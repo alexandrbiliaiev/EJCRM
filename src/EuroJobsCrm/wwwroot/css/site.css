@@ -1,0 +1,93 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background: rgb(250, 250, 250)
+}
+
+
+/* Wrapping element */
+
+
+/* Set some basic padding to keep content from hitting the edges */
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+/* Carousel */
+
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+
+/* Make .svg files in the carousel display properly in older browsers */
+
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+
+/* Hide/rearrange for smaller screens */
+
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none,
+    }
+}
+
+.summary_list_item {
+    min-height: 30px !important;
+    height: 30px;
+}
+
+.summary_item_icon {
+    min-height: 25px;
+    height: 25px !important;
+    min-width: 25px;
+    width: 25px !important;
+}
+
+.summary_item_title {
+    width: 520px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
+}
+
+.summary_item_price {
+    min-width: 50px;
+    width: 50px;
+    text-align: right;
+    font-weight: 700;
+}
+
+.item-show-hide {
+    transition: all linear 0.5s;
+}
+
+.item-show-hide.ng-hide {
+    opacity: 0;
+}
+
+.credit_card_field {
+    /*margin: 5px;*/
+    height: 40px;
+}
+
+.spinner-background {
+    z-index: 10000;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.86);
+}
+

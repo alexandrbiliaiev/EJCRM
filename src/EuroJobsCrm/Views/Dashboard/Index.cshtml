@@ -1,0 +1,428 @@
+﻿@{ ViewData["Title"] = "Home Page"; }
+
+<body ng-app="EuroJobsCrm" ng-controller="TabController as tabCtr">
+    <ui-view>
+        <div class="container body-content">
+            <div ng-cloak id="popupContainer">
+                <md-content>
+                    <md-tabs md-dynamic-height md-border-bottom md-center-tabs="true" md-selected="selectedTab">
+                        <md-tab label="{{'COMMON_TAB_TITLE' | translate}}" ng-click="tabClick()">
+                            <md-content class="md-padding">
+                                <form name="commonForm">
+                                    <div layout="row" layout-align="center center">
+                                        <h3 class="md-title">{{ 'COMMON_TAB_CAPTION' | translate }}</h3>
+                                    </div>
+                                    <div layout="row" layout-align="center center">
+                                        <md-input-container flex="60">
+                                            <label>{{ 'YOUR_LANGUAGE' | translate }}</label>
+                                            <md-select name="type" ng-model="data.lang" ng-change="languageChange()" data-placeholder="{{ 'YOUR_LANGUAGE' | translate }}" required>
+
+                                                <md-option ng-repeat="lang in languages" value="{{lang.langCode}}">{{lang.langName}}</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div layout="row" layout-align="center center">
+                                        <md-input-container flex="60">
+                                            <label>{{ 'TYPE_OF_PROPERTY' | translate }}</label>
+                                            <md-select name="type" ng-model="data.propertyType" ng-change="propertyTypeChange()" data-placeholder="{{ 'TYPE_OF_PROPERTY' | translate }}" required>
+                                                <md-option value="hotel">{{ 'HOTEL' | translate }}</md-option>
+                                                <md-option value="hostel">{{ 'HOSTEL' | translate }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div layout="row" layout-align="center center">
+                                        <md-input-container flex="60">
+                                            <label>{{ 'CURRENCY' | translate }}</label>
+                                            <md-select name="type" ng-model="data.currency" ng-change="currencyChange()" data-placeholder="{{ 'CURRENCY' | translate }}" required>
+                                                <md-option ng-repeat="currency in currencies" ng-value="currency">{{currency.name}}</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div layout="row" layout-align="end center">
+                                        <md-button class="md-raised md-primary" type="submit" ng-click="goToShopingTab()">{{ 'BUTTON_NEXT' | translate }}</md-button>
+                                    </div>
+                                </form>
+                                <card-payment>
+                                </card-payment>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="{{'SHOPPING_TAB_TITLE' | translate}}" ng-disabled="shopingTabDisabled" ng-click="tabClick()">
+                            <md-content class="md-padding">
+                                <form name="shopForm">
+                                    <div layout="row" layout-align="center center">
+                                        <h3 class="md-title">{{ 'SHOPPING_TAB_CAPTION' | translate}}</h3>
+                                    </div>
+                                    <div layout="row" layout-align="center center">
+                                        <md-input-container flex="60">
+                                            <label>{{'PROGRAM_VERSION' | translate}}</label>
+                                            <md-select name="type" ng-change="programVersionChange()" ng-model="data.programVersion" data-placeholder="{{ 'PROGRAM_VERSION' | translate }}" required>
+                                                <md-option ng-repeat="program in programs" value="{{program.id}}">{{program.name}}</md-option>
+
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div layout="row" layout-align="center center">
+                                        <md-input-container flex="60">
+                                            <label>{{'ROOMS_COUNT' | translate}}</label>
+                                            <md-select name="type" ng-change="roomsCountChange()" ng-model="data.rooms" data-placeholder="{{ 'ROOMS_COUNT' | translate }}" required>
+                                                <md-option value="10">10</md-option>
+                                                <md-option value="16">16</md-option>
+                                                <md-option value="28">28</md-option>
+                                                <md-option value="60">60</md-option>
+                                                <md-option value="100">100</md-option>
+                                                <md-option value="127">grather than 100</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div layout="row" layout-align="center center">
+                                        <md-input-container flex="60">
+                                            <label>{{'LICENSE_FOR' | translate}}</label>
+                                            <md-select name="type" ng-model="data.licenseDuration" ng-change="licenseDurationChange()" data-placeholder="{{ 'LICENSE_FOR' | translate }}" required>
+                                                <md-option value="1">{{'ONE_YEAR' | translate}}</md-option>
+                                                <md-option value="2">{{'TWO_YEARS' | translate}}</md-option>
+                                                <md-option value="3">{{'THREE_YEARS' | translate}}</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div layout="row" layout-align="center center" ng-hide="itemsCaptionHide">
+                                        <h3 class="md-title">{{ 'SHOPPING_MODULES_CAPTION' | translate}}</h3>
+                                    </div>
+                                    <div layout="row" layout-align="center center" layout-wrap>
+                                        <div layout-gt-xs="row" style="width: 600px;" ng-repeat="item in shopItems">
+                                            <md-checkbox md-no-ink ng-show="item.visible" ng-model="item.checked" ng-change="itemClick(item)" aria-label="Checkbox No Ink" class="md-primary item-show-hide">
+                                                {{ item.name }}
+                                            </md-checkbox>
+                                        </div>
+                                    </div>
+
+                                    <div layout="row" layout-align="center center" ng-hide="itemsCaptionHide">
+                                        <div layout-gt-xs="row" style="width: 600px;" layout-wrap>
+                                            <div layout="row" style="width: 600px;" layout-align="end center">
+                                                <h3 class="md-title">{{'TOTAL_PRICE' | translate}} <b>{{totalPriceStr}} {{data.currency.name}}</b></h3>
+                                            </div>
+                                            <div layout="row" style="width: 600px;" layout-align="end center">
+                                                <h3 class="md-caption">{{'PROLONGATION_PRICE' | translate}} <b>{{prolongationPriceStr}} {{data.currency.name}}</b></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div layout="row" layout-align="end center">
+                                        <md-button class="md-raised md-primary" type="submit" ng-click="goToCustomerTab()">{{ 'BUTTON_NEXT' | translate }}</md-button>
+                                    </div>
+                                </form>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="{{'CUSTOMER_TAB_TITLE' | translate}}" ng-disabled="customerTabDisabled" ng-click="tabClick()">
+                            <md-content class="md-padding">
+                                <form name="customerForm">
+                                    <div layout="row" layout-align="center center">
+                                        <h3 class="md-title">{{'CUSTOMER_TAB_CAPTION' | translate}}</h3>
+                                    </div>
+                                    <div layout="row" layout-align="center center">
+                                        <div layout-gt-xs="row" style="width: 600px;" layout-wrap>
+                                            <div layout-gt-xs="row" style="width: 600px;">
+                                                <md-input-container class="md-block" flex="50">
+                                                    <label>{{'CUSTOMER_FIRST_NAME' | translate}}</label>
+                                                    <input name="firstName" ng-model="customer.name" required>
+                                                    <div ng-messages="customerForm.firstName.$error" role="alert">
+                                                        <div ng-message="required" class="my-message">{{'FIRST_NAME_REQUIRED'| translate}}</div>
+                                                    </div>
+                                                </md-input-container>
+                                                <md-input-container class="md-block" flex="50">
+                                                    <label>{{'CUSTOMER_SURNAME' | translate}}</label>
+                                                    <input name="surname" ng-model="customer.surname" required>
+                                                    <div ng-messages="customerForm.surname.$error" role="alert">
+                                                        <div ng-message="required" class="my-message">{{'SURNAME_REQUIRED'| translate}}</div>
+                                                    </div>
+                                                </md-input-container>
+                                            </div>
+                                            <div layout-gt-xs="row" style="width: 600px;">
+                                                <md-input-container class="md-block">
+                                                    <label>{{'CUSTOMER_EMAIL' | translate}}</label>
+                                                    <input required type="email" name="clientEmail" ng-model="customer.email" minlength="10" maxlength="100" ng-pattern='/^.+@("@").+\..+$/' style="min-width: 600px;" />
+                                                    <div ng-messages="customerForm.clientEmail.$error" role="alert">
+                                                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">{{'EMAIL_ERROR_MSG' | translate}}</div>
+                                                    </div>
+                                                </md-input-container>
+                                            </div>
+                                            <div layout-gt-xs="row" style="width: 600px;">
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>{{'CUSTOMER_PHONE_NUMBER' | translate}}</label>
+                                                    <input name="phone" ng-model="customer.phone" style="min-width: 600px;" required />
+                                                    <div ng-messages="customerForm.phone.$error">
+                                                        <div ng-message="required">{{'PHONE_NUMBER_ERROR_MSG' | translate}}</div>
+                                                    </div>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div layout="row" layout-align="center center">
+                                        <h3 class="md-title">{{'COMPANY_CAPTION'| translate}}</h3>
+                                    </div>
+                                    <div layout="row" layout-align="center center">
+                                        <div layout-gt-xs="row" style="width: 600px;" layout-wrap>
+                                            <div layout="row" style="width: 600px;">
+                                                <md-input-container class="md-block">
+                                                    <label>{{'COMPANY_NAME'| translate}}</label>
+                                                    <input name="companyName" ng-model="company.name" style="min-width: 600px;" required />
+                                                    <div ng-messages="customerForm.companyName.$error" role="alert">
+                                                        <div ng-message="required" class="my-message">{{'COMPANY_NAME_REQUIRED'| translate}}</div>
+                                                    </div>
+                                                </md-input-container>
+                                            </div>
+                                            <div layout="row" style="width: 600px;">
+                                                <md-input-container class="md-block">
+                                                    <label>{{'ADDRESS'| translate}}</label>
+                                                    <input name="address" ng-model="company.address" style="min-width: 600px;" required />
+                                                    <div ng-messages="customerForm.address.$error" role="alert">
+                                                        <div ng-message="required" class="my-message">{{'COMPANY_ADDRESS_REQUIRED'| translate}}</div>
+                                                    </div>
+                                                </md-input-container>
+                                            </div>
+                                            <div layout-gt-xs="row" style="width: 600px;">
+                                                <div layout-gt-sm="row">
+                                                    <md-input-container class="md-block" flex-gt-sm>
+                                                        <label>{{'CITY'| translate}}</label>
+                                                        <input name="city" ng-model="company.city" required>
+                                                        <div ng-messages="customerForm.city.$error" role="alert">
+                                                            <div ng-message="required" class="my-message">{{'CITY_REQUIRED'| translate}}</div>
+                                                        </div>
+                                                    </md-input-container>
+                                                    <md-input-container class="md-block" flex-gt-sm>
+                                                        <label>{{'COUNTRY'| translate}}</label>
+                                                        <md-select name="country" ng-model="company.country" data-placeholder="{{ 'COUNTRY' | translate }}" required>
+                                                            <md-option ng-repeat="country in countries" value="{{country.code}}"> {{country.name}} </md-option>
+                                                        </md-select>
+                                                        <div ng-messages="customerForm.country.$error" role="alert">
+                                                            <div ng-message="required" class="my-message">{{'COUNTRY_REQUIRED'| translate}}</div>
+                                                        </div>
+                                                    </md-input-container>
+                                                    <md-input-container class="md-block" flex-gt-sm>
+                                                        <label>{{'POST_CODE'| translate}}</label>
+                                                        <input name="postalCode" ng-model="company.postalCode" placeholder="12345" ng-pattern="/^\d{2}[\-]\d{3}$/" md-maxlength="6">
+                                                        <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                                                            <div ng-message="pattern" class="my-message">{{'POST_CODE_INVALID'| translate}} </div>
+                                                            <div ng-message="md-maxlength" class="my-message">{{'POST_CODE_TO_LONG'| translate}}</div>
+                                                        </div>
+                                                    </md-input-container>
+                                                </div>
+                                            </div>
+                                            <div layout="row" style="width: 600px;">
+                                                <md-input-container class="md-block">
+                                                    <label>{{'TAX_ID'| translate}}</label>
+                                                    <input name="taxId" ng-model="company.taxId" style="min-width: 600px;" tax-id-valid>
+                                                    <div ng-messages="customerForm.taxId.$error" role="alert" multiple>
+                                                        <div ng-message="taxIdLengthValidator" class="my-message">{{'TAX_ID_LENGTH_INVALID'| translate}} </div>
+                                                        <div ng-message="taxIdValidator" class="my-message">{{'TAX_ID_INVALID'| translate}} </div>
+                                                    </div>
+                                                    <div class="hint">{{'TAX_ID_MESSAGE' | translate}}</div>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div layout="row" layout-align="end center">
+                                        <md-button class="md-raised md-primary" type="submit" ng-click="goToPropertyTab()">{{ 'BUTTON_NEXT' | translate }}</md-button>
+                                    </div>
+                                </form>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="{{'PROPERTY_TAB_TITLE' | translate}}" ng-disabled="propertyTabDisabled" ng-click="tabClick()">
+                            <md-content class="md-padding">
+                                <md-progress-linear md-mode="indeterminate" ng-hide="doOrderProgressHide"></md-progress-linear>
+
+                                <form name="propertyForm">
+                                    <div layout="row" layout-align="center center">
+                                        <h3 class="md-title">{{'PROPERTY_TAB_CAPTION' | translate}} </h3>
+                                    </div>
+                                    <div layout="row" layout-align="center center">
+                                        <div layout-gt-xs="row" style="width: 600px;" layout-wrap>
+                                            <div layout="row" style="width: 600px;">
+                                                <md-input-container class="md-block">
+                                                    <label>{{'PROPERTY_NAME' | translate}}</label>
+                                                    <input name="propertyName" ng-model="property.name" style="min-width: 600px;" required />
+                                                    <div ng-messages="propertyForm.propertyName.$error" role="alert">
+                                                        <div ng-message="required" class="my-message">{{'PROPERTY_NAME_REQUIRED'| translate}}</div>
+                                                    </div>
+                                                </md-input-container>
+                                            </div>
+                                            <div layout="row" style="width: 600px;">
+                                                <md-input-container class="md-block">
+                                                    <label>{{'ADDRESS' | translate}}</label>
+                                                    <input ng-model="property.address" style="min-width: 600px;" />
+                                                </md-input-container>
+                                            </div>
+                                            <div layout-gt-xs="row" style="width: 600px;">
+                                                <div layout-gt-sm="row">
+                                                    <md-input-container class="md-block" flex-gt-sm>
+                                                        <label>{{'CITY' | translate}}</label>
+                                                        <input ng-model="property.city">
+                                                    </md-input-container>
+                                                    <md-input-container class="md-block" flex-gt-sm>
+                                                        <label>{{'COUNTRY' | translate}}</label>
+                                                        <md-select ng-model="property.country" data-placeholder="{{ 'COUNTRY' | translate }}">
+                                                            <md-option ng-repeat="country in countries" value="{{country.code}}"> {{country.name}} </md-option>
+                                                        </md-select>
+                                                    </md-input-container>
+                                                    <md-input-container class="md-block" flex-gt-sm>
+                                                        <label>{{'POST_CODE' | translate}}</label>
+                                                        <input name="postalCode" ng-model="property.postalCode" placeholder="12345" ng-pattern="/^\d{2}[\-]\d{3}$/" md-maxlength="6">
+                                                        <div ng-messages="propertyForm.postalCode.$error" role="alert" multiple>
+                                                            <div ng-message="pattern" class="my-message">{{'POST_CODE_INVALID' | translate}} </div>
+                                                            <div ng-message="md-maxlength" class="my-message">{{'POST_CODE_TO_LONG' | translate}} </div>
+                                                        </div>
+                                                    </md-input-container>
+                                                </div>
+                                            </div>
+                                            <div layout-gt-xs="row" style="width: 600px;">
+                                                <md-input-container class="md-block">
+                                                    <label>{{'PROPERTY_EMAIL' | translate}}</label>
+                                                    <input required type="email" name="clientEmail" ng-model="property.email" minlength="10" maxlength="100" ng-pattern='/^.+@("@").+\..+$/' style="min-width: 285px;" />
+                                                    <div ng-messages="propertyForm.clientEmail.$error" role="alert">
+                                                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">{{'EMAIL_ERROR_MSG' | translate}} </div>
+                                                    </div>
+                                                </md-input-container>
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>{{'PROPERTY_PHONE_NUMBER' | translate}}</label>
+                                                    <input name="phone" ng-model="property.phone" style="min-width: 285px;" required />
+                                                    <div ng-messages="propertyForm.phone.$error" ng-hide="showHints">
+                                                        <div ng-message="required">{{'PHONE_NUMBER_ERROR_MSG' | translate}}</div>
+                                                    </div>
+                                                </md-input-container>
+                                            </div>
+                                            <div layout="row" style="width: 600px;">
+                                                <md-input-container class="md-block">
+                                                    <label>{{'PROPERTY_WEBSITE' | translate}}</label>
+                                                    <input ng-model="property.website" style="min-width: 600px;" />
+                                                </md-input-container>
+                                            </div>
+                                            <div layout="row" style="width: 600px;">
+                                                <md-input-container class="md-block" style="width: 600px;">
+                                                    <label>{{'COMMENT' | translate}}</label>
+                                                    <textarea ng-model="data.comment" md-maxlength="200" rows="5" style="min-width:600px; max-height:50px;" md-select-on-focus></textarea>
+                                                </md-input-container><br />
+                                            </div>
+                                            <div layout="row" style="width: 600px;">
+                                                <md-checkbox ng-model="userAgreementAccepted">
+                                                    {{'AGREEMENT' | translate}}
+                                                </md-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div layout="row" layout-align="end center">
+                                        <md-button class="md-raised md-primary" type="submit" ng-disabled="!userAgreementAccepted" ng-click="makeOrder()">{{ 'ORDER' | translate }}</md-button>
+                                    </div>
+                                </form>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="{{'SUMMARY_TAB_TITLE' | translate}}" ng-disabled="summaryTabDisabled">
+                            <md-content class="md-padding">
+
+                                <div layout="row" layout-align="center center" layout-wrap>
+
+                                    <md-card md-theme-watch md-theme="{{ payMethods.paypal ? 'dark-blue' : 'default' }}" ng-click="selectPayMethod('paypal')">
+                                        <md-card-content layout="row" layout-align="space-between">
+                                            <div class="md-media-sm card-media">
+                                                <img src="/images/paypal_logo.jpg" />
+                                            </div>
+                                        </md-card-content>
+                                    </md-card>
+                                    <md-card md-theme-watch md-theme="{{ payMethods.payu ? 'dark-blue' : 'default' }}" ng-click="selectPayMethod('payu')">
+                                        <md-card-content layout="row" layout-align="space-between">
+                                            <div class="md-media-sm card-media">
+                                                <img src="/images/payu_logo.png" width="150" height="94" />
+                                            </div>
+                                        </md-card-content>
+                                    </md-card>
+                                    <md-card md-theme-watch md-theme="{{ payMethods.bank ? 'dark-blue' : 'default' }}" ng-click="selectPayMethod('bank')">
+                                        <md-card-content layout="row" layout-align="space-between">
+                                            <div class="md-media-sm card-media">
+                                                <img src="/images/bank_trasfer_logo.png" width="150" height="94" />
+                                            </div>
+                                        </md-card-content>
+                                    </md-card>
+                                </div>
+
+                                <div layout="row" layout-align="center center">
+                                    <h3 class="md-title">{{'ITEMS_LIST' | translate}}</h3>
+                                </div>
+                                <div layout="row" layout-align="center center">
+                                    <md-list ng-cloak>
+                                        <md-subheader class="md-no-sticky">{{'PROGRAM_VERSION' | translate}}</md-subheader>
+                                        <md-list-item ng-repeat="item in summaryItems" ng-if="item.program" class="summary_list_item">
+                                            <img alt="{{ item.name }}" ng-src="/images/item_icon.png" class="md-avatar summary_item_icon" />
+                                            <p flex="80" class="summary_item_title"> {{ item.name }} </p>
+                                            <p class="md-secondary summary_item_price">{{item.price}}</p>
+                                            <p class="md-secondary summary_item_price">{{data.currency.name}}</p>
+                                        </md-list-item>
+
+                                        <md-subheader class="md-no-sticky">{{'ADDITIONAL_MODULES' | translate}}</md-subheader>
+                                        <md-list-item ng-repeat="item in summaryItems" ng-if="item.module" class="summary_list_item">
+                                            <img alt="{{ item.name }}" ng-src="/images/item_icon.png" class="md-avatar summary_item_icon" />
+                                            <p flex="80" class="summary_item_title"> {{ item.name }} </p>
+                                            <p class="md-secondary summary_item_price">{{item.price}}</p>
+                                            <p class="md-secondary summary_item_price">{{data.currency.name}}</p>
+                                        </md-list-item>
+
+                                        <md-subheader class="md-no-sticky">{{'TAXES_AND_DISCOUNTS' | translate}}</md-subheader>
+                                        <md-list-item ng-repeat="item in summaryItems" ng-if="item.taxDiscount" class="summary_list_item">
+                                            <img alt="{{ item.name }}" ng-src="/images/item_icon.png" class="md-avatar summary_item_icon" />
+                                            <p flex="80" class="summary_item_title"> {{ item.name }} </p>
+                                            <p class="md-secondary summary_item_price">{{item.price}}</p>
+                                            <p class="md-secondary summary_item_price">{{data.currency.name}}</p>
+                                        </md-list-item>
+                                        <md-list-item>
+                                        </md-list-item>
+                                        <div layout="row" layout-align="end center">
+                                            <p class="md-title">{{'TOTAL_PRICE' | translate}} <b>{{totalPriceWithTaxStr}} {{data.currency.name}}</b></p>
+                                        </div>
+
+                                        <div layout="row" layout-align="end center">
+                                            <md-button class="md-raised md-primary" style="width:150px;" ng-click="pay()">{{'PAY' | translate}}</md-button>
+                                        </div>
+
+                                    </md-list>
+
+
+                                </div>
+
+                            </md-content>
+                        </md-tab>
+                    </md-tabs>
+
+                </md-content>
+                <div style="visibility: hidden">
+                    <div class="md-dialog-container" id="banktransferDialog">
+                        <md-dialog layout-padding>
+                            <h2>{{'BANK_TRANSFER_TITLE' | translate}}</h2>
+                            <p>
+                                {{'PAYMENT_RECIPIRNT' | translate}} <b>{{bankTransfer.transferBeneficiary}}</b><br /> {{'BANK_NAME' | translate}} <b>{{bankTransfer.bankName}}</b><br /> {{'BIC_SWIFT' | translate}} <b>{{bankTransfer.bicSwift}}</b><br /> {{'IBAN'
+                                | translate}} <b>{{bankTransfer.iban}}</b><br /> {{'ADDRESS' | translate}} <b>{{bankTransfer.address}}</b><br /> {{'POST_CODE' | translate}} <b>{{bankTransfer.postCode}}</b><br /> {{'CITY' | translate}} <b>{{bankTransfer.city}}</b><br />                                {{'AMOUNT' | translate}} <b>{{totalPriceWithTax}}</b><br /> {{'PAYMENT_TITLE' | translate}} <b>{{orderId}}</b><br />
+                            </p>
+                        </md-dialog>
+                    </div>
+                </div>
+                <div style="visibility: hidden">
+                    <div class="md-dialog-container" id="installationCountDialog">
+                        <md-dialog layout-padding>
+                            <h2>{{'INSTALLATION_COUNT_TITLE' | translate}}</h2>
+                            <form name="dialogForm">
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex="100">
+                                        <label>{{'INSTALLATION_COUNT' | translate}}</label>
+                                        <input required type="number" step="1" ng-model="data.installationCount" min="0" max="100" flex="100" />
+                                    </md-input-container>
+                                </div>
+                                <md-button ng-click="hideInstallationDialog()">{{'OK' | translate}}</md-button>
+                            </form>
+                        </md-dialog>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer >
+               
+            </footer>
+        </div>
+    </ui-view>
+</body>

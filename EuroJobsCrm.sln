@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DD821CC2-131C-4C83-80E9-3B0C60F5C986}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{686F7E3B-A25A-4D99-9E29-8C3B40CA76E7}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EuroJobsCrm", "src\EuroJobsCrm\EuroJobsCrm.xproj", "{2FD34C91-B187-4B6F-8EA5-AA045313ED91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2FD34C91-B187-4B6F-8EA5-AA045313ED91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FD34C91-B187-4B6F-8EA5-AA045313ED91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FD34C91-B187-4B6F-8EA5-AA045313ED91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FD34C91-B187-4B6F-8EA5-AA045313ED91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2FD34C91-B187-4B6F-8EA5-AA045313ED91} = {DD821CC2-131C-4C83-80E9-3B0C60F5C986}
+	EndGlobalSection
+EndGlobal

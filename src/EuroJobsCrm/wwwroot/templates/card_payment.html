@@ -1,0 +1,73 @@
+<div layout="column" ng-cloak>
+    <md-content layout-padding>
+        <md-card md-theme-watch>
+            <div class="spinner-background pop" ng-show="isPosting">
+                <div layout="column" layout-align="center center ">
+                    <md-progress-circular md-diameter="70" style="margin-top:80px;"></md-progress-circular>
+                    <h3 class="md-title">Payment is processing...</h3>
+                </div>
+            </div>
+            <div layout="row" layout-align="center center" layout-wrap>
+                <form name="espagoForm" id="espago_form" style="width:400px;">
+                    <md-input-container class="md-block credit_card_field">
+                        <label>Card number</label>
+                        <md-icon md-svg-src="images/icons/credit_card_1.svg"></md-icon>
+                        <input id="espago_card_number" ng-model="cardNumber" name="cardNumber" credit-card-valid required md-no-asterisk/>
+                        <div ng-messages="espagoForm.cardNumber.$error">
+                            <div ng-message="creditCardValidator">Card is invalid</div>
+                        </div>
+                    </md-input-container>
+
+                    <div layout="row">
+                        <md-input-container flex="35" class="credit_card_field">
+                            <label>Month</label>
+                            <md-icon md-svg-src="images/icons/credit_card_date.svg"></md-icon>
+                            <input id="espago_month" ng-model="month" credit-card-date-valid required md-no-asterisk/>
+                            
+                        </md-input-container>
+
+                        <md-input-container flex="20" class="credit_card_field">
+                            <label>Year</label>
+                            <input id="espago_year" ng-model="year" name="cardDate" credit-card-date-valid required md-no-asterisk/>
+                            <div ng-messages="espagoForm.cardDate.$error">
+                                <div ng-message="creditCardDateValidator">Card date is invalid</div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container flex="45" class="credit_card_field">
+                            <label>CVC</label>
+                            <input id="espago_verification_value" ng-model="cvc" name="cardCvc" credit-card-cvc-valid required md-no-asterisk/>
+                            <div ng-messages="espagoForm.cardCvc.$error">
+                                <div ng-message="creditCardCvcValidator">CVC code is invalid</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+
+                    <div layout="row">
+                        <md-input-container flex="50" class="credit_card_field">
+                            <label>First name</label>
+                            <input id="espago_first_name" name="firstName" ng-model="firstName" credit-card-first-name-valid required md-no-asterisk/>
+                            <div ng-messages="espagoForm.firstName.$error">
+                                <div ng-message="creditCardFirstNameValidator">First name is invalid</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex="50" class="credit_card_field">
+                            <label>Last name</label>
+                            <input id="espago_last_name" name="lastName" ng-model="lastName" credit-card-last-name-valid required md-no-asterisk/>
+                            <div ng-messages="espagoForm.lastName.$error">
+                                <div ng-message="creditCardLastNameValidator">Last name is invalid</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+
+                    <div layout="row">
+                        <img src="https://developers.espago.com/downloads/espago-pliki/graphics/common_payments_logo.png" height="40" alt="common payments logo" flex="60" >
+                        <div flex="10" ></div>
+                        <md-button ng-click="click()" flex="30" >Pay</md-button>
+                    </div>
+                </form>
+            </div>
+        </md-card>
+    </md-content>
+
+</div>
