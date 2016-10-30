@@ -1,4 +1,5 @@
 ﻿using System;
+using EuroJobsCrm.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 

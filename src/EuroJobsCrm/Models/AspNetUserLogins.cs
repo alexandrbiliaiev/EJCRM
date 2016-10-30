@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EuroJobsCrm
+namespace EuroJobsCrm.Models
 {
     public partial class AspNetUserLogins
     {

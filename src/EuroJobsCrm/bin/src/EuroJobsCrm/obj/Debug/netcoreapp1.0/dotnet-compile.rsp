@@ -1,5 +1,5 @@
---temp-output:C:\Users\y50\Documents\EuroJobsCrm\src\eurojobscrm\bin\src\EuroJobsCrm\obj\Debug\netcoreapp1.0\
---out:C:\Users\y50\Documents\EuroJobsCrm\src\eurojobscrm\bin\src\EuroJobsCrm\bin\Debug\netcoreapp1.0\EuroJobsCrm.dll
+--temp-output:C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\bin\src\EuroJobsCrm\obj\Debug\netcoreapp1.0\
+--out:C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\bin\src\EuroJobsCrm\bin\Debug\netcoreapp1.0\EuroJobsCrm.dll
 --define:DEBUG
 --define:TRACE
 --define:NETCOREAPP1_0
@@ -229,10 +229,11 @@
 --reference:C:\Users\y50\.nuget\packages\System.Threading.Timer\4.0.1\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\y50\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\y50\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
---resource:"C:\Users\y50\Documents\EuroJobsCrm\src\eurojobscrm\bin\src\EuroJobsCrm\obj\Debug\netcoreapp1.0\EuroJobsCrmdotnet-compile.deps.json",EuroJobsCrm.deps.json
+--resource:"C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\bin\src\EuroJobsCrm\obj\Debug\netcoreapp1.0\EuroJobsCrmdotnet-compile.deps.json",EuroJobsCrm.deps.json
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Program.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Startup.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Controllers\AccountController.cs
+C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Controllers\ContragentsController.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Controllers\DashboardController.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Controllers\HomeController.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Controllers\ManageController.cs
@@ -248,7 +249,8 @@ C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AspNetUserLogins.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AspNetUserRoles.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AspNetUsers.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AspNetUserTokens.cs
-C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\Table.cs
+C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\aspnet_EuroJobsCrm_f04bc9c8_840d_4b93_bc7c_1d8b4ffadc42Context.cs
+C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\DB_A12601_bielkaContext.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AccountViewModels\ForgotPasswordViewModel.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AccountViewModels\LoginViewModel.cs

@@ -233,6 +233,7 @@
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Program.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Startup.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Controllers\AccountController.cs
+C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Controllers\ContragentsController.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Controllers\DashboardController.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Controllers\HomeController.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Controllers\ManageController.cs
@@ -240,6 +241,7 @@ C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Data\ApplicationDbContext.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Data\Migrations\00000000000000_CreateIdentitySchema.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Data\Migrations\ApplicationDbContextModelSnapshot.cs
+C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Dto\ContragentsDto.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\ApplicationUser.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AspNetRoleClaims.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AspNetRoles.cs
@@ -249,7 +251,10 @@ C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AspNetUserRoles.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AspNetUsers.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AspNetUserTokens.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\aspnet_EuroJobsCrm_f04bc9c8_840d_4b93_bc7c_1d8b4ffadc42Context.cs
-C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\Table.cs
+C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\Clients.cs
+C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\Contragents.cs
+C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\DB_A12601_bielkaContext.cs
+C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\Employees.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AccountViewModels\ForgotPasswordViewModel.cs
 C:\Users\y50\Documents\EuroJobsCrm\src\EuroJobsCrm\Models\AccountViewModels\LoginViewModel.cs
