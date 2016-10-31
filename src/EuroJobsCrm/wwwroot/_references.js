@@ -3,6 +3,7 @@
 /// <reference path="js/controllers/eventcontroller.js" />
 /// <reference path="js/controllers/tabscontroller.js" />
 /// <reference path="js/services/dataloadservice.js" />
+/// <reference path="js/site.js" />
 /// <reference path="lib/angular/angular.js" />
 /// <reference path="lib/angular-route/angular-route.js" />
 /// <reference path="lib/angular-translate/angular-translate.js" />
