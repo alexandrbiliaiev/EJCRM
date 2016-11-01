@@ -40,13 +40,20 @@ namespace EuroJobsCrm.Controllers
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                Contragents ctr = contragent.Id != 0 ? 
-                    context.Contragents.FirstOrDefault(c => c.CgtId == contragent.Id)
-                    : new Contragents
+                Contragents ctr;
+                if (contragent.Id != 0)
+                {
+                    ctr = context.Contragents.FirstOrDefault(c => c.CgtId == contragent.Id);
+                }
+                else
+                {
+                    ctr = new Contragents
                     {
                         CgtAuditCd = DateTime.UtcNow,
                         CgtAuditCu = User.GetUserId()
                     };
+                    context.Contragents.Add(ctr);
+                }
 
                 if (ctr == null)
                 {
@@ -59,17 +66,56 @@ namespace EuroJobsCrm.Controllers
                 ctr.CgtAuditMd = DateTime.UtcNow;
                 ctr.CgtAuditMu = User.GetUserId();
  
-                context.Contragents.Add(ctr);
                 context.SaveChanges();
-                return new ContragentDto(ctr);
+                contragent.Id = ctr.CgtId;
+                return contragent;
             }
         }
 
+       
         [HttpPost]
-        [Route("/api/Addresses/Save")]
-        public AddressDto SaveAddress([FromBody] AddressDto address)
+        [Route("/api/ContactPersons/Save")]
+        public AddressDto SaveContactPerson([FromBody] AddressDto address)
         {
-            return null;
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+
+                Addresses adr;
+                if (address.Id != 0)
+                {
+                    adr = context.Addresses.FirstOrDefault(c => c.AdrId == address.Id);
+                }
+                else
+                {
+                    adr = new Addresses
+                    {
+                        AdrAuditCd = DateTime.UtcNow,
+                        AdrAuditCu = User.GetUserId()
+                    };
+                    context.Addresses.Add(adr);
+                }
+
+                if (adr == null)
+                {
+                    return null;
+                }
+
+                adr.AdrCity = address.City;
+                adr.AdrCountry = address.Country;
+                adr.AdrPay = address.Pay;
+                adr.AdrPostCode = address.PostCode;
+                adr.AdrType = address.Type;
+                adr.AdrCgtId = address.ContragentId;
+                adr.AdrAddress = address.Address;
+                adr.AdrAuditCd = DateTime.UtcNow;
+                adr.AdrAuditCu = User.GetUserId();
+
+                context.SaveChanges();
+                address.Id = adr.AdrId;
+
+                return address;
+            }
+
         }
     }
 }
