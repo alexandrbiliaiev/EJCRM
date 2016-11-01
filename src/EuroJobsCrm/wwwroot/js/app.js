@@ -6,7 +6,7 @@
             suffix: '.json'
         });
 
-        //$translateProvider.preferredLanguage('pl');
+        $translateProvider.preferredLanguage('pl');
         $translateProvider.forceAsyncReload(true);
         $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
 

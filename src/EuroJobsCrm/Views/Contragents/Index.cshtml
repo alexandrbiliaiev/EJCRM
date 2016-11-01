@@ -1,20 +1,28 @@
-﻿@* For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860 *@ @{ } @{ ViewData["Title"] = "Home Page"; }
+﻿@* For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860 *@ @{ } @{
+ViewData["Title"] = "Contragnets"; }
 
-<ui-view >
-    <div ng-app="EuroJobsCrm" ng-controller="ContragentsController as contragentsCtr"  class="container body-content">
-        <md-content>
-             <md-button class="md-secondary" ng-click="addNewContragentClick()">Add new</md-button>
-            <md-list  ng-cloak>
-                <md-subheader class="md-no-sticky">Contragents</md-subheader>
- 
-                <md-list-item class="secondary-button-padding"  ng-repeat="contragent in contragents" ng-click="doPrimaryAction($event)">
-                    <p>{{contragent.name}}</p>
-                    <md-button class="md-secondary" ng-click="doSecondaryAction($event)">Edit</md-button>
-                    <md-button class="md-secondary" ng-click="doSecondaryAction($event)">Delete</md-button>
-                    
-                </md-list-item>
+<ui-view>
+	<div id="popupContainer" ng-controller="ContragentsController as contragentsCtr" class="container body-content">
+		<md-content>
 
-            </md-list>
-        </md-content>
-    </div>
+			<md-button class="md-secondary" ng-click="showPrompt($event)">Add new</md-button>
+
+			<md-button class="md-primary md-raised" ng-click="showAdvanced($event)">Add using modal</md-button>
+			<md-list ng-cloak>
+				<md-subheader class="md-no-sticky">Contragents</md-subheader>
+
+				<md-list-item class="secondary-button-padding" ng-repeat="contragent in contragents" ng-click="doPrimaryAction($event)">
+					<p>{{contragent.name}}</p>
+					<md-button class="md-secondary" ng-click="doSecondaryAction($event)">Edit</md-button>
+					<md-button class="md-secondary" ng-click="doSecondaryAction($event)">Delete</md-button>
+
+				</md-list-item>
+
+			</md-list>
+            
+
+		</md-content>
+	</div>
+
+
 </ui-view>
