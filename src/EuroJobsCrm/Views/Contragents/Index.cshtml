@@ -19,7 +19,7 @@ ViewData["Title"] = "Contragnets"; }
 
 				<md-list-item class="secondary-button-padding" ng-repeat="contragent in contragents" ng-click="doPrimaryAction($event)">
 					<p>{{contragent.name}}</p>
-					<md-button class="md-secondary" ng-click="doSecondaryAction($event)">Edit</md-button>
+					<md-button class="md-secondary" ng-click="editContragent(contragent.id)">Edit</md-button>
 					<md-button class="md-secondary" ng-click="doSecondaryAction($event)">Delete</md-button>
 
 				</md-list-item>

@@ -14,6 +14,10 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         $state.go('error');
     });
 
+    $scope.editContragent = function(id){
+        $state.go('contragent', {id: id});
+    }
+
     $scope.showDialog = function (ev) {
         $mdDialog.show({
             controller: function ($scope) {
