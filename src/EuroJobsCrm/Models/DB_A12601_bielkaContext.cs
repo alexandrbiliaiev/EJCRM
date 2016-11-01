@@ -254,33 +254,41 @@ namespace EuroJobsCrm.Models
 
                 entity.Property(e => e.CtpId).HasColumnName("ctp_id");
 
-                entity.Property(e => e.CtpCd)
-                    .HasColumnName("ctp_cd")
+                entity.Property(e => e.CtpAuditCd)
+                    .HasColumnName("ctp_audit_cd")
                     .HasColumnType("datetime");
+
+                entity.Property(e => e.CtpAuditCu)
+                    .HasColumnName("ctp_audit_cu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.CtpAuditMd)
+                    .HasColumnName("ctp_audit_md")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CtpAuditMu)
+                    .HasColumnName("ctp_audit_mu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.CtpAuditRd)
+                    .HasColumnName("ctp_audit_rd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CtpAuditRu)
+                    .HasColumnName("ctp_audit_ru")
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.CtpCgtId).HasColumnName("ctp_cgt_id");
 
                 entity.Property(e => e.CtpCltId).HasColumnName("ctp_clt_id");
 
-                entity.Property(e => e.CtpCu)
-                    .HasColumnName("ctp_cu")
-                    .HasMaxLength(100);
-
                 entity.Property(e => e.CtpEmail)
                     .HasColumnName("ctp_email")
                     .HasMaxLength(250);
 
-                entity.Property(e => e.CtpMd)
-                    .HasColumnName("ctp_md")
-                    .HasColumnType("datetime");
-
                 entity.Property(e => e.CtpMessanger)
                     .HasColumnName("ctp_messanger")
                     .HasMaxLength(150);
-
-                entity.Property(e => e.CtpMu)
-                    .HasColumnName("ctp_mu")
-                    .HasMaxLength(100);
 
                 entity.Property(e => e.CtpName)
                     .HasColumnName("ctp_name")
@@ -293,14 +301,6 @@ namespace EuroJobsCrm.Models
                 entity.Property(e => e.CtpPosition)
                     .HasColumnName("ctp_position")
                     .HasMaxLength(250);
-
-                entity.Property(e => e.CtpRd)
-                    .HasColumnName("ctp_rd")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.CtpRu)
-                    .HasColumnName("ctp_ru")
-                    .HasMaxLength(100);
 
                 entity.Property(e => e.CtpSkype)
                     .HasColumnName("ctp_skype")
