@@ -22,9 +22,9 @@ namespace EuroJobsCrm.Controllers
             {
                 List<ContragentDto> contagents = context.Contragents
                     .Where(c => c.CgtAuditRd == null)
-                    .GroupJoin(context.Addresses, c => c.CgtId, a => a.AdrCgtId,
+                    .GroupJoin(context.Addresses.Where(a => a.AdrAuditRd == null), c => c.CgtId, a => a.AdrCgtId,
                         (c, a) => new {Contragent = c, Addresses = a})
-                    .GroupJoin(context.ContactPersons, c => c.Contragent.CgtId, cp => cp.CtpCgtId,
+                    .GroupJoin(context.ContactPersons.Where(a => a.CtpAuditRd == null), c => c.Contragent.CgtId, cp => cp.CtpCgtId,
                         (c, cp) => new {c.Contragent, c.Addresses, ContactPersons = cp})
                     .ToList()
                     .Select(c => new ContragentDto(c.Contragent, c.Addresses, c.ContactPersons))
@@ -72,50 +72,5 @@ namespace EuroJobsCrm.Controllers
             }
         }
 
-       
-        [HttpPost]
-        [Route("/api/ContactPersons/Save")]
-        public AddressDto SaveContactPerson([FromBody] AddressDto address)
-        {
-            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
-            {
-
-                Addresses adr;
-                if (address.Id != 0)
-                {
-                    adr = context.Addresses.FirstOrDefault(c => c.AdrId == address.Id);
-                }
-                else
-                {
-                    adr = new Addresses
-                    {
-                        AdrAuditCd = DateTime.UtcNow,
-                        AdrAuditCu = User.GetUserId()
-                    };
-                    context.Addresses.Add(adr);
-                }
-
-                if (adr == null)
-                {
-                    return null;
-                }
-
-                adr.AdrCity = address.City;
-                adr.AdrCountry = address.Country;
-                adr.AdrPay = address.Pay;
-                adr.AdrPostCode = address.PostCode;
-                adr.AdrType = address.Type;
-                adr.AdrCgtId = address.ContragentId;
-                adr.AdrAddress = address.Address;
-                adr.AdrAuditCd = DateTime.UtcNow;
-                adr.AdrAuditCu = User.GetUserId();
-
-                context.SaveChanges();
-                address.Id = adr.AdrId;
-
-                return address;
-            }
-
-        }
     }
 }

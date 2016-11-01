@@ -15,7 +15,7 @@ namespace EuroJobsCrm.Controllers
     {
         [HttpPost]
         [Route("/Save")]
-        public AddressDto SaveContactPerson([FromBody] ContactPersonDto contactPerson)
+        public ContactPersonDto SaveContactPerson([FromBody] ContactPersonDto contactPerson)
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
@@ -43,20 +43,20 @@ namespace EuroJobsCrm.Controllers
 
                 ctp.CtpCgtId = contactPerson.ContragentId;
                 ctp.CtpEmail = contactPerson.Email;
-                //ctp.AdrCity = address.City;
-                //ctp.AdrCountry = address.Country;
-                //ctp.AdrPay = address.Pay;
-                //ctp.AdrPostCode = address.PostCode;
-                //ctp.AdrType = address.Type;
-                //ctp.AdrCgtId = address.ContragentId;
-                //ctp.AdrAddress = address.Address;
-                //ctp.AdrAuditCd = DateTime.UtcNow;
-                //ctp.AdrAuditCu = User.GetUserId();
+                ctp.CtpMessanger = contactPerson.Messanger;
+                ctp.CtpName = contactPerson.Name;
+                ctp.CtpPhoneNumber = contactPerson.PhoneNumber;
+                ctp.CtpPosition = contactPerson.Position;
+                ctp.CtpSurname = contactPerson.Surname;
+                ctp.CtpSkype = contactPerson.Skype;
+                ctp.CtpAuditMd = DateTime.UtcNow;
+                ctp.CtpAuditMu = User.GetUserId();
 
-                //context.SaveChanges();
-                //address.Id = adr.AdrId;
 
-                return null;
+                context.SaveChanges();
+                contactPerson.Id = ctp.CtpId;
+
+                return contactPerson;
             }
 
         }
