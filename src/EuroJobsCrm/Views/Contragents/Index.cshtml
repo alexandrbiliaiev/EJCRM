@@ -4,10 +4,12 @@ ViewData["Title"] = "Contragnets"; }
 <ui-view>
 	<div id="popupContainer" ng-controller="ContragentsController as contragentsCtr" class="container body-content">
 		<md-content>
+			
+			<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
+				<a mfb-button  icon="ion-plus-round" label="Add Contragnet" ng-click="showDialog($event)">
+				</a>
+			</nav>
 
-			<md-button class="md-secondary" ng-click="showPrompt($event)">Add new</md-button>
-
-			<md-button class="md-primary md-raised" ng-click="showAdvanced($event)">Add using modal</md-button>
 			<md-list ng-cloak>
 				<md-subheader class="md-no-sticky">Contragents</md-subheader>
 
@@ -19,7 +21,7 @@ ViewData["Title"] = "Contragnets"; }
 				</md-list-item>
 
 			</md-list>
-            
+
 
 		</md-content>
 	</div>
