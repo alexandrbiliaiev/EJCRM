@@ -11,10 +11,10 @@ namespace EuroJobsCrm.Models
         public string EmpLastName { get; set; }
         public DateTime EmpBirthDate { get; set; }
         public DateTime? EmpAuditCd { get; set; }
-        public int? EmpAuditCu { get; set; }
+        public string EmpAuditCu { get; set; }
         public DateTime? EmpAuditMd { get; set; }
-        public int? EmpAuditMu { get; set; }
+        public string EmpAuditMu { get; set; }
         public DateTime? EmpAuditRd { get; set; }
-        public int? EmpAuditRu { get; set; }
+        public string EmpAuditRu { get; set; }
     }
 }

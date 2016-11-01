@@ -10,10 +10,10 @@ namespace EuroJobsCrm.Models
         public string CgtLicenseNumber { get; set; }
         public string CgtStatus { get; set; }
         public DateTime? CgtAuditCd { get; set; }
-        public int? CgtAuditCu { get; set; }
+        public string CgtAuditCu { get; set; }
         public DateTime? CgtAuditMd { get; set; }
-        public DateTime? CgtAuditMu { get; set; }
+        public string CgtAuditMu { get; set; }
         public DateTime? CgtAuditRd { get; set; }
-        public DateTime? CgtAuditRu { get; set; }
+        public string CgtAuditRu { get; set; }
     }
 }

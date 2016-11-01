@@ -11,10 +11,10 @@ namespace EuroJobsCrm.Models
         public string CltKrs { get; set; }
         public string CltRegon { get; set; }
         public DateTime? CltAuditCd { get; set; }
-        public int? CltAuditCu { get; set; }
+        public string CltAuditCu { get; set; }
         public DateTime? CltAuditMd { get; set; }
-        public int? CltAuditMu { get; set; }
+        public string CltAuditMu { get; set; }
         public DateTime? CltAuditRd { get; set; }
-        public int? CltAuditRu { get; set; }
+        public string CltAuditRu { get; set; }
     }
 }
