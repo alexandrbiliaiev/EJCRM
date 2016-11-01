@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using EuroJobsCrm.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,7 +26,7 @@
     </environment>
     @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
 </head>
-<body>
+<body ng-app="EuroJobsCrm">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -34,11 +39,18 @@
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">EuroJobsCrm</a>
             </div>
             <div class="navbar-collapse collapse">
+            @if (SignInManager.IsSignedIn(User))
+            {
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Clients" asp-action="Index">{{ 'Clients' | translate }}</a></li>
+                    <li><a asp-area="" asp-controller="Offers" asp-action="Index">{{ 'Offers' | translate }}</a></li>
+                    <li><a asp-area="" asp-controller="Employees" asp-action="Index">{{ 'Employees' | translate }}</a></li>
+                    <li><a asp-area="" asp-controller="Invoice" asp-action="Index">{{ 'Invoice' | translate }}</a></li>
+                    <li><a asp-area="" asp-controller="Communication" asp-action="Index">{{ 'Communication' | translate }}</a></li>
+                    <li><a asp-area="" asp-controller="Contragents" asp-action="Index">{{ 'Contragents' | translate }}</a></li>
+                    <li><a asp-area="" asp-controller="Calendar" asp-action="Index">{{ 'Calendar' | translate }}</a></li>
                 </ul>
+            }
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
@@ -75,6 +87,7 @@
         <script src="~/js/controllers/ContragentsController.js"></script>
 
         <script src="~/js/services/contragentsService.js"></script>
+        
     </environment>
     <environment names="Staging,Production">
         <script src="~/lib/jquery/dist/jquery.js"></script>

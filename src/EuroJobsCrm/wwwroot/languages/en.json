@@ -1,5 +1,9 @@
 {
- 
-"EDIT": "Edit"
-
+    "Clients": "Clients",
+    "Offers": "Offers",
+    "Employees": "Employees",
+    "Invoice": "Invoice",
+    "Communication": "Communicationts",
+    "Contragents": "Contragents",
+    "Calendar": "Calendar"
 }

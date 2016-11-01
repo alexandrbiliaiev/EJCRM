@@ -1,6 +1,10 @@
 {
-  
-"EDIT": "Edytuj"
-
-
+    "Clients": "Klienci",
+    "Offers": "Oferty",
+    "Employees": "Pracownicy",
+    "Invoice": "Faktury",
+    "Communication": "Powiadomienia",
+    "Contragents": "Kontragenci",
+    "Calendar": "Kalendar",
+    "Log out": "Wyloguj się"
 }
