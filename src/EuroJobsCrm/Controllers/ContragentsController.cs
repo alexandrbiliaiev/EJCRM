@@ -35,7 +35,7 @@ namespace EuroJobsCrm.Controllers
         }
 
         [HttpPost]
-        [Route("/api/Contragents/Add")]
+        [Route("/api/Contragents/Save")]
         public ContragentDto SaveContragent([FromBody] ContragentDto contragent)
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
@@ -63,6 +63,13 @@ namespace EuroJobsCrm.Controllers
                 context.SaveChanges();
                 return new ContragentDto(ctr);
             }
+        }
+
+        [HttpPost]
+        [Route("/api/Addresses/Save")]
+        public AddressDto SaveAddress([FromBody] AddressDto address)
+        {
+            return null;
         }
     }
 }

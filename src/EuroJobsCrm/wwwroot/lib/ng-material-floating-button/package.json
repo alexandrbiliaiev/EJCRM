@@ -1,0 +1,76 @@
+{
+  "name": "ng-material-floating-button",
+  "version": "0.6.2",
+  "description": "angular directive for material floating buttons",
+  "main": [
+    "src/mfb-directive.js",
+    "mfb/dist/mfb.css",
+    "mfb/src/mfb.scss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nobitagit/ng-material-floating-button"
+  },
+  "scripts": {
+    "test": "grunt karma"
+  },
+  "keywords": [
+    "angular",
+    "directive",
+    "material",
+    "design",
+    "floating",
+    "button",
+    "google",
+    "inbox"
+  ],
+  "bugs": {
+    "url": "https://github.com/nobitagit/ng-material-floating-button/issues"
+  },
+  "author": {
+    "name": "Nobita"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "angular-mocks": "^1.3.6",
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-sass": "^0.8.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-gh-pages": "^0.9.1",
+    "grunt-karma": "^0.9.0",
+    "grunt-preprocess": "^4.1.0",
+    "grunt-usemin": "^3.0.0",
+    "jasmine-core": "^2.1.3",
+    "karma": "^0.12.28",
+    "karma-jasmine": "^0.3.2",
+    "karma-ng-html2js-preprocessor": "^0.1.2",
+    "karma-phantomjs-launcher": "^0.1.4"
+  },
+  "dependencies": {},
+  "gitHead": "dd61072d3af56894c439ca7144b50de7a85567fe",
+  "homepage": "https://github.com/nobitagit/ng-material-floating-button",
+  "_id": "ng-material-floating-button@0.6.2",
+  "_shasum": "0193991a933cd839c84ac2403d1d023480898a28",
+  "_from": "ng-material-floating-button@latest",
+  "_npmVersion": "2.5.1",
+  "_nodeVersion": "0.12.0",
+  "_npmUser": {
+    "name": "aurelio",
+    "email": "aurelio.ogliari@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "aurelio",
+      "email": "aurelio.ogliari@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "0193991a933cd839c84ac2403d1d023480898a28",
+    "tarball": "https://registry.npmjs.org/ng-material-floating-button/-/ng-material-floating-button-0.6.2.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/ng-material-floating-button/-/ng-material-floating-button-0.6.2.tgz"
+}
