@@ -1,4 +1,53 @@
 <ui-view>
-	fuck u
+	<div ng-cloak>
+		<md-content>
+			<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
+				<a mfb-button icon="ion-home" label="{{'Add address' | translate}}" ng-click="#"/>
+				<a mfb-button icon="ion-person-add" label="{{'Add employee' | translate}}" ng-click="#"/>
+				<a mfb-button icon="ion-android-contact" label="{{'Add contact person' | translate}}" ng-click="#"/>				
+			</nav>
+
+			<md-subheader class="md-no-sticky">General information</md-subheader>
+			<p>
+			Here will be general infromation about contragnet.</p>
+
+			<md-tabs md-dynamic-height md-border-bottom>
+				<md-tab label="{{'Adresses' | translate}}">
+					<md-content class="md-padding">
+						<md-list-item class="md-2-line" ng-repeat="contragent in contragents" ng-click="doPrimaryAction($event)">
+					<div class="md-list-item-text">
+						<h3>{{contragent.name}}</h3>
+						<p>
+							License: {{contragent.licenseNumber}}
+						</p>
+					</div>
+
+					<md-button class="md-icon-button" ng-click="editContragent(contragent.id)">
+						<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
+					</md-button>
+					<md-button class="md-icon-button">
+						<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+					</md-button>
+
+				</md-list-item>
+
+
+					</md-content>
+				</md-tab>
+				<md-tab label="two">
+					<md-content class="md-padding">
+						<h1 class="md-display-2">Tab Two</h1>
+						<p>test</p>
+					</md-content>
+				</md-tab>
+				<md-tab label="three">
+					<md-content class="md-padding">
+						<h1 class="md-display-2">Tab Three</h1>
+						<p>tst</p>
+					</md-content>
+				</md-tab>
+			</md-tabs>
+		</md-content>
+	</div>
 
 </ui-view>
