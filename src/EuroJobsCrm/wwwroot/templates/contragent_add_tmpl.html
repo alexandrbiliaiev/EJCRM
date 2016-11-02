@@ -1,40 +1,46 @@
 <md-dialog aria-label="Mango (Fruit)">
-	<form ng-cloak>
-		<md-toolbar>
-			<div class="md-toolbar-tools">
-				<h2>New contragent</h2>
-				<span flex></span>
-				<md-button class="md-icon-button" ng-click="cancel()">
-					<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-				</md-button>
-			</div>
-		</md-toolbar>
-
-		<md-dialog-content>
-			<div class="md-dialog-content">
-				<md-input-container>
-					<label>Name</label>
-					<input ng-model="name">
-				</md-input-container>
-
-				<md-input-container>
-					<label>License number</label>
-					<input ng-model="licensenumber">
-				</md-input-container>
-
-				<md-input-container>
-					<label>Status</label>
-					<input ng-model="status">
-				</md-input-container>
-
-
-			</div>
-		</md-dialog-content>
-
-		<md-dialog-actions layout="row">
-			<md-button ng-click="addNewContragentClick()">
-				ADD
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>New contragent</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="close()">
+				<md-icon aria-label="Close dialog">close</md-icon>
 			</md-button>
-		</md-dialog-actions>
-	</form>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div class="md-dialog-content">
+			<form name="contragentForm">
+				<md-input-container class="md-block" style="width:400px;">
+					<label>{{'CONTRAGENT_NAME'| translate}}</label>
+					<input name="contragent_name" ng-model="name" placeholder="Firma S. A." md-maxlength="100" required>
+					<div ng-messages="contragentForm.contragent_name.$error" role="alert" multiple>
+						<div ng-message="required">{{'NAME_REQUIRED' | translate}} </div>
+						<div ng-message="md-maxlength">{{'NAME_IS_TO_LONG'| translate}}</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>{{'LICENSE_NUMBER'| translate}}</label>
+					<input name="license_number" ng-model="licenseNumber" placeholder="License number" md-maxlength="100" required>
+					<div ng-messages="contragentForm.license_number.$error" role="alert" multiple>
+						<div ng-message="required">{{'LICENSE_NUMBER_REQUIRED' | translate}} </div>
+						<div ng-message="md-maxlength">{{'LICENSE_NUMBER_IS_TO_LONG'| translate}}</div>
+					</div>
+				</md-input-container >
+				<md-input-container class="md-block">
+					<label>{{ 'STATUS' | translate }}</label>
+					<md-select name="type" ng-model="status"  data-placeholder="{{ 'STATUS' | translate }}" required>
+						<md-option value="a">{{ 'ACTIVE' | translate }}</md-option>
+						<md-option value="i">{{ 'INACTIVE' | translate }}</md-option>
+					</md-select>
+				</md-input-container>
+			
+			</form>
+		</div>
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<md-button ng-click="addNewContragentClick()">
+			ADD
+		</md-button>
+	</md-dialog-actions>
 </md-dialog>

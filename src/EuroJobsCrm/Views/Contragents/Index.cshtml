@@ -2,16 +2,9 @@
 ViewData["Title"] = "Contragnets"; }
 
 <ui-view>
+
 	<div id="popupContainer" ng-controller="ContragentsController as contragentsCtr" class="container body-content">
 		<md-content>
-
-			<!--	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
-				<a mfb-button  icon="ion-plus-round" label="Add Contragnet" ng-click="showDialog($event)">
-				</a>
-			</nav>-->
-
-			<nav mfb-menu position="br" active-icon="ion-plus-round" resting-icon="ion-plus-round" ng-click="showDialog($event)">
-			</nav>
 
 
 			<md-list ng-cloak>
@@ -36,9 +29,10 @@ ViewData["Title"] = "Contragnets"; }
 
 			</md-list>
 
-
 		</md-content>
+		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
+			<a mfb-button icon="ion-ios-search-strong" label="{{'SEARCH' | translate}}"></a>
+			<a mfb-button icon="ion-android-contact" label="{{'ADD_CONTRAGENT' | translate}}" ng-click="showDialog()"></a>
+		</nav>
 	</div>
-
-
 </ui-view>

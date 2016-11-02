@@ -6,5 +6,8 @@
     "Communication": "Communicationts",
     "Contragents": "Contragents",
     "Calendar": "Calendar",
-    "Log out": "Log out"
+    "Log out": "Log out",
+    "ADD_CONTRAGENT": "Add contragent",
+    "SEARCH": "Search",
+    "CONTRAGENT_NAME": "Contragent name"
 }

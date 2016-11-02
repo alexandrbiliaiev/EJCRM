@@ -6,5 +6,16 @@
     "Communication": "Powiadomienia",
     "Contragents": "Kontragenci",
     "Calendar": "Kalendar",
-    "Log out": "Wyloguj się"
+    "Log out": "Wyloguj się",
+    "ADD_CONTRAGENT": "Dodaj kontragenta",
+    "SEARCH": "Szukaj",
+    "CONTRAGENT_NAME": "Imię kontragenta",
+    "NAME_REQUIRED": "Imię jest wymagane",
+    "NAME_IS_TO_LONG": "Imię może mieć długość do 100 znaków",
+    "LICENSE_NUMBER": "Numer licencji",
+    "LICENSE_NUMBER_REQUIRED": "Imię jest wymagane",
+    "LICENSE_NUMBER_IS_TO_LONG": "Imię może mieć długość do 100 znaków",
+    "STATUS": "Status",
+    "ACTIVE": "Aktywnty",
+    "INACTIVE": "Nie aktywny"
 }
