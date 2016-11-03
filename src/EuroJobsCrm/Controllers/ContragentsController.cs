@@ -11,6 +11,13 @@ namespace EuroJobsCrm.Controllers
     {
         public IActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account", new
+                {
+                    returnUrl = Request.Path
+                });
+            }
             return View();
         }
 
@@ -72,5 +79,27 @@ namespace EuroJobsCrm.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("/api/Contragents/Delete")]
+        public bool DeleteContragent([FromBody] int contragentId)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                Contragents ctr = context.Contragents.FirstOrDefault(c => c.CgtId == contragentId);
+              
+
+                if (ctr == null)
+                {
+                    return false;
+                }
+                
+                ctr.CgtAuditRd = DateTime.UtcNow;
+                ctr.CgtAuditRu = User.GetUserId();
+
+                context.SaveChanges();
+               
+                return true;
+            }
+        }
     }
 }

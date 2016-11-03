@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EuroJobsCrm.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/ContactPersons")]
+    //[Produces("application/json")]
+    //[Route("api/ContactPersons")]
     public class ContactPersonsController : Controller
     {
         [HttpPost]
-        [Route("/Save")]
+        [Route("api/ContactPersons/Save")]
         public ContactPersonDto SaveContactPerson([FromBody] ContactPersonDto contactPerson)
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
@@ -59,6 +59,28 @@ namespace EuroJobsCrm.Controllers
                 return contactPerson;
             }
 
+        }
+
+        [HttpPost]
+        [Route("api/ContactPersons/Delete")]
+        public bool DeleteContactPerson([FromBody] int contactPersonId)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                ContactPersons ctp = context.ContactPersons.FirstOrDefault(c => c.CtpId == contactPersonId);
+ 
+                if (ctp == null)
+                {
+                    return false;
+                }
+                
+                ctp.CtpAuditRd  = DateTime.UtcNow;
+                ctp.CtpAuditRu = User.GetUserId();
+
+                context.SaveChanges();
+
+                return true;
+            }
         }
     }
 }

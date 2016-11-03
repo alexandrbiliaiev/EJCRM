@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EuroJobsCrm.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/Addresses")]
+    //[Produces("application/json")]
+    //[Route("api/Addresses")]
     public class AddressesController : Controller
     {
         [HttpPost]
-        [Route("/Save")]
+        [Route("api/Addresses/Save")]
         public AddressDto SaveAddress([FromBody] AddressDto address)
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
@@ -56,6 +56,27 @@ namespace EuroJobsCrm.Controllers
                 return address;
             }
 
+        }
+
+        [HttpPost]
+        [Route("api/Addresses/Delete")]
+        public bool DeleteAddress([FromBody] int addressId)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                Addresses adr = context.Addresses.FirstOrDefault(c => c.AdrId == addressId);
+
+                if (adr == null)
+                {
+                    return false;
+                }
+
+                adr.AdrAuditRd = DateTime.UtcNow;
+                adr.AdrAduitRu = User.GetUserId();
+                context.SaveChanges();
+
+                return true;
+            }
         }
 
     }

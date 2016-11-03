@@ -14,16 +14,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 16:19:39</publishTime>
     </File>
     <File Include="EuroJobsCrm.deps.json">
-      <publishTime>10/31/2016 08:03:57</publishTime>
+      <publishTime>11/02/2016 23:38:39</publishTime>
     </File>
     <File Include="EuroJobsCrm.dll">
-      <publishTime>10/30/2016 19:26:15</publishTime>
+      <publishTime>02/11/2016 22:38:23</publishTime>
     </File>
     <File Include="EuroJobsCrm.pdb">
-      <publishTime>10/30/2016 19:26:15</publishTime>
+      <publishTime>02/11/2016 22:38:23</publishTime>
     </File>
     <File Include="EuroJobsCrm.runtimeconfig.json">
-      <publishTime>10/31/2016 08:03:57</publishTime>
+      <publishTime>11/02/2016 23:38:39</publishTime>
     </File>
     <File Include="Microsoft.ApplicationInsights.AspNetCore.dll">
       <publishTime>06/22/2016 12:35:54</publishTime>
@@ -593,7 +593,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 09:46:38</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>10/30/2016 09:46:38</publishTime>
+      <publishTime>01/11/2016 18:11:40</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
       <publishTime>10/30/2016 09:46:38</publishTime>
@@ -611,7 +611,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 09:46:38</publishTime>
     </File>
     <File Include="Views/Contragents/Index.cshtml">
-      <publishTime>10/30/2016 19:32:22</publishTime>
+      <publishTime>02/11/2016 22:06:52</publishTime>
     </File>
     <File Include="Views/Dashboard/Index.cshtml">
       <publishTime>10/30/2016 10:43:45</publishTime>
@@ -623,7 +623,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 09:46:34</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>10/30/2016 09:46:34</publishTime>
+      <publishTime>01/11/2016 18:11:40</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>10/30/2016 09:46:38</publishTime>
@@ -647,10 +647,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 09:46:34</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>10/30/2016 18:34:38</publishTime>
+      <publishTime>02/11/2016 19:28:19</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>10/30/2016 09:46:38</publishTime>
+      <publishTime>01/11/2016 18:11:40</publishTime>
     </File>
     <File Include="Views/Shared/_ValidationScriptsPartial.cshtml">
       <publishTime>10/30/2016 09:46:38</publishTime>
@@ -662,16 +662,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 09:46:34</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>10/31/2016 08:03:58</publishTime>
+      <publishTime>11/02/2016 23:38:40</publishTime>
+    </File>
+    <File Include="wwwroot/css/mfb.css">
+      <publishTime>01/11/2016 18:28:44</publishTime>
     </File>
     <File Include="wwwroot/css/server_error.png">
       <publishTime>05/09/2016 22:37:41</publishTime>
     </File>
     <File Include="wwwroot/css/site.css">
-      <publishTime>09/10/2016 21:52:39</publishTime>
+      <publishTime>01/11/2016 19:37:16</publishTime>
     </File>
     <File Include="wwwroot/css/site.min.css">
-      <publishTime>10/31/2016 08:03:55</publishTime>
+      <publishTime>11/02/2016 23:38:37</publishTime>
     </File>
     <File Include="wwwroot/favicon.ico">
       <publishTime>06/24/2016 12:03:04</publishTime>
@@ -728,10 +731,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/10/2016 15:37:58</publishTime>
     </File>
     <File Include="wwwroot/js/app.js">
-      <publishTime>10/29/2016 20:52:13</publishTime>
+      <publishTime>02/11/2016 21:56:52</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/ContragentsController.js">
-      <publishTime>10/30/2016 19:15:01</publishTime>
+      <publishTime>02/11/2016 22:36:45</publishTime>
+    </File>
+    <File Include="wwwroot/js/controllers/ContragentsDialogController.js">
+      <publishTime>01/11/2016 18:28:44</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/EventController.js">
       <publishTime>10/29/2016 19:43:30</publishTime>
@@ -749,13 +755,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 19:26:27</publishTime>
     </File>
     <File Include="wwwroot/languages/en.json">
-      <publishTime>10/30/2016 19:32:57</publishTime>
+      <publishTime>02/11/2016 19:38:44</publishTime>
     </File>
     <File Include="wwwroot/languages/fr.json">
       <publishTime>04/09/2016 21:40:20</publishTime>
     </File>
     <File Include="wwwroot/languages/pl.json">
-      <publishTime>10/30/2016 19:33:22</publishTime>
+      <publishTime>02/11/2016 22:27:26</publishTime>
+    </File>
+    <File Include="wwwroot/languages/ru.json">
+      <publishTime>01/11/2016 18:11:40</publishTime>
     </File>
     <File Include="wwwroot/lib/angular-busy/angular-busy.min.css">
       <publishTime>08/28/2016 21:29:43</publishTime>
@@ -928,6 +937,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/lib/bootstrap/LICENSE">
       <publishTime>06/24/2016 12:03:04</publishTime>
     </File>
+    <File Include="wwwroot/lib/icons/add.svg">
+      <publishTime>01/11/2016 18:28:44</publishTime>
+    </File>
+    <File Include="wwwroot/lib/icons/delete.svg">
+      <publishTime>01/11/2016 19:37:16</publishTime>
+    </File>
+    <File Include="wwwroot/lib/icons/edit.svg">
+      <publishTime>01/11/2016 19:37:16</publishTime>
+    </File>
     <File Include="wwwroot/lib/jquery-validation-unobtrusive/.bower.json">
       <publishTime>06/24/2016 12:03:04</publishTime>
     </File>
@@ -973,14 +991,110 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/lib/jsvat/angular-jsvat.min.js">
       <publishTime>08/25/2016 18:42:58</publishTime>
     </File>
+    <File Include="wwwroot/lib/mfb/.jsbeautifyrc">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/.npmignore">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/bower.json">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/CHANGELOG.md">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/ga.html">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/Gruntfile.js">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/LICENSE">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/.npmignore">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/lib/modernizr.touch.js">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/mfb.css">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/mfb.css.map">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/mfb.js">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/mfb.min.css">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/mfb.min.js">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/Gruntfile.js">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/LICENSE">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/package.json">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/README.md">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/closure/bottom.js">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/closure/top.js">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/mfb.css.map">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/mfb.js">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/mfb.scss">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/_/_fountain.scss">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/_/_slidein-spring.scss">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/_/_slidein.scss">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/_/_zoomin.scss">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/package.json">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/README.md">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/src/mfb-directive.js">
+      <publishTime>01/11/2016 18:28:45</publishTime>
+    </File>
     <File Include="wwwroot/templates/card_payment.html">
       <publishTime>09/11/2016 00:06:25</publishTime>
     </File>
+    <File Include="wwwroot/templates/contragent_add_tmpl.html">
+      <publishTime>02/11/2016 22:35:40</publishTime>
+    </File>
+    <File Include="wwwroot/templates/contragent_details.html">
+      <publishTime>02/11/2016 22:33:50</publishTime>
+    </File>
     <File Include="wwwroot/templates/error_503.html">
-      <publishTime>05/09/2016 22:13:55</publishTime>
+      <publishTime>01/11/2016 18:28:45</publishTime>
     </File>
     <File Include="wwwroot/_references.js">
-      <publishTime>10/30/2016 19:26:28</publishTime>
+      <publishTime>01/11/2016 18:28:47</publishTime>
     </File>
   </ItemGroup>
 </Project>

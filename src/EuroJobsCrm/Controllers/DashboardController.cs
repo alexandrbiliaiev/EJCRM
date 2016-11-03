@@ -16,7 +16,7 @@ namespace EuroJobsCrm.Controllers
                 {
                     returnUrl = Request.Path
                 }
-            );
+                    );
             }
             return View();
         }

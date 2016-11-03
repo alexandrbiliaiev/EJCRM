@@ -17,5 +17,9 @@
     "LICENSE_NUMBER_IS_TO_LONG": "Imię może mieć długość do 100 znaków",
     "STATUS": "Status",
     "ACTIVE": "Aktywnty",
-    "INACTIVE": "Nie aktywny"
+    "INACTIVE": "Nie aktywny",
+    "CTG_DELETE_CONFIRM_TITLE": "Czy napewno chcesz usunąć kontragenta?",
+    "CTG_DELETE_CONFIRM_TEXT": "Wszystkie dane związane z tym kontragentem zostaną usunięte.",
+    "DELETE_OK": "Tak, usuń!",
+    "DELETE_CANCEL": "Anuluj"
 }

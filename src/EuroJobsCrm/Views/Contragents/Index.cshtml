@@ -21,7 +21,7 @@ ViewData["Title"] = "Contragnets"; }
 					<md-button class="md-icon-button" ng-click="editContragent(contragent.id)">
 						<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 					</md-button>
-					<md-button class="md-icon-button">
+					<md-button class="md-icon-button" ng-click="showDeleteCtgConfirmDialog(contragent.id)">
 						<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 					</md-button>
 
@@ -32,7 +32,7 @@ ViewData["Title"] = "Contragnets"; }
 		</md-content>
 		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
 			<a mfb-button icon="ion-ios-search-strong" label="{{'SEARCH' | translate}}"></a>
-			<a mfb-button icon="ion-android-contact" label="{{'ADD_CONTRAGENT' | translate}}" ng-click="showDialog()"></a>
+			<a mfb-button icon="ion-android-contact" label="{{'ADD_CONTRAGENT' | translate}}" ng-click="showAddContragentDialog()"></a>
 		</nav>
 	</div>
 </ui-view>

@@ -1,4 +1,4 @@
-angular.module('EuroJobsCrm.controllers').controller('ContragentsController', function ($scope, $location, $http, $state, contragentsService, $mdDialog) {
+angular.module('EuroJobsCrm.controllers').controller('ContragentsController', function ($scope, $location, $http, $state, $translate, $mdDialog, contragentsService) {
     $scope.contragents = [];
     $scope.index = 0;
     $scope.status = 'a';
@@ -8,7 +8,6 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
     contragentsService.load().success(function (response) {
         contragentsService.contragents = response;
         $scope.contragents = contragentsService.contragents;
-
     }).error(function () {
         $state.go('error');
     });
@@ -32,8 +31,19 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         });
     }
 
+    $scope.deleteContragent = function (ctgId) {
+        param = {
+            contragentId: ctgId
+        };
+        return $http({
+            url: 'api/Contragents/Delete',
+            method: "POST",
+            data: ctgId
+        });
+    }
+
     $scope.addNewContragentClick = function () {
-        if ($scope.contragentForm.$invalid){
+        if ($scope.contragentForm.$invalid) {
             return;
         }
 
@@ -53,7 +63,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         $mdDialog.hide();
     }
 
-    $scope.showDialog = function (ev) {
+    $scope.showAddContragentDialog = function (ev) {
         $mdDialog.show({
                 scope: $scope,
                 preserveScope: true,
@@ -67,4 +77,36 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
 
             });
     }
+
+    $scope.showDeleteCtgConfirmDialog = function (contragentId) {
+        var confirm = $mdDialog.confirm()
+            .title($translate.instant('CTG_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('CTG_DELETE_CONFIRM_TEXT'))
+            .ariaLabel('label')
+            .ok($translate.instant('DELETE_OK'))
+            .cancel($translate.instant('DELETE_CANCEL'));
+
+        $mdDialog.show(confirm).then(function () {
+            $scope.deleteContragent(contragentId).success(function(response){
+                if (response != true){
+                    return;
+                }
+
+                contragents = contragentsService.contragents;
+                for(i in contragents){
+                    if (contragents[i].id != contragentId){
+                        continue;
+                    }
+                    
+                    contragents.splice(i, 1);
+                    return;
+                }
+
+            }).error(function(response){
+                $state.go('error');
+            });
+        }, function () {
+
+        });
+    };
 });
