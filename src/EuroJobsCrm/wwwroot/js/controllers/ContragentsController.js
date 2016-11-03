@@ -12,9 +12,9 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         $state.go('error');
     });
 
-    $scope.editContragent = function (id) {
+    $scope.editContragent = function (ctgId) {
         $state.go('contragent', {
-            id: id
+            id: ctgId
         });
     }
 
