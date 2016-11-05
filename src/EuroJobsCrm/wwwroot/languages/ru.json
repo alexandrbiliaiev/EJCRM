@@ -1,4 +1,10 @@
 ﻿{
-    "CLIENTS": "Klienty"
-
+    "Clients": "Клиенты",
+    "Offers": "Вакансии",
+    "Employees": "Работники",
+    "Invoice": "Фактуры",
+    "Communication": "Коммуникация",
+    "Contragents": "Контрагенты",
+    "Calendar": "Календарь",
+    "Log out": "Выход"
 }

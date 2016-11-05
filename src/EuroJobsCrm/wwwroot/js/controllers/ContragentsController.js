@@ -4,6 +4,8 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
     $scope.status = 'a';
     $scope.name = '';
     $scope.licenseNumber = '';
+    $scope.testshow1 = true;
+    $scope.testshow2 = true;
 
     contragentsService.load().success(function (response) {
         contragentsService.contragents = response;
@@ -87,22 +89,22 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
             .cancel($translate.instant('DELETE_CANCEL'));
 
         $mdDialog.show(confirm).then(function () {
-            $scope.deleteContragent(contragentId).success(function(response){
-                if (response != true){
+            $scope.deleteContragent(contragentId).success(function (response) {
+                if (response != true) {
                     return;
                 }
 
                 contragents = contragentsService.contragents;
-                for(i in contragents){
-                    if (contragents[i].id != contragentId){
+                for (i in contragents) {
+                    if (contragents[i].id != contragentId) {
                         continue;
                     }
-                    
+
                     contragents.splice(i, 1);
                     return;
                 }
 
-            }).error(function(response){
+            }).error(function (response) {
                 $state.go('error');
             });
         }, function () {
