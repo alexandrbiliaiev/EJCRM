@@ -15,7 +15,6 @@
     padding-right: 15px;
 }
 
-
 .icon-button-color {
     color: #2E4172;
 }
@@ -74,11 +73,15 @@
 }
 
 .item-show-hide {
-    transition: all linear 0.5s;
+    line-height: 20px;
+    opacity: 1;
+    padding: 10px;
 }
 
 .item-show-hide.ng-hide {
+    line-height: 0;
     opacity: 0;
+    padding: 0 10px;
 }
 
 .credit_card_field {
@@ -95,4 +98,3 @@
     width: 100%;
     background: rgba(255, 255, 255, 0.86);
 }
-

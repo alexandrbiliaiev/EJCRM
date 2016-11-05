@@ -1,18 +1,13 @@
 angular.module('EuroJobsCrm.controllers').controller('ContragentsController', function ($scope, $location, $http, $state, $translate, $mdDialog, contragentsService) {
     $scope.contragents = [];
     $scope.index = 0;
-    $scope.status = 'a';
-    $scope.name = '';
-    $scope.licenseNumber = '';
-    $scope.testshow1 = true;
-    $scope.testshow2 = true;
 
-    contragentsService.load().success(function (response) {
-        contragentsService.contragents = response;
-        $scope.contragents = contragentsService.contragents;
-    }).error(function () {
-        $state.go('error');
-    });
+
+    $scope.contragent = {
+        status: 'a',
+        name: '',
+        icenseNumber: ''
+    }
 
     $scope.editContragent = function (ctgId) {
         $state.go('contragent', {
@@ -20,39 +15,22 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         });
     }
 
-    $scope.addNewContragent = function () {
-        contragent = {
-            name: $scope.name,
-            licenseNumber: $scope.licenseNumber,
-            status: $scope.status
-        };
-        return $http({
-            url: 'api/Contragents/Save',
-            method: "POST",
-            data: contragent
-        });
-    }
 
-    $scope.deleteContragent = function (ctgId) {
-        param = {
-            contragentId: ctgId
-        };
-        return $http({
-            url: 'api/Contragents/Delete',
-            method: "POST",
-            data: ctgId
-        });
-    }
-
-    $scope.addNewContragentClick = function () {
+    $scope.saveContragentClick = function () {
         if ($scope.contragentForm.$invalid) {
             return;
         }
 
-        $scope.addNewContragent().success(function (response) {
+        contragent = {
+            name: $scope.contragent.name,
+            licenseNumber: $scope.contragent.licenseNumber,
+            status: $scope.contragent.status
+        };
+
+        contragentsService.saveContragent(contragent).success(function (response) {
             contragentsService.contragents.push(response);
-            $scope.status = 'a';
-            $scope.name = $scope.licenseNumber = '';
+            $scope.contragent.status = 'a';
+            $scope.contragent.name = $scope.contragent.licenseNumber = '';
             $mdDialog.hide();
         }).error(function () {
             $state.go('error');
@@ -89,7 +67,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
             .cancel($translate.instant('DELETE_CANCEL'));
 
         $mdDialog.show(confirm).then(function () {
-            $scope.deleteContragent(contragentId).success(function (response) {
+            contragentsService.deleteContragent(contragentId).success(function (response) {
                 if (response != true) {
                     return;
                 }
@@ -111,4 +89,16 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
 
         });
     };
+
+    if (contragentsService.contragents != undefined) {
+        $scope.contragents = contragentsService.contragents;
+        return;
+    }
+
+    contragentsService.load().success(function (response) {
+        contragentsService.contragents = response;
+        $scope.contragents = contragentsService.contragents;
+    }).error(function () {
+        $state.go('error');
+    });
 });

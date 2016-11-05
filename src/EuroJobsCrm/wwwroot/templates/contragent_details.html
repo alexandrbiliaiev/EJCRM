@@ -1,106 +1,213 @@
-<ui-view>
-
-	<div layout-xs="column" layout="row" layout-align="space-between none">
-
-		<div flex-xs flex-gt-xs="35" layout-xs="column">
-			<div flex>
-				<md-toolbar>
-					<div class="md-toolbar-tools">
-						<h2>
-							<span>Detail information</span>
-						</h2>
-					</div>
-				</md-toolbar>
-				<md-card>
-					<md-card-content>
-						<div ng-cloak ng-controller="ContragentManageController as ctgManageCtr">
-							<md-content>
-								<form name="contragentForm">
-									<md-input-container class="md-block">
-										<label>{{'CONTRAGENT_NAME'| translate}}</label>
-										<input name="contragent_name" ng-model="contragent.name" placeholder="Firma S. A." md-maxlength="100" required>
-										<div ng-messages="contragentForm.contragent_name.$error" role="alert" multiple>
-											<div ng-message="required">{{'NAME_REQUIRED' | translate}} </div>
-											<div ng-message="md-maxlength">{{'NAME_IS_TO_LONG'| translate}}</div>
-										</div>
-									</md-input-container>
-									<md-input-container class="md-block">
-										<label>{{'LICENSE_NUMBER'| translate}}</label>
-										<input name="license_number" ng-model="contragent.licenseNumber" placeholder="License number" ng-disabled="true" md-maxlength="100"
-											required>
-										<div ng-messages="contragentForm.license_number.$error" role="alert" multiple>
-											<div ng-message="required">{{'LICENSE_NUMBER_REQUIRED' | translate}} </div>
-											<div ng-message="md-maxlength">{{'LICENSE_NUMBER_IS_TO_LONG'| translate}}</div>
-										</div>
-									</md-input-container>
-									<md-input-container class="md-block">
-										<label>{{ 'STATUS' | translate }}</label>
-										<md-select name="type" ng-model="contragent.status" data-placeholder="{{ 'STATUS' | translate }}" required>
-											<md-option value="a">{{ 'ACTIVE' | translate }}</md-option>
-											<md-option value="i">{{ 'INACTIVE' | translate }}</md-option>
-										</md-select>
-									</md-input-container>
-								</form>
-							</md-content>
+<ui-view ng-controller="ContragentManageController">
+	<div layout="column" layout-align="space-around none" layout-padding>
+		<div layout="row" layout-align="space-between" layout-padding layout-wrap>
+			<div flex-xs flex-gt-xs="35" layout-xs="column">
+				<section class="demo-container md-whiteframe-z1" ng-class="{'show-source': demoCtrl.$showSource}">
+					<md-toolbar>
+						<div class="md-toolbar-tools">
+							<h2>
+								<span>Detail information</span>
+							</h2>
+							<span flex></span>
+							<md-button class="md-icon-button " aria-label="Use Android" ng-click="showEditContragentDialog()">
+								<md-icon md-font-icon="ion-edit"></md-icon>
+							</md-button>
+							<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandDetails = !expandDetails">
+								<md-icon md-font-icon="ion-navicon-round"></md-icon>
+							</md-button>
 						</div>
-					</md-card-content>
-					<md-card-actions layout="row" layout-align="end center">
-						<md-button>Action 1</md-button>
-					</md-card-actions>
-				</md-card>
+					</md-toolbar>
+					<div layout="row" layout-padding="" ng-show="expandDetails" ng-cloak>
+						<md-content flex="100">
+							<form name="contragentForm">
+								<md-input-container class="md-block">
+									<label>{{'CONTRAGENT_NAME'| translate}}</label>
+									<input name="contragent_name" ng-model="contragent.name" placeholder="Firma S. A." ng-disabled="true" md-maxlength="100"
+													required>
+									<div ng-messages="contragentForm.contragent_name.$error" role="alert" multiple>
+										<div ng-message="required">{{'NAME_REQUIRED' | translate}} </div>
+										<div ng-message="md-maxlength">{{'NAME_IS_TO_LONG'| translate}}</div>
+									</div>
+								</md-input-container>
+								<md-input-container class="md-block">
+									<label>{{'LICENSE_NUMBER'| translate}}</label>
+									<input name="license_number" ng-model="contragent.licenseNumber" placeholder="License number" ng-disabled="true" md-maxlength="100"
+													required>
+									<div ng-messages="contragentForm.license_number.$error" role="alert" multiple>
+										<div ng-message="required">{{'LICENSE_NUMBER_REQUIRED' | translate}} </div>
+										<div ng-message="md-maxlength">{{'LICENSE_NUMBER_IS_TO_LONG'| translate}}</div>
+									</div>
+								</md-input-container>
+								<md-input-container class="md-block">
+									<label>{{ 'STATUS' | translate }}</label>
+									<md-select name="type" ng-model="contragent.status" data-placeholder="{{ 'STATUS' | translate }}" ng-disabled="true" required>
+										<md-option value="a">{{ 'ACTIVE' | translate }}</md-option>
+										<md-option value="i">{{ 'INACTIVE' | translate }}</md-option>
+									</md-select>
+								</md-input-container>
+							</form>
+						</md-content>
+					</div>
+				</section>
+			</div>
+			<div flex-xs flex-gt-xs="65" layout-xs="column">
+				<section class="demo-container md-whiteframe-z1" ng-class="{'show-source': demoCtrl.$showSource}">
+					<md-toolbar>
+						<div class="md-toolbar-tools">
+							<h2>
+								<span>Contact persons</span>
+							</h2>
+							<span flex></span>
+							<md-button class="md-icon-button" aria-label="Use Android">
+								<md-icon md-font-icon="ion-plus-round"></md-icon>
+							</md-button>
+							<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandContactPersons = !expandContactPersons">
+								<md-icon md-font-icon="ion-navicon-round"></md-icon>
+							</md-button>
+						</div>
+					</md-toolbar>
+					<div layout="row" layout-padding ng-cloak ng-show="expandContactPersons" class="item-show-hide">
+						<md-content flex="100">
+							<form name="contragentForm">
+								<md-input-container class="md-block">
+									<label>{{'CONTRAGENT_NAME'| translate}}</label>
+									<input name="contragent_name" ng-model="contragent.name" placeholder="Firma S. A." ng-disabled="true" md-maxlength="100"
+													required>
+									<div ng-messages="contragentForm.contragent_name.$error" role="alert" multiple>
+										<div ng-message="required">{{'NAME_REQUIRED' | translate}} </div>
+										<div ng-message="md-maxlength">{{'NAME_IS_TO_LONG'| translate}}</div>
+									</div>
+								</md-input-container>
+								<md-input-container class="md-block">
+									<label>{{'LICENSE_NUMBER'| translate}}</label>
+									<input name="license_number" ng-model="contragent.licenseNumber" placeholder="License number" ng-disabled="true" md-maxlength="100"
+													required>
+									<div ng-messages="contragentForm.license_number.$error" role="alert" multiple>
+										<div ng-message="required">{{'LICENSE_NUMBER_REQUIRED' | translate}} </div>
+										<div ng-message="md-maxlength">{{'LICENSE_NUMBER_IS_TO_LONG'| translate}}</div>
+									</div>
+								</md-input-container>
+								<md-input-container class="md-block">
+									<label>{{ 'STATUS' | translate }}</label>
+									<md-select name="type" ng-model="contragent.status" data-placeholder="{{ 'STATUS' | translate }}" ng-disabled="true" required>
+										<md-option value="a">{{ 'ACTIVE' | translate }}</md-option>
+										<md-option value="i">{{ 'INACTIVE' | translate }}</md-option>
+									</md-select>
+								</md-input-container>
+							</form>
+						</md-content>
+					</div>
+				</section>
 			</div>
 		</div>
-
-		<div flex-gt-xs="1" layout-xs="column">
-			<span flex>&nbsp </span>
+		<div layout="column" layout-align="space-between" layout-padding layout-wrap>
+			<div flex-xs layout="column">
+				<section class="demo-container md-whiteframe-z1" ng-class="{'show-source': demoCtrl.$showSource}">
+					<md-toolbar>
+						<div class="md-toolbar-tools">
+							<h2>
+								<span>Employees</span>
+							</h2>
+							<span flex></span>
+							<md-button class="md-icon-button" aria-label="Use Android">
+								<md-icon md-font-icon="ion-plus-round"></md-icon>
+							</md-button>
+							<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandEmployees = !expandEmployees">
+								<md-icon md-font-icon="ion-navicon-round"></md-icon>
+							</md-button>
+						</div>
+					</md-toolbar>
+					<div layout="row" layout-padding="" ng-show="expandEmployees" ng-cloak>
+						<md-content flex="100">
+							<form name="contragentForm">
+								<md-input-container class="md-block">
+									<label>{{'CONTRAGENT_NAME'| translate}}</label>
+									<input name="contragent_name" ng-model="contragent.name" placeholder="Firma S. A." ng-disabled="true" md-maxlength="100"
+													required>
+									<div ng-messages="contragentForm.contragent_name.$error" role="alert" multiple>
+										<div ng-message="required">{{'NAME_REQUIRED' | translate}} </div>
+										<div ng-message="md-maxlength">{{'NAME_IS_TO_LONG'| translate}}</div>
+									</div>
+								</md-input-container>
+								<md-input-container class="md-block">
+									<label>{{'LICENSE_NUMBER'| translate}}</label>
+									<input name="license_number" ng-model="contragent.licenseNumber" placeholder="License number" ng-disabled="true" md-maxlength="100"
+													required>
+									<div ng-messages="contragentForm.license_number.$error" role="alert" multiple>
+										<div ng-message="required">{{'LICENSE_NUMBER_REQUIRED' | translate}} </div>
+										<div ng-message="md-maxlength">{{'LICENSE_NUMBER_IS_TO_LONG'| translate}}</div>
+									</div>
+								</md-input-container>
+								<md-input-container class="md-block">
+									<label>{{ 'STATUS' | translate }}</label>
+									<md-select name="type" ng-model="contragent.status" data-placeholder="{{ 'STATUS' | translate }}" ng-disabled="true" required>
+										<md-option value="a">{{ 'ACTIVE' | translate }}</md-option>
+										<md-option value="i">{{ 'INACTIVE' | translate }}</md-option>
+									</md-select>
+								</md-input-container>
+							</form>
+						</md-content>
+					</div>
+				</section>
+			</div>
+			<div flex-xs layout="column">
+				<section class="demo-container md-whiteframe-z1" ng-class="{'show-source': demoCtrl.$showSource}">
+					<md-toolbar>
+						<div class="md-toolbar-tools">
+							<h2>
+								<span>Addresses</span>
+							</h2>
+							<span flex></span>
+							<md-button class="md-icon-button" aria-label="Use Android">
+								<md-icon md-font-icon="ion-plus-round"></md-icon>
+							</md-button>
+							<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandAddresses = !expandAddresses">
+								<md-icon md-font-icon="ion-navicon-round"></md-icon>
+							</md-button>
+						</div>
+					</md-toolbar>
+					<div layout="row" layout-padding ng-cloak ng-show="expandAddresses" class="item-show-hide">
+						<md-content flex="100">
+							<form name="contragentForm">
+								<md-input-container class="md-block">
+									<label>{{'CONTRAGENT_NAME'| translate}}</label>
+									<input name="contragent_name" ng-model="contragent.name" placeholder="Firma S. A." ng-disabled="true" md-maxlength="100"
+													required>
+									<div ng-messages="contragentForm.contragent_name.$error" role="alert" multiple>
+										<div ng-message="required">{{'NAME_REQUIRED' | translate}} </div>
+										<div ng-message="md-maxlength">{{'NAME_IS_TO_LONG'| translate}}</div>
+									</div>
+								</md-input-container>
+								<md-input-container class="md-block">
+									<label>{{'LICENSE_NUMBER'| translate}}</label>
+									<input name="license_number" ng-model="contragent.licenseNumber" placeholder="License number" ng-disabled="true" md-maxlength="100"
+													required>
+									<div ng-messages="contragentForm.license_number.$error" role="alert" multiple>
+										<div ng-message="required">{{'LICENSE_NUMBER_REQUIRED' | translate}} </div>
+										<div ng-message="md-maxlength">{{'LICENSE_NUMBER_IS_TO_LONG'| translate}}</div>
+									</div>
+								</md-input-container>
+								<md-input-container class="md-block">
+									<label>{{ 'STATUS' | translate }}</label>
+									<md-select name="type" ng-model="contragent.status" data-placeholder="{{ 'STATUS' | translate }}" ng-disabled="true" required>
+										<md-option value="a">{{ 'ACTIVE' | translate }}</md-option>
+										<md-option value="i">{{ 'INACTIVE' | translate }}</md-option>
+									</md-select>
+								</md-input-container>
+							</form>
+						</md-content>
+					</div>
+				</section>
+			</div>
 		</div>
+	</div>
+	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
+		<a mfb-button icon="ion-home" label="{{'Add address' | translate}}" ng-click="" />
+		<a mfb-button icon="ion-person-add" label="{{'Add employee' | translate}}" ng-click="" />
+		<a mfb-button icon="ion-android-contact" label="{{'Add contact person' | translate}}" ng-click="" />
+	</nav>
 
-
-		<div flex ng-controller="ContragentsController" layout="column">
-			<md-toolbar>
-				<div class="md-toolbar-tools">
-					<h2>
-						<span>Addresses</span>
-					</h2>
-					<span flex></span>
-					<md-button ng-click="testshow1 = !testshow1"><b>...</b></md-button>
-				</div>
-			</md-toolbar>
-			<md-content ng-show="testshow1" effect="zoomin">
-				<md-card>
-					<md-card-content>
-						Shitty shit
-					</md-card-content>
-				</md-card>
-			</md-content>
-			<br>
-			<md-toolbar>
-				<div class="md-toolbar-tools">
-					<h2>
-						<span>Employees</span>
-					</h2>
-					<span flex></span>
-					<md-button ng-click="testshow2 = !testshow2"><b>...</b></md-button>
-				</div>
-			</md-toolbar>
-			<md-content ng-show="testshow2" effect="zoomin">
-				<md-card>
-					<md-card-content>
-						Shitty shit 2
-					</md-card-content>
-				</md-card>
-			</md-content>
-		</div>
-
-
-
-		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
-			<a mfb-button icon="ion-home" label="{{'Add address' | translate}}" ng-click="" />
-			<a mfb-button icon="ion-person-add" label="{{'Add employee' | translate}}" ng-click="" />
-			<a mfb-button icon="ion-android-contact" label="{{'Add contact person' | translate}}" ng-click="" />
-		</nav>
-
-
-
-
+	<nav mfb-menu position="tl" style="margin-top:100px;"  active-icon="ion-android-arrow-back" resting-icon="ion-android-arrow-back" ng-click="goBack()">
+		
+	</nav>
 </ui-view>

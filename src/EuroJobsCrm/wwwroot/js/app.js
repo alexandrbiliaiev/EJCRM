@@ -14,6 +14,9 @@
             .state('error', {
                 url: '/server_error',
                 templateUrl: 'templates/error_503.html',
+            }).state('contragents', {
+                url: "/all",
+                templateUrl: 'templates/contragents_list.html',
             }).state('contragent', {
                 url: "/edit/:id",
                 templateUrl: 'templates/contragent_details.html',
