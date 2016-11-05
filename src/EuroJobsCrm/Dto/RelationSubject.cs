@@ -6,6 +6,6 @@ namespace EuroJobsCrm.Dto
     {
         public int Id { get; set; }
         public List<AddressDto> Addresses { get; set; }
-        public List<ContactPersonDto> ContsctPersons { get; set; }
+        public List<ContactPersonDto> ContactPersons { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-angular.module('EuroJobsCrm.services', [])
+angular.module('EuroJobsCrm.services')
     .factory('contragentsService', ['$http', function ($http) {
 
         var contragents = {};

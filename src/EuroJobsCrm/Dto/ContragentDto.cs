@@ -16,7 +16,7 @@ namespace EuroJobsCrm.Dto
         public ContragentDto()
         {
             Addresses = new List<AddressDto>();
-            ContsctPersons = new List<ContactPersonDto>();
+            ContactPersons = new List<ContactPersonDto>();
         }
 
         public ContragentDto(Contragents contragent, IEnumerable<Addresses> addresses, IEnumerable<ContactPersons> contactPersons )
@@ -27,7 +27,7 @@ namespace EuroJobsCrm.Dto
             Status = contragent.CgtStatus;
             CreationDate = contragent.CgtAuditCd;
             Addresses = addresses.Select(a => new AddressDto(a)).ToList();
-            ContsctPersons = contactPersons.Select(c => new ContactPersonDto(c)).ToList();
+            ContactPersons = contactPersons.Select(c => new ContactPersonDto(c)).ToList();
         }
 
         public ContragentDto(Contragents contragent)
