@@ -21,5 +21,15 @@
     "CTG_DELETE_CONFIRM_TITLE": "Czy napewno chcesz usunąć kontragenta?",
     "CTG_DELETE_CONFIRM_TEXT": "Wszystkie dane związane z tym kontragentem zostaną usunięte.",
     "DELETE_OK": "Tak, usuń!",
-    "DELETE_CANCEL": "Anuluj"
+    "DELETE_CANCEL": "Anuluj",
+    "ADDRESS_TITLE":"Adres",
+    "ADDRESS_REQUIRED": "Adres jest wymagany",
+    "ADDRESS_IS_TO_LONG": "Adres może mieć długość do 300 znaków",
+    "POST_CODE": "Kod pocztowy",
+    "POST_CODE_REQUIRED": "Kod pocztowy jest wymagany",
+    "POST_CODE_IS_TO_LONG": "Kod pocztowy może mieć długość do 300 znaków",
+    "CITY": "Miejscowość",
+    "CITY_REQUIRED": "Miejscowość jest wymagana",
+    "USE_FOR_DOCUMENTS": "Adres główny",
+    "COUNTRY": "Kraj"
 }

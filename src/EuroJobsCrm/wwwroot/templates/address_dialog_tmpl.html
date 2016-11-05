@@ -1,0 +1,56 @@
+<md-dialog aria-label="Addres dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{'ADDRESS_TITLE' | translate}} </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="close()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <form name="addressForm">
+                <md-input-container class="md-block" style="width:400px;">
+                    <label>{{'ADDRESS_TITLE'| translate}}</label>
+                    <input name="address" ng-model="address.address" placeholder="Mickiewica 12/8" md-maxlength="300" required>
+                    <div ng-messages="addressForm.address.$error" role="alert" multiple>
+                        <div ng-message="required">{{'ADDRESS_REQUIRED' | translate}} </div>
+                        <div ng-message="md-maxlength">{{'ADDRESS_IS_TO_LONG'| translate}}</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>{{'POST_CODE'| translate}}</label>
+                    <input name="post_code" ng-model="address.postCode" placeholder="{{'POST_CODE'| translate}}" md-maxlength="20" required>
+                    <div ng-messages="addressForm.post_code.$error" role="alert" multiple>
+                        <div ng-message="required">{{'POST_CODE_REQUIRED' | translate}} </div>
+                        <div ng-message="md-maxlength">{{'POST_CODE_IS_TO_LONG'| translate}}</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>{{ 'CITY' | translate }}</label>
+                    <input name="city" ng-model="address.city" placeholder="{{ 'CITY' | translate }}" required>
+                    <div ng-messages="addressForm.city.$error" role="alert" multiple>
+                        <div ng-message="required">{{'CITY_REQUIRED' | translate}} </div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>{{ 'COUNTRY' | translate }}</label>
+                    <md-select name="type" ng-model="address.country" data-placeholder="Polska" required>
+                        <md-option value="{{country.code}}" ng-repeat="country in countries">{{country.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <md-checkbox md-no-ink ng-model="address.pay" aria-label="Checkbox No Ink" class="md-primary">
+                        {{ 'USE_FOR_DOCUMENTS' | translate }}
+                    </md-checkbox>
+                </md-input-container>
+            </form>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button ng-click="saveAddressClick()">
+            Save
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

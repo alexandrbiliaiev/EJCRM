@@ -2,7 +2,6 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
     $scope.contragents = [];
     $scope.index = 0;
 
-
     $scope.contragent = {
         status: 'a',
         name: '',
@@ -38,8 +37,8 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         });
     }
 
+
     $scope.close = function () {
-        console.log($scope);
         $mdDialog.hide();
     }
 

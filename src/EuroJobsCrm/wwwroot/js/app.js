@@ -24,4 +24,5 @@
     });
 
 angular.module('EuroJobsCrm.services', []);
+
 angular.module('EuroJobsCrm.controllers', []);
