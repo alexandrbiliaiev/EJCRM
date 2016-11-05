@@ -1,10 +1,10 @@
-angular.module('EuroJobsCrm.controllers').controller('ContragentManageController', function ($scope, $location, $translate, $http, $state, contragentsService, countriesService, addressesService, $mdDialog, $routeParams) {
-
+angular.module('EuroJobsCrm.controllers').controller('ContragentManageController', function ($scope, $location, $translate, $http, $state, contragentsService, countriesService, contactpersonsService, addressesService, $mdDialog, $routeParams) {
     $scope.expandDetails = true;
     $scope.expandContactPersons = true;
     $scope.expandAddresses = true;
     $scope.expandEmployees = true;
     $scope.countries = countriesService.countries;
+
 
     $scope.setDefaultAddress = function () {
         return {
@@ -19,7 +19,25 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         }
     }
 
+
+    $scope.setDefaultContactPerson = function () {
+        return {
+            id: 0,
+            contragentId: null,
+            clientId: null,
+            name: "",
+            surname: "",
+            position: "",
+            email: "",
+            phoneNumber: "",
+            skype: "",
+            messanger: ""
+        }
+    }
+
+    $scope.contactperson = $scope.setDefaultContactPerson();
     $scope.address = $scope.setDefaultAddress();
+
 
     $scope.goBack = function () {
         $state.go('contragents');
@@ -45,6 +63,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         });
     }
 
+
     $scope.saveAddressClick = function () {
         if ($scope.addressForm.$invalid) {
             return;
@@ -61,7 +80,39 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             $state.go('error');
             $mdDialog.hide();
         });
+
     }
+
+    $scope.saveContactPersonClick = function () {
+        if ($scope.contactpersonForm.$invalid) {
+            return;
+        }
+
+        contactperson = {
+            id: $scope.contactperson.id,
+            contragentId: $scope.contragent.id,
+            clientId: $scope.contragent.clientId,
+            name: $scope.contactperson.name,
+            surname: $scope.contactperson.surname,
+            position: $scope.contactperson.position,
+            email: $scope.contactperson.email,
+            phoneNumber: $scope.contactperson.phoneNumber,
+            skype: $scope.contactperson.skype,
+            messanger: $scope.contactperson.messanger
+        }
+
+        contactpersonsService.saveContactPerson(contactperson).success(function (response) {
+            if ($scope.contactperson.id == 0 || $scope.contactperson.id == undefined) {
+                $scope.contragent.contactPersons.push(response);
+            }
+
+            $mdDialog.hide();
+        }).error(function () {
+            $state.go('error');
+            $mdDialog.hide();
+        });
+    }
+
 
     $scope.close = function () {
         console.log($scope);
@@ -83,37 +134,124 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             });
     }
 
+    $scope.showNewContactPersonDialog = function (ev) {
+        $scope.contactperson = $scope.setDefaultContactPerson();
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/contragent_add_contact_person_tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+        })
+
+        .then(function (answer) {
+
+        }, function () {
+
+        });
+    }
+
     $scope.showNewAddressDialog = function (ev) {
         $scope.address = $scope.setDefaultAddress();
 
         $mdDialog.show({
-                scope: $scope,
-                preserveScope: true,
-                templateUrl: '/templates/address_dialog_tmpl.html',
-                targetEvent: ev,
-                clickOutsideToClose: true,
-            })
-            .then(function (answer) {
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/address_dialog_tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+        }).then(function (answer) {
 
-            }, function () {
+        }, function () {
 
-            });
+        });
     }
+
+
+
+
+    $scope.showNewContactPersonDialog = function (ev) {
+        $scope.contactperson = $scope.setDefaultContactPerson();
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/contragent_add_contact_person_tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+        })
+
+        .then(function (answer) {
+
+        }, function () {
+
+        });
+    }
+
 
     $scope.showEditAddressDialog = function (address) {
         $scope.address = address;
         $mdDialog.show({
-                scope: $scope,
-                preserveScope: true,
-                templateUrl: '/templates/address_dialog_tmpl.html',
-   
-                clickOutsideToClose: true,
-            })
-            .then(function (answer) {
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/address_dialog_tmpl.html',
 
-            }, function () {
+            clickOutsideToClose: true,
+        })
 
+        .then(function (answer) {
+
+        }, function () {
+
+        });
+    }
+
+
+    $scope.showDeleteCtpConfirmDialog = function (contactPersonId) {
+        var confirm = $mdDialog.confirm()
+            .title($translate.instant('CTG_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('CTG_DELETE_CONFIRM_TEXT'))
+            .ariaLabel('label')
+            .ok($translate.instant('DELETE_OK'))
+            .cancel($translate.instant('DELETE_CANCEL'));
+
+        $mdDialog.show(confirm).then(function () {
+            contactpersonsService.deleteContactPerson(contactPersonId).success(function (response) {
+                if (response != true) {
+                    return;
+                }
+
+                contactpersons = $scope.contragent.contactPersons;
+                for (i in contactpersons) {
+                    if (contactpersons[i].id != contactPersonId) {
+                        continue;
+                    }
+
+                    contactpersons.splice(i, 1);
+                    return;
+                }
+
+            }).error(function (response) {
+                $state.go('error');
             });
+        }, function () {
+
+        });
+    };
+
+    $scope.showEditContactPersonDialog = function (contactPerson) {
+        $scope.contactperson = contactPerson;
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/contragent_add_contact_person_tmpl.html',
+            clickOutsideToClose: true,
+        })
+
+        .then(function (answer) {
+
+        }, function () {
+
+        });
     }
 
 

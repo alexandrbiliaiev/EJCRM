@@ -44,12 +44,12 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
 
     $scope.showAddContragentDialog = function (ev) {
         $mdDialog.show({
-                scope: $scope,
-                preserveScope: true,
-                templateUrl: '/templates/contragent_add_tmpl.html',
-                targetEvent: ev,
-                clickOutsideToClose: true,
-            })
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/contragent_add_tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+        })
             .then(function (answer) {
 
             }, function () {
