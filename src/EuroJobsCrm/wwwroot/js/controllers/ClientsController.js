@@ -45,7 +45,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController', functi
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
-            templateUrl: '/templates/contragent_add_tmpl.html',
+            templateUrl: '/templates/contragents/contragent_dialog_tmpl.html',
             targetEvent: ev,
             clickOutsideToClose: true,
         })

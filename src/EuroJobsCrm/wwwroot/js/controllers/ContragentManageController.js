@@ -167,7 +167,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
-            templateUrl: '/templates/contragent_add_tmpl.html',
+            templateUrl: '/templates/contragents/contragent_dialog_tmpl.html',
             targetEvent: ev,
             clickOutsideToClose: true,
         })
@@ -184,7 +184,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
-            templateUrl: '/templates/contragent_add_employee_tmpl.html',
+            templateUrl: '/templates/employees/employee_dialog_tmpl.html',
 
             clickOutsideToClose: true,
         })
@@ -201,7 +201,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
-            templateUrl: '/templates/contragent_add_contact_person_tmpl.html',
+            templateUrl: '/templates/contactpersons/contact_person_dialog_tmpl.html',
             targetEvent: ev,
             clickOutsideToClose: true,
         })
@@ -219,7 +219,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
-            templateUrl: '/templates/address_dialog_tmpl.html',
+            templateUrl: '/templates/addresses/address_dialog_tmpl.html',
             targetEvent: ev,
             clickOutsideToClose: true,
         }).then(function (answer) {
@@ -234,7 +234,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
-            templateUrl: '/templates/contragent_add_contact_person_tmpl.html',
+            templateUrl: '/templates/contactpersons/contact_person_dialog_tmpl.html',
             targetEvent: ev,
             clickOutsideToClose: true,
         })
@@ -250,7 +250,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
-            templateUrl: '/templates/contragent_add_tmpl.html',
+            templateUrl: '/templates/contragents/contragent_dialog_tmpl.html',
             targetEvent: ev,
             clickOutsideToClose: true,
         })
@@ -266,7 +266,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
-            templateUrl: '/templates/address_dialog_tmpl.html',
+            templateUrl: '/templates/addresses/address_dialog_tmpl.html',
 
             clickOutsideToClose: true,
         })
@@ -316,7 +316,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
-            templateUrl: '/templates/contragent_add_contact_person_tmpl.html',
+            templateUrl: '/templates/contactpersons/contact_person_dialog_tmpl.html',
             clickOutsideToClose: true,
         })
 
@@ -396,7 +396,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
-            templateUrl: '/templates/contragent_add_employee_tmpl.html',
+            templateUrl: '/templates/employees/employee_dialog_tmpl.html',
             targetEvent: ev,
             clickOutsideToClose: true,
         })

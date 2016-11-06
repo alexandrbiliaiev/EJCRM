@@ -21,13 +21,13 @@
                 templateUrl: 'templates/error_503.html',
             }).state('contragents', {
                 url: "/ctg_all",
-                templateUrl: 'templates/contragents_list.html',
+                templateUrl: 'templates/contragents/contragents_list.html',
             }).state('clients', {
                 url: "/clt_all",
-                templateUrl: 'templates/clients_list.html',
+                templateUrl: 'templates/clients/clients_list.html',
             }).state('contragent', {
-                url: "/edit/:id",
-                templateUrl: 'templates/contragent_details.html',
+                url: "/ctg_edit/:id",
+                templateUrl: 'templates/contragents/contragent_details.html',
             });
     });
 
