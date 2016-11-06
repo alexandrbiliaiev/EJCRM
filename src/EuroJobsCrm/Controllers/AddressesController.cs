@@ -42,13 +42,12 @@ namespace EuroJobsCrm.Controllers
 
                 adr.AdrCity = address.City;
                 adr.AdrCountry = address.Country;
-                adr.AdrPay = address.Pay == "true" ? "y" : "n";
                 adr.AdrPostCode = address.PostCode;
                 adr.AdrType = address.Type;
                 adr.AdrCgtId = address.ContragentId;
                 adr.AdrAddress = address.Address;
-                adr.AdrAuditCd = DateTime.UtcNow;
-                adr.AdrAuditCu = User.GetUserId();
+                adr.AdrAuditMd = DateTime.UtcNow;
+                adr.AdrAduitMu = User.GetUserId();
 
                 context.SaveChanges();
                 address.Id = adr.AdrId;

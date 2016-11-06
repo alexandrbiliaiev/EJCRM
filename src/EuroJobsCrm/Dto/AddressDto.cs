@@ -29,7 +29,6 @@ namespace EuroJobsCrm.Dto
             ContragentId = address.AdrCgtId;
             Country = address.AdrCountry;
             EmploeeId = address.ArdEmpId;
-            Pay = address.AdrPay;
             PostCode = address.AdrPostCode;
             Type = address.AdrType;
         }

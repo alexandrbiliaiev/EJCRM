@@ -25,7 +25,7 @@ namespace EuroJobsCrm.Controllers
         [Route("/api/Contragents")]
         public IEnumerable<ContragentDto> GetContragents()
         {
-            using (var context = new DB_A12601_bielkaContext())
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
                 List<ContragentDto> contagents = context.Contragents
                     .Where(c => c.CgtAuditRd == null)
@@ -33,8 +33,10 @@ namespace EuroJobsCrm.Controllers
                         (c, a) => new {Contragent = c, Addresses = a})
                     .GroupJoin(context.ContactPersons.Where(a => a.CtpAuditRd == null), c => c.Contragent.CgtId, cp => cp.CtpCgtId,
                         (c, cp) => new {c.Contragent, c.Addresses, ContactPersons = cp})
+                    .GroupJoin(context.Employees.Where(a => a.EmpAuditRd == null), c => c.Contragent.CgtId, cp => cp.EmpCtgId,
+                        (c, cp) => new { c.Contragent, c.Addresses, c.ContactPersons, Employees = cp })
                     .ToList()
-                    .Select(c => new ContragentDto(c.Contragent, c.Addresses, c.ContactPersons))
+                    .Select(c => new ContragentDto(c.Contragent, c.Addresses, c.ContactPersons, c.Employees))
                     .ToList();
 
                return contagents;

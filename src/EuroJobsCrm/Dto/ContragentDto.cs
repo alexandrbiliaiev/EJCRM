@@ -11,7 +11,7 @@ namespace EuroJobsCrm.Dto
         public string Status { get; set; }
         public string LicenseNumber { get; set; }
         public DateTime? CreationDate { get; set; }
-      
+        public IEnumerable<EmployeeDto> Employees { get; set; }
 
         public ContragentDto()
         {
@@ -19,7 +19,8 @@ namespace EuroJobsCrm.Dto
             ContactPersons = new List<ContactPersonDto>();
         }
 
-        public ContragentDto(Contragents contragent, IEnumerable<Addresses> addresses, IEnumerable<ContactPersons> contactPersons )
+        public ContragentDto(Contragents contragent, IEnumerable<Addresses> addresses, 
+                IEnumerable<ContactPersons> contactPersons, IEnumerable<Employees> employees)
         {
             Id = contragent.CgtId;
             Name = contragent.CgtName;
@@ -28,6 +29,7 @@ namespace EuroJobsCrm.Dto
             CreationDate = contragent.CgtAuditCd;
             Addresses = addresses.Select(a => new AddressDto(a)).ToList();
             ContactPersons = contactPersons.Select(c => new ContactPersonDto(c)).ToList();
+            Employees = employees.Select(e => new EmployeeDto(e)).ToList();
         }
 
         public ContragentDto(Contragents contragent)
@@ -37,6 +39,7 @@ namespace EuroJobsCrm.Dto
             LicenseNumber = contragent.CgtLicenseNumber;
             Status = contragent.CgtStatus;
             CreationDate = contragent.CgtAuditCd;
+            Employees= new List<EmployeeDto>();
         }
     }
 

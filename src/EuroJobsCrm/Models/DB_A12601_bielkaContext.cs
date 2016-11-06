@@ -59,10 +59,6 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("adr_country")
                     .HasColumnType("varchar(100)");
 
-                entity.Property(e => e.AdrPay)
-                    .HasColumnName("adr_pay")
-                    .HasColumnType("varchar(1)");
-
                 entity.Property(e => e.AdrPostCode)
                     .HasColumnName("adr_post_code")
                     .HasColumnType("varchar(10)");
@@ -352,6 +348,10 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("cgt_name")
                     .HasMaxLength(100);
 
+                entity.Property(e => e.CgtResponsibleUser)
+                    .HasColumnName("cgt_responsible_user")
+                    .HasMaxLength(100);
+
                 entity.Property(e => e.CgtStatus)
                     .IsRequired()
                     .HasColumnName("cgt_status")
@@ -393,6 +393,13 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("emp_birth_date")
                     .HasColumnType("date");
 
+                entity.Property(e => e.EmpCtgId).HasColumnName("emp_ctg_id");
+
+                entity.Property(e => e.EmpDescription)
+                    .IsRequired()
+                    .HasColumnName("emp_description")
+                    .HasMaxLength(1000);
+
                 entity.Property(e => e.EmpFirstName)
                     .IsRequired()
                     .HasColumnName("emp_first_name")
@@ -407,6 +414,62 @@ namespace EuroJobsCrm.Models
                     .IsRequired()
                     .HasColumnName("emp_middle_name")
                     .HasMaxLength(100);
+
+                entity.Property(e => e.EmpResponsibleUser)
+                    .HasColumnName("emp_responsible_user")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.EmpStatus).HasColumnName("emp_status");
+            });
+
+            modelBuilder.Entity<Notes>(entity =>
+            {
+                entity.HasKey(e => e.NotId)
+                    .HasName("PK_Notes");
+
+                entity.Property(e => e.NotId).HasColumnName("not_id");
+
+                entity.Property(e => e.NotAuditMd)
+                    .HasColumnName("not_audit_md")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.NotAuditMu)
+                    .HasColumnName("not_audit_mu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.NotAuditRd)
+                    .HasColumnName("not_audit_rd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.NotAuditRu)
+                    .HasColumnName("not_audit_ru")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.NotCltId).HasColumnName("not_clt_id");
+
+                entity.Property(e => e.NotCtgId).HasColumnName("not_ctg_id");
+
+                entity.Property(e => e.NotDueDate)
+                    .HasColumnName("not_due_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.NotEmp).HasColumnName("not_emp");
+
+                entity.Property(e => e.NotRemindDate)
+                    .HasColumnName("not_remind_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.NotSubject)
+                    .HasColumnName("not_subject")
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.NotTargetUser)
+                    .HasColumnName("not_target_user")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.NotText)
+                    .HasColumnName("not_text")
+                    .HasMaxLength(1000);
             });
         }
 
@@ -422,5 +485,6 @@ namespace EuroJobsCrm.Models
         public virtual DbSet<ContactPersons> ContactPersons { get; set; }
         public virtual DbSet<Contragents> Contragents { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<Notes> Notes { get; set; }
     }
 }

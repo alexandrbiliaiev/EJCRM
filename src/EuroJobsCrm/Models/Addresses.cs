@@ -10,7 +10,6 @@ namespace EuroJobsCrm.Models
         public int? ArdEmpId { get; set; }
         public int? AdrCgtId { get; set; }
         public string AdrType { get; set; }
-        public string AdrPay { get; set; }
         public string AdrPostCode { get; set; }
         public string AdrCity { get; set; }
         public string AdrCountry { get; set; }
