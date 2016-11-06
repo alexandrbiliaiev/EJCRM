@@ -28,6 +28,9 @@
             }).state('contragent', {
                 url: "/ctg_edit/:id",
                 templateUrl: 'templates/contragents/contragent_details.html',
+            }).state('client', {
+                url: "/clt_edit/:id",
+                templateUrl: 'templates/clients/client_details.html',
             });
     });
 

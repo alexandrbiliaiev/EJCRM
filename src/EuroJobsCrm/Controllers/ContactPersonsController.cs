@@ -42,6 +42,7 @@ namespace EuroJobsCrm.Controllers
 
 
                 ctp.CtpCgtId = contactPerson.ContragentId;
+                ctp.CtpCltId = contactPerson.ClientId;
                 ctp.CtpEmail = contactPerson.Email;
                 ctp.CtpMessanger = contactPerson.Messanger;
                 ctp.CtpName = contactPerson.Name;

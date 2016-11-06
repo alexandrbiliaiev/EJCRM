@@ -1,15 +1,15 @@
-<ui-view ng-controller="ContragentManageController">
+<ui-view ng-controller="ClientManageController">
 	<div layout="column" layout-align="space-around none" layout-padding>
 		<div layout="row" layout-align="space-between" layout-padding layout-wrap>
 			<div flex-xs flex-gt-xs="35" layout-xs="column">
-				<section class="demo-container md-whiteframe-z1" ng-class="{'show-source': demoCtrl.$showSource}">
+				<section class="demo-container md-whiteframe-z1 " >
 					<md-toolbar>
 						<div class="md-toolbar-tools">
 							<h2>
-								<span>Detail information</span>
+								<span>{{'CLIENT_DETAILS' | translate}}</span>
 							</h2>
 							<span flex></span>
-							<md-button class="md-icon-button " aria-label="Use Android" ng-click="showEditContragentDialog()">
+							<md-button class="md-icon-button " aria-label="Use Android" ng-click="showEditClientDialog()">
 								<md-icon md-font-icon="ion-edit"></md-icon>
 							</md-button>
 							<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandDetails = !expandDetails">
@@ -17,33 +17,40 @@
 							</md-button>
 						</div>
 					</md-toolbar>
-					<div layout="row" layout-padding="" ng-show="expandDetails" class="element-hide"  ng-cloak>
+					<div layout="row" layout-padding="" ng-show="expandDetails" ng-cloak class="element-hide">
 						<md-content flex="100">
-							<form name="contragentForm">
-								<md-input-container class="md-block">
-									<label>{{'CONTRAGENT_NAME'| translate}}</label>
-									<input name="contragent_name" ng-model="contragent.name" placeholder="Firma S. A." ng-disabled="true" md-maxlength="100"
-													required>
-									<div ng-messages="contragentForm.contragent_name.$error" role="alert" multiple>
+							<form name="clientForm">
+								<md-input-container class="md-block" >
+									<label>{{'CLIENT_NAME'| translate}}</label>
+									<input name="client_name" ng-model="client.name" placeholder="Firma S. A." md-maxlength="100" ng-disabled="true" required>
+									<div ng-messages="clientForm.client_name.$error" role="alert" multiple>
 										<div ng-message="required">{{'NAME_REQUIRED' | translate}} </div>
 										<div ng-message="md-maxlength">{{'NAME_IS_TO_LONG'| translate}}</div>
 									</div>
 								</md-input-container>
 								<md-input-container class="md-block">
-									<label>{{'LICENSE_NUMBER'| translate}}</label>
-									<input name="license_number" ng-model="contragent.licenseNumber" placeholder="License number" ng-disabled="true" md-maxlength="100"
-													required>
-									<div ng-messages="contragentForm.license_number.$error" role="alert" multiple>
+									<label>{{'TAX_ID'| translate}}</label>
+									<input name="tax_id" ng-model="client.nip" placeholder="{{'TAX_ID'| translate}}" md-maxlength="20" ng-disabled="true" required>
+									<div ng-messages="clientForm.tax_id.$error" role="alert" multiple>
 										<div ng-message="required">{{'LICENSE_NUMBER_REQUIRED' | translate}} </div>
 										<div ng-message="md-maxlength">{{'LICENSE_NUMBER_IS_TO_LONG'| translate}}</div>
 									</div>
 								</md-input-container>
 								<md-input-container class="md-block">
 									<label>{{ 'STATUS' | translate }}</label>
-									<md-select name="type" ng-model="contragent.status" data-placeholder="{{ 'STATUS' | translate }}" ng-disabled="true" required>
-										<md-option value="a">{{ 'ACTIVE' | translate }}</md-option>
-										<md-option value="i">{{ 'INACTIVE' | translate }}</md-option>
-									</md-select>
+									<input name="krs" ng-model="client.krs" placeholder="KRS" md-maxlength="20" ng-disabled="true" required>
+									<div ng-messages="clientForm.tax_id.$error" role="alert" multiple>
+										<div ng-message="required">{{'REQUIRED' | translate}} </div>
+										<div ng-message="md-maxlength">{{'IS_TO_LONG'| translate}}</div>
+									</div>
+								</md-input-container>
+								<md-input-container class="md-block">
+									<label>REGON</label>
+									<input name="regon" ng-model="client.regon" placeholder="REGON" md-maxlength="20" ng-disabled="true" required>
+									<div ng-messages="clientForm.regon.$error" role="alert" multiple>
+										<div ng-message="required">{{'REQUIRED' | translate}} </div>
+										<div ng-message="md-maxlength">{{'IS_TO_LONG'| translate}}</div>
+									</div>
 								</md-input-container>
 							</form>
 						</md-content>
@@ -70,16 +77,16 @@
 						<md-content flex="100">
 							<md-list ng-cloak style="margin-top: -11px">
 								<!--	<md-subheader class="md-no-sticky">Contragents</md-subheader> -->
-								<md-list-item class="md-2-line" ng-repeat="contactperson in contragent.contactPersons">
+								<md-list-item class="md-2-line" ng-repeat="contactperson in client.contactPersons">
 									<md-icon style="font-size:32px;" md-font-icon="ion-ios-people-outline" ng-click="showEditContactPersonDialog(contactperson)"></md-icon>
 									<div class="md-list-item-text">
-										<h3><b>{{contactperson.name}} {{contactperson.surname}} ({{contactperson.position}})<b></h3>
-											<p>
-												<b>{{'Email'|translate}}</b>: {{contactperson.email}} <b>{{'Phone'|translate}}</b>: {{contactperson.phoneNumber}}
-											</p>
-											<p>
-												<b>{{'Skype'|translate}}</b>: {{contactperson.skype}} <b>{{'Messagner'|translate}}</b>: {{contactperson.messanger}}
-											</p>
+										<h3><b>{{contactperson.name}} {{contactperson.surname}} ({{contactperson.position}})</b></h3>
+										<p>
+											<b>{{'Email'|translate}}</b>: {{contactperson.email}} <b>{{'Phone'|translate}}</b>: {{contactperson.phoneNumber}}
+										</p>
+										<p>
+											<b>{{'Skype'|translate}}</b>: {{contactperson.skype}} <b>{{'Messagner'|translate}}</b>: {{contactperson.messanger}}
+										</p>
 									</div>
 									<md-button class="md-icon-button md-secondary " ng-click="showEditContactPersonDialog(contactperson)">
 										<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
@@ -95,7 +102,7 @@
 				</section>
 			</div>
 		</div>
-		<div layout="column" layout-align="space-between" layout-padding layout-wrap>
+		<div layout="column" layout-align="space-between" layout-padding layout-wrap ng-show="false">
 			<div flex-xs layout="column">
 				<section class="demo-container md-whiteframe-z1">
 					<md-toolbar>
@@ -112,10 +119,10 @@
 							</md-button>
 						</div>
 					</md-toolbar>
-					<div layout="row" layout-padding="" ng-show="expandEmployees" class="element-hide" ng-cloak>
+					<div layout="row" layout-padding="" ng-show="expandEmployees" ng-cloak>
 						<md-content flex>
 							<md-list ng-cloak style="margin-top: -11px">
-								<md-list-item class="md-2-line" ng-repeat="employee in contragent.employees">
+								<md-list-item class="md-2-line" ng-repeat="employee in client.employees">
 									<md-icon style="font-size:32px;" md-font-icon="ion-ios-people-outline" ng-click="showEditContactPersonDialog(contactperson)">
 									</md-icon>
 									<div class="md-list-item-text">
@@ -131,11 +138,11 @@
 								</md-list-item>
 							</md-list>
 						</md-content>
-					</div>
 				</section>
+				</div>
 			</div>
 			<div flex-xs layout="column">
-				<section class="demo-container md-whiteframe-z1" >
+				<section class="demo-container md-whiteframe-z1">
 					<md-toolbar>
 						<div class="md-toolbar-tools">
 							<h2>
@@ -150,10 +157,10 @@
 							</md-button>
 						</div>
 					</md-toolbar>
-					<div layout="row" layout-padding ng-cloak ng-show="expandAddresses" class="element-hide" >
+					<div layout="row" layout-padding ng-cloak ng-show="expandAddresses" class="element-hide">
 						<md-content flex="100">
 							<md-list ng-cloak>
-								<md-list-item class="md-2-line" ng-repeat="address in contragent.addresses">
+								<md-list-item class="md-2-line" ng-repeat="address in client.addresses">
 									<md-icon style="font-size:32px;" md-font-icon="ion-ios-home-outline" ng-click="showEditAddressDialog(address)"></md-icon>
 									<div class="md-list-item-text">
 										<h4>{{'ADDRESS_TITLE'| translate}}: <b>{{address.address}}</b>, <b>{{address.postCode}}</b></h4>
@@ -179,7 +186,7 @@
 	</div>
 	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
 		<a mfb-button icon="ion-home" label="{{'Add address' | translate}}" ng-click="showNewAddressDialog()" />
-		<a mfb-button icon="ion-person-add" label="{{'Add employee' | translate}}" ng-click="showNewEmployeeDialog()" />
+		
 		<a mfb-button icon="ion-android-contact" label="{{'Add contact person' | translate}}" ng-click="showNewContactPersonDialog()"
 		/>
 	</nav>
