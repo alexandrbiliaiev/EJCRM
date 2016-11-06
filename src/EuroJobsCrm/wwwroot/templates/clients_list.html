@@ -1,0 +1,33 @@
+<ui-view>
+
+	<div id="popupContainer" ng-controller="ClientsController" class="container body-content">
+		<md-content>
+			<md-list ng-cloak>
+				<!--	<md-subheader class="md-no-sticky">Contragents</md-subheader> -->
+
+				<md-list-item class="md-2-line" ng-repeat="client in clients" ng-click="doPrimaryAction($event)">
+					<div class="md-list-item-text">
+						<h3>{{client.name}}</h3>
+						<p>
+							NIP: {{client.nip}}
+						</p>
+					</div>
+
+					<md-button class="md-icon-button" ng-click="editContragent(client)">
+						<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
+					</md-button>
+					<md-button class="md-icon-button" ng-click="showDeleteCtgConfirmDialog(client.id)">
+						<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+					</md-button>
+
+				</md-list-item>
+
+			</md-list>
+
+		</md-content>
+		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
+			<a mfb-button icon="ion-ios-search-strong" label="{{'SEARCH' | translate}}"></a>
+			<a mfb-button icon="ion-android-contact" label="{{'ADD_CLIENT' | translate}}" ng-click="showAddClientDialog()"></a>
+		</nav>
+	</div>
+</ui-view>

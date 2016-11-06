@@ -36,14 +36,18 @@
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>{{ 'COUNTRY' | translate }}</label>
-                    <md-select name="type" ng-model="address.country" data-placeholder="Polska" required>
+                    <md-select name="type" ng-model="address.country" data-placeholder="" required>
                         <md-option value="{{country.code}}" ng-repeat="country in countries">{{country.name}}</md-option>
                     </md-select>
                 </md-input-container>
+                <br/>
                 <md-input-container class="md-block">
-                    <md-checkbox md-no-ink ng-model="address.pay" aria-label="Checkbox No Ink" class="md-primary">
-                        {{ 'USE_FOR_DOCUMENTS' | translate }}
-                    </md-checkbox>
+                    <label>{{ 'ADDRESS_TYPE' | translate }}</label>
+                    <md-select name="type" ng-model="address.type" data-placeholder="" required>
+                        <md-option value="1">{{ 'LEGAL_ADDRESS' | translate }}</md-option>
+                        <md-option value="2">{{ 'PHYSICAL_ADDRESS' | translate }}</md-option>
+                        <md-option value="3">{{ 'HOME_ADDRESS' | translate }}</md-option>
+                    </md-select>
                 </md-input-container>
             </form>
         </div>
