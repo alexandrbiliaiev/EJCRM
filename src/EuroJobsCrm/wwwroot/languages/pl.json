@@ -31,5 +31,11 @@
     "CITY": "Miejscowość",
     "CITY_REQUIRED": "Miejscowość jest wymagana",
     "USE_FOR_DOCUMENTS": "Adres główny",
-    "COUNTRY": "Kraj"
+    "COUNTRY": "Kraj",
+    "LEGAL_ADDRESS": "Adres firmy",
+    "PHYSICAL_ADDRESS": "Adres fizyczny",
+    "HOME_ADDRESS": "Adres domowy",
+    "ADDRESS_TYPE":"Rodzaj adresu",
+    "ADDRESS_DELETE_CONFIRM_TITLE": "Czy napewno chcesz usunąć ten adres?",
+    "ADDRESS_DELETE_CONFIRM_TEXT": "Potwierdzając usuwanie tracisz wszystkie informacje o tym adresie"
 }

@@ -11,7 +11,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             address: "",
             city: "",
             contragentId: $state.params.id,
-            country: "pl",
+            country: "PL",
             id: 0,
             pay: "0",
             postCode: "",
@@ -63,7 +63,6 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         });
     }
 
-
     $scope.saveAddressClick = function () {
         if ($scope.addressForm.$invalid) {
             return;
@@ -113,25 +112,9 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         });
     }
 
-
     $scope.close = function () {
         console.log($scope);
         $mdDialog.hide();
-    }
-
-    $scope.showEditContragentDialog = function (ev) {
-        $mdDialog.show({
-                scope: $scope,
-                preserveScope: true,
-                templateUrl: '/templates/contragent_add_tmpl.html',
-                targetEvent: ev,
-                clickOutsideToClose: true,
-            })
-            .then(function (answer) {
-
-            }, function () {
-
-            });
     }
 
     $scope.showNewContactPersonDialog = function (ev) {
@@ -167,9 +150,6 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         });
     }
 
-
-
-
     $scope.showNewContactPersonDialog = function (ev) {
         $scope.contactperson = $scope.setDefaultContactPerson();
         $mdDialog.show({
@@ -187,6 +167,20 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         });
     }
 
+    $scope.showEditContragentDialog = function (ev) {
+        $mdDialog.show({
+                scope: $scope,
+                preserveScope: true,
+                templateUrl: '/templates/contragent_add_tmpl.html',
+                targetEvent: ev,
+                clickOutsideToClose: true,
+            })
+            .then(function (answer) {
+
+            }, function () {
+
+            });
+    }
 
     $scope.showEditAddressDialog = function (address) {
         $scope.address = address;
@@ -205,6 +199,21 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         });
     }
 
+    $scope.showEditContactPersonDialog = function (contactPerson) {
+        $scope.contactperson = contactPerson;
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/contragent_add_contact_person_tmpl.html',
+            clickOutsideToClose: true,
+        })
+
+        .then(function (answer) {
+
+        }, function () {
+
+        });
+    }
 
     $scope.showDeleteCtpConfirmDialog = function (contactPersonId) {
         var confirm = $mdDialog.confirm()
@@ -238,23 +247,37 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         });
     };
 
-    $scope.showEditContactPersonDialog = function (contactPerson) {
-        $scope.contactperson = contactPerson;
-        $mdDialog.show({
-            scope: $scope,
-            preserveScope: true,
-            templateUrl: '/templates/contragent_add_contact_person_tmpl.html',
-            clickOutsideToClose: true,
-        })
+    $scope.showDeleteAddressConfirmDialog = function (addresId) {
+        var confirm = $mdDialog.confirm()
+            .title($translate.instant('ADDRESS_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('ADDRESS_DELETE_CONFIRM_TEXT'))
+            .ariaLabel('label')
+            .ok($translate.instant('DELETE_OK'))
+            .cancel($translate.instant('DELETE_CANCEL'));
 
-        .then(function (answer) {
+        $mdDialog.show(confirm).then(function () {
+            addressesService.deleteAddress(addresId).success(function (response) {
+                if (response != true) {
+                    return;
+                }
 
+                addresses = $scope.contragent.addresses;
+                for (i in addresses) {
+                    if (addresses[i].id != addresId) {
+                        continue;
+                    }
+
+                    addresses.splice(i, 1);
+                    return;
+                }
+
+            }).error(function (response) {
+                $state.go('error');
+            });
         }, function () {
 
         });
-    }
-
-
+    };
 
     if (contragentsService.contragents != undefined) {
         $scope.contragent = contragentsService.getContragent($state.params.id);

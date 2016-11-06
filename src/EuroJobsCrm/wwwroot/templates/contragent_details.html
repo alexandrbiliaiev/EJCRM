@@ -176,8 +176,10 @@
 									<div class="md-list-item-text">
 										   <h4>{{'ADDRESS_TITLE'| translate}}: <b>{{address.address}}</b>, <b>{{address.postCode}}</b></h4>
 											<p>{{ 'CITY' | translate }}: <b>{{address.city}}</b>, &nbsp&nbsp {{ 'COUNTRY' | translate }} <b>{{address.country}}</b> </p>
-											<p ng-show="address.pay == 'y' || address.pay == 'true'"> {{ 'USE_FOR_DOCUMENTS' | translate }}</p>
-
+											<p ng-show="address.type == 1"> {{ 'LEGAL_ADDRESS' | translate }}</p>
+											<p ng-show="address.type == 2"> {{ 'PHYSICAL_ADDRESS' | translate }}</p>
+											<p ng-show="address.type == 3"> {{ 'HOME_ADDRESS' | translate }}</p>
+											
 									</div>
 
 									<md-button class="md-icon-button md-secondary" ng-click="showEditAddressDialog(address)">
