@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using EuroJobsCrm.Models;
+
+namespace EuroJobsCrm.Dto
+{
+    public class ClientDto : RelationSubject
+    {
+        public string Name { get; set; }
+        public string Nip { get; set; }
+        public string Krs { get; set; }
+        public string Regon { get; set; }
+
+        public ClientDto()
+        {
+            
+        }
+
+        public ClientDto(Clients client, IEnumerable<Addresses> addresses, IEnumerable<ContactPersons> contactPersons)
+        {
+            Id = client.CltId;
+            Name = client.CltName;
+            Krs = client.CltKrs;
+            Nip = client.CltNip;
+            Regon = client.CltRegon;
+            Addresses = addresses.Select(a => new AddressDto(a)).ToList();
+            ContactPersons = contactPersons.Select(c => new ContactPersonDto(c)).ToList();
+        }
+    }
+}
