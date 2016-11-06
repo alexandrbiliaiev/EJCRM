@@ -1,0 +1,54 @@
+<md-dialog aria-label="Client">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>{{'CLIENT_TITLE'| translate}}</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="close()">
+				<md-icon aria-label="Close dialog">close</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div class="md-dialog-content">
+			<form name="clientForm">
+				<md-input-container class="md-block" style="width:400px;">
+					<label>{{'CLIENT_NAME'| translate}}</label>
+					<input name="client_name" ng-model="client.name" placeholder="Firma S. A." md-maxlength="100" required>
+					<div ng-messages="clientForm.client_name.$error" role="alert" multiple>
+						<div ng-message="required">{{'NAME_REQUIRED' | translate}} </div>
+						<div ng-message="md-maxlength">{{'NAME_IS_TO_LONG'| translate}}</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>{{'TAX_ID'| translate}}</label>
+					<input name="tax_id" ng-model="client.nip" placeholder="{{'TAX_ID'| translate}}" md-maxlength="20" required>
+					<div ng-messages="clientForm.tax_id.$error" role="alert" multiple>
+						<div ng-message="required">{{'LICENSE_NUMBER_REQUIRED' | translate}} </div>
+						<div ng-message="md-maxlength">{{'LICENSE_NUMBER_IS_TO_LONG'| translate}}</div>
+					</div>
+				</md-input-container >
+				<md-input-container class="md-block">
+					<label>{{ 'STATUS' | translate }}</label>
+					<input name="krs" ng-model="client.krs" placeholder="KRS" md-maxlength="20" required>
+					<div ng-messages="clientForm.tax_id.$error" role="alert" multiple>
+						<div ng-message="required">{{'REQUIRED' | translate}} </div>
+						<div ng-message="md-maxlength">{{'IS_TO_LONG'| translate}}</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>REGON</label>
+					<input name="regon" ng-model="client.regon" placeholder="REGON" md-maxlength="20" required>
+					<div ng-messages="clientForm.regon.$error" role="alert" multiple>
+						<div ng-message="required">{{'REQUIRED' | translate}} </div>
+						<div ng-message="md-maxlength">{{'IS_TO_LONG'| translate}}</div>
+					</div>
+				</md-input-container>
+			</form>
+		</div>
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<md-button ng-click="saveClientClick()">
+			Save
+		</md-button>
+	</md-dialog-actions>
+</md-dialog>

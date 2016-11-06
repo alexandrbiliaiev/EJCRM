@@ -45,6 +45,7 @@ namespace EuroJobsCrm.Controllers
                 adr.AdrPostCode = address.PostCode;
                 adr.AdrType = address.Type;
                 adr.AdrCgtId = address.ContragentId;
+                adr.ArdCltId = address.ClientId;
                 adr.AdrAddress = address.Address;
                 adr.AdrAuditMd = DateTime.UtcNow;
                 adr.AdrAduitMu = User.GetUserId();

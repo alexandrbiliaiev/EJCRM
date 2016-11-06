@@ -1,34 +1,34 @@
 angular.module('EuroJobsCrm.controllers').controller('ClientsController', function ($scope, $location, $http, $state, $translate, $mdDialog, clientsService) {
     $scope.clients = [];
-  
-    $scope.contragent = {
-        status: 'a',
-        name: '',
-        icenseNumber: ''
+
+    $scope.getDefaultClient = function () {
+        return  {
+            id: 0,
+            krs: "",
+            name: "",
+            nip: "",
+            regon: ""
+        }
     }
 
-    $scope.editContragent = function (ctgId) {
-        $state.go('contragent', {
-            id: ctgId
+    $scope.client = $scope.getDefaultClient();
+
+    $scope.editClient = function (clientId) {
+        $state.go('client', {
+            id: clientId
         });
     }
 
-
-    $scope.saveContragentClick = function () {
-        if ($scope.contragentForm.$invalid) {
+    $scope.saveClientClick = function () {
+        if ($scope.clientForm.$invalid) {
             return;
         }
 
-        contragent = {
-            name: $scope.contragent.name,
-            licenseNumber: $scope.contragent.licenseNumber,
-            status: $scope.contragent.status
-        };
+        client = $scope.client;
 
-        contragentsService.saveContragent(contragent).success(function (response) {
-            contragentsService.contragents.push(response);
-            $scope.contragent.status = 'a';
-            $scope.contragent.name = $scope.contragent.licenseNumber = '';
+        clientsService.saveClient(client).success(function (response) {
+            clientsService.clients.push(response);
+            $scope.client = $scope.getDefaultClient();
             $mdDialog.hide();
         }).error(function () {
             $state.go('error');
@@ -41,14 +41,15 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController', functi
         $mdDialog.hide();
     }
 
-    $scope.showAddContragentDialog = function (ev) {
+    $scope.showAddClientDialog = function (ev) {
+        client = $scope.getDefaultClient();
         $mdDialog.show({
-            scope: $scope,
-            preserveScope: true,
-            templateUrl: '/templates/contragents/contragent_dialog_tmpl.html',
-            targetEvent: ev,
-            clickOutsideToClose: true,
-        })
+                scope: $scope,
+                preserveScope: true,
+                templateUrl: '/templates/clients/client_dialog_tmpl.html',
+                targetEvent: ev,
+                clickOutsideToClose: true,
+            })
             .then(function (answer) {
 
             }, function () {
@@ -56,27 +57,27 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController', functi
             });
     }
 
-    $scope.showDeleteCtgConfirmDialog = function (contragentId) {
+    $scope.showDeleteClientConfirmDialog = function (clientId) {
         var confirm = $mdDialog.confirm()
-            .title($translate.instant('CTG_DELETE_CONFIRM_TITLE'))
-            .textContent($translate.instant('CTG_DELETE_CONFIRM_TEXT'))
+            .title($translate.instant('CLI_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('CLT_DELETE_CONFIRM_TEXT'))
             .ariaLabel('label')
             .ok($translate.instant('DELETE_OK'))
             .cancel($translate.instant('DELETE_CANCEL'));
 
         $mdDialog.show(confirm).then(function () {
-            contragentsService.deleteContragent(contragentId).success(function (response) {
+            clientsService.deleteClient(clientId).success(function (response) {
                 if (response != true) {
                     return;
                 }
 
-                contragents = contragentsService.contragents;
-                for (i in contragents) {
-                    if (contragents[i].id != contragentId) {
+                clients = clientsService.clients;
+                for (i in clients) {
+                    if (clients[i].id != clientId) {
                         continue;
                     }
 
-                    contragents.splice(i, 1);
+                    clients.splice(i, 1);
                     return;
                 }
 

@@ -30,12 +30,12 @@ angular.module('EuroJobsCrm.services')
                 }
             }
 
-            //todo
-            return new {
-                id : 0,
-                name:'',
-                licenseNumber: '',
-                status: 'a'
+            return {
+                id: 0,
+                krs: "",
+                name: "",
+                nip: "",
+                regon: ""
             }
         }
 

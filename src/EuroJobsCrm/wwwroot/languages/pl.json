@@ -52,5 +52,17 @@
     "BIRTHDATE": "Data urodzenia",
     "LEFT": "Uciekł",
     "DESCRIPTION": "Opis",
-    "SAVE": "Zapisz"
+    "SAVE": "Zapisz",
+    "TAX_ID":"NIP",
+    "CLT_DELETE_CONFIRM_TITLE": "Czy napewno chcesz usunąć klienta?",
+    "CLT_DELETE_CONFIRM_TEXT": "Wszystkie dane związane z tym klientem zostaną usunięte.",
+    "CLIENT_TITLE":"Klient",
+    "CLIENT_NAME":"Imię klienta",
+    "TAX_ID_REQUIRED": "NIP jest wymagany",
+    "TAX_ID_IS_TO_LONG": "NIP może mieć długość do 20 znaków",
+    "REQUIRED": "Pole jest wymagane",
+    "IS_TO_LONG": "Znaczenie jest zadługie",
+    "CLIENT_DETAILS": "Dane podstawowe",
+    "CPN_DELETE_CONFIRM_TITLE": "Czy napewno chcesz usunąć kontragenta?",
+    "CPN_DELETE_CONFIRM_TEXT": "Wszystkie dane związane z tym kontragentem zostaną usunięte."
 }
