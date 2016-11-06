@@ -12,8 +12,8 @@
 		<div class="md-dialog-content" style="width:800px">
 			<!--NAME SURNAME-->
 			<form name="contactpersonForm">
-				<div layout="row">
-					<md-input-container class="md-block" flex="50">
+				<div layout="row" layout-align="space-between none">
+					<md-input-container class="md-block" flex="45">
 						<label>{{'CP_NAME'| translate}}</label>
 						<input name="contactperson_name" ng-model="contactperson.name" placeholder="Jan" md-maxlength="100" required>
 						<div ng-messages="contactpersonForm.contactperson_name.$error" role="alert" multiple>
@@ -21,7 +21,7 @@
 							<div ng-message="md-maxlength">{{'NAME_IS_TO_LONG'| translate}}</div>
 						</div>
 					</md-input-container>
-					<md-input-container class="md-block" flex="50">
+					<md-input-container class="md-block" flex="45">
 						<label>{{'CP_SURNAME'| translate}}</label>
 						<input name="contactperson_surname" ng-model="contactperson.surname" placeholder="Kowalski" md-maxlength="100" required>
 						<div ng-messages="contactpersonForm.contactperson_surname.$error" role="alert" multiple>
@@ -31,8 +31,8 @@
 					</md-input-container>
 				</div>
 				<!--POSITION EMAIL-->
-				<div layout="row">
-					<md-input-container class="md-block" flex="50">
+				<div layout="row" layout-align="space-between none">
+					<md-input-container class="md-block" flex="45">
 						<label>{{'CP_POSITION'| translate}}</label>
 						<input name="contactperson_position" ng-model="contactperson.position" placeholder="Dyrektor" md-maxlength="100" required>
 						<div ng-messages="contactpersonForm.contactperson_position.$error" role="alert" multiple>
@@ -40,7 +40,7 @@
 							<div ng-message="md-maxlength">{{'POSITION_IS_TO_LONG'| translate}}</div>
 						</div>
 					</md-input-container>
-					<md-input-container class="md-block" flex="50">
+					<md-input-container class="md-block" flex="45">
 						<label>{{'CP_EMAIL'| translate}}</label>
 						<input type="email" name="contactperson_email" placeholder="jan.kowalski@gmail.com" ng-model="contactperson.email" ng-pattern='/^.+@.+\..+$/'>
 						<div ng-messages="contactpersonForm.contactperson_email.$error" role="alert">
@@ -49,8 +49,8 @@
 					</md-input-container>
 				</div>
 				<!--phone skype viber-->
-				<div layout="row">
-					<md-input-container class="md-block" flex="33">
+				<div layout="row"  layout-align="space-between center">
+					<md-input-container class="md-block" flex="30">
 						<label>{{'CP_PHONE'| translate}}</label>
 						<input name="contactperson_phone" ng-model="contactperson.phoneNumber" placeholder="+48 999 999 999" md-maxlength="100">
 						<div ng-messages="contactpersonForm.contactperson_phone.$error" role="alert" multiple>
@@ -59,7 +59,7 @@
 					</md-input-container>
 
 
-					<md-input-container class="md-block" flex="33">
+					<md-input-container class="md-block" flex="30">
 						<label>{{'CP_SKYPE'| translate}}</label>
 						<input name="contactperson_skype" ng-model="contactperson.skype" placeholder="SkypeLogin" md-maxlength="100">
 						<div ng-messages="contactpersonForm.contactperson_skype.$error" role="alert" multiple>
@@ -67,7 +67,7 @@
 						</div>
 					</md-input-container>
 
-					<md-input-container class="md-block" flex="33">
+					<md-input-container class="md-block" flex="30">
 						<label>{{'CP_MESSANGER'| translate}}</label>
 						<input name="contactperson_messanger" ng-model="contactperson.messanger" placeholder="+48 999 999 999" md-maxlength="100">
 						<div ng-messages="contactpersonForm.contactperson_messanger.$error" role="alert" multiple>

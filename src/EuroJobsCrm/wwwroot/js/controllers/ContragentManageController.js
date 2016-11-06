@@ -5,6 +5,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
     $scope.expandEmployees = true;
     $scope.countries = countriesService.countries;
     $scope.birthdate = null;
+    $scope.showSearch = false;
 
 
 
@@ -34,7 +35,8 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             email: "",
             phoneNumber: "",
             skype: "",
-            messanger: ""
+            messanger: "",
+            status: 1
         }
     }
 
@@ -141,6 +143,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             lastName: $scope.employee.lastName,
             birthDate: $scope.birthdate,
             description: $scope.employee.description,
+            status: $scope.employee.status
         }
 
         employeesService.saveEmployee(employee).success(function (response) {
@@ -408,6 +411,9 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             });
     }
 
+    $scope.getFormatedDate = function (date) {
+       return moment(date).format('YYYY-MM-DD');
+    };
 
     if (contragentsService.contragents != undefined) {
         $scope.contragent = contragentsService.getContragent($state.params.id);

@@ -7,23 +7,20 @@
 
 				<md-list-item class="md-2-line" ng-repeat="contragent in contragents">
 					<div class="md-list-item-text">
-						<h3>{{contragent.name}}</h3>
-						<p>
-							License: {{contragent.licenseNumber}}
+						<h3><b>{{contragent.name}}<b></h3> <h4> {{'LICENSE_NUMBER' | translate}}: {{contragent.licenseNumber}} </h4>
+						<p ng-repeat="address in contragent.addresses" >
+							Address: {{address.address}}
 						</p>
-						<md-list-item class="md-2-line" ng-repeat="address in contragent.addresses">
-							{{address.address}}
-						</md-list-item>
 					</div>
 
-					<md-button class="md-icon-button" ng-click="editContragent(contragent.id)">
+					<md-button class="md-icon-button secondary" ng-click="editContragent(contragent.id)">
 						<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 					</md-button>
-					<md-button class="md-icon-button" ng-click="showDeleteCtgConfirmDialog(contragent.id)">
+					<md-button class="md-icon-button secondary" ng-click="showDeleteCtgConfirmDialog(contragent.id)">
 						<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 					</md-button>
-
 				</md-list-item>
+				<md-devider></md-devider>
 
 			</md-list>
 
