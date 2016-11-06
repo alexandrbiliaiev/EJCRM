@@ -1,10 +1,15 @@
 ﻿var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngRoute', 'pascalprecht.translate', 'angular-jsvat', 'ui.router', 'EuroJobsCrm.services', 'EuroJobsCrm.controllers', 'ng-mfb'])
 
-    .config(function ($translateProvider, $routeProvider, $stateProvider, $mdThemingProvider, $httpProvider) {
+    .config(function ($translateProvider, $routeProvider, $stateProvider, $mdThemingProvider, $httpProvider, $mdDateLocaleProvider) {
         $translateProvider.useStaticFilesLoader({
             prefix: '/languages/',
             suffix: '.json'
         });
+
+        $mdDateLocaleProvider.formatDate = function (date) {
+            return moment(date).format('YYYY-MM-DD');
+        };
+
 
         $translateProvider.preferredLanguage('pl');
         $translateProvider.forceAsyncReload(true);

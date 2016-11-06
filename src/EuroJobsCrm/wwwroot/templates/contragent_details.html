@@ -91,7 +91,7 @@
 									<md-button class="md-icon-button md-secondary " ng-click="showDeleteCtpConfirmDialog(contactperson.id)">
 										<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 									</md-button>
-									<md-divider ng-if="!$last"></md-divider>	
+									<md-divider ng-if="!$last"></md-divider>
 								</md-list-item>
 
 							</md-list>
@@ -109,7 +109,7 @@
 								<span>Employees</span>
 							</h2>
 							<span flex></span>
-							<md-button class="md-icon-button" aria-label="Use Android">
+							<md-button class="md-icon-button" aria-label="Use Android" ng-click="showNewEmployeeDialog()">
 								<md-icon md-font-icon="ion-plus-round"></md-icon>
 							</md-button>
 							<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandEmployees = !expandEmployees">
@@ -118,36 +118,30 @@
 						</div>
 					</md-toolbar>
 					<div layout="row" layout-padding="" ng-show="expandEmployees" ng-cloak>
-						<md-content flex="100">
-							<form name="contragentForm">
-								<md-input-container class="md-block">
-									<label>{{'CONTRAGENT_NAME'| translate}}</label>
-									<input name="contragent_name" ng-model="contragent.name" placeholder="Firma S. A." ng-disabled="true" md-maxlength="100"
-										required>
-									<div ng-messages="contragentForm.contragent_name.$error" role="alert" multiple>
-										<div ng-message="required">{{'NAME_REQUIRED' | translate}} </div>
-										<div ng-message="md-maxlength">{{'NAME_IS_TO_LONG'| translate}}</div>
-									</div>
-								</md-input-container>
-								<md-input-container class="md-block">
-									<label>{{'LICENSE_NUMBER'| translate}}</label>
-									<input name="license_number" ng-model="contragent.licenseNumber" placeholder="License number" ng-disabled="true" md-maxlength="100"
-										required>
-									<div ng-messages="contragentForm.license_number.$error" role="alert" multiple>
-										<div ng-message="required">{{'LICENSE_NUMBER_REQUIRED' | translate}} </div>
-										<div ng-message="md-maxlength">{{'LICENSE_NUMBER_IS_TO_LONG'| translate}}</div>
-									</div>
-								</md-input-container>
-								<md-input-container class="md-block">
-									<label>{{ 'STATUS' | translate }}</label>
-									<md-select name="type" ng-model="contragent.status" data-placeholder="{{ 'STATUS' | translate }}" ng-disabled="true" required>
-										<md-option value="a">{{ 'ACTIVE' | translate }}</md-option>
-										<md-option value="i">{{ 'INACTIVE' | translate }}</md-option>
-									</md-select>
-								</md-input-container>
-							</form>
+						<md-content flex>
+							<md-list ng-cloak style="margin-top: -11px">
+								<md-list-item class="md-2-line" ng-repeat="employee in contragent.employees">
+									<md-icon style="font-size:32px;" md-font-icon="ion-ios-people-outline" ng-click="showEditContactPersonDialog(contactperson)">
+
+									</md-icon>
+
+									<div class="md-list-item-text">
+										<h3><b>{{employee.firstName}} {{contactperson.middleName}} {{contactperson.lastName}}<b></h3>
+				</div>
+						<md-button class="md-icon-button md-secondary " ng-click="showEditEmployeeDialog(employee)">
+								<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
+						</md-button>
+						<md-button class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
+							<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+						</md-button>
+						<md-divider ng-if="!$last"></md-divider>
+				</md-list-item>
+		</md-list>
 						</md-content>
-					</div>
+							
+
+						
+						</div>
 				</section>
 			</div>
 			<div flex-xs layout="column">
@@ -169,13 +163,13 @@
 					<div layout="row" layout-padding ng-cloak ng-show="expandAddresses" class="item-show-hide">
 						<md-content flex="100">
 
-							<md-list ng-cloak>				
-								<md-list-item class="md-2-line" ng-repeat="address in contragent.addresses" >
+							<md-list ng-cloak>
+								<md-list-item class="md-2-line" ng-repeat="address in contragent.addresses">
 
-									<md-icon  style="font-size:32px;" md-font-icon="ion-ios-home-outline" ng-click="showEditAddressDialog(address)"></md-icon>
+									<md-icon style="font-size:32px;" md-font-icon="ion-ios-home-outline" ng-click="showEditAddressDialog(address)"></md-icon>
 									<div class="md-list-item-text">
-										   <h4>{{'ADDRESS_TITLE'| translate}}: <b>{{address.address}}</b>, <b>{{address.postCode}}</b></h4>
-											<p>{{ 'CITY' | translate }}: <b>{{address.city}}</b>, &nbsp&nbsp {{ 'COUNTRY' | translate }} <b>{{address.country}}</b> </p>
+										<h4>{{'ADDRESS_TITLE'| translate}}: <b>{{address.address}}</b>, <b>{{address.postCode}}</b></h4>
+											<p>{{ 'CITY' | translate }}: <b>{{address.city}}</b>, &nbsp&nbsp {{ 'COUNTRY' | translate }} <b>{{address.country}}</b>												</p>
 											<p ng-show="address.pay == 'y' || address.pay == 'true'"> {{ 'USE_FOR_DOCUMENTS' | translate }}</p>
 
 									</div>
@@ -186,7 +180,7 @@
 									<md-button class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(address.id)">
 										<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 									</md-button>
-									<md-divider ng-if="!$last"></md-divider>	
+									<md-divider ng-if="!$last"></md-divider>
 								</md-list-item>
 							</md-list>
 						</md-content>
@@ -197,13 +191,13 @@
 	</div>
 	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
 		<a mfb-button icon="ion-home" label="{{'Add address' | translate}}" ng-click="showNewAddressDialog()" />
-		<a mfb-button icon="ion-person-add" label="{{'Add employee' | translate}}" ng-click="" />
+		<a mfb-button icon="ion-person-add" label="{{'Add employee' | translate}}" ng-click="showNewEmployeeDialog()" />
 		<a mfb-button icon="ion-android-contact" label="{{'Add contact person' | translate}}" ng-click="showNewContactPersonDialog()"
 		/>
 	</nav>
 
 	<nav mfb-menu position="tl" style="margin-top:100px;" active-icon="ion-android-arrow-back" resting-icon="ion-android-arrow-back"
-					ng-click="goBack()">
+		ng-click="goBack()">
 
 	</nav>
 </ui-view>

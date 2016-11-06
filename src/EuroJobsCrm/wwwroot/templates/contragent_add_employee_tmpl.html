@@ -1,0 +1,62 @@
+<md-dialog aria-label="Employees">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>{{'EMPLOYEE' | translate}}</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="close()">
+				<md-icon aria-label="Close dialog">close</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div class="md-dialog-content" style="width:800px">
+			<!--NAME SURNAME-->
+			<form name="employeeForm">
+				<div layout="row">
+					<md-input-container class="md-block" flex="33">
+						<label>{{'EP_FIRST_NAME'| translate}}</label>
+						<input name="employee_firstname" ng-model="employee.firstName" placeholder="Jan" md-maxlength="100" required>
+						<div ng-messages="employeeForm.employee_name.$error" role="alert" multiple>
+							<div ng-message="required">{{'NAME_REQUIRED' | translate}} </div>
+							<div ng-message="md-maxlength">{{'FIRST_NAME_IS_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block" flex="33">
+						<label>{{'EP_MIDDLE_NAME'| translate}}</label>
+						<input name="employee_middlename" ng-model="employee.middleName" placeholder="Tadeusz" md-maxlength="100" required>
+						<div ng-messages="employeeForm.employee_middlename.$error" role="alert" multiple>
+							<div ng-message="md-maxlength">{{'MIDDLE_IS_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block" flex="33">
+						<label>{{'EP_LAST_NAME'| translate}}</label>
+						<input name="employee_lastName" ng-model="employee.lastName" placeholder="Kowalski" md-maxlength="100" required>
+						<div ng-messages="employeeForm.employee_lastName.$error" role="alert" multiple>
+							<div ng-message="required">{{'SURNAME_REQUIRED' | translate}} </div>
+							<div ng-message="md-maxlength">{{'SURNAME_IS_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+				</div>
+				<!--BIRTHDATE-->
+				<div layout="row">
+					<md-input-container class="md-block" flex="33">
+                        <label>{{'BIRTHDATE'| translate}}</label>
+						<md-datepicker md-current-view="year" ng-model="birthdate" md-placeholder="{{'Enter date' | translate}}"></md-datepicker>
+					</md-input-container>
+					<md-input-container class="md-block">
+						<label>{{'DESCRIPTION'| translate}}</label>
+						<input name="employee_description" ng-model="employee.description" placeholder="Dobry pracownik" md-maxlength="100">
+						<div ng-messages="employeeForm.employee_phone.$error" role="alert" multiple>
+							<div ng-message="md-maxlength">{{'DESCRIPTION_IS_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+				</div>
+			</form>
+		</div>
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<md-button ng-click="saveEmployeeClick()">
+			Save
+		</md-button>
+	</md-dialog-actions>
+</md-dialog>

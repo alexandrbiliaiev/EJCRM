@@ -11,6 +11,8 @@
 						<p>
 							License: {{contragent.licenseNumber}}
 						</p>
+						<md-list-item class="md-2-line" ng-repeat="address in contragent." ng-click="doPrimaryAction($event)">
+						</md-list-item>
 					</div>
 
 					<md-button class="md-icon-button" ng-click="editContragent(contragent.id)">

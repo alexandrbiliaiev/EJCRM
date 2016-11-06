@@ -15,6 +15,10 @@ namespace EuroJobsCrm.Dto
         public string ResponsibleUser { get; set; }
         public int? Status { get; set; }
 
+        public EmployeeDto()
+        {
+
+        }
 
         public EmployeeDto(Employees e)
         {

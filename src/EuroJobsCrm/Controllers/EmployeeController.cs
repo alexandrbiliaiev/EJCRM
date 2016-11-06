@@ -38,11 +38,11 @@ namespace EuroJobsCrm.Controllers
                     return null;
                 }
 
-                emp.EmpBirthDate = employee.BirthDate;
+                emp.EmpBirthDate = employee.BirthDate.Date.AddDays(1);
                 emp.EmpCtgId = employee.ContragentId;
                 emp.EmpDescription = employee.Description;
                 emp.EmpFirstName = employee.FirstName;
-                emp.EmpLastName = employee.LastName;
+                emp.EmpLastName = employee.LastName ?? string.Empty;
                 emp.EmpMiddleName = employee.MiddleName;
                 emp.EmpResponsibleUser = employee.ResponsibleUser;
                 emp.EmpAuditMu = User.GetUserId();
