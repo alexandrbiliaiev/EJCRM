@@ -1,29 +1,86 @@
 <ui-view>
-
 	<div id="popupContainer" ng-controller="ContragentsController as contragentsCtr" class="container body-content">
 		<md-content>
-			<md-list ng-cloak>
-				<!--	<md-subheader class="md-no-sticky">Contragents</md-subheader> -->
+			<section class="demo-container md-whiteframe-z1">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>{{'Contragents'|translate}}</span>
+						</h2>
+						<span flex></span>
 
-				<md-list-item class="md-2-line" ng-repeat="contragent in contragents">
-					<div class="md-list-item-text">
-						<h3><b>{{contragent.name}}<b></h3> <h4> {{'LICENSE_NUMBER' | translate}}: {{contragent.licenseNumber}} </h4>
-						<p ng-repeat="address in contragent.addresses" >
-							Address: {{address.address}}
-						</p>
+						<md-button class="md-icon-button" aria-label="Search" ng-show="!showSearch" ng-click="showSearch = !showSearch">
+							<md-icon md-font-icon="ion-search"></md-icon>
+						</md-button>
+						<md-button class="md-icon-button" aria-label="Search" ng-show="showSearch" ng-click="showSearch = !showSearch">
+							<md-icon md-font-icon="ion-android-close"></md-icon>
+						</md-button>
 					</div>
+					<md-toolbar class="md-hue-1" ng-show="showSearch">
+						<div class="md-toolbar-tools">
+							<md-input-container class="md-block" flex="100">
+								<input ng-model="contactperson.position" style="color:white; font-size:14pt;">
+							</md-input-container>
 
-					<md-button class="md-icon-button secondary" ng-click="editContragent(contragent.id)">
-						<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
-					</md-button>
-					<md-button class="md-icon-button secondary" ng-click="showDeleteCtgConfirmDialog(contragent.id)">
-						<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-					</md-button>
-				</md-list-item>
-				<md-devider></md-devider>
+							<span flex> </span>
+							<md-button aria-label="Back">
+								<md-icon md-font-icon="ion-search"></md-icon>
+						</div>
+					</md-toolbar>
+				</md-toolbar>
+				<div layout="row" layout-padding="" ng-cloak>
+					<md-content flex>
+						<md-list ng-cloak style="margin-top: -20px">
+							<md-list-item class="md-2-line" ng-repeat="contragent in contragents">
+								<md-icon style="font-size:24px;" md-font-icon="ion-ios-folder">
+								</md-icon>
+								<div class="md-list-item-text">
+									<table>
+										<td style="padding:0 30px 0 0;">
+											<h3><b>{{contragent.name}}</b></h3>
+											<h4> <b>{{'LICENSE_NUMBER' | translate}}:</b> {{contragent.licenseNumber}} </h4>
+										</td>
+										<td>
+											<p ng-repeat="address in contragent.addresses">
+												<i ng-show="address.type == 1">{{ 'LEGAL_ADDRESS' | translate }}: {{address.address}}, {{address.postCode}}, {{address.city}}, {{address.country}}</i>
+												<i ng-show="address.type == 2"> {{ 'PHYSICAL_ADDRESS' | translate }}: {{address.address}}, {{address.postCode}}, {{address.city}}, {{address.country}}</i>
+												<i ng-show="address.type == 3"> {{ 'HOME_ADDRESS' | translate }}: {{address.address}}, {{address.postCode}}, {{address.city}}, {{address.country}}</i>
+											</p>
+										</td>
+									</table>
+								</div>
 
-			</md-list>
+								<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" ng-show="contragent.status == 'a'">
+									<md-tooltip md-direction="left">
+										{{ 'ACTIVE' | translate }}
+									</md-tooltip>
+								</md-icon>
+								<md-icon style="font-size:24px;" md-font-icon="ion-android-cancel" ng-show="contragent.status == 'i'">
+									<md-tooltip md-direction="left">
+										{{ 'INACTIVE' | translate }}
+									</md-tooltip>
+								</md-icon>
 
+								<md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="editContragent(contragent.id)">
+									<md-icon md-svg-icon="/lib/icons/edit.svg">
+										<md-tooltip md-direction="down">
+											{{ 'EDIT' | translate }}
+										</md-tooltip>
+									</md-icon>
+								</md-button>
+								<md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteCtgConfirmDialog(contragent.id)">
+									<md-icon md-svg-icon="/lib/icons/delete.svg">
+										<md-tooltip md-direction="down">
+											{{ 'DELETE' | translate }}
+										</md-tooltip>
+									</md-icon>
+								</md-button>
+								<md-divider ng-if="!$last"></md-divider>
+							</md-list-item>
+						</md-list>
+					</md-content>
+				</div>
+			</section>
 		</md-content>
 		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
 			<a mfb-button icon="ion-ios-search-strong" label="{{'SEARCH' | translate}}"></a>

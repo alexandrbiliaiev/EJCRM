@@ -2,6 +2,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
     $scope.expandDetails = true;
     $scope.expandContactPersons = true;
     $scope.expandAddresses = true;
+    $scope.filteredEmployees;
 
     $scope.countries = countriesService.countries;
     $scope.birthdate = null;
@@ -36,6 +37,9 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
     }
 
 
+
+
+
     $scope.contactperson = $scope.setDefaultContactPerson();
     $scope.address = $scope.setDefaultAddress();
 
@@ -65,6 +69,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
 
         address = $scope.address;
         address.clientId = $scope.client.id;
+        address.contragentId = 0;
         addressesService.saveAddress(address).success(function (response) {
             if (address.id == 0) {
                 $scope.client.addresses.push(response);

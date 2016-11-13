@@ -192,7 +192,7 @@
 					<md-toolbar>
 						<div class="md-toolbar-tools">
 							<h2>
-								<span>Addresses</span>
+								<span>ADDRESSES</span>
 							</h2>
 							<span flex></span>
 							<md-button class="md-icon-button" aria-label="Use Android" ng-click="showNewAddressDialog()">
@@ -207,7 +207,7 @@
 						<md-content flex="100">
 							<md-list ng-cloak>
 								<md-list-item class="md-2-line" ng-repeat="address in contragent.addresses">
-									<md-icon style="font-size:32px;" md-font-icon="ion-ios-home-outline" ng-click="showEditAddressDialog(address)"></md-icon>
+									<md-icon style="font-size:32px;" md-font-icon="ion-home" ng-click="showEditAddressDialog(address)"></md-icon>
 									<div class="md-list-item-text">
 										<h4>{{'ADDRESS_TITLE'| translate}}: <b>{{address.address}}</b>, <b>{{address.postCode}}</b></h4>
 										<p>{{ 'CITY' | translate }}: <b>{{address.city}}</b>, &nbsp&nbsp {{ 'COUNTRY' | translate }} <b>{{address.country}}</b>											</p>

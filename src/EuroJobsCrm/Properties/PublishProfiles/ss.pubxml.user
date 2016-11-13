@@ -14,16 +14,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 19:20:23</publishTime>
     </File>
     <File Include="EuroJobsCrm.deps.json">
-      <publishTime>11/05/2016 22:56:18</publishTime>
+      <publishTime>11/13/2016 19:39:32</publishTime>
     </File>
     <File Include="EuroJobsCrm.dll">
-      <publishTime>11/05/2016 22:29:12</publishTime>
+      <publishTime>11/13/2016 19:28:37</publishTime>
     </File>
     <File Include="EuroJobsCrm.pdb">
-      <publishTime>11/05/2016 22:29:12</publishTime>
+      <publishTime>11/13/2016 19:28:37</publishTime>
     </File>
     <File Include="EuroJobsCrm.runtimeconfig.json">
-      <publishTime>11/05/2016 22:56:19</publishTime>
+      <publishTime>11/13/2016 19:39:32</publishTime>
     </File>
     <File Include="Microsoft.ApplicationInsights.AspNetCore.dll">
       <publishTime>06/22/2016 12:35:54</publishTime>
@@ -610,6 +610,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Account/VerifyCode.cshtml">
       <publishTime>10/30/2016 16:59:13</publishTime>
     </File>
+    <File Include="Views/Clients/Index.cshtml">
+      <publishTime>11/06/2016 16:00:35</publishTime>
+    </File>
     <File Include="Views/Contragents/Index.cshtml">
       <publishTime>11/05/2016 15:25:38</publishTime>
     </File>
@@ -647,7 +650,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 16:59:13</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/05/2016 22:23:02</publishTime>
+      <publishTime>11/13/2016 19:37:46</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>11/01/2016 13:53:42</publishTime>
@@ -662,19 +665,43 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 16:59:13</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>11/05/2016 22:56:21</publishTime>
+      <publishTime>11/13/2016 19:39:33</publishTime>
+    </File>
+    <File Include="wwwroot/css/bootstrap-material-design.css">
+      <publishTime>10/05/2016 14:48:40</publishTime>
+    </File>
+    <File Include="wwwroot/css/bootstrap-material-design.css.map">
+      <publishTime>10/05/2016 14:48:40</publishTime>
+    </File>
+    <File Include="wwwroot/css/bootstrap-material-design.min.css">
+      <publishTime>10/05/2016 14:48:40</publishTime>
+    </File>
+    <File Include="wwwroot/css/bootstrap-material-design.min.css.map">
+      <publishTime>10/05/2016 14:48:40</publishTime>
     </File>
     <File Include="wwwroot/css/mfb.css">
       <publishTime>11/01/2016 18:09:40</publishTime>
+    </File>
+    <File Include="wwwroot/css/ripples.css">
+      <publishTime>10/05/2016 14:48:40</publishTime>
+    </File>
+    <File Include="wwwroot/css/ripples.css.map">
+      <publishTime>10/05/2016 14:48:40</publishTime>
+    </File>
+    <File Include="wwwroot/css/ripples.min.css">
+      <publishTime>10/05/2016 14:48:40</publishTime>
+    </File>
+    <File Include="wwwroot/css/ripples.min.css.map">
+      <publishTime>10/05/2016 14:48:40</publishTime>
     </File>
     <File Include="wwwroot/css/server_error.png">
       <publishTime>10/30/2016 16:59:13</publishTime>
     </File>
     <File Include="wwwroot/css/site.css">
-      <publishTime>11/05/2016 15:25:38</publishTime>
+      <publishTime>11/06/2016 19:18:26</publishTime>
     </File>
     <File Include="wwwroot/css/site.min.css">
-      <publishTime>11/05/2016 22:56:16</publishTime>
+      <publishTime>11/13/2016 19:39:30</publishTime>
     </File>
     <File Include="wwwroot/favicon.ico">
       <publishTime>10/30/2016 16:59:13</publishTime>
@@ -731,13 +758,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/10/2016 15:37:58</publishTime>
     </File>
     <File Include="wwwroot/js/app.js">
-      <publishTime>11/05/2016 22:23:02</publishTime>
+      <publishTime>11/13/2016 19:00:35</publishTime>
+    </File>
+    <File Include="wwwroot/js/controllers/ClientManageController.js">
+      <publishTime>11/07/2016 20:10:04</publishTime>
+    </File>
+    <File Include="wwwroot/js/controllers/ClientsController.js">
+      <publishTime>11/06/2016 19:18:26</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/ContragentManageController.js">
-      <publishTime>11/05/2016 22:23:02</publishTime>
+      <publishTime>11/06/2016 19:01:14</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/ContragentsController.js">
-      <publishTime>11/05/2016 22:23:02</publishTime>
+      <publishTime>11/06/2016 16:23:14</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/ContragentsDialogController.js">
       <publishTime>01/11/2016 18:28:44</publishTime>
@@ -751,6 +784,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/js/services/addressesService.js">
       <publishTime>11/05/2016 22:23:02</publishTime>
     </File>
+    <File Include="wwwroot/js/services/clientsService.js">
+      <publishTime>11/06/2016 19:18:26</publishTime>
+    </File>
     <File Include="wwwroot/js/services/contactPersonsService.js">
       <publishTime>11/05/2016 19:32:53</publishTime>
     </File>
@@ -760,6 +796,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/js/services/countriesService.js">
       <publishTime>11/05/2016 22:23:02</publishTime>
     </File>
+    <File Include="wwwroot/js/services/employeesService.js">
+      <publishTime>11/06/2016 15:51:09</publishTime>
+    </File>
     <File Include="wwwroot/js/site.js">
       <publishTime>10/30/2016 16:59:13</publishTime>
     </File>
@@ -767,16 +806,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/01/2016 15:23:18</publishTime>
     </File>
     <File Include="wwwroot/languages/en.json">
-      <publishTime>11/03/2016 18:27:01</publishTime>
+      <publishTime>11/06/2016 17:13:23</publishTime>
     </File>
     <File Include="wwwroot/languages/fr.json">
       <publishTime>04/09/2016 21:40:20</publishTime>
     </File>
     <File Include="wwwroot/languages/pl.json">
-      <publishTime>11/05/2016 22:23:02</publishTime>
+      <publishTime>11/13/2016 19:27:04</publishTime>
     </File>
     <File Include="wwwroot/languages/ru.json">
-      <publishTime>11/01/2016 21:25:39</publishTime>
+      <publishTime>11/06/2016 17:13:24</publishTime>
     </File>
     <File Include="wwwroot/lib/angular-busy/angular-busy.min.css">
       <publishTime>10/30/2016 16:59:13</publishTime>
@@ -1096,11 +1135,38 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/lib/mfb/src/mfb-directive.js">
       <publishTime>11/01/2016 16:13:48</publishTime>
     </File>
+    <File Include="wwwroot/lib/moment.js">
+      <publishTime>11/06/2016 14:48:28</publishTime>
+    </File>
+    <File Include="wwwroot/templates/addresses/address_dialog_tmpl.html">
+      <publishTime>11/06/2016 16:10:58</publishTime>
+    </File>
     <File Include="wwwroot/templates/address_dialog_tmpl.html">
       <publishTime>11/05/2016 22:23:02</publishTime>
     </File>
     <File Include="wwwroot/templates/card_payment.html">
       <publishTime>09/11/2016 00:06:25</publishTime>
+    </File>
+    <File Include="wwwroot/templates/clients/clients_list.html">
+      <publishTime>11/06/2016 19:18:26</publishTime>
+    </File>
+    <File Include="wwwroot/templates/clients/client_details.html">
+      <publishTime>11/06/2016 19:18:26</publishTime>
+    </File>
+    <File Include="wwwroot/templates/clients/client_dialog_tmpl.html">
+      <publishTime>11/06/2016 19:18:26</publishTime>
+    </File>
+    <File Include="wwwroot/templates/contactpersons/contact_person_dialog_tmpl.html">
+      <publishTime>11/06/2016 17:25:20</publishTime>
+    </File>
+    <File Include="wwwroot/templates/contragents/contragents_list.html">
+      <publishTime>11/13/2016 18:49:15</publishTime>
+    </File>
+    <File Include="wwwroot/templates/contragents/contragent_details.html">
+      <publishTime>11/13/2016 19:22:36</publishTime>
+    </File>
+    <File Include="wwwroot/templates/contragents/contragent_dialog_tmpl.html">
+      <publishTime>11/06/2016 16:10:48</publishTime>
     </File>
     <File Include="wwwroot/templates/contragents_list.html">
       <publishTime>11/05/2016 15:25:38</publishTime>
@@ -1114,11 +1180,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/templates/contragent_details.html">
       <publishTime>11/05/2016 22:23:02</publishTime>
     </File>
+    <File Include="wwwroot/templates/employees/employee_dialog_tmpl.html">
+      <publishTime>11/06/2016 18:36:51</publishTime>
+    </File>
     <File Include="wwwroot/templates/error_503.html">
       <publishTime>11/01/2016 15:56:32</publishTime>
     </File>
     <File Include="wwwroot/_references.js">
-      <publishTime>11/01/2016 19:35:38</publishTime>
+      <publishTime>11/06/2016 19:18:28</publishTime>
     </File>
   </ItemGroup>
 </Project>

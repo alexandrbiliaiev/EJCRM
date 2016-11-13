@@ -10,7 +10,7 @@
             return moment(date).format('YYYY-MM-DD');
         };
 
-
+        $translateProvider.useSanitizeValueStrategy('escapeParameters');
         $translateProvider.preferredLanguage('pl');
         $translateProvider.forceAsyncReload(true);
         $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();

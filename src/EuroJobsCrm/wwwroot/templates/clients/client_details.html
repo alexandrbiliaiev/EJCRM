@@ -160,19 +160,19 @@
 					<div layout="row" layout-padding ng-cloak ng-show="expandAddresses" class="element-hide">
 						<md-content flex="100">
 							<md-list ng-cloak>
-								<md-list-item class="md-2-line" ng-repeat="address in client.addresses">
+								<md-list-item class="md-2-line" ng-repeat="cl_address in client.addresses">
 									<md-icon style="font-size:32px;" md-font-icon="ion-ios-home-outline" ng-click="showEditAddressDialog(address)"></md-icon>
 									<div class="md-list-item-text">
-										<h4>{{'ADDRESS_TITLE'| translate}}: <b>{{address.address}}</b>, <b>{{address.postCode}}</b></h4>
-										<p>{{ 'CITY' | translate }}: <b>{{address.city}}</b>, &nbsp&nbsp {{ 'COUNTRY' | translate }} <b>{{address.country}}</b>											</p>
-										<p ng-show="address.type == 1"> {{ 'LEGAL_ADDRESS' | translate }}</p>
-										<p ng-show="address.type == 2"> {{ 'PHYSICAL_ADDRESS' | translate }}</p>
-										<p ng-show="address.type == 3"> {{ 'HOME_ADDRESS' | translate }}</p>
+										<h4>{{'ADDRESS_TITLE'| translate}}: <b>{{cl_address.address}}</b>, <b>{{cl_address.postCode}}</b></h4>
+										<p>{{ 'CITY' | translate }}: <b>{{cl_address.city}}</b>, &nbsp&nbsp {{ 'COUNTRY' | translate }} <b>{{cl_address.country}}</b>											</p>
+										<p ng-show="cl_address.type == 1"> {{ 'LEGAL_ADDRESS' | translate }}</p>
+										<p ng-show="cl_address.type == 2"> {{ 'PHYSICAL_ADDRESS' | translate }}</p>
+										<p ng-show="cl_address.type == 3"> {{ 'HOME_ADDRESS' | translate }}</p>
 									</div>
-									<md-button class="md-icon-button md-secondary" ng-click="showEditAddressDialog(address)">
+									<md-button class="md-icon-button md-secondary" ng-click="showEditAddressDialog(cl_address)">
 										<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 									</md-button>
-									<md-button class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(address.id)">
+									<md-button class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(cl_address.id)">
 										<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 									</md-button>
 									<md-divider ng-if="!$last"></md-divider>
