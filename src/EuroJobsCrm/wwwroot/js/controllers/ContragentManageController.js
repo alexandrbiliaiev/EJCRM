@@ -284,8 +284,8 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
     $scope.showDeleteEmployeeConfirmDialog = function (employeeId) {
         var confirm = $mdDialog.confirm()
-            .title($translate.instant('CTG_DELETE_CONFIRM_TITLE'))
-            .textContent($translate.instant('CTG_DELETE_CONFIRM_TEXT'))
+            .title($translate.instant('EMP_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('EMP_DELETE_CONFIRM_TEXT'))
             .ariaLabel('label')
             .ok($translate.instant('DELETE_OK'))
             .cancel($translate.instant('DELETE_CANCEL'));

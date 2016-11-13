@@ -28,7 +28,7 @@
 					</div>
 				</md-input-container >
 				<md-input-container class="md-block">
-					<label>{{ 'STATUS' | translate }}</label>
+					<label>{{ 'KRS' | translate }}</label>
 					<input name="krs" ng-model="client.krs" placeholder="KRS" md-maxlength="20" required>
 					<div ng-messages="clientForm.tax_id.$error" role="alert" multiple>
 						<div ng-message="required">{{'REQUIRED' | translate}} </div>
@@ -42,6 +42,13 @@
 						<div ng-message="required">{{'REQUIRED' | translate}} </div>
 						<div ng-message="md-maxlength">{{'IS_TO_LONG'| translate}}</div>
 					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>{{ 'STATUS' | translate }}</label>
+					<md-select name="type" ng-model="client.status"  data-placeholder="{{ 'STATUS' | translate }}" required>
+						<md-option value="1">{{ 'ACTIVE' | translate }}</md-option>
+						<md-option value="0">{{ 'INACTIVE' | translate }}</md-option>
+					</md-select>
 				</md-input-container>
 			</form>
 		</div>

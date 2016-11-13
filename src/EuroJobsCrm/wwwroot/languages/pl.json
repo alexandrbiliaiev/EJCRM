@@ -71,5 +71,8 @@
     "ADDRESSES": "Adresy",
     "EP_FIRST_NAME": "Imię",
     "EP_MIDDLE_NAME": "Drugie imię",
-    "EP_LAST_NAME": "Nazwisko"
+    "EP_LAST_NAME": "Nazwisko",
+    "EMP_DELETE_CONFIRM_TITLE": "Uwaga!",
+    "EMP_DELETE_CONFIRM_TEXT": "Czy na prawde chcesz ununąć pracownika?",
+    "OFFERS": "Oferty"
 }
