@@ -1,11 +1,12 @@
 angular.module('EuroJobsCrm.controllers').controller('ContragentManageController', function ($scope, $location, $translate, $http, $state, contragentsService, countriesService, contactpersonsService, addressesService, $mdDialog, $routeParams, employeesService) {
     $scope.expandDetails = true;
     $scope.expandContactPersons = true;
-    $scope.expandAddresses = true;
-    $scope.expandEmployees = true;
+    $scope.expandAddresses = false;
+    $scope.expandEmployees = false;
     $scope.countries = countriesService.countries;
     $scope.birthdate = null;
     $scope.showSearch = false;
+    $scope.expandNotes = false;
 
 
 

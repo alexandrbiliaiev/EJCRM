@@ -14,7 +14,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 19:20:23</publishTime>
     </File>
     <File Include="EuroJobsCrm.deps.json">
-      <publishTime>11/13/2016 19:39:32</publishTime>
+      <publishTime>11/14/2016 21:40:11</publishTime>
     </File>
     <File Include="EuroJobsCrm.dll">
       <publishTime>11/13/2016 19:28:37</publishTime>
@@ -23,7 +23,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/13/2016 19:28:37</publishTime>
     </File>
     <File Include="EuroJobsCrm.runtimeconfig.json">
-      <publishTime>11/13/2016 19:39:32</publishTime>
+      <publishTime>11/14/2016 21:40:11</publishTime>
     </File>
     <File Include="Microsoft.ApplicationInsights.AspNetCore.dll">
       <publishTime>06/22/2016 12:35:54</publishTime>
@@ -665,7 +665,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 16:59:13</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>11/13/2016 19:39:33</publishTime>
+      <publishTime>11/14/2016 21:40:13</publishTime>
     </File>
     <File Include="wwwroot/css/bootstrap-material-design.css">
       <publishTime>10/05/2016 14:48:40</publishTime>
@@ -701,7 +701,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/06/2016 19:18:26</publishTime>
     </File>
     <File Include="wwwroot/css/site.min.css">
-      <publishTime>11/13/2016 19:39:30</publishTime>
+      <publishTime>11/14/2016 21:40:09</publishTime>
     </File>
     <File Include="wwwroot/favicon.ico">
       <publishTime>10/30/2016 16:59:13</publishTime>
@@ -761,13 +761,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/13/2016 19:00:35</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/ClientManageController.js">
-      <publishTime>11/07/2016 20:10:04</publishTime>
+      <publishTime>11/14/2016 21:14:33</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/ClientsController.js">
-      <publishTime>11/06/2016 19:18:26</publishTime>
+      <publishTime>11/13/2016 23:38:24</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/ContragentManageController.js">
-      <publishTime>11/06/2016 19:01:14</publishTime>
+      <publishTime>11/13/2016 23:29:01</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/ContragentsController.js">
       <publishTime>11/06/2016 16:23:14</publishTime>
@@ -812,7 +812,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2016 21:40:20</publishTime>
     </File>
     <File Include="wwwroot/languages/pl.json">
-      <publishTime>11/13/2016 19:27:04</publishTime>
+      <publishTime>11/14/2016 21:22:14</publishTime>
     </File>
     <File Include="wwwroot/languages/ru.json">
       <publishTime>11/06/2016 17:13:24</publishTime>
@@ -1148,22 +1148,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2016 00:06:25</publishTime>
     </File>
     <File Include="wwwroot/templates/clients/clients_list.html">
-      <publishTime>11/06/2016 19:18:26</publishTime>
+      <publishTime>11/13/2016 22:12:53</publishTime>
     </File>
     <File Include="wwwroot/templates/clients/client_details.html">
-      <publishTime>11/06/2016 19:18:26</publishTime>
+      <publishTime>11/14/2016 21:31:07</publishTime>
     </File>
     <File Include="wwwroot/templates/clients/client_dialog_tmpl.html">
-      <publishTime>11/06/2016 19:18:26</publishTime>
+      <publishTime>11/14/2016 21:33:46</publishTime>
     </File>
     <File Include="wwwroot/templates/contactpersons/contact_person_dialog_tmpl.html">
       <publishTime>11/06/2016 17:25:20</publishTime>
     </File>
     <File Include="wwwroot/templates/contragents/contragents_list.html">
-      <publishTime>11/13/2016 18:49:15</publishTime>
+      <publishTime>11/13/2016 22:31:56</publishTime>
     </File>
     <File Include="wwwroot/templates/contragents/contragent_details.html">
-      <publishTime>11/13/2016 19:22:36</publishTime>
+      <publishTime>11/13/2016 23:27:00</publishTime>
     </File>
     <File Include="wwwroot/templates/contragents/contragent_dialog_tmpl.html">
       <publishTime>11/06/2016 16:10:48</publishTime>

@@ -12,10 +12,10 @@
 							<span>{{'DETAIL_INFORMATION'| translate}}</span>
 						</h2>
 						<span flex></span>
-						<md-button class="md-icon-button " aria-label="Use Android" ng-click="showEditClientDialog()">
+						<md-button aria-label="button" class="md-icon-button" ng-click="showEditClientDialog()">
 							<md-icon md-font-icon="ion-edit"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandDetails = !expandDetails">
+						<md-button aria-label="button" class="md-icon-button" ng-click="expandDetails = !expandDetails">
 							<md-icon md-font-icon="ion-navicon-round"></md-icon>
 						</md-button>
 					</div>
@@ -100,10 +100,10 @@
 							<span>{{'CONTACT_PERSONS' | translate}}</span>
 						</h2>
 						<span flex></span>
-						<md-button class="md-icon-button" aria-label="Add Contact Person" ng-click="showNewContactPersonDialog()">
+						<md-button aria-label="button" aria-label="button" class="md-icon-button" ng-click="showNewContactPersonDialog()">
 							<md-icon md-font-icon="ion-plus-round"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandContactPersons = !expandContactPersons">
+						<md-button aria-label="button" aria-label="button" class="md-icon-button" ng-click="expandContactPersons=! expandContactPersons">
 							<md-icon md-font-icon="ion-navicon-round"></md-icon>
 						</md-button>
 					</div>
@@ -122,10 +122,10 @@
 											<b>{{'Skype'|translate}}</b>: {{contactperson.skype}} <b>{{'Messagner'|translate}}</b>: {{contactperson.messanger}}
 										</p>
 								</div>
-								<md-button class="md-icon-button md-secondary " ng-click="showEditContactPersonDialog(contactperson)">
+								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditContactPersonDialog(contactperson)">
 									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 								</md-button>
-								<md-button class="md-icon-button md-secondary " ng-click="showDeleteCtpConfirmDialog(contactperson.id)">
+								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteCtpConfirmDialog(contactperson.id)">
 									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 								</md-button>
 								<md-divider ng-if="!$last"></md-divider>
@@ -148,10 +148,10 @@
 							<span>{{'DOCUMENTS'|translate}}</span>
 						</h2>
 						<span flex></span>
-						<md-button class="md-icon-button" aria-label="button" ng-click="showNewDocumentDialog()">
+						<md-button aria-label="button" class="md-icon-button" ng-click="showNewDocumentDialog()">
 							<md-icon md-font-icon="ion-plus-round"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="button" ng-click="expandDocuments = !expandDocuments">
+						<md-button aria-label="button" class="md-icon-button" ng-click="expandDocuments=! expandDocuments">
 							<md-icon md-font-icon="ion-navicon-round"></md-icon>
 						</md-button>
 					</div>
@@ -170,10 +170,10 @@
 							<span>{{'ADDRESSES' | translate}}</span>
 						</h2>
 						<span flex></span>
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="showNewAddressDialog()">
+						<md-button aria-label="button" class="md-icon-button" ng-click="showNewAddressDialog()">
 							<md-icon md-font-icon="ion-plus-round"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandAddresses = !expandAddresses">
+						<md-button aria-label="button" class="md-icon-button" ng-click="expandAddresses=! expandAddresses">
 							<md-icon md-font-icon="ion-navicon-round"></md-icon>
 						</md-button>
 					</div>
@@ -186,14 +186,14 @@
 								<div class="md-list-item-text">
 									<h4>{{'ADDRESS_TITLE'| translate}}: <b>{{address.address}}</b>, <b>{{address.postCode}}</b></h4>
 									<p>{{ 'CITY' | translate }}: <b>{{address.city}}</b>, &nbsp&nbsp {{ 'COUNTRY' | translate }} <b>{{address.country}}</b>										</p>
-									<p ng-show="address.type == 1"> {{ 'LEGAL_ADDRESS' | translate }}</p>
-									<p ng-show="address.type == 2"> {{ 'PHYSICAL_ADDRESS' | translate }}</p>
-									<p ng-show="address.type == 3"> {{ 'HOME_ADDRESS' | translate }}</p>
+									<p ng-show="address.type==1"> {{ 'LEGAL_ADDRESS' | translate }}</p>
+									<p ng-show="address.type==2"> {{ 'PHYSICAL_ADDRESS' | translate }}</p>
+									<p ng-show="address.type==3"> {{ 'HOME_ADDRESS' | translate }}</p>
 								</div>
-								<md-button class="md-icon-button md-secondary" ng-click="showEditAddressDialog(address)">
+								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditAddressDialog(address)">
 									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 								</md-button>
-								<md-button class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(address.id)">
+								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(address.id)">
 									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 								</md-button>
 								<md-divider ng-if="!$last"></md-divider>
@@ -218,23 +218,23 @@
 						</h2>
 						<span flex></span>
 
-						<md-button class="md-icon-button" aria-label="Search" ng-show="!showSearch" ng-click="showSearch = !showSearch">
+						<md-button aria-label="button" class="md-icon-button" ng-show="!showSearch" ng-click="showSearch=! showSearch">
 							<md-icon md-font-icon="ion-search"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="Search" ng-show="showSearch" ng-click="showSearch = !showSearch">
+						<md-button aria-label="button" class="md-icon-button" ng-show="showSearch" ng-click="showSearch=! showSearch">
 							<md-icon md-font-icon="ion-android-close"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="showNewEmployeeDialog()">
+						<md-button aria-label="button" class="md-icon-button" ng-click="showNewEmployeeDialog()">
 							<md-icon md-font-icon="ion-plus-round"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandOffers = !expandOffers">
+						<md-button aria-label="button" class="md-icon-button" ng-click="expandOffers=! expandOffers">
 							<md-icon md-font-icon="ion-navicon-round"></md-icon>
 						</md-button>
 					</div>
 					<md-toolbar class="md-hue-1" ng-show="showSearch">
 						<div class="md-toolbar-tools">
 							<md-input-container class="md-block" flex="100">
-								<input ng-model="contactperson.position" style="color:white; font-size:14pt;">
+								<input aria-label="input" ng-model="contactperson.position" style="color:white; font-size:14pt;">
 							</md-input-container>
 
 							<span flex> </span>
@@ -258,27 +258,27 @@
 						</h2>
 						<span flex></span>
 
-						<md-button class="md-icon-button" aria-label="Search" ng-show="!showSearch" ng-click="showSearch = !showSearch">
+						<md-button aria-label="button" class="md-icon-button" ng-show="!showSearch" ng-click="showSearch=! showSearch">
 							<md-icon md-font-icon="ion-search"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="Search" ng-show="showSearch" ng-click="showSearch = !showSearch">
+						<md-button aria-label="button" class="md-icon-button" ng-show="showSearch" ng-click="showSearch=! showSearch">
 							<md-icon md-font-icon="ion-android-close"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="showNewEmployeeDialog()">
+						<md-button aria-label="button" class="md-icon-button" ng-click="showNewEmployeeDialog()">
 							<md-icon md-font-icon="ion-plus-round"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandEmployees = !expandEmployees">
+						<md-button aria-label="button" class="md-icon-button" ng-click="expandEmployees=! expandEmployees">
 							<md-icon md-font-icon="ion-navicon-round"></md-icon>
 						</md-button>
 					</div>
 					<md-toolbar class="md-hue-1" ng-show="showSearch">
 						<div class="md-toolbar-tools">
 							<md-input-container class="md-block" flex="100">
-								<input ng-model="contactperson.position" style="color:white; font-size:14pt;">
+								<input aria-label="input" ng-model="contactperson.position" style="color:white; font-size:14pt;">
 							</md-input-container>
 
 							<span flex> </span>
-							<md-button aria-label="Back">
+							<md-button aria-label="button" aria-label="Back">
 								<md-icon md-font-icon="ion-search"></md-icon>
 						</div>
 					</md-toolbar>
@@ -301,10 +301,10 @@
 						</h2>
 						<span flex></span>
 
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="showNewEmployeeDialog()">
+						<md-button aria-label="button" class="md-icon-button" ng-click="showNewEmployeeDialog()">
 							<md-icon md-font-icon="ion-plus-round"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandPayments = !expandPayments">
+						<md-button aria-label="button" class="md-icon-button" ng-click="expandPayments=! expandPayments">
 							<md-icon md-font-icon="ion-navicon-round"></md-icon>
 						</md-button>
 					</div>
@@ -327,10 +327,10 @@
 						</h2>
 						<span flex></span>
 
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="showNewEmployeeDialog()">
+						<md-button aria-label="button" class="md-icon-button"" ng-click="showNewEmployeeDialog()">
 							<md-icon md-font-icon="ion-plus-round"></md-icon>
 						</md-button>
-						<md-button class="md-icon-button" aria-label="Use Android" ng-click="expandNotes = !expandNotes">
+						<md-button aria-label="button" class="md-icon-button"" ng-click="expandNotes=! expandNotes">
 							<md-icon md-font-icon="ion-navicon-round"></md-icon>
 						</md-button>
 					</div>
@@ -344,12 +344,17 @@
 
 	<!--Fucking material add buttons NOT ALL BUTTONS ARE AVAILABLE ON PAGE-->
 	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
-		<a mfb-button mfb-button-close icon="ion-android-contact" label="{{'ADD_CONTACT_PERSON' | translate}}" ng-click="showNewContactPersonDialog()"/>
-		<a mfb-button mfb-button-close icon="ion-home" label="{{'ADD_ADDRESS' | translate}}" ng-click="showNewAddressDialog()" />
-		<a mfb-button mfb-button-close icon="ion-android-document" label="{{'ADD_DOCUMENT' | translate}}" ng-click="showNewDocumentsDialog()" />
-		<a mfb-button mfb-button-close icon="ion-bag" label="{{'ADD_OFFER' | translate}}" ng-click="showNewOfferDialog()" />
-		<a mfb-button mfb-button-close icon="ion-card" label="{{'ADD_PAYMENT' | translate}}" ng-click="showNewPaymentDialog()" />
-		<a mfb-button mfb-button-close icon="ion-ios-information" label="{{'ADD_NOTE' | translate}}" ng-click="showNewNoteDialog()" />
+		<a mfb-button mfb-button-close icon="ion-android-contact" label="{{ 'ADD_CONTACT_PERSON' | translate}}" ng-click="showNewContactPersonDialog()"
+		/>
+		<a mfb-button mfb-button-close icon="ion-home" label="{{ 'ADD_ADDRESS' | translate}}" ng-click="showNewAddressDialog()"
+		/>
+		<a mfb-button mfb-button-close icon="ion-android-document" label="{{ 'ADD_DOCUMENT' | translate}}" ng-click="showNewDocumentsDialog()"
+		/>
+		<a mfb-button mfb-button-close icon="ion-bag" label="{{ 'ADD_OFFER' | translate}}" ng-click="showNewOfferDialog()" />
+		<a mfb-button mfb-button-close icon="ion-card" label="{{ 'ADD_PAYMENT' | translate}}" ng-click="showNewPaymentDialog()"
+		/>
+		<a mfb-button mfb-button-close icon="ion-ios-information" label="{{ 'ADD_NOTE' | translate}}" ng-click="showNewNoteDialog()"
+		/>
 	</nav>
 	<!--Fucking material return button-bich -->
 	<nav mfb-menu position="tl" style="margin-top:100px;" active-icon="ion-android-arrow-back" resting-icon="ion-android-arrow-back"
