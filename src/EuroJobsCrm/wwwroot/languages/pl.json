@@ -74,5 +74,14 @@
     "EP_LAST_NAME": "Nazwisko",
     "EMP_DELETE_CONFIRM_TITLE": "Uwaga!",
     "EMP_DELETE_CONFIRM_TEXT": "Czy na prawde chcesz ununąć pracownika?",
-    "OFFERS": "Oferty"
+    "OFFERS": "Oferty",
+    "PAYMENTS": "Płatności",
+    "DOCUMENTS": "Dokumenty",
+    "NOTES": "Notatki",
+    "ADD_NOTE": "Dodaj notatkę",
+    "ADD_PAYMENT": "Dodaj płatność",
+    "ADD_OFFER": "Dodaj ofertę",
+    "ADD_DOCUMENT": "Dodaj dokument",
+    "ADD_ADDRESS": "Dodaj adres",
+    "ADD_CONTACT_PERSON": "Dodaj osobę kontaktową"
 }

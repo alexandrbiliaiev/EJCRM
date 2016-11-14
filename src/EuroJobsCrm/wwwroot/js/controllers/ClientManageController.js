@@ -1,7 +1,11 @@
 angular.module('EuroJobsCrm.controllers').controller('ClientManageController', function ($scope, $location, $translate, $http, $state, clientsService, countriesService, contactpersonsService, addressesService, $mdDialog, $routeParams, employeesService) {
-    $scope.expandDetails = true;
-    $scope.expandContactPersons = true;
-    $scope.expandAddresses = true;
+    $scope.expandDetails = false;
+    $scope.expandContactPersons = false;
+    $scope.expandAddresses = false;
+    $scope.expandDocuments = false;
+    $scope.expandEmployees = false;
+    $scope.expandPayments = false;
+    $scope.expandNotes = false;
     $scope.filteredEmployees;
 
     $scope.countries = countriesService.countries;
@@ -109,12 +113,12 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
 
     $scope.showEditClientDialog = function (ev) {
         $mdDialog.show({
-                scope: $scope,
-                preserveScope: true,
-                templateUrl: '/templates/clients/client_dialog_tmpl.html',
-                targetEvent: ev,
-                clickOutsideToClose: true,
-            })
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/clients/client_dialog_tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+        })
             .then(function (answer) {
 
             }, function () {
@@ -132,11 +136,11 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             clickOutsideToClose: true,
         })
 
-        .then(function (answer) {
+            .then(function (answer) {
 
-        }, function () {
+            }, function () {
 
-        });
+            });
     }
 
     $scope.showNewAddressDialog = function (ev) {
@@ -165,11 +169,11 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             clickOutsideToClose: true,
         })
 
-        .then(function (answer) {
+            .then(function (answer) {
 
-        }, function () {
+            }, function () {
 
-        });
+            });
     }
 
     $scope.showEditContactPersonDialog = function (contactPerson) {
@@ -181,11 +185,11 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             clickOutsideToClose: true,
         })
 
-        .then(function (answer) {
+            .then(function (answer) {
 
-        }, function () {
+            }, function () {
 
-        });
+            });
     }
 
     $scope.showDeleteCtpConfirmDialog = function (contactPersonId) {
