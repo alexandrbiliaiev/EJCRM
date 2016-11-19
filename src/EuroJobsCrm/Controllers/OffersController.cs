@@ -76,6 +76,8 @@ namespace EuroJobsCrm.Controllers
                     return null;
                 }
 
+                offer.SetWorkDaysBitMap();
+
                 ofr.OfrId = offer.Id;
                 ofr.OfrAccomodationPrice = offer.AccomodationPrice;
                 ofr.OfrAccomodationType = offer.AccomodationType;
@@ -190,7 +192,7 @@ namespace EuroJobsCrm.Controllers
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //todo: add logging
                 return false;

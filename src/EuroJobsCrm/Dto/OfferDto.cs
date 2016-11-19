@@ -186,5 +186,23 @@ namespace EuroJobsCrm.Dto
             }
         }
 
+
+        /// <summary>
+        /// Only the bit fields of week updates in UI
+        /// so we have to set the save value of the week fields
+        /// to update value of the week days bitmap. 
+        /// P.S. In Trump we trust!!!
+        /// </summary>
+        public void SetWorkDaysBitMap()
+        {
+            WorkMo = WorkMo;
+            WorkTu = WorkTu;
+            WorkWe = WorkWe;
+            WorkTh = WorkTh;
+            WorkFr = WorkFr;
+            WorkSa = WorkSa;
+            WorkSu = WorkSu;
+        }
+
     }
 }
