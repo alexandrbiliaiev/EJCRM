@@ -383,8 +383,6 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
     };
     //End Employees
 
-
-
     $scope.getFormatedDate = function (date) {
         return moment(date).format('YYYY-MM-DD');
     };
