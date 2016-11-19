@@ -63,7 +63,7 @@ namespace EuroJobsCrm.Controllers
                 }
                 else
                 {
-                    ofr = new Offers()
+                    ofr = new Offers
                     {
                         OfrAuditCd = DateTime.UtcNow,
                         OfrAuditCu = User.GetUserId()
@@ -76,7 +76,39 @@ namespace EuroJobsCrm.Controllers
                     return null;
                 }
 
-
+                ofr.OfrId = offer.Id;
+                ofr.OfrAccomodationPrice = offer.AccomodationPrice;
+                ofr.OfrAccomodationType = offer.AccomodationType;
+                ofr.OfrAdditionalInfo = offer.AdditionalInfo;
+                ofr.OfrAdvanceAmount = offer.AdvanceAmount;
+                ofr.OfrAgeFrom = offer.AgeFrom;
+                ofr.OfrAgeTo = offer.AgeTo;
+                ofr.OfrBranch = offer.Branch;
+                ofr.OfrCltId = offer.ClientId;
+                ofr.OfrComments = offer.Comments;
+                ofr.OfrContractType = offer.ContractType;
+                ofr.OfrDistanceToWork = offer.DistanceToWork;
+                ofr.OfrDocuments = offer.Documents;
+                ofr.OfrEducation = offer.Education;
+                ofr.OfrEndingDate = offer.EndingDate;
+                ofr.OfrExperience = offer.Experience;
+                ofr.OfrFacilities = offer.Facilities;
+                ofr.OfrHoursPerMonth = offer.HoursPerMonth;
+                ofr.OfrLanguages = offer.Languages;
+                ofr.OfrOvertimeRate = offer.OvertimeRate;
+                ofr.OfrPaymentMethod = offer.PaymentMethod;
+                ofr.OfrRatePerHour = offer.RatePerHour;
+                ofr.OfrRatePerMonth = offer.RatePerMonth;
+                ofr.OfrResponsibilities = offer.Responsibilities;
+                ofr.OfrRoomPeopleNumber = offer.RoomPeopleNumber;
+                ofr.OfrStartingDate = offer.StartingDate;
+                ofr.OfrTransportPrice = offer.TransportPrice;
+                ofr.OfrTransportToWork = offer.TransportToWork;
+                ofr.OfrVacanciesNumber = offer.VacanciesNumber;
+                ofr.OfrWorkDays = offer.WorkDays;
+                ofr.OfrWorkEnd = offer.WorkEnd;
+                ofr.OfrWorkPlace = offer.WorkPlace;
+                ofr.OfrWorkStart = offer.WorkStart;
                 ofr.OfrAuditMd = DateTime.UtcNow;
                 ofr.OfrAuditMu = User.GetUserId();
 
