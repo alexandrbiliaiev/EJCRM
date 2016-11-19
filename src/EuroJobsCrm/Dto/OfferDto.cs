@@ -48,7 +48,7 @@ namespace EuroJobsCrm.Dto
         public int VacanciesNumber { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime EndingDate { get; set; }
-        public int WorkPlace { get; set; }
+        public string WorkPlace { get; set; }
         public string Responsibilities { get; set; }
         public int Education { get; set; }
         public string Experience { get; set; }
