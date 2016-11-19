@@ -201,33 +201,26 @@ namespace EuroJobsCrm.Controllers
         [Route("/api/Offers/IssueContract")]
         public ContractDto IssueContract([FromBody] ContractDto contractDto)
         {
-            //Contracts contract = new Contracts
-            //{
-            //    CntAuditCd = DateTime.UtcNow,
-            //    CntAuditCu = User.GetUserId(),
-                
-            //};
-            //    using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
-            //    {
-            //        EmploymentRequests employmentRequest =
-            //            context.EmploymentRequests.FirstOrDefault(e => e.EtrId == employmentRequestDto.Id);
+            Contracts contract = new Contracts
+            {
+                CntAuditCd = DateTime.UtcNow,
+                CntAuditCu = User.GetUserId(),
+                CntCgtId = contractDto.ContragentId,
+                CntEmpId = contractDto.EmployeeId,
+                CntIssueDate = DateTime.UtcNow,
+                CntStartDate = contractDto.StartDate,
+                CntEndDate = contractDto.EndDate
+            };
 
-            //        if (employmentRequest == null)
-            //        {
-            //            return false;
-            //        }
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                context.Contracts.Add(contract);
+                context.SaveChanges();
 
-            //        employmentRequest.EtrAuditMd = DateTime.UtcNow;
-            //        employmentRequest.EtrAuditMu = User.GetUserId();
-            //        employmentRequest.EtrStatus = employmentRequestDto.Status;
+                contractDto.Id = contract.CntId;
+            }
 
-            //        context.SaveChanges();
-            //    }
-
-            //    return true;
-
-
-            return null;
+            return contractDto;
         }
 
     }
