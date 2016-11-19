@@ -12,6 +12,7 @@
 /// <reference path="js/services/contragentsService.js" />
 /// <reference path="js/services/countriesService.js" />
 /// <reference path="js/services/employeesservice.js" />
+/// <reference path="js/services/offersservice.js" />
 /// <reference path="js/site.js" />
 /// <reference path="lib/angular/angular.js" />
 /// <reference path="lib/angular-route/angular-route.js" />
