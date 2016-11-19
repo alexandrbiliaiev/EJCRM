@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using EuroJobsCrm.Models;
 
 namespace EuroJobsCrm.Dto
@@ -14,6 +16,7 @@ namespace EuroJobsCrm.Dto
         public string Description { get; set; }
         public string ResponsibleUser { get; set; }
         public int? Status { get; set; }
+        public List<IdentityDocumentsDto> IdentityDocuments { get; set; }
 
         public EmployeeDto()
         {
@@ -32,6 +35,12 @@ namespace EuroJobsCrm.Dto
             Description = e.EmpDescription;
             ResponsibleUser = e.EmpResponsibleUser;
             Status = e.EmpStatus;
+        }
+
+        public EmployeeDto(Employees e, IEnumerable<IdentityDocuments> documents, IEnumerable<DocumentFiles> files): this(e)
+        {
+            IdentityDocuments =
+                documents.Select(d => new IdentityDocumentsDto(d, files.Where(f => f.DcfIdcId == d.IdcId))).ToList();
         }
     }
 }

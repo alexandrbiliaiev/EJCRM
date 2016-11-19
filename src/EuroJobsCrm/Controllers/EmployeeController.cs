@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
@@ -69,6 +70,88 @@ namespace EuroJobsCrm.Controllers
 
                 emp.EmpAuditRd = DateTime.UtcNow;
                 emp.EmpAuditRu = User.GetUserId();
+                context.SaveChanges();
+
+                return true;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/Employees/GetDocuments")]
+        public List<IdentityDocumentsDto> GetIdentityDocuments([FromBody] int employeeId)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                List<IdentityDocumentsDto> documents =
+                    context.IdentityDocuments
+                        .Where(i => i.IdcAuditRd == null && i.IdcEmpId == employeeId)
+                        .GroupJoin(context.DocumentFiles, d => d.IdcId, f => f.DcfIdcId,
+                            (d, f) => new {doc = d, files = f})
+                        .ToList()
+                        .Select(d => new IdentityDocumentsDto(d.doc, d.files))
+                        .ToList();
+
+                return documents;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/Employees/SaveDocument")]
+        public IdentityDocumentsDto SaveIdentityDocument([FromBody] IdentityDocumentsDto documentDto)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                IdentityDocuments document;
+                if (documentDto.Id == 0)
+                {
+                    document = new IdentityDocuments
+                    {
+                        IdcAuditCd = DateTime.UtcNow,
+                        IdcAuditCu = User.GetUserId()
+                    };
+                    context.IdentityDocuments.Add(document);
+                }
+                else
+                {
+                    document = context.IdentityDocuments.FirstOrDefault(d => d.IdcId == documentDto.Id);
+                }
+
+                document.IdcEmpId = documentDto.EmployeeId;
+                document.IdcAuditMd = DateTime.UtcNow;
+                document.IdcAuditMu = User.GetUserId();
+                document.IdcIssueDate = documentDto.IssueDate;
+                document.IdcNumber = documentDto.Number;
+                document.IdcParentIdcId = documentDto.ParentDocumentId;
+                document.IdcRemarks = documentDto.Remarks;
+                document.IdcSeria = documentDto.Seria;
+                document.IdcType = documentDto.Type;
+                document.IdcValidFrom = documentDto.ValidFrom;
+                document.IdcValidTo = documentDto.ValidTo;
+                document.IdcVisaType = documentDto.VisaType;
+
+                context.SaveChanges();
+
+                documentDto.Id = document.IdcId;
+                return documentDto;
+            }
+        }
+
+
+        [HttpPost]
+        [Route("api/Employees/DeleteDocument")]
+        public bool DeleteIdentityDocument([FromBody] int documentId)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                IdentityDocuments doc = context.IdentityDocuments.FirstOrDefault(c => c.IdcId == documentId);
+
+                if (doc == null)
+                {
+                    return false;
+                }
+
+                doc.IdcAuditRd = DateTime.UtcNow;
+                doc.IdcAuditRu = User.GetUserId();
                 context.SaveChanges();
 
                 return true;

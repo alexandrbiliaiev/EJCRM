@@ -406,6 +406,62 @@ namespace EuroJobsCrm.Models
                     .HasMaxLength(1);
             });
 
+            modelBuilder.Entity<DocumentFiles>(entity =>
+            {
+                entity.HasKey(e => e.DcfId)
+                    .HasName("PK__Document__2996CAF62F188655");
+
+                entity.Property(e => e.DcfId).HasColumnName("dcf_id");
+
+                entity.Property(e => e.DcfAuditCd)
+                    .HasColumnName("dcf_audit_cd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.DcfAuditCu)
+                    .HasColumnName("dcf_audit_cu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.DcfAuditMd)
+                    .HasColumnName("dcf_audit_md")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.DcfAuditMu)
+                    .HasColumnName("dcf_audit_mu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.DcfAuditRd)
+                    .HasColumnName("dcf_audit_rd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.DcfAuditRu)
+                    .HasColumnName("dcf_audit_ru")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.DcfCntId).HasColumnName("dcf_cnt_id");
+
+                entity.Property(e => e.DcfDescription)
+                    .HasColumnName("dcf_description")
+                    .HasMaxLength(1000);
+
+                entity.Property(e => e.DcfGoogleFileId)
+                    .HasColumnName("dcf_google_file_id")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.DcfIdcId).HasColumnName("dcf_idc_id");
+
+                entity.Property(e => e.DcfInvId).HasColumnName("dcf_inv_id");
+
+                entity.Property(e => e.DcfName)
+                    .IsRequired()
+                    .HasColumnName("dcf_name")
+                    .HasMaxLength(300);
+
+                entity.Property(e => e.DcfUrl)
+                    .IsRequired()
+                    .HasColumnName("dcf_url")
+                    .HasMaxLength(500);
+            });
+
             modelBuilder.Entity<Employees>(entity =>
             {
                 entity.HasKey(e => e.EmpId)
@@ -508,6 +564,72 @@ namespace EuroJobsCrm.Models
                 entity.Property(e => e.EtrOfrId).HasColumnName("etr_ofr_id");
 
                 entity.Property(e => e.EtrStatus).HasColumnName("etr_status");
+            });
+
+            modelBuilder.Entity<IdentityDocuments>(entity =>
+            {
+                entity.HasKey(e => e.IdcId)
+                    .HasName("PK__Identity__CC1873659A101A22");
+
+                entity.Property(e => e.IdcId).HasColumnName("idc_id");
+
+                entity.Property(e => e.IdcAuditCd)
+                    .HasColumnName("idc_audit_cd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.IdcAuditCu)
+                    .HasColumnName("idc_audit_cu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.IdcAuditMd)
+                    .HasColumnName("idc_audit_md")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.IdcAuditMu)
+                    .HasColumnName("idc_audit_mu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.IdcAuditRd)
+                    .HasColumnName("idc_audit_rd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.IdcAuditRu)
+                    .HasColumnName("idc_audit_ru")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.IdcEmpId).HasColumnName("idc_emp_id");
+
+                entity.Property(e => e.IdcIssueDate)
+                    .HasColumnName("idc_issue_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.IdcNumber)
+                    .HasColumnName("idc_number")
+                    .HasMaxLength(32);
+
+                entity.Property(e => e.IdcParentIdcId).HasColumnName("idc_parent_idc_id");
+
+                entity.Property(e => e.IdcRemarks)
+                    .HasColumnName("idc_remarks")
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.IdcSeria)
+                    .HasColumnName("idc_seria")
+                    .HasMaxLength(16);
+
+                entity.Property(e => e.IdcType).HasColumnName("idc_type");
+
+                entity.Property(e => e.IdcValidFrom)
+                    .HasColumnName("idc_valid_from")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.IdcValidTo)
+                    .HasColumnName("idc_valid_to")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.IdcVisaType)
+                    .HasColumnName("idc_visa_type")
+                    .HasMaxLength(10);
             });
 
             modelBuilder.Entity<Notes>(entity =>
@@ -697,8 +819,10 @@ namespace EuroJobsCrm.Models
         public virtual DbSet<ContactPersons> ContactPersons { get; set; }
         public virtual DbSet<Contracts> Contracts { get; set; }
         public virtual DbSet<Contragents> Contragents { get; set; }
+        public virtual DbSet<DocumentFiles> DocumentFiles { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<EmploymentRequests> EmploymentRequests { get; set; }
+        public virtual DbSet<IdentityDocuments> IdentityDocuments { get; set; }
         public virtual DbSet<Notes> Notes { get; set; }
         public virtual DbSet<Offers> Offers { get; set; }
     }
