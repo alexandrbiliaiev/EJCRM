@@ -1,6 +1,6 @@
-angular.module('EuroJobsCrm.controllers').controller('ClientManageController', function ($scope, $location, $translate, $http, $state, 
-clientsService, countriesService, contactpersonsService, addressesService, offersService, employeesService,
-$mdDialog, $routeParams) {
+angular.module('EuroJobsCrm.controllers').controller('ClientManageController', function ($scope, $location, $translate, $http, $state,
+    clientsService, countriesService, contactpersonsService, addressesService, offersService, employeesService,
+    $mdDialog, $routeParams) {
 
     $scope.expandDetails = false;
     $scope.expandContactPersons = false;
@@ -387,6 +387,16 @@ $mdDialog, $routeParams) {
 
         });
     };
+
+    $scope.disableEndDate = function (isUnlimited) {
+        if (isUnlimited) {
+            $scope.workEndBeforeChange = $scope.offer.workEnd;
+            $scope.offer.workEnd = null;
+        }
+        else {
+            $scope.offer.workEnd = $scope.workEndBeforeChange;
+        }
+    }
     //End Offers
 
 
