@@ -45,6 +45,7 @@ namespace EuroJobsCrm.Dto
             WorkEnd = offer.OfrWorkEnd;
             WorkPlace = offer.OfrWorkPlace;
             WorkStart = offer.OfrWorkStart;
+            Gender = offer.OfrGender;
         }
 
         public int Id { get; set; }
@@ -80,5 +81,6 @@ namespace EuroJobsCrm.Dto
         public string Facilities { get; set; }
         public string AdditionalInfo { get; set; }
         public string Documents { get; set; }
+        public int Gender { get; set; }
     }
 }

@@ -3,7 +3,7 @@ angular.module('EuroJobsCrm.services')
 
         var offers = {};
 
-        offers.saveAddress= function (offer) {
+        offers.saveOffer= function (offer) {
             return $http({
                 url: 'api/Offers/Save',
                 method: "POST",
@@ -11,7 +11,7 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
-        offers.deleteAddress = function (offId) {
+        offers.deleteOffer = function (offId) {
 
             return $http({
                 url: 'api/Offers/Delete',

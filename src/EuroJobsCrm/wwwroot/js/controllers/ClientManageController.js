@@ -281,7 +281,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             education: "",
             endingDate: "",
             experience: "",
-            eacilities: "",
+            facilities: "",
             hoursPerMonth: "160",
             languages: "",
             overtimeRate: "",
@@ -294,10 +294,16 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             transportPrice: "",
             transportToWork: "",
             vacanciesNumber: "",
-            workDays: "",
             workEnd: "",
             workPlace: "",
-            workStart: ""
+            workStart: "",
+            workMo: true,
+            workTu: true,
+            workWe: true,
+            workTh: true,
+            workFr: true,
+            workSa: false,
+            workSu: false
         }
     }
 
@@ -314,7 +320,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             if (offer.id == 0) {
                 $scope.client.offers.push(response);
             }
-            $scope.offer = $scope.saveAddressClick();
+            $scope.offer = $scope.saveOfferClick();
             $mdDialog.hide();
         }).error(function () {
             $state.go('error');
@@ -397,6 +403,38 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             $scope.offer.workEnd = $scope.workEndBeforeChange;
         }
     }
+
+    $scope.disableOvertime = function (overtimeDisabled) {
+        if (overtimeDisabled) {
+            $scope.overtimeRateOld = $scope.offer.overtimeRate;
+            $scope.offer.overtimeRate = "0";
+        }
+        else {
+            $scope.offer.overtimeRate = $scope.overtimeRateOld;
+        }
+    }
+
+    $scope.disableAdvance = function (advanceEnabled) {
+        if (advanceEnabled) {
+            $scope.advanceAmountOld = $scope.offer.advanceAmount;
+            $scope.offer.advanceAmount = null;
+        }
+        else {
+            $scope.offer.advanceAmount = $scope.advanceAmountOld;
+        }
+    }
+
+    $scope.disableFreeAccomodation = function (accomodationFreeEnabled) {
+        if (accomodationFreeEnabled) {
+            $scope.accomodationPriceOld = $scope.offer.accomodationPrice;
+            $scope.offer.accomodationPrice = null;
+        }
+        else {
+            $scope.offer.accomodationPrice = $scope.accomodationPriceOld;
+        }
+    }
+
+
     //End Offers
 
 
