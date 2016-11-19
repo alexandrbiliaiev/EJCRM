@@ -471,6 +471,126 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("not_text")
                     .HasMaxLength(1000);
             });
+
+            modelBuilder.Entity<Offers>(entity =>
+            {
+                entity.HasKey(e => e.OfrId)
+                    .HasName("PK_Offers");
+
+                entity.Property(e => e.OfrId).HasColumnName("ofr_id");
+
+                entity.Property(e => e.OfrAccomodationPrice).HasColumnName("ofr_accomodation_price");
+
+                entity.Property(e => e.OfrAccomodationType).HasColumnName("ofr_accomodation_type");
+
+                entity.Property(e => e.OfrAdditionalInfo)
+                    .HasColumnName("ofr_additional_info")
+                    .HasColumnType("text");
+
+                entity.Property(e => e.OfrAdvanceAmount).HasColumnName("ofr_advance_amount");
+
+                entity.Property(e => e.OfrAgeFrom).HasColumnName("ofr_age_from");
+
+                entity.Property(e => e.OfrAgeTo).HasColumnName("ofr_age_to");
+
+                entity.Property(e => e.OfrAuditCd)
+                    .HasColumnName("ofr_audit_cd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.OfrAuditCu)
+                    .HasColumnName("ofr_audit_cu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.OfrAuditMd)
+                    .HasColumnName("ofr_audit_md")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.OfrAuditMu)
+                    .HasColumnName("ofr_audit_mu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.OfrAuditRd)
+                    .HasColumnName("ofr_audit_rd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.OfrAuditRu)
+                    .HasColumnName("ofr_audit_ru")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.OfrBranch).HasColumnName("ofr_branch");
+
+                entity.Property(e => e.OfrCltId).HasColumnName("ofr_clt_id");
+
+                entity.Property(e => e.OfrComments)
+                    .HasColumnName("ofr_comments")
+                    .HasColumnType("text");
+
+                entity.Property(e => e.OfrContractType).HasColumnName("ofr_contract_type");
+
+                entity.Property(e => e.OfrDistanceToWork).HasColumnName("ofr_distance_to_work");
+
+                entity.Property(e => e.OfrDocuments)
+                    .HasColumnName("ofr_documents")
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.OfrEducation).HasColumnName("ofr_education");
+
+                entity.Property(e => e.OfrEndingDate)
+                    .HasColumnName("ofr_ending_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.OfrExperience)
+                    .IsRequired()
+                    .HasColumnName("ofr_experience")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.OfrFacilities)
+                    .HasColumnName("ofr_facilities")
+                    .HasMaxLength(1000);
+
+                entity.Property(e => e.OfrHoursPerMonth).HasColumnName("ofr_hours_per_month");
+
+                entity.Property(e => e.OfrLanguages)
+                    .HasColumnName("ofr_languages")
+                    .HasColumnType("nchar(300)");
+
+                entity.Property(e => e.OfrOvertimeRate).HasColumnName("ofr_overtime_rate");
+
+                entity.Property(e => e.OfrPaymentMethod).HasColumnName("ofr_payment_method");
+
+                entity.Property(e => e.OfrRatePerHour).HasColumnName("ofr_rate_per_hour");
+
+                entity.Property(e => e.OfrRatePerMonth).HasColumnName("ofr_rate_per_month");
+
+                entity.Property(e => e.OfrResponsibilities)
+                    .IsRequired()
+                    .HasColumnName("ofr_responsibilities")
+                    .HasMaxLength(1500);
+
+                entity.Property(e => e.OfrRoomPeopleNumber).HasColumnName("ofr_room_people_number");
+
+                entity.Property(e => e.OfrStartingDate)
+                    .HasColumnName("ofr_starting_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.OfrTransportPrice).HasColumnName("ofr_transport_price");
+
+                entity.Property(e => e.OfrTransportToWork).HasColumnName("ofr_transport_to_work");
+
+                entity.Property(e => e.OfrVacanciesNumber).HasColumnName("ofr_vacancies_number");
+
+                entity.Property(e => e.OfrWorkDays).HasColumnName("ofr_work_days");
+
+                entity.Property(e => e.OfrWorkEnd)
+                    .HasColumnName("ofr_work_end")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.OfrWorkPlace).HasColumnName("ofr_work_place");
+
+                entity.Property(e => e.OfrWorkStart)
+                    .HasColumnName("ofr_work_start")
+                    .HasColumnType("datetime");
+            });
         }
 
         public virtual DbSet<Addresses> Addresses { get; set; }
@@ -486,5 +606,6 @@ namespace EuroJobsCrm.Models
         public virtual DbSet<Contragents> Contragents { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<Notes> Notes { get; set; }
+        public virtual DbSet<Offers> Offers { get; set; }
     }
 }
