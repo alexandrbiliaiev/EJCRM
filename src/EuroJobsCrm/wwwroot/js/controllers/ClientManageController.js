@@ -1,4 +1,7 @@
-angular.module('EuroJobsCrm.controllers').controller('ClientManageController', function ($scope, $location, $translate, $http, $state, clientsService, countriesService, contactpersonsService, addressesService, $mdDialog, $routeParams, employeesService) {
+angular.module('EuroJobsCrm.controllers').controller('ClientManageController', function ($scope, $location, $translate, $http, $state, 
+clientsService, countriesService, contactpersonsService, addressesService, offersService, employeesService,
+$mdDialog, $routeParams) {
+
     $scope.expandDetails = false;
     $scope.expandContactPersons = false;
     $scope.expandAddresses = false;
@@ -11,46 +14,16 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
     $scope.countries = countriesService.countries;
     $scope.birthdate = null;
 
-    $scope.setDefaultAddress = function () {
-        return {
-            address: "",
-            city: "",
-            contragentId: $state.params.id,
-            country: "PL",
-            id: 0,
-            pay: "0",
-            postCode: "",
-            type: "1"
-        }
-    }
-
-
-    $scope.setDefaultContactPerson = function () {
-        return {
-            id: 0,
-            contragentId: null,
-            clientId: null,
-            name: "",
-            surname: "",
-            position: "",
-            email: "",
-            phoneNumber: "",
-            skype: "",
-            messanger: ""
-        }
-    }
-
-
-
-
-
-    $scope.contactperson = $scope.setDefaultContactPerson();
-    $scope.address = $scope.setDefaultAddress();
-
     $scope.goBack = function () {
         $state.go('clients');
     }
 
+    $scope.close = function () {
+        console.log($scope);
+        $mdDialog.hide();
+    }
+
+    //clients
     $scope.saveClientClick = function () {
         if ($scope.clientForm.$invalid) {
             return;
@@ -65,6 +38,39 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             $mdDialog.hide();
         });
     }
+
+    $scope.showEditClientDialog = function (ev) {
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/clients/client_dialog_tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+        })
+            .then(function (answer) {
+
+            }, function () {
+
+            });
+    }
+    //End clients
+
+
+    //Addresses
+    $scope.setDefaultAddress = function () {
+        return {
+            address: "",
+            city: "",
+            contragentId: $state.params.id,
+            country: "PL",
+            id: 0,
+            pay: "0",
+            postCode: "",
+            type: "1"
+        }
+    }
+
+    $scope.address = $scope.setDefaultAddress();
 
     $scope.saveAddressClick = function () {
         if ($scope.addressForm.$invalid) {
@@ -85,62 +91,6 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             $mdDialog.hide();
         });
 
-    }
-
-    $scope.saveContactPersonClick = function () {
-        if ($scope.contactpersonForm.$invalid) {
-            return;
-        }
-
-        contactperson = $scope.contactperson;
-        contactperson.clientId = $scope.client.id;
-        contactpersonsService.saveContactPerson(contactperson).success(function (response) {
-            if ($scope.contactperson.id == 0 || $scope.contactperson.id == undefined) {
-                $scope.client.contactPersons.push(response);
-            }
-
-            $mdDialog.hide();
-        }).error(function () {
-            $state.go('error');
-            $mdDialog.hide();
-        });
-    }
-
-    $scope.close = function () {
-        console.log($scope);
-        $mdDialog.hide();
-    }
-
-    $scope.showEditClientDialog = function (ev) {
-        $mdDialog.show({
-            scope: $scope,
-            preserveScope: true,
-            templateUrl: '/templates/clients/client_dialog_tmpl.html',
-            targetEvent: ev,
-            clickOutsideToClose: true,
-        })
-            .then(function (answer) {
-
-            }, function () {
-
-            });
-    }
-
-    $scope.showNewContactPersonDialog = function (ev) {
-        $scope.contactperson = $scope.setDefaultContactPerson();
-        $mdDialog.show({
-            scope: $scope,
-            preserveScope: true,
-            templateUrl: '/templates/contactpersons/contact_person_dialog_tmpl.html',
-            targetEvent: ev,
-            clickOutsideToClose: true,
-        })
-
-            .then(function (answer) {
-
-            }, function () {
-
-            });
     }
 
     $scope.showNewAddressDialog = function (ev) {
@@ -166,6 +116,94 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             preserveScope: true,
             templateUrl: '/templates/addresses/address_dialog_tmpl.html',
 
+            clickOutsideToClose: true,
+        })
+
+            .then(function (answer) {
+
+            }, function () {
+
+            });
+    }
+
+    $scope.showDeleteAddressConfirmDialog = function (addresId) {
+        var confirm = $mdDialog.confirm()
+            .title($translate.instant('ADDRESS_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('ADDRESS_DELETE_CONFIRM_TEXT'))
+            .ariaLabel('label')
+            .ok($translate.instant('DELETE_OK'))
+            .cancel($translate.instant('DELETE_CANCEL'));
+
+        $mdDialog.show(confirm).then(function () {
+            addressesService.deleteAddress(addresId).success(function (response) {
+                if (response != true) {
+                    return;
+                }
+
+                addresses = $scope.client.addresses;
+                for (i in addresses) {
+                    if (addresses[i].id != addresId) {
+                        continue;
+                    }
+
+                    addresses.splice(i, 1);
+                    return;
+                }
+
+            }).error(function (response) {
+                $state.go('error');
+            });
+        }, function () {
+
+        });
+    };
+    //End Addresses
+
+
+    //Contact Persons
+    $scope.setDefaultContactPerson = function () {
+        return {
+            id: 0,
+            contragentId: null,
+            clientId: null,
+            name: "",
+            surname: "",
+            position: "",
+            email: "",
+            phoneNumber: "",
+            skype: "",
+            messanger: ""
+        }
+    }
+
+    $scope.contactperson = $scope.setDefaultContactPerson();
+
+    $scope.saveContactPersonClick = function () {
+        if ($scope.contactpersonForm.$invalid) {
+            return;
+        }
+
+        contactperson = $scope.contactperson;
+        contactperson.clientId = $scope.client.id;
+        contactpersonsService.saveContactPerson(contactperson).success(function (response) {
+            if ($scope.contactperson.id == 0 || $scope.contactperson.id == undefined) {
+                $scope.client.contactPersons.push(response);
+            }
+
+            $mdDialog.hide();
+        }).error(function () {
+            $state.go('error');
+            $mdDialog.hide();
+        });
+    }
+
+    $scope.showNewContactPersonDialog = function (ev) {
+        $scope.contactperson = $scope.setDefaultContactPerson();
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/contactpersons/contact_person_dialog_tmpl.html',
+            targetEvent: ev,
             clickOutsideToClose: true,
         })
 
@@ -223,28 +261,122 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
 
         });
     };
+    //End Contact Persons
 
-    $scope.showDeleteAddressConfirmDialog = function (addresId) {
+    //Offers
+    $scope.setDefaultOffer = function () {
+        return {
+            accomodationPrice: "",
+            accomodationType: "",
+            additionalInfo: "",
+            advanceAmount: "",
+            ageFrom: "20",
+            ageTo: "60",
+            branch: "",
+            clientId: 0,
+            comments: "",
+            contractType: "",
+            distanceToWork: "",
+            documents: "",
+            education: "",
+            endingDate: "",
+            experience: "",
+            eacilities: "",
+            hoursPerMonth: "160",
+            languages: "",
+            overtimeRate: "",
+            paymentMethod: "",
+            ratePerHour: "",
+            ratePerMonth: "",
+            responsibilities: "",
+            roomPeopleNumber: "",
+            startingDate: "",
+            transportPrice: "",
+            transportToWork: "",
+            vacanciesNumber: "",
+            workDays: "",
+            workEnd: "",
+            workPlace: "",
+            workStart: ""
+        }
+    }
+
+    $scope.offer = $scope.setDefaultOffer();
+
+    $scope.saveOfferClick = function () {
+        if ($scope.offerForm.$invalid) {
+            return;
+        }
+
+        offer = $scope.offer;
+        offer.clientId = $scope.client.id;
+        offersService.saveOffer(offer).success(function (response) {
+            if (offer.id == 0) {
+                $scope.client.offers.push(response);
+            }
+            $scope.offer = $scope.saveAddressClick();
+            $mdDialog.hide();
+        }).error(function () {
+            $state.go('error');
+            $mdDialog.hide();
+        });
+
+    }
+
+    $scope.showNewOfferDialog = function (ev) {
+        $scope.address = $scope.setDefaultOffer();
+
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/offers/offer_dialog_tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+        }).then(function (answer) {
+
+        }, function () {
+
+        });
+    }
+
+    $scope.showEditOfferDialog = function (offer) {
+        $scope.address = offer;
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/offers/offer_dialog_tmpl.html',
+
+            clickOutsideToClose: true,
+        })
+
+            .then(function (answer) {
+
+            }, function () {
+
+            });
+    }
+
+    $scope.showDeleteOfferConfirmDialog = function (offId) {
         var confirm = $mdDialog.confirm()
-            .title($translate.instant('ADDRESS_DELETE_CONFIRM_TITLE'))
-            .textContent($translate.instant('ADDRESS_DELETE_CONFIRM_TEXT'))
+            .title($translate.instant('OFFER_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('OFFER_DELETE_CONFIRM_TEXT'))
             .ariaLabel('label')
             .ok($translate.instant('DELETE_OK'))
             .cancel($translate.instant('DELETE_CANCEL'));
 
         $mdDialog.show(confirm).then(function () {
-            addressesService.deleteAddress(addresId).success(function (response) {
+            offersService.deleteOffer(offId).success(function (response) {
                 if (response != true) {
                     return;
                 }
 
-                addresses = $scope.client.addresses;
-                for (i in addresses) {
-                    if (addresses[i].id != addresId) {
+                offers = $scope.client.offers;
+                for (i in offers) {
+                    if (offers[i].id != offId) {
                         continue;
                     }
 
-                    addresses.splice(i, 1);
+                    offers.splice(i, 1);
                     return;
                 }
 
@@ -255,6 +387,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
 
         });
     };
+    //End Offers
 
 
     if (clientsService.clients != undefined) {
