@@ -44,5 +44,6 @@ namespace EuroJobsCrm.Models
         public string OfrAuditMu { get; set; }
         public DateTime? OfrAuditRd { get; set; }
         public string OfrAuditRu { get; set; }
+        public int OfrGender { get; set; }
     }
 }

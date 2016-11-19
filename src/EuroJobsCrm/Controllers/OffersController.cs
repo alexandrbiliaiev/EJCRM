@@ -140,5 +140,95 @@ namespace EuroJobsCrm.Controllers
                 return true;
             }
         }
+
+        [HttpPost]
+        [Route("/api/Offers/MakeRequest")]
+        public EmploymentRequestDto MakeEmploymentRequest([FromBody] EmploymentRequestDto employmentRequestDto)
+        {
+            EmploymentRequests employmentRequest = new EmploymentRequests
+            {
+                EtrAuditCd = DateTime.UtcNow,
+                EtrAuditCu = User.GetUserId(),
+                EtrOfrId = employmentRequestDto.OfferId,
+                EtrCntId = null,
+                EtrEmpId = employmentRequestDto.EmployeeId,
+                EtrStatus = employmentRequestDto.Status
+            };
+
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                context.EmploymentRequests.Add(employmentRequest);
+                context.SaveChanges();
+            }
+
+            employmentRequestDto.Id = employmentRequest.EtrId;
+            return employmentRequestDto;
+        }
+
+        [HttpPost]
+        [Route("/api/Offers/ChangeRequestStatus")]
+        public bool ChangeEmploymentRequestStatus([FromBody] EmploymentRequestDto employmentRequestDto)
+        {
+            try
+            {
+                using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+                {
+                    EmploymentRequests employmentRequest =
+                        context.EmploymentRequests.FirstOrDefault(e => e.EtrId == employmentRequestDto.Id);
+
+                    if (employmentRequest == null)
+                    {
+                        return false;
+                    }
+
+                    employmentRequest.EtrAuditMd = DateTime.UtcNow;
+                    employmentRequest.EtrAuditMu = User.GetUserId();
+                    employmentRequest.EtrStatus = employmentRequestDto.Status;
+
+                    context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //todo: add logging
+                return false;
+            }
+        }
+
+        [HttpPost]
+        [Route("/api/Offers/IssueContract")]
+        public ContractDto IssueContract([FromBody] ContractDto contractDto)
+        {
+            //Contracts contract = new Contracts
+            //{
+            //    CntAuditCd = DateTime.UtcNow,
+            //    CntAuditCu = User.GetUserId(),
+                
+            //};
+            //    using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            //    {
+            //        EmploymentRequests employmentRequest =
+            //            context.EmploymentRequests.FirstOrDefault(e => e.EtrId == employmentRequestDto.Id);
+
+            //        if (employmentRequest == null)
+            //        {
+            //            return false;
+            //        }
+
+            //        employmentRequest.EtrAuditMd = DateTime.UtcNow;
+            //        employmentRequest.EtrAuditMu = User.GetUserId();
+            //        employmentRequest.EtrStatus = employmentRequestDto.Status;
+
+            //        context.SaveChanges();
+            //    }
+
+            //    return true;
+
+
+            return null;
+        }
+
     }
 }

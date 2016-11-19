@@ -5,6 +5,11 @@ namespace EuroJobsCrm.Dto
 {
     public class OfferDto
     {
+        public OfferDto()
+        {
+            
+        }
+
         public OfferDto(Offers offer)
         {
             Id = offer.OfrId;

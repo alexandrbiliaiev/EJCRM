@@ -636,6 +636,8 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("ofr_facilities")
                     .HasMaxLength(1000);
 
+                entity.Property(e => e.OfrGender).HasColumnName("ofr_gender");
+
                 entity.Property(e => e.OfrHoursPerMonth).HasColumnName("ofr_hours_per_month");
 
                 entity.Property(e => e.OfrLanguages)
