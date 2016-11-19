@@ -9,58 +9,16 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
     $scope.expandNotes = false;
 
 
-
-
-    $scope.setDefaultAddress = function () {
-        return {
-            address: "",
-            city: "",
-            contragentId: $state.params.id,
-            country: "PL",
-            id: 0,
-            pay: "0",
-            postCode: "",
-            type: "1"
-        }
-    }
-
-
-    $scope.setDefaultContactPerson = function () {
-        return {
-            id: 0,
-            contragentId: null,
-            clientId: null,
-            name: "",
-            surname: "",
-            position: "",
-            email: "",
-            phoneNumber: "",
-            skype: "",
-            messanger: "",
-            status: 1
-        }
-    }
-
-    $scope.setDefaultEmployee = function () {
-        return {
-            id: 0,
-            firstName: null,
-            middleName: null,
-            lastName: null,
-            birthdate: null,
-            description: null
-        }
-    }
-
-    $scope.contactperson = $scope.setDefaultContactPerson();
-    $scope.address = $scope.setDefaultAddress();
-    $scope.employee = $scope.setDefaultAddress();
-
-
     $scope.goBack = function () {
         $state.go('contragents');
     }
 
+    $scope.close = function () {
+        console.log($scope);
+        $mdDialog.hide();
+    }
+
+    //contragents
     $scope.saveContragentClick = function () {
         if ($scope.contragentForm.$invalid) {
             return;
@@ -81,6 +39,38 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         });
     }
 
+    $scope.showEditContragentDialog = function (ev) {
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/contragents/contragent_dialog_tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+        })
+            .then(function (answer) {
+
+            }, function () {
+
+            });
+    }
+    //End Contragents
+
+    //Addresses
+    $scope.setDefaultAddress = function () {
+        return {
+            address: "",
+            city: "",
+            contragentId: $state.params.id,
+            country: "PL",
+            id: 0,
+            pay: "0",
+            postCode: "",
+            type: "1"
+        }
+    }
+
+    $scope.address = $scope.setDefaultAddress();
+
     $scope.saveAddressClick = function () {
         if ($scope.addressForm.$invalid) {
             return;
@@ -99,6 +89,93 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         });
 
     }
+
+    $scope.showNewAddressDialog = function (ev) {
+        $scope.address = $scope.setDefaultAddress();
+
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/addresses/address_dialog_tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+        }).then(function (answer) {
+
+        }, function () {
+
+        });
+    }
+
+    $scope.showEditAddressDialog = function (address) {
+        $scope.address = address;
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/addresses/address_dialog_tmpl.html',
+
+            clickOutsideToClose: true,
+        })
+
+            .then(function (answer) {
+
+            }, function () {
+
+            });
+    }
+
+    $scope.showDeleteAddressConfirmDialog = function (addresId) {
+        var confirm = $mdDialog.confirm()
+            .title($translate.instant('ADDRESS_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('ADDRESS_DELETE_CONFIRM_TEXT'))
+            .ariaLabel('label')
+            .ok($translate.instant('DELETE_OK'))
+            .cancel($translate.instant('DELETE_CANCEL'));
+
+        $mdDialog.show(confirm).then(function () {
+            addressesService.deleteAddress(addresId).success(function (response) {
+                if (response != true) {
+                    return;
+                }
+
+                addresses = $scope.contragent.addresses;
+                for (i in addresses) {
+                    if (addresses[i].id != addresId) {
+                        continue;
+                    }
+
+                    addresses.splice(i, 1);
+                    return;
+                }
+
+            }).error(function (response) {
+                $state.go('error');
+            });
+        }, function () {
+
+        });
+    };
+    //End Addresses
+
+
+
+    //ContactPersons
+    $scope.setDefaultContactPerson = function () {
+        return {
+            id: 0,
+            contragentId: null,
+            clientId: null,
+            name: "",
+            surname: "",
+            position: "",
+            email: "",
+            phoneNumber: "",
+            skype: "",
+            messanger: "",
+            status: 1
+        }
+    }
+
+    $scope.contactperson = $scope.setDefaultContactPerson();
 
     $scope.saveContactPersonClick = function () {
         if ($scope.contactpersonForm.$invalid) {
@@ -130,76 +207,6 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         });
     }
 
-
-    $scope.saveEmployeeClick = function () {
-        if ($scope.employeeForm.$invalid) {
-            return;
-        }
-
-        employee = {
-            id: $scope.employee.id,
-            contragentId: $scope.contragent.id,
-            firstName: $scope.employee.firstName,
-            middleName: $scope.employee.middleName,
-            lastName: $scope.employee.lastName,
-            birthDate: $scope.birthdate,
-            description: $scope.employee.description,
-            status: $scope.employee.status
-        }
-
-        employeesService.saveEmployee(employee).success(function (response) {
-            if ($scope.employee.id == 0 || $scope.employee.id == undefined) {
-                $scope.contragent.employees.push(response);
-            }
-
-            $mdDialog.hide();
-        }).error(function () {
-            $state.go('error');
-            $mdDialog.hide();
-        });
-    }
-
-
-
-    $scope.close = function () {
-        console.log($scope);
-        $mdDialog.hide();
-    }
-
-
-    $scope.showEditContragentDialog = function (ev) {
-        $mdDialog.show({
-            scope: $scope,
-            preserveScope: true,
-            templateUrl: '/templates/contragents/contragent_dialog_tmpl.html',
-            targetEvent: ev,
-            clickOutsideToClose: true,
-        })
-            .then(function (answer) {
-
-            }, function () {
-
-            });
-    }
-
-    $scope.showEditEmployeeDialog = function (employee) {
-        $scope.employee = employee;
-        $scope.birthdate = new Date(employee.birthDate);
-        $mdDialog.show({
-            scope: $scope,
-            preserveScope: true,
-            templateUrl: '/templates/employees/employee_dialog_tmpl.html',
-
-            clickOutsideToClose: true,
-        })
-            .then(function (answer) {
-
-            }, function () {
-
-            });
-    }
-
-
     $scope.showNewContactPersonDialog = function (ev) {
         $scope.contactperson = $scope.setDefaultContactPerson();
         $mdDialog.show({
@@ -216,104 +223,6 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
             });
     }
-
-    $scope.showNewAddressDialog = function (ev) {
-        $scope.address = $scope.setDefaultAddress();
-
-        $mdDialog.show({
-            scope: $scope,
-            preserveScope: true,
-            templateUrl: '/templates/addresses/address_dialog_tmpl.html',
-            targetEvent: ev,
-            clickOutsideToClose: true,
-        }).then(function (answer) {
-
-        }, function () {
-
-        });
-    }
-
-    $scope.showNewContactPersonDialog = function (ev) {
-        $scope.contactperson = $scope.setDefaultContactPerson();
-        $mdDialog.show({
-            scope: $scope,
-            preserveScope: true,
-            templateUrl: '/templates/contactpersons/contact_person_dialog_tmpl.html',
-            targetEvent: ev,
-            clickOutsideToClose: true,
-        })
-
-            .then(function (answer) {
-
-            }, function () {
-
-            });
-    }
-
-    $scope.showEditContragentDialog = function (ev) {
-        $mdDialog.show({
-            scope: $scope,
-            preserveScope: true,
-            templateUrl: '/templates/contragents/contragent_dialog_tmpl.html',
-            targetEvent: ev,
-            clickOutsideToClose: true,
-        })
-            .then(function (answer) {
-
-            }, function () {
-
-            });
-    }
-
-    $scope.showEditAddressDialog = function (address) {
-        $scope.address = address;
-        $mdDialog.show({
-            scope: $scope,
-            preserveScope: true,
-            templateUrl: '/templates/addresses/address_dialog_tmpl.html',
-
-            clickOutsideToClose: true,
-        })
-
-            .then(function (answer) {
-
-            }, function () {
-
-            });
-    }
-
-
-    $scope.showDeleteEmployeeConfirmDialog = function (employeeId) {
-        var confirm = $mdDialog.confirm()
-            .title($translate.instant('EMP_DELETE_CONFIRM_TITLE'))
-            .textContent($translate.instant('EMP_DELETE_CONFIRM_TEXT'))
-            .ariaLabel('label')
-            .ok($translate.instant('DELETE_OK'))
-            .cancel($translate.instant('DELETE_CANCEL'));
-
-        $mdDialog.show(confirm).then(function () {
-            employeesService.deleteEmployee(employeeId).success(function (response) {
-                if (response != true) {
-                    return;
-                }
-
-                employees = $scope.contragent.employees;
-                for (i in employees) {
-                    if (employees[i].id != employeeId) {
-                        continue;
-                    }
-
-                    employees.splice(i, 1);
-                    return;
-                }
-
-            }).error(function (response) {
-                $state.go('error');
-            });
-        }, function () {
-
-        });
-    };
 
     $scope.showEditContactPersonDialog = function (contactPerson) {
         $scope.contactperson = contactPerson;
@@ -362,38 +271,50 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
         });
     };
+    //End ContactPersons
 
-    $scope.showDeleteAddressConfirmDialog = function (addresId) {
-        var confirm = $mdDialog.confirm()
-            .title($translate.instant('ADDRESS_DELETE_CONFIRM_TITLE'))
-            .textContent($translate.instant('ADDRESS_DELETE_CONFIRM_TEXT'))
-            .ariaLabel('label')
-            .ok($translate.instant('DELETE_OK'))
-            .cancel($translate.instant('DELETE_CANCEL'));
 
-        $mdDialog.show(confirm).then(function () {
-            addressesService.deleteAddress(addresId).success(function (response) {
-                if (response != true) {
-                    return;
-                }
+    //Employees
+    $scope.setDefaultEmployee = function () {
+        return {
+            id: 0,
+            firstName: null,
+            middleName: null,
+            lastName: null,
+            birthdate: null,
+            description: null
+        }
+    }
 
-                addresses = $scope.contragent.addresses;
-                for (i in addresses) {
-                    if (addresses[i].id != addresId) {
-                        continue;
-                    }
+    $scope.employee = $scope.setDefaultEmployee();
 
-                    addresses.splice(i, 1);
-                    return;
-                }
+    $scope.saveEmployeeClick = function () {
+        if ($scope.employeeForm.$invalid) {
+            return;
+        }
 
-            }).error(function (response) {
-                $state.go('error');
-            });
-        }, function () {
+        employee = {
+            id: $scope.employee.id,
+            contragentId: $scope.contragent.id,
+            firstName: $scope.employee.firstName,
+            middleName: $scope.employee.middleName,
+            lastName: $scope.employee.lastName,
+            birthDate: $scope.birthdate,
+            description: $scope.employee.description,
+            status: $scope.employee.status
+        }
 
+        employeesService.saveEmployee(employee).success(function (response) {
+            if ($scope.employee.id == 0 || $scope.employee.id == undefined) {
+                $scope.contragent.employees.push(response);
+            }
+
+            $mdDialog.hide();
+        }).error(function () {
+            $state.go('error');
+            $mdDialog.hide();
         });
-    };
+    }
 
     $scope.showNewEmployeeDialog = function (ev) {
         $scope.employee = $scope.setDefaultEmployee();
@@ -412,8 +333,60 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             });
     }
 
+    $scope.showEditEmployeeDialog = function (employee) {
+        $scope.employee = employee;
+        $scope.birthdate = new Date(employee.birthDate);
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/employees/employee_dialog_tmpl.html',
+
+            clickOutsideToClose: true,
+        })
+            .then(function (answer) {
+
+            }, function () {
+
+            });
+    }
+
+    $scope.showDeleteEmployeeConfirmDialog = function (employeeId) {
+        var confirm = $mdDialog.confirm()
+            .title($translate.instant('EMP_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('EMP_DELETE_CONFIRM_TEXT'))
+            .ariaLabel('label')
+            .ok($translate.instant('DELETE_OK'))
+            .cancel($translate.instant('DELETE_CANCEL'));
+
+        $mdDialog.show(confirm).then(function () {
+            employeesService.deleteEmployee(employeeId).success(function (response) {
+                if (response != true) {
+                    return;
+                }
+
+                employees = $scope.contragent.employees;
+                for (i in employees) {
+                    if (employees[i].id != employeeId) {
+                        continue;
+                    }
+
+                    employees.splice(i, 1);
+                    return;
+                }
+
+            }).error(function (response) {
+                $state.go('error');
+            });
+        }, function () {
+
+        });
+    };
+    //End Employees
+
+
+
     $scope.getFormatedDate = function (date) {
-       return moment(date).format('YYYY-MM-DD');
+        return moment(date).format('YYYY-MM-DD');
     };
 
     if (contragentsService.contragents != undefined) {
