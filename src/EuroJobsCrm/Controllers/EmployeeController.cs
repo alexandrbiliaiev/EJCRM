@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
@@ -72,6 +73,25 @@ namespace EuroJobsCrm.Controllers
                 context.SaveChanges();
 
                 return true;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/Employees/GetDocuments")]
+        public List<IdentityDocumentsDto> GetIdentityDocuments([FromBody] int employeeId)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                List<IdentityDocumentsDto> documents =
+                    context.IdentityDocuments
+                        .Where(i => i.IdcAuditRd == null && i.IdcEmpId == employeeId)
+                        .GroupJoin(context.DocumentFiles, d => d.IdcId, f => f.DcfIdcId,
+                            (d, f) => new {doc = d, files = f})
+                        .ToList()
+                        .Select(d => new IdentityDocumentsDto(d.doc, d.files))
+                        .ToList();
+
+                return documents;
             }
         }
 

@@ -409,7 +409,7 @@ namespace EuroJobsCrm.Models
             modelBuilder.Entity<DocumentFiles>(entity =>
             {
                 entity.HasKey(e => e.DcfId)
-                    .HasName("PK__Document__2996CAF68CA3B31A");
+                    .HasName("PK__Document__2996CAF62F188655");
 
                 entity.Property(e => e.DcfId).HasColumnName("dcf_id");
 
@@ -449,7 +449,7 @@ namespace EuroJobsCrm.Models
 
                 entity.Property(e => e.DcfIdcId).HasColumnName("dcf_idc_id");
 
-                entity.Property(e => e.DcfInvoiceId).HasColumnName("dcf_invoice_id");
+                entity.Property(e => e.DcfInvId).HasColumnName("dcf_inv_id");
 
                 entity.Property(e => e.DcfName)
                     .IsRequired()
@@ -569,11 +569,39 @@ namespace EuroJobsCrm.Models
             modelBuilder.Entity<IdentityDocuments>(entity =>
             {
                 entity.HasKey(e => e.IdcId)
-                    .HasName("PK__Identity__CC187365B664CBCE");
+                    .HasName("PK__Identity__CC1873659A101A22");
 
                 entity.Property(e => e.IdcId).HasColumnName("idc_id");
 
+                entity.Property(e => e.IdcAuditCd)
+                    .HasColumnName("idc_audit_cd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.IdcAuditCu)
+                    .HasColumnName("idc_audit_cu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.IdcAuditMd)
+                    .HasColumnName("idc_audit_md")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.IdcAuditMu)
+                    .HasColumnName("idc_audit_mu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.IdcAuditRd)
+                    .HasColumnName("idc_audit_rd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.IdcAuditRu)
+                    .HasColumnName("idc_audit_ru")
+                    .HasMaxLength(100);
+
                 entity.Property(e => e.IdcEmpId).HasColumnName("idc_emp_id");
+
+                entity.Property(e => e.IdcIssueDate)
+                    .HasColumnName("idc_issue_date")
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.IdcNumber)
                     .HasColumnName("idc_number")
@@ -581,54 +609,26 @@ namespace EuroJobsCrm.Models
 
                 entity.Property(e => e.IdcParentIdcId).HasColumnName("idc_parent_idc_id");
 
+                entity.Property(e => e.IdcRemarks)
+                    .HasColumnName("idc_remarks")
+                    .HasMaxLength(500);
+
                 entity.Property(e => e.IdcSeria)
                     .HasColumnName("idc_seria")
                     .HasMaxLength(16);
 
-                entity.Property(e => e.IdsAuditCd)
-                    .HasColumnName("ids_audit_cd")
+                entity.Property(e => e.IdcType).HasColumnName("idc_type");
+
+                entity.Property(e => e.IdcValidFrom)
+                    .HasColumnName("idc_valid_from")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.IdsAuditCu)
-                    .HasColumnName("ids_audit_cu")
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.IdsAuditMd)
-                    .HasColumnName("ids_audit_md")
+                entity.Property(e => e.IdcValidTo)
+                    .HasColumnName("idc_valid_to")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.IdsAuditMu)
-                    .HasColumnName("ids_audit_mu")
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.IdsAuditRd)
-                    .HasColumnName("ids_audit_rd")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.IdsAuditRu)
-                    .HasColumnName("ids_audit_ru")
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.IdsIssueDate)
-                    .HasColumnName("ids_issue_date")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.IdsRemarks)
-                    .HasColumnName("ids_remarks")
-                    .HasMaxLength(500);
-
-                entity.Property(e => e.IdsType).HasColumnName("ids_type");
-
-                entity.Property(e => e.IdsValidFrom)
-                    .HasColumnName("ids_valid_from")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.IdsValidTo)
-                    .HasColumnName("ids_valid_to")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.IdsVisaType)
-                    .HasColumnName("ids_visa_type")
+                entity.Property(e => e.IdcVisaType)
+                    .HasColumnName("idc_visa_type")
                     .HasMaxLength(10);
             });
 

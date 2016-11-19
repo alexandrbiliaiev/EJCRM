@@ -80,5 +80,111 @@ namespace EuroJobsCrm.Dto
         public string Facilities { get; set; }
         public string AdditionalInfo { get; set; }
         public string Documents { get; set; }
+
+        public bool WorkMo
+        {
+            get
+            {
+                return (WorkDays & 1 << 0) > 0;
+            }
+            set
+            {
+                if (value)
+                    WorkDays |= 1 << 0;
+                else
+                    WorkDays &= ~(1 << 0);
+            }
+        }
+
+        public bool WorkTu
+        {
+            get
+            {
+                return (WorkDays & 1 << 1) > 0;
+            }
+            set
+            {
+                if (value)
+                    WorkDays |= 1 << 1;
+                else
+                    WorkDays &= ~(1 << 1);
+            }
+        }
+
+        public bool WorkWe
+        {
+            get
+            {
+                return (WorkDays & 1 << 2) > 0;
+            }
+            set
+            {
+                if (value)
+                    WorkDays |= 1 << 2;
+                else
+                    WorkDays &= ~(1 << 2);
+            }
+        }
+
+        public bool WorkTh
+        {
+            get
+            {
+                return (WorkDays & 1 << 3) > 0;
+            }
+            set
+            {
+                if (value)
+                    WorkDays |= 1 << 3;
+                else
+                    WorkDays &= ~(1 << 3);
+            }
+        }
+
+        public bool WorkFr
+        {
+            get
+            {
+                return (WorkDays & 1 << 4) > 0;
+            }
+            set
+            {
+                if (value)
+                    WorkDays |= 1 << 4;
+                else
+                    WorkDays &= ~(1 << 4);
+            }
+        }
+
+        public bool WorkSa
+        {
+            get
+            {
+                return (WorkDays & 1 << 5) > 0;
+            }
+            set
+            {
+                if (value)
+                    WorkDays |= 1 << 5;
+                else
+                    WorkDays &= ~(1 << 5);
+            }
+        }
+
+        public bool WorkSu
+        {
+            get
+            {
+                return (WorkDays & 1 << 6) > 0;
+            }
+            set
+            {
+                if (value)
+                    WorkDays |= 1 << 6;
+                else
+                    WorkDays &= ~(1 << 6);
+            }
+        }
+
     }
 }

@@ -6,7 +6,7 @@ namespace EuroJobsCrm.Models
     public partial class DocumentFiles
     {
         public int DcfId { get; set; }
-        public int? DcfInvoiceId { get; set; }
+        public int? DcfInvId { get; set; }
         public int? DcfCntId { get; set; }
         public int? DcfIdcId { get; set; }
         public string DcfGoogleFileId { get; set; }

@@ -10,17 +10,17 @@ namespace EuroJobsCrm.Models
         public int IdcEmpId { get; set; }
         public string IdcSeria { get; set; }
         public string IdcNumber { get; set; }
-        public DateTime? IdsIssueDate { get; set; }
-        public DateTime? IdsValidFrom { get; set; }
-        public DateTime? IdsValidTo { get; set; }
-        public int IdsType { get; set; }
-        public string IdsVisaType { get; set; }
-        public string IdsRemarks { get; set; }
-        public DateTime? IdsAuditCd { get; set; }
-        public string IdsAuditCu { get; set; }
-        public DateTime? IdsAuditMd { get; set; }
-        public string IdsAuditMu { get; set; }
-        public DateTime? IdsAuditRd { get; set; }
-        public string IdsAuditRu { get; set; }
+        public DateTime? IdcIssueDate { get; set; }
+        public DateTime? IdcValidFrom { get; set; }
+        public DateTime? IdcValidTo { get; set; }
+        public int IdcType { get; set; }
+        public string IdcVisaType { get; set; }
+        public string IdcRemarks { get; set; }
+        public DateTime? IdcAuditCd { get; set; }
+        public string IdcAuditCu { get; set; }
+        public DateTime? IdcAuditMd { get; set; }
+        public string IdcAuditMu { get; set; }
+        public DateTime? IdcAuditRd { get; set; }
+        public string IdcAuditRu { get; set; }
     }
 }
