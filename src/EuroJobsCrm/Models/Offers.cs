@@ -11,7 +11,7 @@ namespace EuroJobsCrm.Models
         public int OfrVacanciesNumber { get; set; }
         public DateTime OfrStartingDate { get; set; }
         public DateTime OfrEndingDate { get; set; }
-        public int OfrWorkPlace { get; set; }
+        public string OfrWorkPlace { get; set; }
         public string OfrResponsibilities { get; set; }
         public int OfrEducation { get; set; }
         public string OfrExperience { get; set; }

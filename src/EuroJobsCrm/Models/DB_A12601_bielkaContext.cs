@@ -307,6 +307,54 @@ namespace EuroJobsCrm.Models
                     .HasMaxLength(150);
             });
 
+            modelBuilder.Entity<Contracts>(entity =>
+            {
+                entity.HasKey(e => e.CntId)
+                    .HasName("PK__Contract__CDB1F3C18F3440BF");
+
+                entity.Property(e => e.CntId).HasColumnName("cnt_id");
+
+                entity.Property(e => e.CntAuditCd)
+                    .HasColumnName("cnt_audit_cd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CntAuditCu)
+                    .HasColumnName("cnt_audit_cu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.CntAuditMd)
+                    .HasColumnName("cnt_audit_md")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CntAuditMu)
+                    .HasColumnName("cnt_audit_mu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.CntAuditRd)
+                    .HasColumnName("cnt_audit_rd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CntAuditRu)
+                    .HasColumnName("cnt_audit_ru")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.CntCgtId).HasColumnName("cnt_cgt_id");
+
+                entity.Property(e => e.CntEmpId).HasColumnName("cnt_emp_id");
+
+                entity.Property(e => e.CntEndDate)
+                    .HasColumnName("cnt_end_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CntIssueDate)
+                    .HasColumnName("cnt_issue_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CntStartDate)
+                    .HasColumnName("cnt_start_date")
+                    .HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<Contragents>(entity =>
             {
                 entity.HasKey(e => e.CgtId)
@@ -420,6 +468,46 @@ namespace EuroJobsCrm.Models
                     .HasMaxLength(100);
 
                 entity.Property(e => e.EmpStatus).HasColumnName("emp_status");
+            });
+
+            modelBuilder.Entity<EmploymentRequests>(entity =>
+            {
+                entity.HasKey(e => e.EtrId)
+                    .HasName("PK__Employme__D200B475365274A4");
+
+                entity.Property(e => e.EtrId).HasColumnName("etr_id");
+
+                entity.Property(e => e.EtrAuditCd)
+                    .HasColumnName("etr_audit_cd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.EtrAuditCu)
+                    .HasColumnName("etr_audit_cu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.EtrAuditMd)
+                    .HasColumnName("etr_audit_md")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.EtrAuditMu)
+                    .HasColumnName("etr_audit_mu")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.EtrAuditRd)
+                    .HasColumnName("etr_audit_rd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.EtrAuditRu)
+                    .HasColumnName("etr_audit_ru")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.EtrCntId).HasColumnName("etr_cnt_id");
+
+                entity.Property(e => e.EtrEmpId).HasColumnName("etr_emp_id");
+
+                entity.Property(e => e.EtrOfrId).HasColumnName("etr_ofr_id");
+
+                entity.Property(e => e.EtrStatus).HasColumnName("etr_status");
             });
 
             modelBuilder.Entity<Notes>(entity =>
@@ -585,7 +673,9 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("ofr_work_end")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.OfrWorkPlace).HasColumnName("ofr_work_place");
+                entity.Property(e => e.OfrWorkPlace)
+                    .HasColumnName("ofr_work_place")
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.OfrWorkStart)
                     .HasColumnName("ofr_work_start")
@@ -603,8 +693,10 @@ namespace EuroJobsCrm.Models
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<ContactPersons> ContactPersons { get; set; }
+        public virtual DbSet<Contracts> Contracts { get; set; }
         public virtual DbSet<Contragents> Contragents { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<EmploymentRequests> EmploymentRequests { get; set; }
         public virtual DbSet<Notes> Notes { get; set; }
         public virtual DbSet<Offers> Offers { get; set; }
     }
