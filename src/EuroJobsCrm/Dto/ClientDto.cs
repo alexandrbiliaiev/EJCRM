@@ -12,13 +12,15 @@ namespace EuroJobsCrm.Dto
         public string Nip { get; set; }
         public string Krs { get; set; }
         public string Regon { get; set; }
+        public List<OfferDto> Offers { get; set; }
 
         public ClientDto()
         {
-            
+
         }
 
-        public ClientDto(Clients client, IEnumerable<Addresses> addresses, IEnumerable<ContactPersons> contactPersons)
+        public ClientDto(Clients client, IEnumerable<Addresses> addresses, IEnumerable<ContactPersons> contactPersons,
+                         IEnumerable<Offers> offers)
         {
             Id = client.CltId;
             Name = client.CltName;
@@ -27,6 +29,7 @@ namespace EuroJobsCrm.Dto
             Regon = client.CltRegon;
             Addresses = addresses.Select(a => new AddressDto(a)).ToList();
             ContactPersons = contactPersons.Select(c => new ContactPersonDto(c)).ToList();
+            Offers = offers.Select(o => new OfferDto(o)).ToList();
         }
     }
 }

@@ -33,8 +33,10 @@ namespace EuroJobsCrm.Controllers
                         (c, a) => new {Client = c, Addresses = a})
                     .GroupJoin(context.ContactPersons.Where(a => a.CtpAuditRd == null), c => c.Client.CltId, cp => cp.CtpCltId,
                         (c, cp) => new {c.Client, c.Addresses, ContactPersons = cp})
+                    .GroupJoin(context.Offers.Where(o => o.OfrAuditRd == null), c => c.Client.CltId, o => o.OfrCltId,
+                        (c, o) => new { c.Client, c.Addresses, c.ContactPersons, Offers = o })
                     .ToList()
-                    .Select(c => new ClientDto(c.Client, c.Addresses, c.ContactPersons))
+                    .Select(c => new ClientDto(c.Client, c.Addresses, c.ContactPersons, c.Offers))
                     .ToList();
 
                return clients;
