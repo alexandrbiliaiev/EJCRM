@@ -31,9 +31,11 @@
             }).state('client', {
                 url: "/clt_edit/:id",
                 templateUrl: 'templates/clients/client_details.html',
+            }).state('employee', {
+                url: "/emp_edit/:id",
+                templateUrl: 'templates/employees/employee_details.html',
             });
     });
 
 angular.module('EuroJobsCrm.services', []);
-
 angular.module('EuroJobsCrm.controllers', []);

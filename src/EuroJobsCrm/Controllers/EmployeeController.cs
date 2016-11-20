@@ -10,6 +10,18 @@ namespace EuroJobsCrm.Controllers
     public class EmployeeController : Controller
     {
         [HttpPost]
+        [Route("api/Employees/Get")]
+        public EmployeeDto GetEmployee([FromBody] int employeeId)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                Employees emp = context.Employees.FirstOrDefault(c => c.EmpId == employeeId);
+
+                return emp == null ? null : new EmployeeDto(emp);
+            }
+        }
+
+        [HttpPost]
         [Route("api/Employees/Save")]
         public EmployeeDto SaveEmployee([FromBody] EmployeeDto employee)
         {

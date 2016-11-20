@@ -45,7 +45,7 @@
 					</md-input-container>
 					<md-input-container class="md-block" flex="70">
 						<label>{{'DESCRIPTION'| translate}}</label>
-						<input name="employee_description" ng-model="employee.description" placeholder="Dobry pracownik" md-maxlength="100">
+						<input name="employee_description" ng-model="employee.description" placeholder="Dobry pracownik" md-maxlength="1000">
 						<div ng-messages="employeeForm.employee_phone.$error" role="alert" multiple>
 							<div ng-message="md-maxlength">{{'DESCRIPTION_IS_TO_LONG'| translate}}</div>
 						</div>
@@ -54,7 +54,7 @@
 				<div layout="row">
 					<md-input-container class="md-block" flex="30">
 						<label>{{ 'STATUS' | translate }}</label>
-                        <md-select name="type" ng-model="employee.status"  data-placeholder="{{ 'STATUS' | translate }}" required>
+                        <md-select name="type" ng-model="employee.status"  data-placeholder="{{ 'STATUS' | translate }}">
 						<md-option value="1">{{ 'ACTIVE' | translate }}</md-option>
 						<md-option value="0">{{ 'INACTIVE' | translate }}</md-option>
 						<md-option value="2">{{ 'LEFT' | translate }}</md-option>
