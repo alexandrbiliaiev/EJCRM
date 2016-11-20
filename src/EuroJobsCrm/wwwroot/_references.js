@@ -5,6 +5,7 @@
 /// <reference path="js/controllers/ContragentManageController.js" />
 /// <reference path="js/controllers/ContragentsController.js" />
 /// <reference path="js/controllers/employeemanagecontroller.js" />
+/// <reference path="js/controllers/employeescontroller.js" />
 /// <reference path="js/controllers/EventController.js" />
 /// <reference path="js/controllers/tabsController.js" />
 /// <reference path="js/services/addressesService.js" />
