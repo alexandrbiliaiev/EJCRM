@@ -171,5 +171,11 @@
     "EMPLOYED_PEOPLE": "Zatrudnione osoby",
     "OFFER": "Oferta",
     "DOCUMENT": "Dokument",
-    "EMPLOYEE": "Pracownik"
+    "EMPLOYEE": "Pracownik",
+    "DOC_NUMBER":"Numer",
+    "PASSPORT":"Pasport",
+    "VISA":"Visa",
+    "VALID_FROM":"Ważny od",
+    "VALID_TO":"ważny do"
+    
 }
