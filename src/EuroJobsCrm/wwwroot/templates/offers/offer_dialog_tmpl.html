@@ -10,9 +10,9 @@
 	</md-toolbar>
 	<md-dialog-content>
 		<div class="md-dialog-content" style="width:1000px">
-			<!--OFFER INFORMATION-->
 			<form name="offerForm">
 				<h4>{{'OFFER_INFORMATION'| translate}}</h4>
+				<!--OFFER INFORMATION-->
 				<div layout="row" layout-align="space-between none">
 					<md-input-container class="md-block" flex="30">
 						<label>{{'BRANCH'| translate}}</label>
@@ -40,46 +40,254 @@
 				</div>
 				<div layout="row" layout-align="space-between none">
 					<md-input-container class="md-block" flex="30">
-						<label>{{'WORK_START'| translate}}</label>
-						<md-datepicker md-current-view="year" ng-model="offer.workStart" md-placeholder="{{'Enter date' | translate}}"></md-datepicker>
+						<label>{{'STARTING_DATE'| translate}}</label>
+						<md-datepicker md-current-view="year" ng-model="offer.startingDate" md-placeholder="{{'Enter date' | translate}}"></md-datepicker>
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
-						<label>{{'WORK_END'| translate}}</label>
-						<md-datepicker md-current-view="year" ng-model="offer.workEnd" md-placeholder="{{'Enter date' | translate}}" ng-disabled="isUnlimited"></md-datepicker>
+						<label>{{'ENDING_DATE'| translate}}</label>
+						<md-datepicker md-current-view="year" ng-model="offer.endingDate" md-placeholder="{{'Enter date' | translate}}" ng-disabled="isUnlimited"></md-datepicker>
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<md-checkbox ng-model="isUnlimited" aria-label="chb1" ng-change="disableEndDate(isUnlimited)">{{'WORK_UNLIMITED'| translate}}</md-checkbox>
 					</md-input-container>
 				</div>
+
 				<!--Responcibilities-->
-				
 				<h4>{{'RESPONCIBILITIES'| translate}}</h4>
 				<h6>{{'DESCRIPTION_OF_POSITION'| translate}}</h6>
 				<div layout="row" layout-align="space-between center">
 					<md-input-container class="md-block" flex="100">
 						<label>{{'RESPONCIBILITIES'| translate}}</label>
-						<textarea ng-model="offer.responsibilities" md-maxlength="500" rows="5" md-select-on-focus></textarea>
+						<textarea ng-model="offer.responsibilities" md-maxlength="500" rows="4" md-select-on-focus></textarea>
+					</md-input-container>
+				</div>
+
+				<!--Competence-->
+				<h4>{{'COMPETENCE'| translate}}</h4>
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="30">
+						<label>{{'EDUCATION'| translate}}</label>
+						<input name="offer_education" ng-model="offer.education" placeholder="..." md-maxlength="100">
+						<div ng-messages="offerForm.offer_education.$error" role="alert" multiple>
+							<div ng-message="md-maxlength">{{'EDUCATION_IS_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
+						<label>{{'EXPERIENCE'| translate}}</label>
+						<input name="offer_experience" ng-model="offer.experience" placeholder="..." md-maxlength="100">
+						<div ng-messages="offerForm.offer_experience.$error" role="alert" multiple>
+							<div ng-message="md-maxlength">{{'EXPERIENCE_IS_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
+						<label>{{'LANGUAGES'| translate}}</label>
+						<input name="offer_languages" ng-model="offer.languages" placeholder="..." md-maxlength="100">
+						<div ng-messages="offerForm.offer_languages.$error" role="alert" multiple>
+							<div ng-message="md-maxlength">{{'LANGUAGES_ARE_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+				</div>
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="30">
+						<label>{{'AGE_FROM'| translate}}</label>
+						<input name="offer_ageFrom" ng-model="offer.ageFrom" placeholder="20" md-maxlength="2">
+						<div ng-messages="offerForm.offer_ageFrom.$error" role="alert" multiple>
+							<div ng-message="md-maxlength">{{'AGE_IS_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
+						<label>{{'AGE_TO'| translate}}</label>
+						<input name="offer_ageTo" ng-model="offer.ageTo" placeholder="..." md-maxlength="2">
+						<div ng-messages="offerForm.offer_ageTo.$error" role="alert" multiple>
+							<div ng-message="md-maxlength">{{'AGE_IS_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
+						<label>{{ 'GENDER' | translate }}</label>
+						<md-select name="type" ng-model="offer.gender" data-placeholder="{{ 'GENDER' | translate }}" required>
+							<md-option value="0">{{ 'ALL' | translate }}</md-option>
+							<md-option value="1">{{ 'MAIL' | translate }}</md-option>
+							<md-option value="2">{{ 'FEMAIL' | translate }}</md-option>
+						</md-select>
+						<br/>
+					</md-input-container>
+
+				</div>
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="45">
+						<label>{{'DOCUMENTS'| translate}}</label>
+						<textarea ng-model="offer.documents" md-maxlength="200" rows="2" md-select-on-focus></textarea>
+					</md-input-container>
+					<md-input-container class="md-block" flex="45">
+						<label>{{'OTHER'| translate}}</label>
+						<textarea ng-model="offer.other" md-maxlength="200" rows="2" md-select-on-focus></textarea>
+					</md-input-container>
+				</div>
+
+				<!--JOB conditions-->
+				<h4>{{'JOB_CONDITIONS'| translate}}</h4>
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="30">
+						<label>{{'CONTRACT_TYPE'| translate}}</label>
+						<md-select name="type" ng-model="offer.contractType" required>
+							<md-option value="0">{{ 'UMOWA_O_PRACE' | translate }}</md-option>
+							<md-option value="1">{{ 'ZLECENIE' | translate }}</md-option>
+						</md-select>
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
+						<label>{{'WORK_FROM'| translate}}</label>
+						<input mdc-datetime-picker="" date="false" time="true" type="text" id="time1" placeholder="Time" min-date="minDate" format="HH:mm"
+							ng-model="offer.workFrom" class="md-input">
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
+						<label>{{'WORK_TO'| translate}}</label>
+						<input mdc-datetime-picker="" date="false" time="true" type="text" id="time2" placeholder="Time" min-date="minDate" format="HH:mm"
+							ng-model="offer.workTo" class="md-input">
+					</md-input-container>
+				</div>
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="35">
+						<label>{{'HOURS_PER_MONTH'| translate}}</label>
+						<input name="offer_hoursPerMonth" ng-model="offer.hoursPerMonth" placeholder="0" md-maxlength="4"></input>
+					</md-input-container>
+					<md-input-container class="md-block" flex="25">
+						<label>{{'OVERWORK'| translate}}</label>
+						<input name="offer_overtimeRate" ng-model="offer.overtimeRate" placeholder="0" md-maxlength="10" ng-disabled="overtimeDisabled"></input>
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
+						<md-checkbox aria-label="chb2" ng-model="overtimeDisabled" ng-change="disableOvertime(overtimeDisabled)">{{'OVERWORK_NOT_POSSIBLE'}}
+						</md-checkbox>
+					</md-input-container>
+				</div>
+				<h4>{{'WORK_DAYS'| translate}}</h4>
+				<div layout="row" layout-align="space-between none">
+					<md-input-container class="md-block" flex="10">
+						<md-checkbox aria-label="chb2" ng-model="offer.workMo">{{'MONDAY'}}</md-checkbox>
+					</md-input-container>
+					<md-input-container class="md-block" flex="10">
+						<md-checkbox aria-label="chb2" ng-model="offer.workTu">{{'TUESDAY'}}</md-checkbox>
+					</md-input-container>
+					<md-input-container class="md-block" flex="10">
+						<md-checkbox aria-label="chb2" ng-model="offer.workWe">{{'WEDNESDAY'}}</md-checkbox>
+					</md-input-container>
+					<md-input-container class="md-block" flex="10">
+						<md-checkbox aria-label="chb2" ng-model="offer.workTh">{{'THURSDAY'}}</md-checkbox>
+					</md-input-container>
+					<md-input-container class="md-block" flex="10">
+						<md-checkbox aria-label="chb2" ng-model="offer.workFr">{{'FRIDAY'}}</md-checkbox>
+					</md-input-container>
+					<md-input-container class="md-block" flex="10">
+						<md-checkbox aria-label="chb2" ng-model="offer.workSa">{{'SATURDAY'}}</md-checkbox>
+					</md-input-container>
+					<md-input-container class="md-block" flex="10">
+						<md-checkbox aria-label="chb2" ng-model="offer.workSu">{{'SUNDAY'}}</md-checkbox>
+					</md-input-container>
+				</div>
+				<h4>{{'PAYMENT'| translate}}</h4>
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="30">
+						<label>{{'PER_HOUR'| translate}}</label>
+						<input name="offer_ratePerHour" ng-model="offer.ratePerHour" placeholder="1000" md-maxlength="6" required>
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
+						<label>{{'PER_MONTH'| translate}}</label>
+						<input name="offer_ratePerMonth" ng-model="offer.ratePerMonth" placeholder="1000" md-maxlength="6" required>
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
+						<label>{{'PAYMENT_TYPE'| translate}}</label>
+						<md-select name="type" ng-model="offer.paymentMethod" required>
+							<md-option value="0">{{ 'CASH' | translate }}</md-option>
+							<md-option value="1">{{ 'BANK_TRANSFER' | translate }}</md-option>
+							<md-option value="2">{{ 'CASH' | translate }}/{{ 'BANK_TRANSFER' | translate }}</md-option>
+						</md-select>
+						<br/>
+					</md-input-container>
+				</div>
+				<div layout="row" layout-align="space-between none">
+					<md-input-container class="md-block" flex="40">
+						<label>{{'ADVANCE'| translate}}</label>
+						<input name="offer_advanceAmount" ng-model="offer.advanceAmount" placeholder="0" md-maxlength="10" ng-disabled="advanceEnabled">
+					</md-input-container>
+					<md-input-container class="md-block" flex="40">
+						<md-checkbox aria-label="chb2" ng-model="advanceEnabled" ng-change="disableAdvance(advanceEnabled)">{{'ADVANCE_NOT_POSSIBLE'}}
+						</md-checkbox>
+					</md-input-container>
+				</div>
+
+				<h4>{{'ACCOMODATION'| translate}}</h4>
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="40">
+						<label>{{'ACCOMODATION_PRICE'| translate}}</label>
+						<input name="offer_accomodationPrice" ng-model="offer.accomodationPrice" placeholder="0" md-maxlength="10" ng-disabled="accomodationFreeEnabled">
+					</md-input-container>
+					<md-input-container class="md-block" flex="40">
+						<md-checkbox aria-label="chb2" ng-model="accomodationFreeEnabled" ng-change="disableFreeAccomodation(accomodationFreeEnabled)">{{'FREE_ACCOMODATION_NOT_POSSIBLE'}}
+						</md-checkbox>
 					</md-input-container>
 				</div>
 
 				<div layout="row" layout-align="space-between center">
 					<md-input-container class="md-block" flex="30">
-						<label>{{'CP_SKYPE'| translate}}</label>
-						<input name="offer_skype" ng-model="offer.skype" placeholder="SkypeLogin" md-maxlength="100">
-						<div ng-messages="offerForm.offer_skype.$error" role="alert" multiple>
-							<div ng-message="md-maxlength">{{'SKYPE_IS_TO_LONG'| translate}}</div>
-						</div>
+						<label>{{'ACCOMODATION_TYPE'| translate}}</label>
+						<md-select name="type" ng-model="offer.accomodationType">
+							<md-option value="0">{{ 'NONE' | translate }}</md-option>
+							<md-option value="1">{{ 'APARTMENT' | translate }}</md-option>
+							<md-option value="2">{{ 'HOUSE' | translate }}</md-option>
+							<md-option value="3">{{ 'HOSTEL' | translate }}</md-option>
+						</md-select>
 					</md-input-container>
-
 					<md-input-container class="md-block" flex="30">
-						<label>{{'CP_MESSANGER'| translate}}</label>
-						<input name="offer_messanger" ng-model="offer.messanger" placeholder="+48 999 999 999" md-maxlength="100">
-						<div ng-messages="offerForm.offer_messanger.$error" role="alert" multiple>
-							<div ng-message="md-maxlength">{{'MESSANGER_IS_TO_LONG'| translate}}</div>
-						</div>
+						<label>{{'ROOM_PEOPLE_NUMBER'| translate}}</label>
+						<md-select name="type" ng-model="offer.roomPeopleNumber">
+							<md-option value="1">{{ 'PERSONAL' | translate }}</md-option>
+							<md-option value="2">2</md-option>
+							<md-option value="3">3</md-option>
+							<md-option value="4">4</md-option>
+							<md-option value="5">5</md-option>
+							<md-option value="6">6</md-option>
+							<md-option value="7">7</md-option>
+						</md-select>
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
 					</md-input-container>
 				</div>
 
+
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="30">
+						<label>{{'TRANSPORT_TO_WORK_KM'| translate}}</label>
+						<input name="distanceToWork" ng-model="offer.distanceToWork" placeholder="2" md-maxlength="10" required>
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
+						<label>{{'TRANSPORT_TO_WORK_TYPE'| translate}}</label>
+						<md-select name="type" ng-model="offer.transportToWork">
+							<md-option value="0">{{ 'NOT_PAYED' | translate }}</md-option>
+							<md-option value="1">{{ 'PAYED' | translate }}</md-option>
+						</md-select>
+						<br/>
+					</md-input-container>
+					<md-input-container class="md-block" flex="30">
+						<label>{{'TRANSPORT_PAYMENT'| translate}}</label>
+						<input ng-disabled="offer.transportToWork==0" ng-model="offer.transportPrice" placeholder="100" md-maxlength="10" required>
+					</md-input-container>
+				</div>
+
+
+				<h4>{{'FACILITIES'| translate}}</h4>
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="100">
+						<label>{{'FACILITIES'| translate}}</label>
+						<textarea ng-model="offer.facilities" md-maxlength="1000" rows="5" md-select-on-focus></textarea>
+					</md-input-container>
+				</div>
+
+				<h4>{{'ADDITIONAL_INFO'| translate}}</h4>
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="100">
+						<label>{{'ADDITIONAL_INFO'| translate}}</label>
+						<textarea ng-model="offer.additionalInfo" md-maxlength="1000" rows="5" md-select-on-focus></textarea>
+					</md-input-container>
+				</div>
 			</form>
 		</div>
 	</md-dialog-content>
