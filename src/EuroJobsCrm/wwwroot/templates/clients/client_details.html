@@ -244,7 +244,27 @@
 					</md-toolbar>
 				</md-toolbar>
 				<div layout="row" ng-show="expandOffers" ng-cloak>
-					test offer
+					<md-content flex="100">
+						<md-list ng-cloak>
+							<md-list-item class="md-2-line" ng-repeat="offer in client.offers">
+								<md-icon style="font-size:32px;" md-font-icon="ion-home" ng-click="showEditAddressDialog(address)"></md-icon>
+								<div class="md-list-item-text">
+									<h4>{{'OFFER'| translate}}: <b>{{offer.gender}}</b>, <b>{{address.postCode}}</b></h4>
+									<p>{{ 'CITY' | translate }}: <b>{{address.city}}</b>, &nbsp&nbsp {{ 'COUNTRY' | translate }} <b>{{address.country}}</b>										</p>
+									<p ng-show="address.type==1"> {{ 'LEGAL_ADDRESS' | translate }}</p>
+									<p ng-show="address.type==2"> {{ 'PHYSICAL_ADDRESS' | translate }}</p>
+									<p ng-show="address.type==3"> {{ 'HOME_ADDRESS' | translate }}</p>
+								</div>
+								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditAddressDialog(address)">
+									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
+								</md-button>
+								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(address.id)">
+									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+								</md-button>
+								<md-divider ng-if="!$last"></md-divider>
+							</md-list-item>
+						</md-list>
+					</md-content>
 				</div>
 			</section>
 		</div>

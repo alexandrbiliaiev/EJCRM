@@ -113,6 +113,8 @@ namespace EuroJobsCrm.Controllers
                 ofr.OfrWorkStart = offer.WorkStart;
                 ofr.OfrAuditMd = DateTime.UtcNow;
                 ofr.OfrAuditMu = User.GetUserId();
+                ofr.OfrPosition = offer.Position;
+                ofr.OfrGender = offer.Gender;
 
                 context.SaveChanges();
                 offer.Id = ofr.OfrId;
