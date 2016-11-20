@@ -41,6 +41,8 @@ angular.module('EuroJobsCrm.services')
             }
         }
 
+        
+
         return contragents;
 
     }]);

@@ -2,6 +2,7 @@ angular.module('EuroJobsCrm.services')
     .factory('employeesService', ['$http', function ($http) {
 
         var employees = {};
+        var currentEmployee;
 
         employees.load = function () {
             return $http.get('api/Employees');
@@ -26,7 +27,19 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
-        employees.getEmployee = function (id) {
+        employees.getEmployeeFromDb = function (id) {
+            param = {
+                employeeId: id
+            };
+            return $http({
+                url: 'api/Employees/Get',
+                method: "POST",
+                data: id
+            });
+        }
+
+
+        employees.getEmployeeFromCache = function (id) {
             for (i in this.employees) {
                 if (this.employees[i].id == id) {
                     return this.employees[i];
@@ -39,6 +52,14 @@ angular.module('EuroJobsCrm.services')
                 licenseNumber: '',
                 status: 'a'
             }
+        }
+
+        employees.setCurrentEmployee = function(employee){
+                currentEmployee = employee;
+        }
+
+        employees.getCurrentEmployee = function(){
+            return currentEmployee;
         }
 
         return employees;

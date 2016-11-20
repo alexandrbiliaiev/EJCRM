@@ -333,21 +333,11 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             });
     }
 
-    $scope.showEditEmployeeDialog = function (employee) {
-        $scope.employee = employee;
-        $scope.birthdate = new Date(employee.birthDate);
-        $mdDialog.show({
-            scope: $scope,
-            preserveScope: true,
-            templateUrl: '/templates/employees/employee_dialog_tmpl.html',
-
-            clickOutsideToClose: true,
-        })
-            .then(function (answer) {
-
-            }, function () {
-
-            });
+    $scope.editEmployee = function (employee) {
+       employeesService.setCurrentEmployee(employee);
+       $state.go('employee', {
+            id: employee.id
+        });
     }
 
     $scope.showDeleteEmployeeConfirmDialog = function (employeeId) {

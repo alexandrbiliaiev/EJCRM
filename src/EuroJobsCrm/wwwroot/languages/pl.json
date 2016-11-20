@@ -84,5 +84,6 @@
     "ADD_DOCUMENT": "Dodaj dokument",
     "ADD_ADDRESS": "Dodaj adres",
     "ADD_CONTACT_PERSON": "Dodaj osobę kontaktową",
-    "ADD_EMPLOYEE": "Dodaj pracownika"
+    "ADD_EMPLOYEE": "Dodaj pracownika",
+    "EP_FULL_NAME": "Pełne imię"
 }
