@@ -41,7 +41,19 @@
                 url: "/off_all",
                 templateUrl: 'templates/offers/offers_list.html',
             });
+
+          
     });
+
+app.run(function($rootScope) {
+    $rootScope.$on('$stateChangeSuccess', function(event, to, toParams, from, fromParams) {
+        //save the previous state in a rootScope variable so that it's accessible from everywhere
+        $rootScope.previousState = from;
+        $rootScope.previousStateParams = fromParams;
+    });
+});
 
 angular.module('EuroJobsCrm.services', []);
 angular.module('EuroJobsCrm.controllers', []);
+
+
