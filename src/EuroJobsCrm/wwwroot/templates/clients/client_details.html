@@ -65,7 +65,7 @@
 											<h3>
 									</p>
 								</div>
-								<md-divider ng-if="!$last"></md-divider>
+								
 							</md-list-item>
 							<md-list-item class="md-2-line" ng-show="client.status == 'i'">
 								<md-icon style="font-size:32px;" md-font-icon="ion-android-cancel"></md-icon>
@@ -110,7 +110,7 @@
 				</md-toolbar>
 				<div ng-cloak ng-show="expandContactPersons" class="element-hide">
 					<md-content>
-						<md-list ng-cloak style="margin-top: -11px">
+						<md-list ng-cloak style="margin-top: -10px">
 							<md-list-item class="md-2-line" ng-repeat="contactperson in client.contactPersons">
 								<md-icon style="font-size:32px;" md-font-icon="ion-person-stalker" ng-click="showEditContactPersonDialog(contactperson)"></md-icon>
 								<div class="md-list-item-text">
@@ -157,7 +157,24 @@
 					</div>
 				</md-toolbar>
 				<div ng-show="expandDocuments" ng-cloak>
-					Test documents
+						<md-content flex="100">
+						<md-list ng-cloak>
+							<md-list-item class="md-2-line" ng-repeat="address in client.addresses">
+								<md-icon style="font-size:32px;" md-font-icon="ion-android-document" ng-click=""></md-icon>
+								<div class="md-list-item-text">
+									<h4>{{'DOCUMENT'| translate}}: <b>Umowa</b></h4>
+									<p>Opis dokumentu </p>
+								</div>
+								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="">
+									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
+								</md-button>
+								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(address.id)">
+									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+								</md-button>
+								<md-divider ng-if="!$last"></md-divider>
+							</md-list-item>
+						</md-list>
+					</md-content>
 				</div>
 			</section>
 		</div>
@@ -247,18 +264,19 @@
 					<md-content flex="100">
 						<md-list ng-cloak>
 							<md-list-item class="md-2-line" ng-repeat="offer in client.offers">
-								<md-icon style="font-size:32px;" md-font-icon="ion-home" ng-click="showEditAddressDialog(address)"></md-icon>
+								<md-icon style="font-size:32px;" md-font-icon="ion-document-text" ng-click="showEditAddressDialog(address)"></md-icon>
 								<div class="md-list-item-text">
-									<h4>{{'OFFER'| translate}}: <b>{{offer.gender}}</b>, <b>{{address.postCode}}</b></h4>
-									<p>{{ 'CITY' | translate }}: <b>{{address.city}}</b>, &nbsp&nbsp {{ 'COUNTRY' | translate }} <b>{{address.country}}</b>										</p>
-									<p ng-show="address.type==1"> {{ 'LEGAL_ADDRESS' | translate }}</p>
-									<p ng-show="address.type==2"> {{ 'PHYSICAL_ADDRESS' | translate }}</p>
-									<p ng-show="address.type==3"> {{ 'HOME_ADDRESS' | translate }}</p>
+									<h4>{{'POSITION'| translate}}: <b>{{offer.position}}</b>,
+										<b ng-show="offer.branch==0">{{ 'BUILDING' | translate }}</b>
+										<b ng-show="offer.branch==1"> {{ 'PHISICAL_WORK' | translate }}</b>
+										<b ng-show="offer.branch==2"> {{ 'IT' | translate }}</b>
+									</h4>
+									<p>{{ 'VACANCIES_NUMBER' | translate }}: <b>{{offer.vacanciesNumber}}</b></p>
 								</div>
-								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditAddressDialog(address)">
+								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditOfferDialog(offer)">
 									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 								</md-button>
-								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(address.id)">
+								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteOfferConfirmDialog(offer.id)">
 									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 								</md-button>
 								<md-divider ng-if="!$last"></md-divider>
@@ -274,7 +292,7 @@
 				<md-toolbar>
 					<div class="md-toolbar-tools">
 						<h2>
-							<span>{{'EMPLOYEES'|translate}}</span>
+							<span>{{'EMPLOYED_PEOPLE'|translate}}</span>
 						</h2>
 						<span flex></span>
 
@@ -304,7 +322,31 @@
 					</md-toolbar>
 				</md-toolbar>
 				<div ng-show="expandEmployees" ng-cloak>
-					Test employee
+					<md-content>
+					<md-list ng-cloak style="">
+						<md-list-item class="md-2-line">
+							<md-icon style="font-size:32px;" md-font-icon="ion-person" >
+							</md-icon>
+							<div class="md-list-item-text">
+								<h3><b>Jan Tadeusz Kowalski </b></h3>
+								<p>
+									{{'OFFER'|translate}}: <b>Programista</b>
+								</p>
+							</div>
+							<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" >
+								<md-tooltip md-direction="left">
+									{{ 'ACTIVE' | translate }}
+								</md-tooltip>
+							</md-icon>
+							<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)">
+								<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
+							</md-button>
+							<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
+								<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+							</md-button>
+						</md-list-item>
+					</md-list>
+					</md-content>
 				</div>
 			</section>
 		</div>
@@ -330,7 +372,34 @@
 					</div>
 				</md-toolbar>
 				<div ng-show="expandPayments" ng-cloak>
-					Test payment
+										<md-content>
+					<md-list ng-cloak style="">
+						<md-list-item class="md-2-line">
+							<md-icon style="font-size:32px;" md-font-icon="ion-card" >
+							</md-icon>
+							<div class="md-list-item-text">
+								<h3><b>Faktura za wynajem pracownika od 2016-11-10 </b></h3>
+								<p>
+									{{'OFFER'|translate}}: <b>Programista</b>
+								</p>
+								<p>
+									{{'EMPLOYEE'|translate}}: <b>Jan Tadeusz Kowalski</b>
+								</p>
+							</div>
+							<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" >
+								<md-tooltip md-direction="left">
+									{{ 'ACTIVE' | translate }}
+								</md-tooltip>
+							</md-icon>
+							<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)">
+								<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
+							</md-button>
+							<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
+								<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+							</md-button>
+						</md-list-item>
+					</md-list>
+					</md-content>
 				</div>
 			</section>
 		</div>
@@ -347,16 +416,40 @@
 						</h2>
 						<span flex></span>
 
-						<md-button aria-label="button" class="md-icon-button"" ng-click="showNewEmployeeDialog()">
-							<md-icon md-font-icon="ion-plus-round"></md-icon>
+						<md-button aria-label="button" class="md-icon-button" " ng-click="showNewEmployeeDialog() ">
+							<md-icon md-font-icon="ion-plus-round "></md-icon>
 						</md-button>
-						<md-button aria-label="button" class="md-icon-button"" ng-click="expandNotes=! expandNotes">
+						<md-button aria-label="button " class="md-icon-button "" ng-click="expandNotes=! expandNotes">
 							<md-icon md-font-icon="ion-navicon-round"></md-icon>
 						</md-button>
 					</div>
 				</md-toolbar>
 				<div ng-show="expandNotes" ng-cloak>
-					Test Note
+									<md-content>
+					<md-list ng-cloak style="">
+						<md-list-item class="md-2-line">
+							<md-icon style="font-size:32px;" md-font-icon="ion-alert-circled" >
+							</md-icon>
+							<div class="md-list-item-text">
+								<h3><b>Klient nie zapłacił za uslugi!!! </b></h3>
+								<p>
+									<i>Napisał Tadeusz o 12:33 2016-11-15</i>
+								</p>
+							</div>
+							<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" >
+								<md-tooltip md-direction="left">
+									{{ 'ACTIVE' | translate }}
+								</md-tooltip>
+							</md-icon>
+							<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)">
+								<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
+							</md-button>
+							<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
+								<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+							</md-button>
+						</md-list-item>
+					</md-list>
+					</md-content>
 				</div>
 			</section>
 		</div>
@@ -366,13 +459,11 @@
 	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
 		<a mfb-button mfb-button-close icon="ion-android-contact" label="{{ 'ADD_CONTACT_PERSON' | translate}}" ng-click="showNewContactPersonDialog()"
 		/>
-		<a mfb-button mfb-button-close icon="ion-home" label="{{ 'ADD_ADDRESS' | translate}}" ng-click="showNewAddressDialog()"
-		/>
+		<a mfb-button mfb-button-close icon="ion-home" label="{{ 'ADD_ADDRESS' | translate}}" ng-click="showNewAddressDialog()" />
 		<a mfb-button mfb-button-close icon="ion-android-document" label="{{ 'ADD_DOCUMENT' | translate}}" ng-click="showNewDocumentsDialog()"
 		/>
 		<a mfb-button mfb-button-close icon="ion-bag" label="{{ 'ADD_OFFER' | translate}}" ng-click="showNewOfferDialog()" />
-		<a mfb-button mfb-button-close icon="ion-card" label="{{ 'ADD_PAYMENT' | translate}}" ng-click="showNewPaymentDialog()"
-		/>
+		<a mfb-button mfb-button-close icon="ion-card" label="{{ 'ADD_PAYMENT' | translate}}" ng-click="showNewPaymentDialog()" />
 		<a mfb-button mfb-button-close icon="ion-ios-information" label="{{ 'ADD_NOTE' | translate}}" ng-click="showNewNoteDialog()"
 		/>
 	</nav>

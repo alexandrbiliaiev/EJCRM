@@ -332,7 +332,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
     }
 
     $scope.showNewOfferDialog = function (ev) {
-        $scope.address = $scope.setDefaultOffer();
+        $scope.offer = $scope.setDefaultOffer();
 
         $mdDialog.show({
             scope: $scope,
@@ -348,13 +348,13 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
     }
 
     $scope.showEditOfferDialog = function (offer) {
-        $scope.address = offer;
+        $scope.offer = offer;
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
             templateUrl: '/templates/offers/offer_dialog_tmpl.html',
 
-            clickOutsideToClose: true,
+            clickOutsideToClose: false,
         })
 
             .then(function (answer) {

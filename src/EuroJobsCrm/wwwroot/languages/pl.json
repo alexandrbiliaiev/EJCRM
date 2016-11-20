@@ -165,5 +165,11 @@
     "UNIVERCITY":"Wyższe",
 	"HIGH_SCHOOL":"Liceum",
 	"NONE_ED":"Bez wykształcenia",
-    "DOCS_VISA":"Dokumenty i wizy"
+    "DOCS_VISA":"Dokumenty i wizy",
+    "OFFER_DELETE_CONFIRM_TITLE":"Chcesz usunąć tą oferte?",
+    "OFFER_DELETE_CONFIRM_TEXT": "Dane będą usunięte",
+    "EMPLOYED_PEOPLE": "Zatrudnione osoby",
+    "OFFER": "Oferta",
+    "DOCUMENT": "Dokument",
+    "EMPLOYEE": "Pracownik"
 }
