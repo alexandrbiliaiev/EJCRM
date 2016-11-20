@@ -9,6 +9,11 @@ namespace EuroJobsCrm.Controllers
 {
     public class EmployeeController : Controller
     {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [HttpGet]
         [Route("api/Employees/GetAll")]
         public IEnumerable<EmployeeDto> GetAllEmployees()
@@ -17,7 +22,7 @@ namespace EuroJobsCrm.Controllers
             {
                 var employees = context.Employees
                     .GroupJoin(context.IdentityDocuments, e => e.EmpId, d => d.IdcEmpId,
-                        (e, d) => new {employee = e, documents = d})
+                        (e, d) => new { employee = e, documents = d })
                     .ToList()
                     .Select(e => new EmployeeDto(e.employee, e.documents, new List<DocumentFiles>()))
                     .ToList();
@@ -34,7 +39,7 @@ namespace EuroJobsCrm.Controllers
             {
                 var employeeData = context.Employees.Where(c => c.EmpId == employeeId)
                     .GroupJoin(context.IdentityDocuments, e => e.EmpId, d => d.IdcEmpId,
-                        (e, d) => new {employee = e, documents = d})
+                        (e, d) => new { employee = e, documents = d })
                     .ToList();
 
                 EmployeeDto emp = employeeData
@@ -121,7 +126,7 @@ namespace EuroJobsCrm.Controllers
                     context.IdentityDocuments
                         .Where(i => i.IdcAuditRd == null && i.IdcEmpId == employeeId)
                         .GroupJoin(context.DocumentFiles, d => d.IdcId, f => f.DcfIdcId,
-                            (d, f) => new {doc = d, files = f})
+                            (d, f) => new { doc = d, files = f })
                         .ToList()
                         .Select(d => new IdentityDocumentsDto(d.doc, d.files))
                         .ToList();
