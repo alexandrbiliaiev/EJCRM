@@ -9,15 +9,38 @@ namespace EuroJobsCrm.Controllers
 {
     public class EmployeeController : Controller
     {
+        [HttpGet]
+        [Route("api/Employees/GetAll")]
+        public IEnumerable<EmployeeDto> GetAllEmployees()
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                var employees = context.Employees
+                    .GroupJoin(context.IdentityDocuments, e => e.EmpId, d => d.IdcEmpId,
+                        (e, d) => new {employee = e, documents = d})
+                    .ToList()
+                    .Select(e => new EmployeeDto(e.employee, e.documents, new List<DocumentFiles>()))
+                    .ToList();
+
+                return employees;
+            }
+        }
+
         [HttpPost]
         [Route("api/Employees/Get")]
         public EmployeeDto GetEmployee([FromBody] int employeeId)
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                Employees emp = context.Employees.FirstOrDefault(c => c.EmpId == employeeId);
+                var employeeData = context.Employees.Where(c => c.EmpId == employeeId)
+                    .GroupJoin(context.IdentityDocuments, e => e.EmpId, d => d.IdcEmpId,
+                        (e, d) => new {employee = e, documents = d})
+                    .ToList();
 
-                return emp == null ? null : new EmployeeDto(emp);
+                EmployeeDto emp = employeeData
+                    .Select(e => new EmployeeDto(e.employee, e.documents, new List<DocumentFiles>())).FirstOrDefault();
+
+                return emp;
             }
         }
 

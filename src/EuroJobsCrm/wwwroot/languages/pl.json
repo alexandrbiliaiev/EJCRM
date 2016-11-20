@@ -165,5 +165,13 @@
     "UNIVERCITY":"Wyższe",
 	"HIGH_SCHOOL":"Liceum",
 	"NONE_ED":"Bez wykształcenia",
-    "DOCS_VISA":"Dokumenty i wizy"
+    "DOCS_VISA":"Dokumenty i wizy",
+    "DOC_NUMBER":"Numer",
+    "PASSPORT":"Pasport",
+    "VISA":"Visa",
+    "VALID_FROM":"Ważny od",
+    "VALID_TO":"ważny do"
+    
+
+    
 }

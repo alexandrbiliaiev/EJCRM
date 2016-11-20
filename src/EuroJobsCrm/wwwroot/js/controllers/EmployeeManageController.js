@@ -2,6 +2,9 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
     $mdDialog, $routeParams) {
     
     $scope.expandDetails = true;
+    $scope.expandDocs = true;
+    
+    $scope.moment = moment;
 
     $scope.showEditEmployeeDialog = function () {
         $scope.birthdate = new Date($scope.employee.birthDate);
@@ -51,18 +54,13 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
         $mdDialog.hide();
     }
 
-    currentEmployee = employeesService.getCurrentEmployee();
-
     employeeId = $state.params.id;
-    if (currentEmployee != undefined && currentEmployee.id == employeeId) {
-        $scope.employee = currentEmployee;
-        $scope.employeeBirthday = moment(currentEmployee.birthDate).format('DD-MM-YYYY');
-    } else {
-        employeesService.getEmployeeFromDb(employeeId).success(function (response) {
-            $scope.employee = response;
-            $scope.employeeBirthday = moment(response.birthDate).format('DD-MM-YYYY');
-        }).error(function () {
-            $state.go('error');
-        });
-    }
+   
+    employeesService.getEmployeeFromDb(employeeId).success(function (response) {
+        $scope.employee = response;
+        $scope.employeeBirthday = moment(response.birthDate).format('DD-MM-YYYY');
+    }).error(function () {
+        $state.go('error');
+    });
+    
 });

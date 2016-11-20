@@ -1,7 +1,11 @@
-﻿body {
+﻿html{
+    background: #EEEEEE;
+}
+body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background: #EEEEEE
+    background: #EEEEEE;
+    height: 100%;
 }
 
 

@@ -1,7 +1,7 @@
 <ui-view ng-controller="EmployeeManageController">
     <div layout="column" layout-align="space-between stretch">
         <!--General information -->
-        <div flex="50"  layout="column">
+        <div layout="column">
             <section class="demo-container md-whiteframe-z1">
                 <md-toolbar>
                     <div class="md-toolbar-tools">
@@ -98,8 +98,9 @@
                 </div>
             </section>
         </div>
+        <br/>
         <!--Identity documents -->
-        <div flex  layout="column">
+        <div layout="column">
             <section class="demo-container md-whiteframe-z1">
                 <md-toolbar>
                     <div class="md-toolbar-tools">
@@ -107,94 +108,58 @@
                             <span>{{'DOCS_VISA'| translate}}</span>
                         </h2>
                         <span flex></span>
-                          <md-button aria-label="button" class="md-icon-button" ng-click="showEditEmployeeDialog()">
+                        <md-button aria-label="button" class="md-icon-button" ng-click="showEditEmployeeDialog()">
                             <md-icon md-font-icon="ion-plus-round"></md-icon>
                         </md-button>
-                        <md-button aria-label="button" class="md-icon-button" ng-click="expandDetails = !expandDetails">
+                        <md-button aria-label="button" class="md-icon-button" ng-click="expandDocs = !expandDocs">
                             <md-icon md-font-icon="ion-navicon-round"></md-icon>
                         </md-button>
                     </div>
                 </md-toolbar>
-                <div ng-show="expandDetails" class="element-hide" ng-cloak>
+                <div ng-show="expandDocs" class="element-hide" ng-cloak>
                     <md-content>
-                        <div layout="row" flex>
-                            <div layout="column" flex="60">
-                                <md-list layout-padding>
-                                    <md-list-item class="md-2-line">
-                                        <md-icon style="font-size:32px;" md-font-icon="ion-person"></md-icon>
-                                        <div class="md-list-item-text">
-                                            {{ 'EP_FULL_NAME' | translate }}
-                                            <p>
-                                                <h3><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b>
-                                                    <h3>
-                                            </p>
-                                        </div>
-                                    </md-list-item>
-                                    <md-divider ng-if="!$last"></md-divider>
-                                    <md-list-item class="md-2-line">
-                                        <md-icon style="font-size:32px;" md-font-icon="ion-android-calendar"></md-icon>
-                                        <div class="md-list-item-text">
-                                            {{ 'BIRTHDATE' | translate }}
-                                            <p>
-                                                <h3><b>{{employeeBirthday}}</b>
-                                                    <h3>
-                                            </p>
-                                        </div>
-                                    </md-list-item>
-                                    <md-divider ng-if="!$last"></md-divider>
-                                    <md-list-item class="md-2-line" ng-show="employee.status == '1'">
-                                        <md-icon style="font-size:32px;" md-font-icon="ion-checkmark-circled"></md-icon>
-                                        <div class="md-list-item-text">
-                                            {{ 'STATUS' | translate }}
-                                            <p>
-                                                <h3>
-                                                    <b>{{ 'ACTIVE' | translate }}</b>
-                                                </h3>
-                                            </p>
-                                        </div>
-                                    </md-list-item>
-                                    <md-list-item class="md-2-line" ng-show="employee.status == '0'">
-                                        <md-icon style="font-size:32px;" md-font-icon="ion-android-cancel"></md-icon>
-                                        <div class="md-list-item-text">
-                                            {{ 'STATUS' | translate }}
-                                            <p>
-                                                <h3>
-                                                    <b>{{ 'INACTIVE' | translate }}</b>
-                                                </h3>
-                                            </p>
-                                        </div>
-                                    </md-list-item>
-                                    <md-list-item class="md-2-line" ng-show="employee.status == '2'">
-                                        <md-icon style="font-size:32px;" md-font-icon="ion-sad"> </md-icon>
-                                        <div class="md-list-item-text">
-                                            {{ 'STATUS' | translate }}
-                                            <p>
-                                                <h3>
-                                                    <b>{{ 'LEFT' | translate }}</b>
-                                                </h3>
-                                            </p>
-                                        </div>
-                                    </md-list-item>
-                                </md-list>
-                            </div>
-                            <div layout="column" flex="40">
-                                <md-card>
-                                    <md-card-title>
-                                        <md-card-title-text>
-                                            <span class="md-headline">{{'DESCRIPTION'| translate}}</span>
-                                        </md-card-title-text>
-                                    </md-card-title>
-                                    <md-card-content>
-                                        <p>
-                                            {{employee.description}}
-                                        </p>
-                                    </md-card-content>
-                                </md-card>
-                            </div>
-                        </div>
+                        <md-list layout-padding flex>
+                            <md-list-item class="md-2-line" ng-repeat="doc in employee.identityDocuments">
+                                <md-icon style="font-size:32px;" md-font-icon="ion-document-text"></md-icon>
+                                <div class="md-list-item-text">
+                                    <h3 ng-show="doc.type == 1"><b>{{'PASSPORT' | translate}}</b></h3>
+                                    <h3 ng-show="doc.type == 2"><b>{{'VISA' | translate}}</b></h3>
+                                    <h4>{{ 'DOC_NUMBER' | translate }}: <b>{{doc.seria}} {{doc.number}}</b></h4>
+                                    <p>
+                                        {{ 'VALID_FROM' | translate }} {{moment(doc.validFrom).format('DD-MM-YYYY')}} {{ 'VALID_TO' | translate }} {{moment(doc.validTo).format('DD-MM-YYYY')}}
+                                    </p>
+                                </div>
+                                <md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="editContragent(contragent.id)">
+                                    <md-icon md-svg-icon="/lib/icons/edit.svg">
+                                        <md-tooltip md-direction="down">
+                                            {{ 'EDIT' | translate }}
+                                        </md-tooltip>
+                                    </md-icon>
+                                </md-button>
+                                <md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteCtgConfirmDialog(contragent.id)">
+                                    <md-icon md-svg-icon="/lib/icons/delete.svg">
+                                        <md-tooltip md-direction="down">
+                                            {{ 'DELETE' | translate }}
+                                        </md-tooltip>
+                                    </md-icon>
+                                </md-button>
+                                <md-divider ng-if="!$last"></md-divider>
+                            </md-list-item>
+                        </md-list>
                     </md-content>
                 </div>
             </section>
         </div>
     </div>
+
+    <!--Fucking material add buttons NOT ALL BUTTONS ARE AVAILABLE ON PAGE-->
+	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
+	
+		<a mfb-button mfb-button-close icon="ion-android-document" label="{{ 'ADD_DOCUMENT' | translate}}" ng-click="showNewDocumentsDialog()"/>
+	
+	</nav>
+	<!--Fucking material return button-bich -->
+	<nav mfb-menu position="tl" style="margin-top:100px;" active-icon="ion-android-arrow-back" resting-icon="ion-android-arrow-back"
+		ng-click="goBack()">
+	</nav>
 </ui-view>
