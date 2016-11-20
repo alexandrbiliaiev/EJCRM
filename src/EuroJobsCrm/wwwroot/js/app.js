@@ -34,6 +34,12 @@
             }).state('employee', {
                 url: "/emp_edit/:id",
                 templateUrl: 'templates/employees/employee_details.html',
+            }).state('employees', {
+                url: "/emp_all",
+                templateUrl: 'templates/employees/employees_list.html',
+            }).state('offers', {
+                url: "/off_all",
+                templateUrl: 'templates/offers/offers_list.html',
             });
 
           

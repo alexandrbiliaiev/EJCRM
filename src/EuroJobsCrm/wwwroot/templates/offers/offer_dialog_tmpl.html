@@ -16,40 +16,25 @@
 				<div layout="row" layout-align="space-between none">
 					<md-input-container class="md-block" flex="25">
 						<label>{{'BRANCH'| translate}}</label>
-						<md-select name="type" ng-model="offer.branch" required>
-							<md-select name="type" ng-model="offer.branch">
-								<md-option value="0">{{ 'BUILDING' | translate }}</md-option>
-								<md-option value="1">{{ 'PHISICAL_WORK' | translate }}</md-option>
-								<md-option value="2">{{ 'IT' | translate }}</md-option>
-							</md-select>
+						<md-select name="type" ng-model="offer.branch">
+							<md-option value="0">{{ 'BUILDING' | translate }}</md-option>
+							<md-option value="1">{{ 'PHISICAL_WORK' | translate }}</md-option>
+							<md-option value="2">{{ 'IT' | translate }}</md-option>
+						</md-select>
 					</md-input-container>
 
 					<md-input-container class="md-block" flex="25">
 						<label>{{'POSITION'| translate}}</label>
-						<input name="offer_position" ng-model="offer.position" placeholder="{{'ENGINEER'| translate}}" md-maxlength="100" required>
 						<input name="offer_position" ng-model="offer.position" placeholder="{{'ENGINEER'| translate}}" md-maxlength="100">
-						<div ng-messages="offerForm.offer_position.$error" role="alert" multiple>
-							<div ng-message="required">{{'POSITION_REQUIRED' | translate}} </div>
-							<div ng-message="md-maxlength">{{'POSITION_IS_TO_LONG'| translate}}</div>
-						</div>
 					</md-input-container>
-
 
 					<md-input-container class="md-block" flex="15">
 						<label>{{'VACANCIES_NUMBER'| translate}}</label>
-						<input name="offer_vacanciesNumber" ng-model="offer.vacanciesNumber" placeholder="10" md-maxlength="3" required>
 						<input name="offer_vacanciesNumber" ng-model="offer.vacanciesNumber" placeholder="10" md-maxlength="3">
-						<div ng-messages="offerForm.offer_vacanciesNumber.$error" role="alert" multiple>
-							<div ng-message="required">{{'VACANCIES_NUMBER_REQUIRED' | translate}} </div>
-							<div ng-message="md-maxlength">{{'VACANCIES_NUMBER_IS_TO_LONG'| translate}}</div>
-						</div>
 					</md-input-container>
 					<md-input-container class="md-block" flex="15">
 						<label>{{'WORK_PLACE'| translate}}</label>
 						<input name="offer_workPlace" placeholder="" ng-model="offer.workPlace">
-						<div ng-messages="offerForm.offer_email.$error" role="alert">
-							<div ng-message-exp="['pattern']">{{'EMAIL_ERROR_MSG' | translate}}</div>
-						</div>
 					</md-input-container>
 				</div>
 				<div layout="row" layout-align="space-between none">
@@ -81,13 +66,12 @@
 				<div layout="row" layout-align="space-between center">
 					<md-input-container class="md-block" flex="30">
 						<label>{{'EDUCATION'| translate}}</label>
-						<md-select name="type" ng-model="offer.education" required>
-							<md-select name="type" ng-model="offer.education">
-								<md-option value="0">{{ 'UNIVERCITY' | translate }}</md-option>
-								<md-option value="1">{{ 'HIGH_SCHOOL' | translate }}</md-option>
-								<md-option value="2">{{ 'NONE_ED' | translate }}</md-option>
-							</md-select>
-							<br/>
+						<md-select name="type" ng-model="offer.education">
+							<md-option value="0">{{ 'UNIVERCITY' | translate }}</md-option>
+							<md-option value="1">{{ 'HIGH_SCHOOL' | translate }}</md-option>
+							<md-option value="2">{{ 'NONE_ED' | translate }}</md-option>
+						</md-select>
+						<br/>
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{'EXPERIENCE'| translate}}</label>

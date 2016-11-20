@@ -50,12 +50,12 @@
                         @if (SignInManager.IsSignedIn(User)) {
                         <ul class="nav navbar-nav">
                             <li><a asp-area="" asp-controller="Clients" asp-action="Index" asp-fragment="clt_all">{{ 'Clients' | translate }}</a></li>
-                            <li><a asp-area="" asp-controller="Offers" asp-action="Index">{{ 'Offers' | translate }}</a></li>
-                            <li><a asp-area="" asp-controller="Employees" asp-action="Index">{{ 'Employees' | translate }}</a></li>
-                            <li><a asp-area="" asp-controller="Invoice" asp-action="Index">{{ 'Invoice' | translate }}</a></li>
-                            <li><a asp-area="" asp-controller="Communication" asp-action="Index">{{ 'Communication' | translate }}</a></li>
+                            <li><a asp-area="" asp-controller="Offers" asp-action="Index" asp-fragment="off_all">{{ 'Offers' | translate }}</a></li>
+                            <li><a asp-area="" asp-controller="Employee" asp-action="Index" asp-fragment="emp_all">{{ 'Employees' | translate }}</a></li>
+                         <!--   <li><a asp-area="" asp-controller="Invoice" asp-action="Index">{{ 'Invoice' | translate }}</a></li> -->
+                          <!--  <li><a asp-area="" asp-controller="Communication" asp-action="Index">{{ 'Communication' | translate }}</a></li> -->
                             <li><a asp-area="" asp-controller="Contragents" asp-action="Index" asp-fragment="ctg_all">{{ 'Contragents' | translate }}</a></li>
-                            <li><a asp-area="" asp-controller="Calendar" asp-action="Index">{{ 'Calendar' | translate }}</a></li>
+                          <!--  <li><a asp-area="" asp-controller="Calendar" asp-action="Index">{{ 'Calendar' | translate }}</a></li> -->
                         </ul>
                         } @await Html.PartialAsync("_LoginPartial")
                     </div>
