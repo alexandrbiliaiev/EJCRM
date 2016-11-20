@@ -27,7 +27,7 @@ namespace EuroJobsCrm.Controllers
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                List<OfferDto> offers = context.Offers.Where(o => o.OfrAuditRd == null)
+                List<OfferDto> offers = context.Offers.Where(o => o.OfrAuditRd == null).ToList()
                                                       .Select(o => new OfferDto(o))
                                                       .ToList();
 
