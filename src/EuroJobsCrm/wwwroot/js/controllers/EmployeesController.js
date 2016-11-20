@@ -1,6 +1,8 @@
 angular.module('EuroJobsCrm.controllers').controller('EmployeesController', function ($scope, $location, $http, $state, $translate, $mdDialog, employeesService) {
     $scope.employees = [];
 
+    $scope.moment = moment;
+
   /*  $scope.getDefaultEmployee = function () {
         return  {
             id: 0,

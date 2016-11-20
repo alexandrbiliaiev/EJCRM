@@ -37,7 +37,7 @@
 								<div class="md-list-item-text">
 									<h3><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
 									<p>
-										{{'BIRTHDATE'|translate}}: {{getFormatedDate(birthDate)}}
+										{{'BIRTHDATE'|translate}}: {{moment(employee.birthDate).format('DD-MM-YYYY')}}
 									</p>
 								</div>
 								<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" ng-show="employee.status == '1'">
