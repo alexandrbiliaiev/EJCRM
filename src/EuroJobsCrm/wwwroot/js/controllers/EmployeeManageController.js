@@ -1,9 +1,9 @@
-angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController', function ($scope, $location, $translate, $http, $state, countriesService, employeesService,
+angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController', function ($scope, $rootScope, $location, $translate, $http, $state, countriesService, employeesService,
     $mdDialog, $routeParams) {
     
     $scope.expandDetails = true;
     $scope.expandDocs = true;
-    
+
     $scope.moment = moment;
 
     $scope.showEditEmployeeDialog = function () {
@@ -52,6 +52,10 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
 
     $scope.close = function () {
         $mdDialog.hide();
+    }
+
+    $scope.goBack = function () {
+        $state.go($rootScope.previousState, $rootScope.previousStateParams);
     }
 
     employeeId = $state.params.id;
