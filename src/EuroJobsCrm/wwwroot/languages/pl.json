@@ -84,8 +84,7 @@
     "ADD_DOCUMENT": "Dodaj dokument",
     "ADD_ADDRESS": "Dodaj adres",
     "ADD_CONTACT_PERSON": "Dodaj osobę kontaktową",
-   
-    "EP_FULL_NAME": "Pełne imię"
+    "EP_FULL_NAME": "Pełne imię",
     "ADD_EMPLOYEE": "Dodaj pracownika",
     "OFFER_INFORMATION": "Informacja ofertowa",
     "BRANCH": "Branża",
@@ -165,5 +164,6 @@
     "ADDITIONAL_INFO": "Informacje dodatkowe",
     "UNIVERCITY":"Wyższe",
 	"HIGH_SCHOOL":"Liceum",
-	"NONE_ED":"Bez wykształcenia"
+	"NONE_ED":"Bez wykształcenia",
+    "DOCS_VISA":"Dokumenty i wizy"
 }

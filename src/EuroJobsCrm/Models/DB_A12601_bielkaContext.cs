@@ -750,7 +750,6 @@ namespace EuroJobsCrm.Models
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.OfrExperience)
-                    .IsRequired()
                     .HasColumnName("ofr_experience")
                     .HasMaxLength(100);
 
@@ -779,7 +778,6 @@ namespace EuroJobsCrm.Models
                 entity.Property(e => e.OfrRatePerMonth).HasColumnName("ofr_rate_per_month");
 
                 entity.Property(e => e.OfrResponsibilities)
-                    .IsRequired()
                     .HasColumnName("ofr_responsibilities")
                     .HasMaxLength(1500);
 
