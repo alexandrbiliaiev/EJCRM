@@ -266,7 +266,8 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
     //Offers
     $scope.setDefaultOffer = function () {
         return {
-            accomodationPrice: "",
+            id: 0,
+            accomodationPrice: 0,
             accomodationType: "",
             additionalInfo: "",
             advanceAmount: "",
@@ -294,16 +295,18 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             transportPrice: "",
             transportToWork: "",
             vacanciesNumber: "",
-            workEnd: "",
+            workEnd: null,
             workPlace: "",
-            workStart: "",
+            workStart: null,
             workMo: true,
             workTu: true,
             workWe: true,
             workTh: true,
             workFr: true,
             workSa: false,
-            workSu: false
+            workSu: false,
+            position: null,
+            gender: 0
         }
     }
 
@@ -320,7 +323,6 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             if (offer.id == 0) {
                 $scope.client.offers.push(response);
             }
-            $scope.offer = $scope.saveOfferClick();
             $mdDialog.hide();
         }).error(function () {
             $state.go('error');
@@ -337,7 +339,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
             preserveScope: true,
             templateUrl: '/templates/offers/offer_dialog_tmpl.html',
             targetEvent: ev,
-            clickOutsideToClose: true,
+            clickOutsideToClose: false,
         }).then(function (answer) {
 
         }, function () {
@@ -396,11 +398,11 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
 
     $scope.disableEndDate = function (isUnlimited) {
         if (isUnlimited) {
-            $scope.workEndBeforeChange = $scope.offer.workEnd;
-            $scope.offer.workEnd = null;
+            $scope.endingDateBeforeChange = $scope.offer.endingDate;
+            $scope.offer.endingDate = null;
         }
         else {
-            $scope.offer.workEnd = $scope.workEndBeforeChange;
+            $scope.offer.endingDate = $scope.endingDateBeforeChange;
         }
     }
 
@@ -427,7 +429,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
     $scope.disableFreeAccomodation = function (accomodationFreeEnabled) {
         if (accomodationFreeEnabled) {
             $scope.accomodationPriceOld = $scope.offer.accomodationPrice;
-            $scope.offer.accomodationPrice = null;
+            $scope.offer.accomodationPrice = 0;
         }
         else {
             $scope.offer.accomodationPrice = $scope.accomodationPriceOld;

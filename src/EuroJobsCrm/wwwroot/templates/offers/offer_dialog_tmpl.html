@@ -14,15 +14,26 @@
 				<h4>{{'OFFER_INFORMATION'| translate}}</h4>
 				<!--OFFER INFORMATION-->
 				<div layout="row" layout-align="space-between none">
-					<md-input-container class="md-block" flex="30">
+					<md-input-container class="md-block" flex="25">
 						<label>{{'BRANCH'| translate}}</label>
-						<input name="offer_branch" ng-model="offer.branch" placeholder="{{'Engineer'| translate}}" md-maxlength="100" required>
-						<div ng-messages="offerForm.offer_branch.$error" role="alert" multiple>
-							<div ng-message="required">{{'BRANCH_REQUIRED' | translate}} </div>
-							<div ng-message="md-maxlength">{{'BRANCH_IS_TO_LONG'| translate}}</div>
+						<md-select name="type" ng-model="offer.branch" required>
+							<md-option value="0">{{ 'BUILDING' | translate }}</md-option>
+							<md-option value="1">{{ 'PHISICAL_WORK' | translate }}</md-option>
+							<md-option value="2">{{ 'IT' | translate }}</md-option>
+						</md-select>
+					</md-input-container>
+
+					<md-input-container class="md-block" flex="25">
+						<label>{{'POSITION'| translate}}</label>
+						<input name="offer_position" ng-model="offer.position" placeholder="{{'ENGINEER'| translate}}" md-maxlength="100" required>
+						<div ng-messages="offerForm.offer_position.$error" role="alert" multiple>
+							<div ng-message="required">{{'POSITION_REQUIRED' | translate}} </div>
+							<div ng-message="md-maxlength">{{'POSITION_IS_TO_LONG'| translate}}</div>
 						</div>
 					</md-input-container>
-					<md-input-container class="md-block" flex="30">
+
+
+					<md-input-container class="md-block" flex="15">
 						<label>{{'VACANCIES_NUMBER'| translate}}</label>
 						<input name="offer_vacanciesNumber" ng-model="offer.vacanciesNumber" placeholder="10" md-maxlength="3" required>
 						<div ng-messages="offerForm.offer_vacanciesNumber.$error" role="alert" multiple>
@@ -30,7 +41,7 @@
 							<div ng-message="md-maxlength">{{'VACANCIES_NUMBER_IS_TO_LONG'| translate}}</div>
 						</div>
 					</md-input-container>
-					<md-input-container class="md-block" flex="30">
+					<md-input-container class="md-block" flex="15">
 						<label>{{'WORK_PLACE'| translate}}</label>
 						<input name="offer_workPlace" placeholder="" ng-model="offer.workPlace">
 						<div ng-messages="offerForm.offer_email.$error" role="alert">
@@ -41,11 +52,11 @@
 				<div layout="row" layout-align="space-between none">
 					<md-input-container class="md-block" flex="30">
 						<label>{{'STARTING_DATE'| translate}}</label>
-						<md-datepicker md-current-view="year" ng-model="offer.startingDate" md-placeholder="{{'Enter date' | translate}}"></md-datepicker>
+						<md-datepicker md-current-view="year" ng-model="offer.startingDate"></md-datepicker>
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{'ENDING_DATE'| translate}}</label>
-						<md-datepicker md-current-view="year" ng-model="offer.endingDate" md-placeholder="{{'Enter date' | translate}}" ng-disabled="isUnlimited"></md-datepicker>
+						<md-datepicker md-current-view="year" ng-model="offer.endingDate" ng-disabled="isUnlimited"></md-datepicker>
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<md-checkbox ng-model="isUnlimited" aria-label="chb1" ng-change="disableEndDate(isUnlimited)">{{'WORK_UNLIMITED'| translate}}</md-checkbox>
@@ -67,10 +78,12 @@
 				<div layout="row" layout-align="space-between center">
 					<md-input-container class="md-block" flex="30">
 						<label>{{'EDUCATION'| translate}}</label>
-						<input name="offer_education" ng-model="offer.education" placeholder="..." md-maxlength="100">
-						<div ng-messages="offerForm.offer_education.$error" role="alert" multiple>
-							<div ng-message="md-maxlength">{{'EDUCATION_IS_TO_LONG'| translate}}</div>
-						</div>
+						<md-select name="type" ng-model="offer.education" required>
+							<md-option value="0">{{ 'UNIVERCITY' | translate }}</md-option>
+							<md-option value="1">{{ 'HIGH_SCHOOL' | translate }}</md-option>
+							<md-option value="2">{{ 'NONE_ED' | translate }}</md-option>
+						</md-select>
+						<br/>
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{'EXPERIENCE'| translate}}</label>
@@ -104,10 +117,10 @@
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{ 'GENDER' | translate }}</label>
-						<md-select name="type" ng-model="offer.gender" data-placeholder="{{ 'GENDER' | translate }}" required>
+						<md-select name="type" ng-model="offer.gender" required>
 							<md-option value="0">{{ 'ALL' | translate }}</md-option>
-							<md-option value="1">{{ 'MAIL' | translate }}</md-option>
-							<md-option value="2">{{ 'FEMAIL' | translate }}</md-option>
+							<md-option value="1">{{ 'MALE' | translate }}</md-option>
+							<md-option value="2">{{ 'FEMALE' | translate }}</md-option>
 						</md-select>
 						<br/>
 					</md-input-container>
@@ -120,7 +133,7 @@
 					</md-input-container>
 					<md-input-container class="md-block" flex="45">
 						<label>{{'OTHER'| translate}}</label>
-						<textarea ng-model="offer.other" md-maxlength="200" rows="2" md-select-on-focus></textarea>
+						<textarea ng-model="offer.comments" md-maxlength="200" rows="2" md-select-on-focus></textarea>
 					</md-input-container>
 				</div>
 
@@ -133,16 +146,17 @@
 							<md-option value="0">{{ 'UMOWA_O_PRACE' | translate }}</md-option>
 							<md-option value="1">{{ 'ZLECENIE' | translate }}</md-option>
 						</md-select>
+						<br/>
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{'WORK_FROM'| translate}}</label>
 						<input mdc-datetime-picker="" date="false" time="true" type="text" id="time1" placeholder="Time" min-date="minDate" format="HH:mm"
-							ng-model="offer.workFrom" class="md-input">
+							ng-model="offer.workStart" class="md-input">
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{'WORK_TO'| translate}}</label>
 						<input mdc-datetime-picker="" date="false" time="true" type="text" id="time2" placeholder="Time" min-date="minDate" format="HH:mm"
-							ng-model="offer.workTo" class="md-input">
+							ng-model="offer.workEnd" class="md-input">
 					</md-input-container>
 				</div>
 				<div layout="row" layout-align="space-between center">
@@ -155,39 +169,39 @@
 						<input name="offer_overtimeRate" ng-model="offer.overtimeRate" placeholder="0" md-maxlength="10" ng-disabled="overtimeDisabled"></input>
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
-						<md-checkbox aria-label="chb2" ng-model="overtimeDisabled" ng-change="disableOvertime(overtimeDisabled)">{{'OVERWORK_NOT_POSSIBLE'}}
+						<md-checkbox aria-label="chb2" ng-model="overtimeDisabled" ng-change="disableOvertime(overtimeDisabled)">{{'OVERWORK_NOT_POSSIBLE' | translate}}
 						</md-checkbox>
 					</md-input-container>
 				</div>
 				<h4>{{'WORK_DAYS'| translate}}</h4>
 				<div layout="row" layout-align="space-between none">
 					<md-input-container class="md-block" flex="10">
-						<md-checkbox aria-label="chb2" ng-model="offer.workMo">{{'MONDAY'}}</md-checkbox>
+						<md-checkbox aria-label="chb2" ng-model="offer.workMo">{{'MONDAY' | translate}}</md-checkbox>
 					</md-input-container>
 					<md-input-container class="md-block" flex="10">
-						<md-checkbox aria-label="chb2" ng-model="offer.workTu">{{'TUESDAY'}}</md-checkbox>
+						<md-checkbox aria-label="chb2" ng-model="offer.workTu">{{'TUESDAY' | translate}}</md-checkbox>
 					</md-input-container>
 					<md-input-container class="md-block" flex="10">
-						<md-checkbox aria-label="chb2" ng-model="offer.workWe">{{'WEDNESDAY'}}</md-checkbox>
+						<md-checkbox aria-label="chb2" ng-model="offer.workWe">{{'WEDNESDAY' | translate}}</md-checkbox>
 					</md-input-container>
 					<md-input-container class="md-block" flex="10">
-						<md-checkbox aria-label="chb2" ng-model="offer.workTh">{{'THURSDAY'}}</md-checkbox>
+						<md-checkbox aria-label="chb2" ng-model="offer.workTh">{{'THURSDAY' | translate}}</md-checkbox>
 					</md-input-container>
 					<md-input-container class="md-block" flex="10">
-						<md-checkbox aria-label="chb2" ng-model="offer.workFr">{{'FRIDAY'}}</md-checkbox>
+						<md-checkbox aria-label="chb2" ng-model="offer.workFr">{{'FRIDAY' | translate}}</md-checkbox>
 					</md-input-container>
 					<md-input-container class="md-block" flex="10">
-						<md-checkbox aria-label="chb2" ng-model="offer.workSa">{{'SATURDAY'}}</md-checkbox>
+						<md-checkbox aria-label="chb2" ng-model="offer.workSa">{{'SATURDAY' | translate}}</md-checkbox>
 					</md-input-container>
 					<md-input-container class="md-block" flex="10">
-						<md-checkbox aria-label="chb2" ng-model="offer.workSu">{{'SUNDAY'}}</md-checkbox>
+						<md-checkbox aria-label="chb2" ng-model="offer.workSu">{{'SUNDAY' | translate}}</md-checkbox>
 					</md-input-container>
 				</div>
 				<h4>{{'PAYMENT'| translate}}</h4>
 				<div layout="row" layout-align="space-between center">
 					<md-input-container class="md-block" flex="30">
 						<label>{{'PER_HOUR'| translate}}</label>
-						<input name="offer_ratePerHour" ng-model="offer.ratePerHour" placeholder="1000" md-maxlength="6" required>
+						<input name="offer_ratePerHour" ng-model="offer.ratePerHour" placeholder="20" md-maxlength="6" required>
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{'PER_MONTH'| translate}}</label>
@@ -209,7 +223,7 @@
 						<input name="offer_advanceAmount" ng-model="offer.advanceAmount" placeholder="0" md-maxlength="10" ng-disabled="advanceEnabled">
 					</md-input-container>
 					<md-input-container class="md-block" flex="40">
-						<md-checkbox aria-label="chb2" ng-model="advanceEnabled" ng-change="disableAdvance(advanceEnabled)">{{'ADVANCE_NOT_POSSIBLE'}}
+						<md-checkbox aria-label="chb2" ng-model="advanceEnabled" ng-change="disableAdvance(advanceEnabled)">{{'ADVANCE_NOT_POSSIBLE' | translate}}
 						</md-checkbox>
 					</md-input-container>
 				</div>
@@ -221,7 +235,8 @@
 						<input name="offer_accomodationPrice" ng-model="offer.accomodationPrice" placeholder="0" md-maxlength="10" ng-disabled="accomodationFreeEnabled">
 					</md-input-container>
 					<md-input-container class="md-block" flex="40">
-						<md-checkbox aria-label="chb2" ng-model="accomodationFreeEnabled" ng-change="disableFreeAccomodation(accomodationFreeEnabled)">{{'FREE_ACCOMODATION_NOT_POSSIBLE'}}
+						<md-checkbox aria-label="chb2" ng-model="accomodationFreeEnabled" ng-change="disableFreeAccomodation(accomodationFreeEnabled)">
+							{{'FREE_ACCOMODATION' | translate}}
 						</md-checkbox>
 					</md-input-container>
 				</div>
@@ -256,7 +271,7 @@
 				<div layout="row" layout-align="space-between center">
 					<md-input-container class="md-block" flex="30">
 						<label>{{'TRANSPORT_TO_WORK_KM'| translate}}</label>
-						<input name="distanceToWork" ng-model="offer.distanceToWork" placeholder="2" md-maxlength="10" required>
+						<input name="distanceToWork" ng-model="offer.distanceToWork" placeholder="2" md-maxlength="10">
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{'TRANSPORT_TO_WORK_TYPE'| translate}}</label>
@@ -268,7 +283,7 @@
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{'TRANSPORT_PAYMENT'| translate}}</label>
-						<input ng-disabled="offer.transportToWork==0" ng-model="offer.transportPrice" placeholder="100" md-maxlength="10" required>
+						<input ng-disabled="offer.transportToWork==0" ng-model="offer.transportPrice" placeholder="100" md-maxlength="10">
 					</md-input-container>
 				</div>
 
