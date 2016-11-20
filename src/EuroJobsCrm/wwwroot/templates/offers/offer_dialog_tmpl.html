@@ -17,6 +17,7 @@
 					<md-input-container class="md-block" flex="25">
 						<label>{{'BRANCH'| translate}}</label>
 						<md-select name="type" ng-model="offer.branch" required>
+						<md-select name="type" ng-model="offer.branch">
 							<md-option value="0">{{ 'BUILDING' | translate }}</md-option>
 							<md-option value="1">{{ 'PHISICAL_WORK' | translate }}</md-option>
 							<md-option value="2">{{ 'IT' | translate }}</md-option>
@@ -26,6 +27,7 @@
 					<md-input-container class="md-block" flex="25">
 						<label>{{'POSITION'| translate}}</label>
 						<input name="offer_position" ng-model="offer.position" placeholder="{{'ENGINEER'| translate}}" md-maxlength="100" required>
+						<input name="offer_position" ng-model="offer.position" placeholder="{{'ENGINEER'| translate}}" md-maxlength="100">
 						<div ng-messages="offerForm.offer_position.$error" role="alert" multiple>
 							<div ng-message="required">{{'POSITION_REQUIRED' | translate}} </div>
 							<div ng-message="md-maxlength">{{'POSITION_IS_TO_LONG'| translate}}</div>
@@ -36,6 +38,7 @@
 					<md-input-container class="md-block" flex="15">
 						<label>{{'VACANCIES_NUMBER'| translate}}</label>
 						<input name="offer_vacanciesNumber" ng-model="offer.vacanciesNumber" placeholder="10" md-maxlength="3" required>
+						<input name="offer_vacanciesNumber" ng-model="offer.vacanciesNumber" placeholder="10" md-maxlength="3">
 						<div ng-messages="offerForm.offer_vacanciesNumber.$error" role="alert" multiple>
 							<div ng-message="required">{{'VACANCIES_NUMBER_REQUIRED' | translate}} </div>
 							<div ng-message="md-maxlength">{{'VACANCIES_NUMBER_IS_TO_LONG'| translate}}</div>
@@ -79,6 +82,7 @@
 					<md-input-container class="md-block" flex="30">
 						<label>{{'EDUCATION'| translate}}</label>
 						<md-select name="type" ng-model="offer.education" required>
+						<md-select name="type" ng-model="offer.education">
 							<md-option value="0">{{ 'UNIVERCITY' | translate }}</md-option>
 							<md-option value="1">{{ 'HIGH_SCHOOL' | translate }}</md-option>
 							<md-option value="2">{{ 'NONE_ED' | translate }}</md-option>
