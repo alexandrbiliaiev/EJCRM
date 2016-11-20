@@ -17,11 +17,11 @@
 					<md-input-container class="md-block" flex="25">
 						<label>{{'BRANCH'| translate}}</label>
 						<md-select name="type" ng-model="offer.branch" required>
-						<md-select name="type" ng-model="offer.branch">
-							<md-option value="0">{{ 'BUILDING' | translate }}</md-option>
-							<md-option value="1">{{ 'PHISICAL_WORK' | translate }}</md-option>
-							<md-option value="2">{{ 'IT' | translate }}</md-option>
-						</md-select>
+							<md-select name="type" ng-model="offer.branch">
+								<md-option value="0">{{ 'BUILDING' | translate }}</md-option>
+								<md-option value="1">{{ 'PHISICAL_WORK' | translate }}</md-option>
+								<md-option value="2">{{ 'IT' | translate }}</md-option>
+							</md-select>
 					</md-input-container>
 
 					<md-input-container class="md-block" flex="25">
@@ -82,12 +82,12 @@
 					<md-input-container class="md-block" flex="30">
 						<label>{{'EDUCATION'| translate}}</label>
 						<md-select name="type" ng-model="offer.education" required>
-						<md-select name="type" ng-model="offer.education">
-							<md-option value="0">{{ 'UNIVERCITY' | translate }}</md-option>
-							<md-option value="1">{{ 'HIGH_SCHOOL' | translate }}</md-option>
-							<md-option value="2">{{ 'NONE_ED' | translate }}</md-option>
-						</md-select>
-						<br/>
+							<md-select name="type" ng-model="offer.education">
+								<md-option value="0">{{ 'UNIVERCITY' | translate }}</md-option>
+								<md-option value="1">{{ 'HIGH_SCHOOL' | translate }}</md-option>
+								<md-option value="2">{{ 'NONE_ED' | translate }}</md-option>
+							</md-select>
+							<br/>
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{'EXPERIENCE'| translate}}</label>
@@ -121,7 +121,7 @@
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{ 'GENDER' | translate }}</label>
-						<md-select name="type" ng-model="offer.gender" required>
+						<md-select name="type" ng-model="offer.gender">
 							<md-option value="0">{{ 'ALL' | translate }}</md-option>
 							<md-option value="1">{{ 'MALE' | translate }}</md-option>
 							<md-option value="2">{{ 'FEMALE' | translate }}</md-option>
@@ -146,7 +146,7 @@
 				<div layout="row" layout-align="space-between center">
 					<md-input-container class="md-block" flex="30">
 						<label>{{'CONTRACT_TYPE'| translate}}</label>
-						<md-select name="type" ng-model="offer.contractType" required>
+						<md-select name="type" ng-model="offer.contractType">
 							<md-option value="0">{{ 'UMOWA_O_PRACE' | translate }}</md-option>
 							<md-option value="1">{{ 'ZLECENIE' | translate }}</md-option>
 						</md-select>
@@ -205,15 +205,15 @@
 				<div layout="row" layout-align="space-between center">
 					<md-input-container class="md-block" flex="30">
 						<label>{{'PER_HOUR'| translate}}</label>
-						<input name="offer_ratePerHour" ng-model="offer.ratePerHour" placeholder="20" md-maxlength="6" required>
+						<input name="offer_ratePerHour" ng-model="offer.ratePerHour" placeholder="20" md-maxlength="6">
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{'PER_MONTH'| translate}}</label>
-						<input name="offer_ratePerMonth" ng-model="offer.ratePerMonth" placeholder="1000" md-maxlength="6" required>
+						<input name="offer_ratePerMonth" ng-model="offer.ratePerMonth" placeholder="1000" md-maxlength="6">
 					</md-input-container>
 					<md-input-container class="md-block" flex="30">
 						<label>{{'PAYMENT_TYPE'| translate}}</label>
-						<md-select name="type" ng-model="offer.paymentMethod" required>
+						<md-select name="type" ng-model="offer.paymentMethod">
 							<md-option value="0">{{ 'CASH' | translate }}</md-option>
 							<md-option value="1">{{ 'BANK_TRANSFER' | translate }}</md-option>
 							<md-option value="2">{{ 'CASH' | translate }}/{{ 'BANK_TRANSFER' | translate }}</md-option>
