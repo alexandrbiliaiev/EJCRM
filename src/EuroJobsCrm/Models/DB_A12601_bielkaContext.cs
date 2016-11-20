@@ -770,6 +770,10 @@ namespace EuroJobsCrm.Models
 
                 entity.Property(e => e.OfrPaymentMethod).HasColumnName("ofr_payment_method");
 
+                entity.Property(e => e.OfrPosition)
+                    .HasColumnName("ofr_position")
+                    .HasMaxLength(150);
+
                 entity.Property(e => e.OfrRatePerHour).HasColumnName("ofr_rate_per_hour");
 
                 entity.Property(e => e.OfrRatePerMonth).HasColumnName("ofr_rate_per_month");
