@@ -5,7 +5,7 @@ angular.module('EuroJobsCrm.services')
         var currentEmployee;
 
         employees.load = function () {
-            return $http.get('api/Employees');
+            return $http.get('api/Employees/GetAll');
         };
 
         employees.saveEmployee = function (employee) {
