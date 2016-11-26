@@ -27,6 +27,14 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
+        employees.saveDocument = function (document){
+            return $http({
+                url: 'api/Employees/SaveDocument',
+                method: "POST",
+                data: document
+            });
+        }
+
         employees.getEmployeeFromDb = function (id) {
             param = {
                 employeeId: id
@@ -60,6 +68,23 @@ angular.module('EuroJobsCrm.services')
 
         employees.getCurrentEmployee = function(){
             return currentEmployee;
+        }
+
+        employees.getDefaultDocument = function () {
+            return {
+                id: 0,
+                parentDocumentId: null,
+                employeeId: 0,
+                seria: '',
+                number: '',
+                issueDate: new Date(),
+                validFrom: new Date(),
+                validTo: new Date(),
+                type: 0,
+                visaType: '',
+                remarks: '',
+                files: new Array()
+            };
         }
 
         return employees;

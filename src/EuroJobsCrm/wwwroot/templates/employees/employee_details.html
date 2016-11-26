@@ -108,7 +108,7 @@
                             <span>{{'DOCS_VISA'| translate}}</span>
                         </h2>
                         <span flex></span>
-                        <md-button aria-label="button" class="md-icon-button" ng-click="showEditEmployeeDialog()">
+                        <md-button aria-label="button" class="md-icon-button" ng-click="showAddDocumentDialog()">
                             <md-icon md-font-icon="ion-plus-round"></md-icon>
                         </md-button>
                         <md-button aria-label="button" class="md-icon-button" ng-click="expandDocs = !expandDocs">
@@ -129,14 +129,14 @@
                                         {{ 'VALID_FROM' | translate }} {{moment(doc.validFrom).format('DD-MM-YYYY')}} {{ 'VALID_TO' | translate }} {{moment(doc.validTo).format('DD-MM-YYYY')}}
                                     </p>
                                 </div>
-                                <md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="editContragent(contragent.id)">
+                                <md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="showEditDocumentDialog(doc)">
                                     <md-icon md-svg-icon="/lib/icons/edit.svg">
                                         <md-tooltip md-direction="down">
                                             {{ 'EDIT' | translate }}
                                         </md-tooltip>
                                     </md-icon>
                                 </md-button>
-                                <md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteCtgConfirmDialog(contragent.id)">
+                                <md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteDocConfirmDialog(doc.id)">
                                     <md-icon md-svg-icon="/lib/icons/delete.svg">
                                         <md-tooltip md-direction="down">
                                             {{ 'DELETE' | translate }}

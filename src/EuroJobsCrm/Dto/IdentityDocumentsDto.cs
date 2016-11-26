@@ -15,6 +15,10 @@ namespace EuroJobsCrm.Dto
         public DateTime? IssueDate { get; set; }
         public DateTime? ValidFrom { get; set; }
         public DateTime? ValidTo { get; set; }
+        /// <summary>
+        /// 1 - passport
+        /// 2 - visa
+        /// </summary>
         public int Type { get; set; }
         public string VisaType { get; set; }
         public string Remarks { get; set; }

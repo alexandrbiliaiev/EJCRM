@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EuroJobsCrm.Models;
+﻿using EuroJobsCrm.Models;
 
 namespace EuroJobsCrm.Dto
 {
@@ -11,6 +7,13 @@ namespace EuroJobsCrm.Dto
         public int Id { get; set; }
         public int OfferId { get; set; }
         public int EmployeeId { get; set; }
+
+        /// <summary>
+        /// 0 - pending
+        /// 1 - accepted
+        /// 2 - rejected
+        /// 3 - finished
+        /// </summary>
         public int Status { get; set; }
         public int? ContractId { get; set; }
 
