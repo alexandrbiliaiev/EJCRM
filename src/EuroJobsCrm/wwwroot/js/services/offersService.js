@@ -3,11 +3,20 @@ angular.module('EuroJobsCrm.services')
 
         var offers = {};
 
+        offers.getOffer = function (offId) {
+
+            return $http({
+                url: 'api/Offers/Get',
+                method: "POST",
+                data: offId
+            });
+        }
+
         offers.load = function () {
             return $http.get('api/Offers');
         };
 
-        offers.saveOffer= function (offer) {
+        offers.saveOffer = function (offer) {
             return $http({
                 url: 'api/Offers/Save',
                 method: "POST",

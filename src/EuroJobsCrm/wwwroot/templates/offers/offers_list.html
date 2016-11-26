@@ -41,7 +41,7 @@
 									</h4>
 									<p>{{ 'VACANCIES_NUMBER' | translate }}: <b>{{offer.vacanciesNumber}}</b></p>
 								</div>
-								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditOfferDialog(offer)">
+								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="editOffer(offer.id)">
 									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 								</md-button>
 								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteOfferConfirmDialog(offer.id)">

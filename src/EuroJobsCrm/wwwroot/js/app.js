@@ -40,10 +40,10 @@
             }).state('offers', {
                 url: "/off_all",
                 templateUrl: 'templates/offers/offers_list.html',
+            }).state('offer', {
+                url: "/off_edit/:id",
+                templateUrl: 'templates/offers/offer_details.html',
             });
-
-
-
           
     });
 

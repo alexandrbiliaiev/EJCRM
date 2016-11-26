@@ -3,19 +3,21 @@ angular.module('EuroJobsCrm.controllers').controller('OffersController', functio
 
     $scope.moment = moment;
 
-  /*  $scope.getDefaultoffer = function () {
-        return  {
-            id: 0,
-            krs: "",
-            name: "",
-            nip: "",
-            regon: ""
-        }
-    }
+    /*  $scope.getDefaultoffer = function () {
+          return  {
+              id: 0,
+              krs: "",
+              name: "",
+              nip: "",
+              regon: ""
+          }
+      }
+  
+      $scope.offer = $scope.getDefaultoffer();*/
 
-    $scope.offer = $scope.getDefaultoffer();*/
 
-    $scope.editoffer = function (offerId) {
+
+    $scope.editOffer = function (offerId) {
         $state.go('offer', {
             id: offerId
         });
@@ -46,12 +48,12 @@ angular.module('EuroJobsCrm.controllers').controller('OffersController', functio
     $scope.showAddofferDialog = function (ev) {
         offer = $scope.getDefaultoffer();
         $mdDialog.show({
-                scope: $scope,
-                preserveScope: true,
-                templateUrl: '/templates/offers/offer_dialog_tmpl.html',
-                targetEvent: ev,
-                clickOutsideToClose: true,
-            })
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/offers/offer_dialog_tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+        })
             .then(function (answer) {
 
             }, function () {
