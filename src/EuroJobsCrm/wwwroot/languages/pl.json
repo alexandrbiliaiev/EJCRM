@@ -171,11 +171,18 @@
     "EMPLOYED_PEOPLE": "Zatrudnione osoby",
     "OFFER": "Oferta",
     "DOCUMENT": "Dokument",
+    "DOCUMENT_TYPE": "Typ dokumentu",
+    "VISA_TYPE": "Typ wizy",
+    
     "EMPLOYEE": "Pracownik",
     "DOC_NUMBER":"Numer",
     "PASSPORT":"Pasport",
     "VISA":"Visa",
+    "DOC_ISSUE_DATE": "Data wydania",
     "VALID_FROM":"Ważny od",
-    "VALID_TO":"ważny do"
+    "VALID_TO":"ważny do",
+    "SERIA": "Seria",
+    "REMARKS":"Uwagi"
+    
     
 }

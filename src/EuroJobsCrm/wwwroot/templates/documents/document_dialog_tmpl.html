@@ -1,0 +1,114 @@
+<md-dialog aria-label="Employees">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>{{'DOCUMENT' | translate}}</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="close()">
+				<md-icon aria-label="Close dialog">close</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div class="md-dialog-content" style="width:900px">
+
+			<form name="documentForm">
+				<div layout="row">
+					<md-input-container class="md-block" flex="35">
+						<label>{{'SERIA'| translate}}</label>
+						<input name="seria" ng-model="document.seria" placeholder="AC" md-maxlength="10" required>
+						<div ng-messages="documentForm.seria.$error" role="alert" multiple>
+							<div ng-message="required">{{'REQUIRED' | translate}} </div>
+							<div ng-message="md-maxlength">{{'IS_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block" flex="65">
+						<label>{{'DOC_NUMBER'| translate}}</label>
+						<input name="number" ng-model="document.number" placeholder="00000" md-maxlength="100" required>
+						<div ng-messages="documentForm.number.$error" role="alert" multiple>
+							<div ng-message="required">{{'REQUIRED' | translate}} </div>
+							<div ng-message="md-maxlength">{{'IS_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+				</div>
+
+				<div layout="row">
+					<md-input-container class="md-block" flex="35">
+						<label>{{'DOC_ISSUE_DATE'| translate}}</label>
+						<md-datepicker name="issueDate" md-current-view="year" ng-model="document.issueDate" required></md-datepicker>
+						<div ng-messages="documentForm.issueDate.$error" role="alert" multiple>
+							<div ng-message="required">{{'REQUIRED' | translate}} </div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block" flex="35">
+						<label>{{'VALID_FROM'| translate}}</label>
+						<md-datepicker name="validFrom" md-current-view="year" ng-model="document.validFrom" required></md-datepicker>
+						<div ng-messages="documentForm.validFrom.$error" role="alert" multiple>
+							<div ng-message="required">{{'REQUIRED' | translate}} </div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block" flex="35">
+						<label>{{'VALID_TO'| translate}}</label>
+						<md-datepicker name="validTo" md-current-view="year" ng-model="document.validTo" required></md-datepicker>
+						<div ng-messages="documentForm.validTo.$error" role="alert" multiple>
+							<div ng-message="required">{{'REQUIRED' | translate}} </div>
+						</div>
+					</md-input-container>
+				</div>
+
+				<div layout="row">
+					<md-input-container class="md-block" flex="50">
+						<label>{{ 'DOCUMENT_TYPE' | translate }}</label>
+						<md-select name="type" ng-model="document.type" data-placeholder="{{ 'DOCUMENT_TYPE' | translate }}">
+							<md-option value="1">{{ 'PASSPORT' | translate }}</md-option>
+							<md-option value="2">{{ 'VISA' | translate }}</md-option>
+						</md-select>
+					</md-input-container>
+					<md-input-container class="md-block" flex="50" ng-show="document.type == 2">
+						<label>{{'VISA_TYPE'| translate}}</label>
+						<input name="visaType" ng-model="document.visaType" placeholder="D" md-maxlength="3">
+					</md-input-container>
+				</div>
+
+				<div layout="row">
+					<md-input-container class="md-block" flex="100">
+						<label>{{ 'REMARKS' | translate }}</label>
+						<textarea ng-model="document.remarks" md-maxlength="300" rows="2" md-select-on-focus></textarea>
+					</md-input-container>
+				</div>
+				<div layout="row" layout-wrap>
+
+					<md-list>
+							<md-list-item ng-repeat="file in document.files">
+								<a href="{{file.url}}">{{file.name}}</a>
+								<md-divider ng-if="!$last"></md-divider>
+
+							</md-list-item>
+					</md-list>
+
+					<md-button class="md-raised md-primary" >
+						<label for="document-file-input" style="cusrsor:pointer; color:white;" >
+								<md-icon md-font-icon="ion-document"></md-icon> Select file {{ docFile.name}} 
+						</label>
+					</md-button>
+
+					<md-button class="md-fab md-mini md-primary" aria-label="Upload file" ng-click="uploadFile(docFile)" ng-show="docFile != undefined">
+						<md-icon md-font-icon="ion-ios-cloud-upload"></md-icon>
+					</md-button>
+
+					<md-progress-linear md-mode="determinate" value="{{sendProgress}}" ng-show="sendProgress > 0"></md-progress-linear>
+
+					<input id="document-file-input" type="file" ngf-select ng-model="docFile" ngf-max-size="10MB" required ngf-model-invalid="errorFile"
+						style="display: none;" />
+
+						
+
+				</div>
+			</form>
+		</div>
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<md-button ng-click="saveDocumentClick()">
+			{{'SAVE'|translate}}
+		</md-button>
+	</md-dialog-actions>
+</md-dialog>

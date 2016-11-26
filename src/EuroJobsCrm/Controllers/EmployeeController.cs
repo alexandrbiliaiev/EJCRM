@@ -11,7 +11,7 @@ namespace EuroJobsCrm.Controllers
 {
     public class EmployeeController : Controller
     {
-        private UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public  EmployeeController(UserManager<ApplicationUser> userManager)
         {
@@ -188,11 +188,33 @@ namespace EuroJobsCrm.Controllers
 
                 context.SaveChanges();
 
+                foreach (var file in documentDto.Files)
+                {
+                    DocumentFiles docFile = new DocumentFiles
+                    {
+                        DcfAuditCd = DateTime.UtcNow,
+                        DcfAuditCu = User.GetUserId(),
+                        DcfDescription = file.Description,
+                        DcfName = file.Name,
+                        DcfIdcId = document.IdcId,
+                        DcfUrl = file.Url
+                    };
+
+                    context.DocumentFiles.Add(docFile);
+                }
+
+                context.SaveChanges();
+
                 documentDto.Id = document.IdcId;
+                documentDto.Files =
+                    context.DocumentFiles.Where(d => d.DcfIdcId == document.IdcId)
+                        .ToList()
+                        .Select(d => new DocumentFilesDto(d))
+                        .ToList();
+
                 return documentDto;
             }
         }
-
 
         [HttpPost]
         [Route("api/Employees/DeleteDocument")]
