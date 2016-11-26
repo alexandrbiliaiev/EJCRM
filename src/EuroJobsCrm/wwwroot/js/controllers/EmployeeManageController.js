@@ -1,5 +1,5 @@
 angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController', function ($scope, $rootScope, $location, $translate, $http, $state, countriesService, employeesService,
-    $mdDialog, $routeParams) {
+    $mdDialog, $routeParams, DriveService) {
     
     $scope.expandDetails = true;
     $scope.expandDocs = true;

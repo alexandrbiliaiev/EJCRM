@@ -1,4 +1,4 @@
-﻿var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngRoute', 'pascalprecht.translate', 'angular-jsvat', 'ui.router', 'EuroJobsCrm.services', 'EuroJobsCrm.controllers', 'ng-mfb', 'ngMaterialDatePicker'])
+﻿var app = angular.module('EuroJobsCrm', ['ngMaterial','ngm.ngDrive', 'ngMessages', 'ngRoute', 'pascalprecht.translate', 'angular-jsvat', 'ui.router', 'EuroJobsCrm.services', 'EuroJobsCrm.controllers', 'ng-mfb', 'ngMaterialDatePicker'])
 
     .config(function ($translateProvider, $routeProvider, $stateProvider, $mdThemingProvider, $httpProvider, $mdDateLocaleProvider) {
         $translateProvider.useStaticFilesLoader({
@@ -42,8 +42,12 @@
                 templateUrl: 'templates/offers/offers_list.html',
             });
 
+
+
           
     });
+
+
 
 app.run(function($rootScope) {
     $rootScope.$on('$stateChangeSuccess', function(event, to, toParams, from, fromParams) {
@@ -56,4 +60,11 @@ app.run(function($rootScope) {
 angular.module('EuroJobsCrm.services', []);
 angular.module('EuroJobsCrm.controllers', []);
 
+angular.module('ngm.ngDrive')
+    .provider('OauthService', ngDrive.Config)
+    .config(function (OauthServiceProvider) {
+        OauthServiceProvider.setScopes('https://www.googleapis.com/auth/drive.file');
+        OauthServiceProvider.setClientID('2231299-2bvf1.apps.googleusercontent.com');
+        OauthServiceProvider.setTokenRefreshPolicy(ngDrive.TokenRefreshPolicy.ON_DEMAND);
+    });
 
