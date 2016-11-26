@@ -91,12 +91,11 @@
 							<md-list-item class="md-2-line" ng-repeat="contactperson in contragent.contactPersons">
 								<md-icon style="font-size:32px;" md-font-icon="ion-person-stalker" ng-click="showEditContactPersonDialog(contactperson)"></md-icon>
 								<div class="md-list-item-text">
-									<h3><b>{{contactperson.name}} {{contactperson.surname}} ({{contactperson.position}})<b></h3>
+									<h4><b>{{contactperson.name}} {{contactperson.surname}} ({{contactperson.position}})<b></h4>
 											<p>
-												<b>{{'Email'|translate}}</b>: {{contactperson.email}} <b>{{'Phone'|translate}}</b>: {{contactperson.phoneNumber}}
-										</p>
-										<p>
-											<b>{{'Skype'|translate}}</b>: {{contactperson.skype}} <b>{{'Messagner'|translate}}</b>: {{contactperson.messanger}}
+												{{'Email'|translate}}: <b>{{contactperson.email}}</b> {{'Phone'|translate}}: <b>{{contactperson.phoneNumber}}</b>
+										<br/>
+											{{'Skype'|translate}}: <b>{{contactperson.skype}}</b> {{'Messagner'|translate}}: <b>{{contactperson.messanger}}</b>
 										</p>
 								</div>
 								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showEditContactPersonDialog(contactperson)">
@@ -260,8 +259,32 @@
 						</md-button>
 					</div>
 				</md-toolbar>
-				<div ng-show="expandNotes" ng-cloak>
-					Test Note
+					<div ng-show="expandNotes" ng-cloak>
+									<md-content>
+					<md-list ng-cloak style="">
+						<md-list-item class="md-2-line">
+							<md-icon style="font-size:32px;" md-font-icon="ion-alert-circled" >
+							</md-icon>
+							<div class="md-list-item-text">
+								<h3><b>Klient nie zapłacił za uslugi!!! </b></h3>
+								<p>
+									<i>Napisał Tadeusz o 12:33 2016-11-15</i>
+								</p>
+							</div>
+							<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" >
+								<md-tooltip md-direction="left">
+									{{ 'ACTIVE' | translate }}
+								</md-tooltip>
+							</md-icon>
+							<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)">
+								<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
+							</md-button>
+							<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
+								<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+							</md-button>
+						</md-list-item>
+					</md-list>
+					</md-content>
 				</div>
 			</section>
 		</div>

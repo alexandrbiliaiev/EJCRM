@@ -2,13 +2,14 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController', f
     clientsService, countriesService, contactpersonsService, addressesService, offersService, employeesService,
     $mdDialog, $routeParams) {
 
-    $scope.expandDetails = false;
-    $scope.expandContactPersons = false;
-    $scope.expandAddresses = false;
-    $scope.expandDocuments = false;
-    $scope.expandEmployees = false;
-    $scope.expandPayments = false;
-    $scope.expandNotes = false;
+    $scope.expandDetails = true;
+    $scope.expandContactPersons = true;
+    $scope.expandAddresses = true;
+    $scope.expandDocuments = true;
+    $scope.expandEmployees = true;
+    $scope.expandPayments = true;
+    $scope.expandNotes = true;
+    $scope.expandOffers = true;
     $scope.filteredEmployees;
 
     $scope.countries = countriesService.countries;
