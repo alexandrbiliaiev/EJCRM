@@ -1,6 +1,6 @@
 angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController', function ($scope, $rootScope, $location, $translate, $http, $state, countriesService, employeesService,
-    $mdDialog, $routeParams, DriveService) {
-    
+    $mdDialog, $routeParams) {
+
     $scope.expandDetails = true;
     $scope.expandDocs = true;
 
@@ -59,12 +59,14 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
     }
 
     employeeId = $state.params.id;
-   
+
     employeesService.getEmployeeFromDb(employeeId).success(function (response) {
         $scope.employee = response;
         $scope.employeeBirthday = moment(response.birthDate).format('DD-MM-YYYY');
     }).error(function () {
         $state.go('error');
     });
-    
+
+ 
+
 });

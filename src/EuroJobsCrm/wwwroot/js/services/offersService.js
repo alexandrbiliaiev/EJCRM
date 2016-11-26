@@ -10,7 +10,25 @@ angular.module('EuroJobsCrm.services')
                 method: "POST",
                 data: offId
             });
-        }
+        };
+
+        offers.saveCandidateRequest = function (candidateRequest) {
+            return $http({
+                url: '/api/Offers/MakeRequest',
+                method: "POST",
+                data: candidateRequest
+            });
+        };
+
+        offers.pimpCandidateToEmployee = function (candidateRequest) {
+            return $http({
+                url: '/api/Offers/ChangeRequestStatus',
+                method: "POST",
+                data: candidateRequest
+            });
+        };
+
+
 
         offers.load = function () {
             return $http.get('api/Offers');

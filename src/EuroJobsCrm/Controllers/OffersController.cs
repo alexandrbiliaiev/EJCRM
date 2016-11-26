@@ -21,9 +21,11 @@ namespace EuroJobsCrm.Controllers
             return View();
         }
 
+
+
         [HttpGet]
         [Route("/api/Offers")]
-        public IEnumerable<OfferDto> GetOffers()
+        public IEnumerable<OfferDto> GetOffersList()
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
@@ -34,6 +36,37 @@ namespace EuroJobsCrm.Controllers
                 return offers;
             }
         }
+
+        [HttpPost]
+        [Route("/api/Offers/Get")]
+        public OfferDetailsDto GetOffer([FromBody] int offerId)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                Offers ofr = context.Offers.FirstOrDefault(c => c.OfrId == offerId);
+
+                List<EmployeeDto> candidates =
+                    context.EmploymentRequests.Where(r => r.EtrOfrId == offerId && r.EtrStatus == 0)
+                        .Join(context.Employees, r => r.EtrEmpId, e => e.EmpId,
+                            (request, employee) => new {request, employee}).ToList()
+                        .Select(e => new EmployeeDto(e.employee)).ToList();
+
+                List<EmployeeDto> employees =
+                  context.EmploymentRequests.Where(r => r.EtrOfrId == offerId && r.EtrStatus == 1)
+                      .Join(context.Employees, r => r.EtrEmpId, e => e.EmpId,
+                          (request, employee) => new { request, employee }).ToList()
+                      .Select(e => new EmployeeDto(e.employee)).ToList();
+
+                OfferDetailsDto offerDetails = new OfferDetailsDto(ofr)
+                {
+                    Candidates = candidates,
+                    Employees = employees
+                };
+
+                return offerDetails;
+            }
+        }
+
 
         [HttpGet]
         [Route("/api/ClientOffers")]
@@ -178,7 +211,7 @@ namespace EuroJobsCrm.Controllers
                 using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
                 {
                     EmploymentRequests employmentRequest =
-                        context.EmploymentRequests.FirstOrDefault(e => e.EtrId == employmentRequestDto.Id);
+                        context.EmploymentRequests.FirstOrDefault(e => e.EtrOfrId == employmentRequestDto.OfferId && e.EtrEmpId == employmentRequestDto.EmployeeId);
 
                     if (employmentRequest == null)
                     {

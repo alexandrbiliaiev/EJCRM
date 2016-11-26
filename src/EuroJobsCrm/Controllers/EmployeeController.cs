@@ -1,14 +1,24 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EuroJobsCrm.Controllers
 {
     public class EmployeeController : Controller
     {
+        private UserManager<ApplicationUser> _userManager;
+
+        public  EmployeeController(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+       
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -18,8 +28,15 @@ namespace EuroJobsCrm.Controllers
         [Route("api/Employees/GetAll")]
         public IEnumerable<EmployeeDto> GetAllEmployees()
         {
+            var user =  _userManager.FindByIdAsync(User.GetUserId());
+           
+            var roles = _userManager.GetRolesAsync(user.Result);
+            var ffdsfd = roles.Result;
+
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
+                
+
                 var employees = context.Employees
                     .GroupJoin(context.IdentityDocuments, e => e.EmpId, d => d.IdcEmpId,
                         (e, d) => new { employee = e, documents = d })
@@ -30,6 +47,7 @@ namespace EuroJobsCrm.Controllers
                 return employees;
             }
         }
+
 
         [HttpPost]
         [Route("api/Employees/Get")]

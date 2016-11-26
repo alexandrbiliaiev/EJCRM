@@ -1,50 +1,180 @@
 <ui-view ng-controller="OfferManageController">
-    <div layout="row" layout-padding>
-        <div flex flex-gt-xs layout-xs="column">
-            <section class="demo-container md-whiteframe-z1">
+    <div layout="column" layout-padding>
+        <div flex layout="column">
+            <div layout="column" flex>
                 <md-toolbar>
-                    <div class="md-toolbar-tools">
+                    <div flex class="md-toolbar-tools">
                         <h2>
-                            <span>{{'NOTES'|translate}}</span>
+                            <span>{{'DETAIL_INFORMATION' | translate}}</span>
                         </h2>
                         <span flex></span>
-
-                        <md-button aria-label="button" class="md-icon-button" ng-click="showNewNoteDialog()">
-                            <md-icon md-font-icon="ion-plus-round"></md-icon>
-                        </md-button>
-                        <md-button aria-label="button" class="md-icon-button" ng-click="expandNotes = !expandNotes">
+                        <md-button aria-label="button" class="md-icon-button" ng-click="expandDetails = !expandDetails">
                             <md-icon md-font-icon="ion-navicon-round"></md-icon>
                         </md-button>
                     </div>
                 </md-toolbar>
-                <div ng-show="expandNotes" ng-cloak>
-                    <md-content>
-                        <md-list ng-cloak style="">
-                            <md-list-item class="md-2-line">
-                                <md-icon style="font-size:32px;" md-font-icon="ion-alert-circled">
-                                </md-icon>
-                                <div class="md-list-item-text">
-                                    <h3><b>Klient nie zapłacił za uslugi!!! </b></h3>
-                                    <p>
-                                        <i>Napisał Tadeusz o 12:33 2016-11-15</i>
-                                    </p>
-                                </div>
-                                <md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled">
-                                    <md-tooltip md-direction="left">
-                                        {{ 'ACTIVE' | translate }}
-                                    </md-tooltip>
-                                </md-icon>
-                                <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)">
-                                    <md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
-                                </md-button>
-                                <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
-                                    <md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-                                </md-button>
-                            </md-list-item>
-                        </md-list>
-                    </md-content>
+            </div>
+            <div layout="row" flex layout-wrap>
+                <div flex="50" ng-show="expandDetails" ng-cloak>
+                    <section class="demo-container md-whiteframe-z1">
+                        <md-toolbar layout="row" class="md-hue-3">
+                            <div class="md-toolbar-tools">
+                                <span>{{'OFFER_DETAIL' |translate}}</span>
+                            </div>
+                        </md-toolbar>
+
+                        <md-content>
+                            <md-content>
+                                azazaza
+                            </md-content>
+                    </section>
                 </div>
-            </section>
+                <div flex="50" ng-show="expandDetails" ng-cloak>
+                    <section class="demo-container md-whiteframe-z1">
+                        <md-toolbar layout="row" class="md-hue-3">
+                            <div class="md-toolbar-tools">
+                                <span>{{'OFFER_DETAIL' |translate}}</span>
+                            </div>
+                        </md-toolbar>
+
+                        <md-content>
+                            <md-content>
+                                azazaza
+                            </md-content>
+                    </section>
+                </div>
+                <div flex="50" ng-show="expandDetails" ng-cloak>
+                    <section class="demo-container md-whiteframe-z1">
+                        <md-toolbar layout="row" class="md-hue-3">
+                            <div class="md-toolbar-tools">
+                                <span>{{'OFFER_DETAIL' |translate}}</span>
+                            </div>
+                        </md-toolbar>
+
+                        <md-content>
+                            <md-content>
+                                azazaza
+                            </md-content>
+                    </section>
+                </div>
+            </div>
+
+
         </div>
     </div>
+
+    <div layout="column" layout-padding>
+        <div flex layout="column">
+            <div layout="column" flex>
+                <md-toolbar>
+                    <div flex class="md-toolbar-tools">
+                        <h2>
+                            <span>{{'CANDIDATES' | translate}}</span>
+                        </h2>
+                        <span flex></span>
+                        <md-button aria-label="button" class="md-icon-button" ng-click="showAddCandidateDialog()">
+                            <md-icon md-font-icon="ion-plus"></md-icon>
+                        </md-button>
+                        <md-button aria-label="button" class="md-icon-button" ng-click="expandCandidates = !expandCandidates">
+                            <md-icon md-font-icon="ion-navicon-round"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+            </div>
+            <div layout="row" flex layout-wrap>
+                <div flex ng-show="expandCandidates" ng-cloak>
+                    <section class="demo-container md-whiteframe-z1">
+                        <md-content>
+                           <md-list ng-cloak style="margin-top: -10px">
+							<md-list-item class="md-2-line" ng-repeat="candidate in offer.candidates">
+								<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="showEditContactPersonDialog(contactperson)">
+								</md-icon>
+								<div class="md-list-item-text">
+									<h3><b>{{candidate.firstName}} {{candidate.middleName}} {{candidate.lastName}}</b></h3>
+								</div>
+								<md-icon style="font-size:24px;" md-font-icon="ion-thumbsup" ng-click="acceptCandidateToOffer(candidate)">
+									<md-tooltip md-direction="left">
+										{{ 'ACCEPT' | translate }}
+									</md-tooltip>
+								</md-icon>
+								
+								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
+									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+								</md-button>
+								<md-divider ng-if="!$last"></md-divider>
+							</md-list-item>
+                        </md-content>
+                    </section>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+      <div layout="column" layout-padding>
+        <div flex layout="column">
+            <div layout="column" flex>
+                <md-toolbar>
+                    <div flex class="md-toolbar-tools">
+                        <h2>
+                            <span>{{'EMPLOYEES' | translate}}</span>
+                        </h2>
+                        <span flex></span>
+                        <md-button aria-label="button" class="md-icon-button" ng-click="showAddCandidateDialog()">
+                            <md-icon md-font-icon="ion-plus"></md-icon>
+                        </md-button>
+                        <md-button aria-label="button" class="md-icon-button" ng-click="expandCandidates = !expandCandidates">
+                            <md-icon md-font-icon="ion-navicon-round"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+            </div>
+            <div layout="row" flex layout-wrap>
+                <div flex ng-show="expandCandidates" ng-cloak>
+                    <section class="demo-container md-whiteframe-z1">
+                        <md-content>
+                           <md-list ng-cloak style="margin-top: -10px">
+							<md-list-item class="md-2-line" ng-repeat="employee in offer.employees">
+								<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="showEditContactPersonDialog(contactperson)">
+								</md-icon>
+								<div class="md-list-item-text">
+									<h3><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
+									<p>
+										{{'BIRTHDATE'|translate}}: {{moment(employee.birthDate).format('DD-MM-YYYY')}}
+									</p>
+								</div>
+								<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" ng-show="employee.status == '1'">
+									<md-tooltip md-direction="left">
+										{{ 'ACTIVE' | translate }}
+									</md-tooltip>
+								</md-icon>
+								<md-icon style="font-size:24px;" md-font-icon="ion-android-cancel" ng-show="employee.status == '0'">
+									<md-tooltip md-direction="left">
+										{{ 'INACTIVE' | translate }}
+									</md-tooltip>
+								</md-icon>
+								<md-icon style="font-size:24px;" md-font-icon="ion-sad" ng-show="employee.status == '2'">
+									<md-tooltip md-direction="left">
+										{{ 'LEFT' | translate }}
+									</md-tooltip>
+								</md-icon>
+								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee.id)">
+									<md-icon md-svg-icon="ion-thumbsup"></md-icon>
+								</md-button>
+								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
+									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+								</md-button>
+								<md-divider ng-if="!$last"></md-divider>
+							</md-list-item>
+                        </md-content>
+                    </section>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
 </ui-view>
