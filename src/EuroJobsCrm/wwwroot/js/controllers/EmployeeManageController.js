@@ -154,7 +154,17 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
         employeesService.saveEmployee(employee).success(function (response) {
             if ($scope.employee.id == 0 || $scope.employee.id == undefined) {
                 $scope.contragent.employees.push(response);
+            }else{
+                for(i in employeesService.employees){
+                    if (employeesService.employees[i].id == response.id){
+                        for(j in employeesService.employees[i])
+                            employeesService.employees[i][j] = response[j];
+                    }
+                }
+               
             }
+
+            
 
             $mdDialog.hide();
         }).error(function () {

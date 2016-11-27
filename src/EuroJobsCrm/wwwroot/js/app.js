@@ -57,6 +57,7 @@ app.run(function($rootScope) {
     });
 });
 
+angular.module('EuroJobsCrm.filters', []);
 angular.module('EuroJobsCrm.services', []);
 angular.module('EuroJobsCrm.controllers', []);
 

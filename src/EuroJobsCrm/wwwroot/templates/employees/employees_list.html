@@ -17,20 +17,16 @@
 					</div>
 					<md-toolbar class="md-hue-1" ng-show="showSearch">
 						<div class="md-toolbar-tools">
-							<md-input-container class="md-block" flex="100">
-								<input aria-label="input" ng-model="client.position" style="color:white; font-size:14pt;">
+							<md-input-container class="md-block" flex="100" ng-show="showSearch">
+								<input aria-label="input" ng-model="searchString" style="color:white; font-size:14pt;" placeholder="{{'SEARCH'| translate}} ..." />
 							</md-input-container>
-
-							<span flex> </span>
-							<md-button aria-label="Back">
-								<md-icon md-font-icon="ion-search"></md-icon>
 						</div>
 					</md-toolbar>
 				</md-toolbar>
 				<div layout="row" layout-padding="" ng-cloak>
 					<md-content flex>
 						<md-list ng-cloak style="margin-top: -10px">
-							<md-list-item class="md-2-line" ng-repeat="employee in employees">
+							<md-list-item class="md-2-line" ng-repeat="employee in employees | employeesSearchFor:searchString">
 								<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="showEditContactPersonDialog(contactperson)">
 								</md-icon>
 								<div class="md-list-item-text">
@@ -66,15 +62,10 @@
 				</div>
 			</section>
 		</md-content>
-		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
-			<a mfb-button icon="ion-ios-search-strong" label="{{'SEARCH' | translate}}"></a>
-			<a mfb-button icon="ion-android-contact" label="{{'ADD_CONTRAGENT' | translate}}" ng-click="showAddContragentDialog()"></a>
-		</nav>
 
 
 		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
 			<a mfb-button icon="ion-ios-search-strong" label="{{'SEARCH' | translate}}"></a>
-			<a mfb-button icon="ion-android-contact" label="{{'ADD_CLIENT' | translate}}" ng-click="showAddClientDialog()"></a>
 		</nav>
 	</div>
 </ui-view>
