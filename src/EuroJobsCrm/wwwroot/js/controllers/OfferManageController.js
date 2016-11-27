@@ -5,6 +5,8 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     $scope.expandEmployees = true;
     $scope.expandEmployees = true;
 
+    $scope.moment = moment;
+
     $scope.goBack = function () {
         $state.go('offers');
     }
@@ -52,7 +54,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     }
 
     $scope.acceptCandidateToOffer = function (emp) {
-       
+
         candidateRequest = {
             offerId: $scope.offer.id,
             employeeId: emp.id,

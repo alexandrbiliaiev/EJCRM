@@ -1,7 +1,7 @@
 <ui-view ng-controller="OfferManageController">
     <div layout="column" layout-padding>
         <div flex layout="column">
-            <div layout="column" flex>
+            <div layout="column" flex >
                 <md-toolbar>
                     <div flex class="md-toolbar-tools">
                         <h2>
@@ -14,53 +14,221 @@
                     </div>
                 </md-toolbar>
             </div>
-            <div layout="row" flex layout-wrap>
-                <div flex="50" ng-show="expandDetails" ng-cloak>
-                    <section class="demo-container md-whiteframe-z1">
-                        <md-toolbar layout="row" class="md-hue-3">
-                            <div class="md-toolbar-tools">
-                                <span>{{'OFFER_DETAIL' |translate}}</span>
-                            </div>
-                        </md-toolbar>
-
-                        <md-content>
-                            <md-content>
-                                azazaza
-                            </md-content>
-                    </section>
+            <div flex layout="row">
+                <div flex layout="column" flex="50" layout-align="stretch">
+                    <div layout="row">
+                        <div flex ng-show="expandDetails" ng-cloak>
+                            <section class="demo-container md-whiteframe-z1">
+                                <md-content>
+                                    <md-list ng-cloak>
+                                        <md-list-item class="md-2-line">
+                                            <div class="md-list-item-text">
+                                                <label>{{'OFFER_INFORMATION'| translate}}</label>
+                                                <p>{{'BRANCH'| translate}}:
+                                                    <b ng-show="offer.branch==0">{{ 'BUILDING' | translate }}</b>
+                                                    <b ng-show="offer.branch==1"> {{ 'PHISICAL_WORK' | translate }}</b>
+                                                    <b ng-show="offer.branch==2"> {{ 'IT' | translate }}</b> </p>
+                                                <p>{{'POSITION'| translate}}: <b>{{offer.position}}</b> </p>
+                                                <p>{{ 'VACANCIES_NUMBER' | translate }}: <b>{{offer.vacanciesNumber}}</b></p>
+                                                <p>{{'POSITION'| translate}}: <b>{{offer.position}}</b> </p>
+                                                <p>{{'WORK_PLACE'| translate}}: <b>{{offer.workPlace}}</b> </p>
+                                                <p>{{'STARTING_DATE'| translate}}: <b> {{moment(offer.startingDate).format('DD-MM-YYYY')}}</b>                                                    </p>
+                                                <p>{{'ENDING_DATE'| translate}}: <b ng-show="offer.endingDate != null">{{moment(offer.endingDate).format('DD-MM-YYYY')}}</b>
+                                                    <b ng-show="offer.endingDate == null">{{'WORK_UNLIMITED'| translate}}</b>                                                    </p>
+                                            </div>
+                                        </md-list-item>
+                                    </md-list>
+                                </md-content>
+                            </section>
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div flex ng-show="expandDetails" ng-cloak>
+                            <section class="demo-container md-whiteframe-z1">
+                                <md-content>
+                                    <md-list ng-cloak>
+                                        <md-list-item class="md-2-line">
+                                            <div class="md-list-item-text">
+                                                <label>	{{'RESPONCIBILITIES'| translate}}
+				                            <h6>{{'DESCRIPTION_OF_POSITION'| translate}}</h6></label>
+                                                <p>{{offer.responsibilities}}</p>
+                                            </div>
+                                        </md-list-item>
+                                    </md-list>
+                                </md-content>
+                            </section>
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div flex ng-show="expandDetails" ng-cloak>
+                            <section class="demo-container md-whiteframe-z1">
+                                <md-content>
+                                    <md-list ng-cloak>
+                                        <md-list-item class="md-2-line">
+                                            <div class="md-list-item-text">
+                                                <label>{{'COMPETENCE'| translate}}</label>
+                                                <p>{{'EDUCATION'| translate}}:
+                                                    <b ng-show="offer.education==0">{{ 'UNIVERCITY' | translate }}</b>
+                                                    <b ng-show="offer.education==1">{{ 'HIGH_SCHOOL' | translate }}</b>
+                                                    <b ng-show="offer.education==2">{{ 'NONE_ED' | translate }}</b> </p>
+                                                <p>{{'EXPERIENCE'| translate}}: <b>{{offer.experience}}</b> </p>
+                                                <p>{{'LANGUAGES'| translate}}: <b>{{offer.languages}}</b></p>
+                                                <p>{{'AGE_FROM'| translate}} <b>{{offer.ageFrom}}</b> </p>
+                                                <p>{{'AGE_TO'| translate}} <b>{{offer.ageTo}}</b> </p>
+                                                <p>{{ 'GENDER' | translate }}:
+                                                    <b ng-show="offer.gender==0">{{ 'ALL' | translate }}</b>
+                                                    <b ng-show="offer.gender==1">{{ 'MALE' | translate }}</b>
+                                                    <b ng-show="offer.gender==2">{{ 'FEMALE' | translate }}</b> </p>
+                                                <p>{{'DOCUMENTS'| translate}}: <b>{{offer.documents}}</b> </p>
+                                                <p>{{'OTHER'| translate}}: <b>{{offer.comments}}</b> </p>
+                                            </div>
+                                        </md-list-item>
+                                    </md-list>
+                                </md-content>
+                            </section>
+                        </div>
+                    </div>
                 </div>
-                <div flex="50" ng-show="expandDetails" ng-cloak>
-                    <section class="demo-container md-whiteframe-z1">
-                        <md-toolbar layout="row" class="md-hue-3">
-                            <div class="md-toolbar-tools">
-                                <span>{{'OFFER_DETAIL' |translate}}</span>
-                            </div>
-                        </md-toolbar>
+                <div layout="column" flex="50" layout-align="stretch">
+                    <div layout="row">
+                        <div flex ng-show="expandDetails" ng-cloak>
+                            <section class="demo-container md-whiteframe-z1">
+                                <md-content>
+                                    <md-list ng-cloak>
+                                        <md-list-item class="md-2-line">
+                                            <div class="md-list-item-text">
+                                                <label>{{'JOB_CONDITIONS'| translate}}</label>
+                                                <p>{{'CONTRACT_TYPE'| translate}}:
+                                                    <b ng-show="offer.contractType==0">{{ 'UMOWA_O_PRACE' | translate }}</b>
+                                                    <b ng-show="offer.contractType==1">{{ 'ZLECENIE' | translate }}</b></p>
+                                                <p>{{'WORK_FROM'| translate}} <b>{{moment(offer.workStart).format('HH:mm')}}</b>                                                    </p>
+                                                <p>{{'WORK_TO'| translate}} <b>{{moment(offer.workEnd).format('HH:mm')}}</b></p>
+                                                <p>{{'HOURS_PER_MONTH'| translate}}: <b>{{offer.hoursPerMonth}}</b> </p>
+                                                <p>{{'OVERWORK'| translate}}:
+                                                    <b ng-show="offer.overtimeRate != null">{{offer.overtimeRate}}</b>
+                                                    <b ng-show="offer.overtimeRate == null">{{'OVERWORK_NOT_POSSIBLE' | translate}}</b></p>
+                                                <p>{{'WORK_DAYS'| translate}}:
+                                                    <b ng-show="offer.workMo == true">{{'MONDAY' | translate}}</b><b ng-show="offer.workTu == true">, </b>
+                                                    <b ng-show="offer.workTu == true">{{'TUESDAY' | translate}}</b><b ng-show="offer.workWe == true">, </b>
+                                                    <b ng-show="offer.workWe == true">{{'WEDNESDAY' | translate}}</b><b ng-show="offer.workTh == true">, </b>
+                                                    <b ng-show="offer.workTh == true">{{'THURSDAY' | translate}}</b><b ng-show="offer.workFr == true">, </b>
+                                                    <b ng-show="offer.workFr == true">{{'FRIDAY' | translate}}</b><b ng-show="offer.workSa == true">, </b>
+                                                    <b ng-show="offer.workSa == true">{{'SATURDAY' | translate}}</b><b ng-show="offer.workSu == true">, </b>
+                                                    <b ng-show="offer.workSu == true">{{'SUNDAY' | translate}}</b>
+                                                </p>
 
-                        <md-content>
-                            <md-content>
-                                azazaza
-                            </md-content>
-                    </section>
-                </div>
-                <div flex="50" ng-show="expandDetails" ng-cloak>
-                    <section class="demo-container md-whiteframe-z1">
-                        <md-toolbar layout="row" class="md-hue-3">
-                            <div class="md-toolbar-tools">
-                                <span>{{'OFFER_DETAIL' |translate}}</span>
-                            </div>
-                        </md-toolbar>
-
-                        <md-content>
-                            <md-content>
-                                azazaza
-                            </md-content>
-                    </section>
+                                            </div>
+                                        </md-list-item>
+                                    </md-list>
+                                </md-content>
+                            </section>
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div flex ng-show="expandDetails" ng-cloak>
+                            <section class="demo-container md-whiteframe-z1">
+                                <md-content>
+                                    <md-list ng-cloak>
+                                        <md-list-item class="md-2-line">
+                                            <div class="md-list-item-text">
+                                                <label>{{'PAYMENT'| translate}}</label>
+                                                <p ng-show="offer.ratePerHour != null">{{'PER_HOUR'| translate}}: <b>{{offer.ratePerHour}}</b> </p>
+                                                <p ng-show="offer.ratePerMonth != null">{{'PER_MONTH'| translate}}: <b>{{offer.ratePerMonth}}</b> </p>
+                                                <p>{{'PAYMENT_TYPE'| translate}}:
+                                                    <b ng-show="offer.paymentMethod == 0">{{ 'CASH' | translate }}</b>
+                                                    <b ng-show="offer.paymentMethod == 1">{{ 'BANK_TRANSFER' | translate }}</b>
+                                                    <b ng-show="offer.paymentMethod == 2">{{ 'CASH' | translate }}/{{ 'BANK_TRANSFER' | translate }}</b>
+                                                </p>
+                                                <p>{{'ADVANCE'| translate}}:
+                                                    <b ng-show="offer.advanceAmount != null">{{offer.advanceAmount}}</b>
+                                                    <b ng-show="offer.advanceAmount == null">{{'ADVANCE_NOT_POSSIBLE' | translate}}</b>
+                                                </p>
+                                            </div>
+                                        </md-list-item>
+                                    </md-list>
+                                </md-content>
+                            </section>
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div flex ng-show="expandDetails" ng-cloak>
+                            <section class="demo-container md-whiteframe-z1">
+                                <md-content>
+                                    <md-list ng-cloak>
+                                        <md-list-item class="md-2-line">
+                                            <div class="md-list-item-text">
+                                                <label>{{'ACCOMODATION'| translate}}</label>
+                                                <p>{{'ACCOMODATION_PRICE'| translate}}:
+                                                    <b ng-show="offer.accomodationPrice != null">{{offer.accomodationPrice}}</b>
+                                                    <b ng-show="offer.accomodationPrice == null">{{'FREE_ACCOMODATION' | translate}}</b>
+                                                </p>
+                                                <p>{{'ACCOMODATION_TYPE'| translate}}:
+                                                    <b ng-show="offer.accomodationType == 0">{{ 'NONE' | translate }}</b>
+                                                    <b ng-show="offer.accomodationType == 1">{{ 'APARTMENT' | translate }}</b>
+                                                    <b ng-show="offer.accomodationType == 2">{{ 'HOUSE' | translate }}</b>
+                                                    <b ng-show="offer.accomodationType == 3">{{ 'HOSTEL' | translate }}</b>
+                                                </p>
+                                                <p>{{'ROOM_PEOPLE_NUMBER'| translate}}:
+                                                    <b ng-show="offer.roomPeopleNumber == 0 ">{{ 'PERSONAL' | translate }}</b>
+                                                    <b ng-show="offer.roomPeopleNumber == 1">1</b>
+                                                    <b ng-show="offer.roomPeopleNumber == 2">2</b>
+                                                    <b ng-show="offer.roomPeopleNumber == 3">3</b>
+                                                    <b ng-show="offer.roomPeopleNumber == 4">4</b>
+                                                    <b ng-show="offer.roomPeopleNumber == 5">5</b>
+                                                    <b ng-show="offer.roomPeopleNumber == 6">6</b>
+                                                    <b ng-show="offer.roomPeopleNumber == 7">7</b>
+                                                </p>
+                                                <p>{{'TRANSPORT_TO_WORK_KM'| translate}}: <b>{{offer.distanceToWork}}</b> </p>
+                                                <p>{{'TRANSPORT_TO_WORK_TYPE'| translate}}:
+                                                    <b ng-show="offer.transportToWork == 0">{{ 'NOT_PAYED' | translate }}</b>
+                                                    <b ng-show="offer.transportToWork == 1">{{ 'PAYED' | translate }}</b>
+                                                </p>
+                                                <p ng-show="offer.transportToWork == 1">{{'TRANSPORT_PAYMENT'| translate}}: <b>{{offer.transportPrice}}</b> </p>
+                                            </div>
+                                        </md-list-item>
+                                    </md-list>
+                                </md-content>
+                            </section>
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div flex ng-show="expandDetails" ng-cloak>
+                            <section class="demo-container md-whiteframe-z1">
+                                <md-content>
+                                    <md-list ng-cloak>
+                                        <md-list-item class="md-2-line">
+                                            <div class="md-list-item-text">
+                                                <label>{{'FACILITIES'| translate}}</label>
+                                                <p ng-show="offer.facilities != null">{{offer.facilities}}</p>
+                                                <p ng-show="offer.facilities == null">Brak</p>
+                                            </div>
+                                        </md-list-item>
+                                    </md-list>
+                                </md-content>
+                            </section>
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div flex ng-show="expandDetails" ng-cloak>
+                            <section class="demo-container md-whiteframe-z1">
+                                <md-content>
+                                    <md-list ng-cloak>
+                                        <md-list-item class="md-2-line">
+                                            <div class="md-list-item-text">
+                                                <label>	{{'ADDITIONAL_INFO'| translate}}</label>
+                                                <p ng-show="offer.additionalInfo != null">{{offer.additionalInfo}}</p>
+                                                <p ng-show="offer.additionalInfo == null">Brak</p>
+                                            </div>
+                                        </md-list-item>
+                                    </md-list>
+                                </md-content>
+                            </section>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
         </div>
+    </div>
     </div>
 
     <div layout="column" layout-padding>
@@ -85,24 +253,24 @@
                 <div flex ng-show="expandCandidates" ng-cloak>
                     <section class="demo-container md-whiteframe-z1">
                         <md-content>
-                           <md-list ng-cloak style="margin-top: -10px">
-							<md-list-item class="md-2-line" ng-repeat="candidate in offer.candidates">
-								<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="showEditContactPersonDialog(contactperson)">
-								</md-icon>
-								<div class="md-list-item-text">
-									<h3><b>{{candidate.firstName}} {{candidate.middleName}} {{candidate.lastName}}</b></h3>
-								</div>
-								<md-icon style="font-size:24px;" md-font-icon="ion-thumbsup" ng-click="acceptCandidateToOffer(candidate)">
-									<md-tooltip md-direction="left">
-										{{ 'ACCEPT' | translate }}
-									</md-tooltip>
-								</md-icon>
-								
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
-									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-								</md-button>
-								<md-divider ng-if="!$last"></md-divider>
-							</md-list-item>
+                            <md-list ng-cloak style="margin-top: -10px">
+                                <md-list-item class="md-2-line" ng-repeat="candidate in offer.candidates">
+                                    <md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="showEditContactPersonDialog(contactperson)">
+                                    </md-icon>
+                                    <div class="md-list-item-text">
+                                        <h3><b>{{candidate.firstName}} {{candidate.middleName}} {{candidate.lastName}}</b></h3>
+                                    </div>
+                                    <md-icon style="font-size:24px;" md-font-icon="ion-thumbsup" ng-click="acceptCandidateToOffer(candidate)">
+                                        <md-tooltip md-direction="left">
+                                            {{ 'ACCEPT' | translate }}
+                                        </md-tooltip>
+                                    </md-icon>
+
+                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
+                                        <md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+                                    </md-button>
+                                    <md-divider ng-if="!$last"></md-divider>
+                                </md-list-item>
                         </md-content>
                     </section>
                 </div>
@@ -112,7 +280,7 @@
         </div>
     </div>
 
-      <div layout="column" layout-padding>
+    <div layout="column" layout-padding>
         <div flex layout="column">
             <div layout="column" flex>
                 <md-toolbar>
@@ -134,39 +302,39 @@
                 <div flex ng-show="expandCandidates" ng-cloak>
                     <section class="demo-container md-whiteframe-z1">
                         <md-content>
-                           <md-list ng-cloak style="margin-top: -10px">
-							<md-list-item class="md-2-line" ng-repeat="employee in offer.employees">
-								<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="showEditContactPersonDialog(contactperson)">
-								</md-icon>
-								<div class="md-list-item-text">
-									<h3><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
-									<p>
-										{{'BIRTHDATE'|translate}}: {{moment(employee.birthDate).format('DD-MM-YYYY')}}
-									</p>
-								</div>
-								<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" ng-show="employee.status == '1'">
-									<md-tooltip md-direction="left">
-										{{ 'ACTIVE' | translate }}
-									</md-tooltip>
-								</md-icon>
-								<md-icon style="font-size:24px;" md-font-icon="ion-android-cancel" ng-show="employee.status == '0'">
-									<md-tooltip md-direction="left">
-										{{ 'INACTIVE' | translate }}
-									</md-tooltip>
-								</md-icon>
-								<md-icon style="font-size:24px;" md-font-icon="ion-sad" ng-show="employee.status == '2'">
-									<md-tooltip md-direction="left">
-										{{ 'LEFT' | translate }}
-									</md-tooltip>
-								</md-icon>
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee.id)">
-									<md-icon md-svg-icon="ion-thumbsup"></md-icon>
-								</md-button>
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
-									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-								</md-button>
-								<md-divider ng-if="!$last"></md-divider>
-							</md-list-item>
+                            <md-list ng-cloak style="margin-top: -10px">
+                                <md-list-item class="md-2-line" ng-repeat="employee in offer.employees">
+                                    <md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="showEditContactPersonDialog(contactperson)">
+                                    </md-icon>
+                                    <div class="md-list-item-text">
+                                        <h3><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
+                                        <p>
+                                            {{'BIRTHDATE'|translate}}: {{moment(employee.birthDate).format('DD-MM-YYYY')}}
+                                        </p>
+                                    </div>
+                                    <md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" ng-show="employee.status == '1'">
+                                        <md-tooltip md-direction="left">
+                                            {{ 'ACTIVE' | translate }}
+                                        </md-tooltip>
+                                    </md-icon>
+                                    <md-icon style="font-size:24px;" md-font-icon="ion-android-cancel" ng-show="employee.status == '0'">
+                                        <md-tooltip md-direction="left">
+                                            {{ 'INACTIVE' | translate }}
+                                        </md-tooltip>
+                                    </md-icon>
+                                    <md-icon style="font-size:24px;" md-font-icon="ion-sad" ng-show="employee.status == '2'">
+                                        <md-tooltip md-direction="left">
+                                            {{ 'LEFT' | translate }}
+                                        </md-tooltip>
+                                    </md-icon>
+                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee.id)">
+                                        <md-icon md-svg-icon="ion-thumbsup"></md-icon>
+                                    </md-button>
+                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
+                                        <md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+                                    </md-button>
+                                    <md-divider ng-if="!$last"></md-divider>
+                                </md-list-item>
                         </md-content>
                     </section>
                 </div>
