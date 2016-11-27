@@ -1,6 +1,7 @@
 angular.module('EuroJobsCrm.controllers').controller('ContragentsController', function ($scope, $location, $http, $state, $translate, $mdDialog, contragentsService) {
     $scope.contragents = [];
     $scope.index = 0;
+    $scope.contragents = new Array();
 
     $scope.contragent = {
         status: 'a',

@@ -35,6 +35,22 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
+         employees.deleteDocument = function(docId){
+             return $http({
+                url: 'api/Employees/DeleteDocument',
+                method: "POST",
+                data: docId
+            });
+        }
+
+        employees.deleteDocumentFile = function(fileId){
+             return $http({
+                url: 'api/Employees/DeleteFile',
+                method: "POST",
+                data: fileId
+            });
+        }
+
         employees.getEmployeeFromDb = function (id) {
             param = {
                 employeeId: id

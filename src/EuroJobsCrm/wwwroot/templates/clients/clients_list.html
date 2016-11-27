@@ -18,20 +18,16 @@
 					</div>
 					<md-toolbar class="md-hue-1" ng-show="showSearch">
 						<div class="md-toolbar-tools">
-							<md-input-container class="md-block" flex="100">
-								<input aria-label="input" ng-model="client.position" style="color:white; font-size:14pt;">
+							<md-input-container class="md-block" flex="100" ng-show="showSearch">
+								<input aria-label="input" ng-model="searchString" style="color:white; font-size:14pt;" placeholder="{{'SEARCH'| translate}} ..." />
 							</md-input-container>
-
-							<span flex> </span>
-							<md-button aria-label="Back">
-								<md-icon md-font-icon="ion-search"></md-icon>
 						</div>
 					</md-toolbar>
 				</md-toolbar>
 				<div layout="row" layout-padding="" ng-cloak>
 					<md-content flex>
 						<md-list ng-cloak style="margin-top: -10px">
-							<md-list-item class="md-3-line" ng-repeat="client in clients">
+							<md-list-item class="md-3-line" ng-repeat="client in clients | clientsSearchFor : searchString">
 								<md-icon style="font-size:24px;" md-font-icon="ion-ios-folder">
 								</md-icon>
 								<div class="md-list-item-text">
