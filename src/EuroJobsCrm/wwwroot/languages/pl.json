@@ -166,14 +166,13 @@
 	"HIGH_SCHOOL":"Liceum",
 	"NONE_ED":"Bez wykształcenia",
     "DOCS_VISA":"Dokumenty i wizy",
-    "OFFER_DELETE_CONFIRM_TITLE":"Chcesz usunąć tą oferte?",
+    "OFFER_DELETE_CONFIRM_TITLE":"Chcesz usunąć tę ofertę?",
     "OFFER_DELETE_CONFIRM_TEXT": "Dane będą usunięte",
     "EMPLOYED_PEOPLE": "Zatrudnione osoby",
     "OFFER": "Oferta",
     "DOCUMENT": "Dokument",
     "DOCUMENT_TYPE": "Typ dokumentu",
-    "VISA_TYPE": "Typ wizy",
-    
+    "VISA_TYPE": "Typ wizy",   
     "EMPLOYEE": "Pracownik",
     "DOC_NUMBER":"Numer",
     "PASSPORT":"Pasport",
@@ -182,7 +181,10 @@
     "VALID_FROM":"Ważny od",
     "VALID_TO":"ważny do",
     "SERIA": "Seria",
-    "REMARKS":"Uwagi"
-    
-    
+    "REMARKS":"Uwagi",
+    "FILES":"Pliki",
+    "DOC_FILE_DELETE_CONFIRM_TITLE":"Chcesz usunąć ten plik?",
+    "DOC_FILE_DELETE_CONFIRM_TEXT":"Plik zostanie usunięty z serwera",
+    "DOC_DELETE_CONFIRM_TITLE":"Chcesz usunąć ten dokument?",
+    "DOC_DELETE_CONFIRM_TEXT":"Dokument zostanie usunięty"    
 }

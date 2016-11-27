@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
 using Microsoft.AspNetCore.Identity;
@@ -56,12 +55,18 @@ namespace EuroJobsCrm.Controllers
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
                 var employeeData = context.Employees.Where(c => c.EmpId == employeeId)
-                    .GroupJoin(context.IdentityDocuments, e => e.EmpId, d => d.IdcEmpId,
+                    .GroupJoin(context.IdentityDocuments.Where(d => d.IdcAuditRd == null), e => e.EmpId, d => d.IdcEmpId,
                         (e, d) => new { employee = e, documents = d })
                     .ToList();
 
+                IEnumerable<int?> documentsIds = employeeData.SelectMany(e => e.documents.Select(d => (int?)d.IdcId)).ToList();
+
+                List<DocumentFiles> files = context.DocumentFiles
+                                                          .Where(d => documentsIds.Contains(d.DcfIdcId) && d.DcfAuditRd == null)
+                                                          .ToList();
+
                 EmployeeDto emp = employeeData
-                    .Select(e => new EmployeeDto(e.employee, e.documents, new List<DocumentFiles>())).FirstOrDefault();
+                    .Select(e => new EmployeeDto(e.employee, e.documents, files)).FirstOrDefault();
 
                 return emp;
             }
@@ -238,5 +243,27 @@ namespace EuroJobsCrm.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("api/Employees/DeleteFile")]
+        public bool DeleteIdDocumentFile([FromBody] int fileId)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                DocumentFiles docFile = context.DocumentFiles.FirstOrDefault(c => c.DcfId == fileId);
+
+                if (docFile == null)
+                {
+                    return false;
+                }
+
+                docFile.DcfAuditRd = DateTime.UtcNow;
+                docFile.DcfAuditRu = User.GetUserId();
+                context.SaveChanges();
+
+                return true;
+            }
+        }
+
+        
     }
 }

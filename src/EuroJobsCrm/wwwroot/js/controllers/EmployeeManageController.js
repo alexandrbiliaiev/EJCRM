@@ -26,6 +26,7 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
 
     $scope.showAddDocumentDialog = function () {
         $scope.document = employeesService.getDefaultDocument();
+        $scope.document.employeeId =  $scope.employee.id;
         $scope.docFile = undefined;
         $scope.sendProgress = 0;
         $mdDialog.show({
@@ -44,6 +45,11 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
 
     $scope.showEditDocumentDialog = function (document) {
         $scope.document = document;
+        $scope.document.validFrom =  new Date($scope.document.validFrom); 
+        $scope.document.validTo =  new Date($scope.document.validTo);  
+        $scope.document.issueDate =  new Date($scope.document.issueDate);  
+        
+             
         $scope.docFile = undefined;
         $scope.sendProgress = 0;
         $mdDialog.show({
@@ -59,8 +65,76 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
 
             });
     }
-    
 
+    $scope.showDeleteDocFileConfirmDialog = function (fileId) {
+        var confirm = $mdDialog.confirm()
+            .title($translate.instant('DOC_FILE_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('DOC_FILE_DELETE_CONFIRM_TEXT'))
+            .ariaLabel('label')
+            .ok($translate.instant('DELETE_OK'))
+            .cancel($translate.instant('DELETE_CANCEL'));
+
+        $mdDialog.show(confirm).then(function () {
+            employeesService.deleteDocumentFile(fileId).success(function (response) {
+                if (response == false) {
+                    return;
+                }
+
+                documents = $scope.employee.identityDocuments;
+                for (i in documents) {
+                    files = documents[i].files;
+                    for (j in files) {
+                        if (files[j].id != fileId) {
+                            continue;
+                        }
+
+                        files.splice(j, 1);
+                        return;
+                    }
+                }
+
+            }).error(function (response) {
+                $state.go('error');
+            });
+        }, function () {
+
+        });
+    }
+
+    $scope.showDeleteDocConfirmDialog = function (docId) {
+        var confirm = $mdDialog.confirm()
+            .title($translate.instant('DOC_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('DOC_DELETE_CONFIRM_TEXT'))
+            .ariaLabel('label')
+            .ok($translate.instant('DELETE_OK'))
+            .cancel($translate.instant('DELETE_CANCEL'));
+
+        $mdDialog.show(confirm).then(function () {
+            employeesService.deleteDocument(docId).success(function (response) {
+                if (response == false) {
+                    return;
+                }
+
+                documents = $scope.employee.identityDocuments;
+                for (i in documents) {
+
+                    if (documents[i].id != docId) {
+                        continue;
+                    }
+
+                    documents.splice(i, 1);
+                    return;
+
+                }
+
+            }).error(function (response) {
+                $state.go('error');
+            });
+        }, function () {
+
+        });
+    }
+  
     $scope.saveEmployeeClick = function () {
         if ($scope.employeeForm.$invalid) {
             return;
@@ -96,7 +170,10 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
 
         employeesService.saveDocument($scope.document).success(function (response) {
             if ($scope.document.id== 0 || $scope.document.id == undefined) {
-                $scope.employee.documents.push(response);
+                $scope.employee.identityDocuments.push(response);
+            }else{
+                for(i in $scope.document) 
+                    $scope.document[i] = response[i];
             }
 
             $mdDialog.hide();
@@ -114,16 +191,6 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
         $state.go($rootScope.previousState, $rootScope.previousStateParams);
     }
 
-    employeeId = $state.params.id;
-
-    employeesService.getEmployeeFromDb(employeeId).success(function (response) {
-        $scope.employee = response;
-        $scope.employeeBirthday = moment(response.birthDate).format('DD-MM-YYYY');
-    }).error(function () {
-        $state.go('error');
-    });
-
-    
     $scope.uploadFile = function (file) {
         $scope.sendProgress = 0;
         file.upload = Upload.upload({
@@ -137,6 +204,8 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
             $timeout(function () {
                 $scope.document.files.push({url : response.data, name : file.name});
                 file.result = response.data;
+                $scope.docFile = undefined;
+                $scope.sendProgress = 0;
             });
         }, function (response) {
             if (response.status > 0)
@@ -148,5 +217,13 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
         });
     }
 
+    employeeId = $state.params.id;
+
+    employeesService.getEmployeeFromDb(employeeId).success(function (response) {
+        $scope.employee = response;
+        $scope.employeeBirthday = moment(response.birthDate).format('DD-MM-YYYY');
+    }).error(function () {
+        $state.go('error');
+    });
 
 });

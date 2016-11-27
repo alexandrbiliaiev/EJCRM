@@ -72,18 +72,26 @@
 				<div layout="row">
 					<md-input-container class="md-block" flex="100">
 						<label>{{ 'REMARKS' | translate }}</label>
-						<textarea ng-model="document.remarks" md-maxlength="300" rows="2" md-select-on-focus></textarea>
+						<textarea ng-model="document.remarks" md-maxlength="300" rows="2" ></textarea>
 					</md-input-container>
 				</div>
-				<div layout="row" layout-wrap>
-
+				<div layout="column" flex>
+					<h3 flex>{{ 'FILES' | translate }}</h3>
 					<md-list>
-							<md-list-item ng-repeat="file in document.files">
-								<a href="{{file.url}}">{{file.name}}</a>
+							<md-list-item ng-repeat="file in document.files " flex>
+								<a href="{{file.url}}" target="_blank">{{file.name}}</a>
+								  <md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteDocFileConfirmDialog(file.id)">
+                                    <md-icon md-svg-icon="/lib/icons/delete.svg">
+                                        <md-tooltip md-direction="down">
+                                            {{ 'DELETE' | translate }}
+                                        </md-tooltip>
+                                    </md-icon>
+                                </md-button>
 								<md-divider ng-if="!$last"></md-divider>
-
 							</md-list-item>
 					</md-list>
+				<div>
+				<div layout="row" flex="100" layout-wrap>
 
 					<md-button class="md-raised md-primary" >
 						<label for="document-file-input" style="cusrsor:pointer; color:white;" >
@@ -97,16 +105,13 @@
 
 					<md-progress-linear md-mode="determinate" value="{{sendProgress}}" ng-show="sendProgress > 0"></md-progress-linear>
 
-					<input id="document-file-input" type="file" ngf-select ng-model="docFile" ngf-max-size="10MB" required ngf-model-invalid="errorFile"
+					<input id="document-file-input" type="file" ngf-select ng-model="docFile" ngf-max-size="10MB" ngf-model-invalid="errorFile"
 						style="display: none;" />
-
-						
-
 				</div>
 			</form>
 		</div>
 	</md-dialog-content>
-	<md-dialog-actions layout="row">
+	<md-dialog-actions layout="row" flex>
 		<md-button ng-click="saveDocumentClick()">
 			{{'SAVE'|translate}}
 		</md-button>
