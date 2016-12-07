@@ -406,6 +406,21 @@ namespace EuroJobsCrm.Models
                     .HasMaxLength(1);
             });
 
+            modelBuilder.Entity<ContragentsUsersMappings>(entity =>
+            {
+                entity.HasKey(e => e.CumId)
+                    .HasName("PK_ContragentsUsersMappings");
+
+                entity.Property(e => e.CumId).HasColumnName("cum_id");
+
+                entity.Property(e => e.CumCtgId).HasColumnName("cum_ctg_id");
+
+                entity.Property(e => e.CumUserId)
+                    .IsRequired()
+                    .HasColumnName("cum_user_id")
+                    .HasMaxLength(450);
+            });
+
             modelBuilder.Entity<DocumentFiles>(entity =>
             {
                 entity.HasKey(e => e.DcfId)
@@ -821,6 +836,7 @@ namespace EuroJobsCrm.Models
         public virtual DbSet<ContactPersons> ContactPersons { get; set; }
         public virtual DbSet<Contracts> Contracts { get; set; }
         public virtual DbSet<Contragents> Contragents { get; set; }
+        public virtual DbSet<ContragentsUsersMappings> ContragentsUsersMappings { get; set; }
         public virtual DbSet<DocumentFiles> DocumentFiles { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<EmploymentRequests> EmploymentRequests { get; set; }

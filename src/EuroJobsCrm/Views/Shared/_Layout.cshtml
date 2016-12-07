@@ -55,7 +55,7 @@
                          <!--   <li><a asp-area="" asp-controller="Invoice" asp-action="Index">{{ 'Invoice' | translate }}</a></li> -->
                           <!--  <li><a asp-area="" asp-controller="Communication" asp-action="Index">{{ 'Communication' | translate }}</a></li> -->
                             <li><a asp-area="" asp-controller="Contragents" asp-action="Index" asp-fragment="ctg_all">{{ 'Contragents' | translate }}</a></li>
-                          <!--  <li><a asp-area="" asp-controller="Calendar" asp-action="Index">{{ 'Calendar' | translate }}</a></li> -->
+                           <li><a asp-area="" asp-controller="Users" asp-action="Index" asp-fragment="usr_all">{{ 'USERS' | translate }}</a></li>
                         </ul>
                         } @await Html.PartialAsync("_LoginPartial")
                     </div>
@@ -100,6 +100,7 @@
                 <script src="~/js/services/contragentsService.js"></script>
                 <script src="~/js/services/contactPersonsService.js"></script>
                 <script src="~/js/services/clientsService.js"></script>
+                <script src="~/js/services/usersService.js"></script>
 
                 <script src="~/js/controllers/ClientsController.js"></script>
                 <script src="~/js/controllers/ContragentsController.js"></script>
@@ -109,6 +110,7 @@
                 <script src="~/js/controllers/EmployeesController.js"></script>
                 <script src="~/js/controllers/OffersController.js"></script>
                 <script src="~/js/controllers/OfferManageController.js"></script>
+                <script src="~/js/controllers/UsersController.js"></script>
 
                 <script src="~/js/filters/searchForFilter.js"></script>
 
@@ -147,6 +149,8 @@
                 <script src="~/js/services/employeesService.js"></script>
                 <script src="~/js/services/clientsService.js"></script>
                 <script src="~/js/services/offersService.js"></script>
+                <script src="~/js/services/usersService.js"></script>
+                
                 <script src="~/lib/mdPickers/mdPickers.js"></script>
 
 
@@ -159,6 +163,7 @@
                 <script src="~/js/controllers/EmployeesController.js"></script>
                 <script src="~/js/controllers/OffersController.js"></script>
                 <script src="~/js/controllers/OfferManageController.js"></script>
+                <script src="~/js/controllers/UsersController.js"></script>
 
                 <script src="~/js/filters/searchForFilter.js"></script>
 

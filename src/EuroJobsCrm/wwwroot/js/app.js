@@ -43,6 +43,9 @@
             }).state('offer', {
                 url: "/off_edit/:id",
                 templateUrl: 'templates/offers/offer_details.html',
+            }).state('users', {
+                url: "/usr_all",
+                templateUrl: 'templates/users/users_list.html',
             });
           
     });

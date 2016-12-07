@@ -186,5 +186,11 @@
     "DOC_FILE_DELETE_CONFIRM_TITLE":"Chcesz usunąć ten plik?",
     "DOC_FILE_DELETE_CONFIRM_TEXT":"Plik zostanie usunięty z serwera",
     "DOC_DELETE_CONFIRM_TITLE":"Chcesz usunąć ten dokument?",
-    "DOC_DELETE_CONFIRM_TEXT":"Dokument zostanie usunięty"    
+    "DOC_DELETE_CONFIRM_TEXT":"Dokument zostanie usunięty",
+    "USERS": "Użytkownicy",
+    "ID": "Identyfikator",
+    "ADD_USER": "Dodaj użytkownika",
+    "ADD_ADV_USER": "Dotaj zaawansowanego użytkownika",
+    "USER":"Użytkownik",
+    "PASSWORD":"Hasło"
 }

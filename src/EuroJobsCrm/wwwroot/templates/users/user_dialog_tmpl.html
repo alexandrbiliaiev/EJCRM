@@ -1,0 +1,46 @@
+<md-dialog aria-label="ContactPersons">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>{{'USER' | translate}}</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="close()">
+				<md-icon aria-label="Close dialog">close</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div class="md-dialog-content" style="width:800px">
+			<!--NAME SURNAME-->
+			<form name="userForm">
+			
+				<!--POSITION EMAIL-->
+				<div layout="row" layout-align="space-between none">
+
+					<md-input-container class="md-block" flex="50">
+						<label>{{'CP_EMAIL'| translate}}</label>
+						<input type="email" name="email" placeholder="jan.kowalski@gmail.com" ng-model="user.email" ng-pattern='/^.+@.+\..+$/'>
+						<div ng-messages="userForm.email.$error" role="alert">
+							<div ng-message-exp="['pattern']">{{'EMAIL_ERROR_MSG' | translate}}</div>
+						</div>
+					</md-input-container>
+                     <md-input-container class="md-block" flex="50">
+						<label>{{'PASSWORD'| translate}}</label>
+						<input name="password" ng-model="user.password" placeholder="Password" md-maxlength="100" required>
+						<div ng-messages="userForm.password.$error" role="alert" multiple>
+							<div ng-message="required">{{'REQUIRED' | translate}} </div>
+							<div ng-message="md-maxlength">{{'IS_TO_LONG'| translate}}</div>
+						</div>
+					</md-input-container>
+				</div>
+
+               
+
+			</form>
+		</div>
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<md-button ng-click="saveNormalUserClick()">
+			{{'SAVE'|translate}}
+		</md-button>
+	</md-dialog-actions>
+</md-dialog>
