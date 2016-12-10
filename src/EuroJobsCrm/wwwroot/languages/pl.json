@@ -192,5 +192,15 @@
     "ADD_USER": "Dodaj użytkownika",
     "ADD_ADV_USER": "Dotaj zaawansowanego użytkownika",
     "USER":"Użytkownik",
-    "PASSWORD":"Hasło"
+    "PASSWORD":"Hasło",
+    "ADDING_USER_ERROR":"Błąd przy dodawaniu użytkownika",
+    "PASSWORD_ERROR": "Hasło musi zawierać liczby, znaki specjalne $#!@* oraz duże litery",
+    "USER_NAME":"Imię użytkownika",
+    "ADD_ACCOUNTING_USER":"Dodaj krzięgowego",
+    "ADD_ADMIN":"Dodaj administratora",
+    "ADMINS": "Administratorzy",
+    "ACCOUNTINGS":"Księgowe",
+    "NORMAL_USERS":"Użytkownicy",
+    "ADVANCED_USERS":"Zaawansowani użytkownicy"
+    
 }

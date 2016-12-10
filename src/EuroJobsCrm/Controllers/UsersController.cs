@@ -16,7 +16,7 @@ namespace EuroJobsCrm.Controllers
     public class UsersController : Controller
     {
         private const string NORMAL_USER_ROLE_NAME = "Normal user";
-        private const string ADVANSED_USER_ROLE_NAME = "Advanced user";
+        private const string ADVANCED_USER_ROLE_NAME = "Advanced user";
         private const string ACCOUNTING_ROLE_NAME = "Accounting";
         private const string SUPER_ADMIN_ROLE_NAME = "Super Admin";
         private const string ADMIN_ROLE_NAME = "Admin";
@@ -24,7 +24,6 @@ namespace EuroJobsCrm.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-
 
         public UsersController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -39,128 +38,51 @@ namespace EuroJobsCrm.Controllers
 
         [HttpGet]
         [Route("api/Users/GetInternalUsers")]
-        public async Task<IList<UserDto>> GetUsers()
+        public async Task<Dictionary<string, IList<UserDto>>> GetInternalUsers()
         {
-            var users = await _userManager.GetUsersInRoleAsync(NORMAL_USER_ROLE_NAME);
+            IList<ApplicationUser> normalUsers = await _userManager.GetUsersInRoleAsync(NORMAL_USER_ROLE_NAME);
+            IList<ApplicationUser> advancedUsers = await _userManager.GetUsersInRoleAsync(ADVANCED_USER_ROLE_NAME);
+            IList<ApplicationUser> accountingUsers = await _userManager.GetUsersInRoleAsync(ACCOUNTING_ROLE_NAME);
+            IList<ApplicationUser> admins = await _userManager.GetUsersInRoleAsync(ADMIN_ROLE_NAME);
 
-            return users.Select(u => new UserDto
+            Dictionary<string, IList<UserDto>> users = new Dictionary<string, IList<UserDto>>
             {
-                Id = u.Id,
-                Email = u.Email
-            }).ToList();
+                {ADMIN_ROLE_NAME, admins.Select(u => new UserDto(u)).ToList()},
+                {ADVANCED_USER_ROLE_NAME, advancedUsers.Select(u => new UserDto(u)).ToList()},
+                {NORMAL_USER_ROLE_NAME, normalUsers.Select(u => new UserDto(u)).ToList()},
+                {ACCOUNTING_ROLE_NAME, accountingUsers.Select(u => new UserDto(u)).ToList()}
+            };
+
+            
+            return users;
         }
 
         [HttpPost]
         [Route("api/Users/AddNormalUser")]
         public async Task<UserDto> AddNormalUser([FromBody] UserDto user)
         {
-            ApplicationUser applicationUser = new ApplicationUser
-            {
-                Email = user.Email,
-                UserName = user.Email
-            };
-
-            IdentityResult result = await _userManager.CreateAsync(applicationUser, user.Password);
-            if (!result.Succeeded)
-            {
-                return new UserDto
-                {
-                    Success = false,
-                    ErrorMessage = string.Join("; ", result.Errors.Select(e => e.Description).ToArray())
-                };
-            }
-            await _userManager.AddToRoleAsync(applicationUser, NORMAL_USER_ROLE_NAME);
-            return new UserDto
-            {
-                Id = applicationUser.Id,
-                Email = applicationUser.Email,
-                Password = string.Empty
-            };
+            return await AddUserWithRole(user, NORMAL_USER_ROLE_NAME);
         }
 
         [HttpPost]
         [Route("api/Users/AddAdvancedUser")]
         public async Task<UserDto> AddAdvancedUser([FromBody] UserDto user)
         {
-            ApplicationUser applicationUser = new ApplicationUser
-            {
-                Email = user.Email,
-                UserName = user.Email
-            };
-
-            IdentityResult result = await _userManager.CreateAsync(applicationUser, user.Password);
-            if (!result.Succeeded)
-            {
-                return new UserDto
-                {
-                    Success = false,
-                    ErrorMessage = string.Join("; ", result.Errors.Select(e => e.Description).ToArray())
-                };
-            }
-            await _userManager.AddToRoleAsync(applicationUser, ADVANSED_USER_ROLE_NAME);
-            return new UserDto
-            {
-                Id = applicationUser.Id,
-                Email = applicationUser.Email,
-                Password = string.Empty
-            };
+            return await AddUserWithRole(user, ADVANCED_USER_ROLE_NAME);
         }
 
         [HttpPost]
         [Route("api/Users/AddAccountingUser")]
         public async Task<UserDto> AddAccountingUser([FromBody] UserDto user)
         {
-            ApplicationUser applicationUser = new ApplicationUser
-            {
-                Email = user.Email,
-                UserName = user.Email
-            };
-
-            IdentityResult result = await _userManager.CreateAsync(applicationUser, user.Password);
-            if (!result.Succeeded)
-            {
-                return new UserDto
-                {
-                    Success = false,
-                    ErrorMessage = string.Join("; ", result.Errors.Select(e => e.Description).ToArray())
-                };
-            }
-            await _userManager.AddToRoleAsync(applicationUser, ACCOUNTING_ROLE_NAME);
-            return new UserDto
-            {
-                Id = applicationUser.Id,
-                Email = applicationUser.Email,
-                Password = string.Empty
-            };
+            return await AddUserWithRole(user, ACCOUNTING_ROLE_NAME);
         }
 
         [HttpPost]
         [Route("api/Users/AddAdmin")]
         public async Task<UserDto> AddAdmin([FromBody] UserDto user)
         {
-            ApplicationUser applicationUser = new ApplicationUser
-            {
-                Email = user.Email,
-                UserName = user.Email
-            };
-
-            IdentityResult result = await _userManager.CreateAsync(applicationUser, user.Password);
-            if (!result.Succeeded)
-            {
-                return new UserDto
-                {
-                    Success = false,
-                    ErrorMessage = string.Join("; ", result.Errors.Select(e => e.Description).ToArray())
-                };
-            }
-
-            await _userManager.AddToRoleAsync(applicationUser, ADMIN_ROLE_NAME);
-            return new UserDto
-            {
-                Id = applicationUser.Id,
-                Email = applicationUser.Email,
-                Password = string.Empty
-            };
+            return await AddUserWithRole(user, ADMIN_ROLE_NAME);
         }
 
         [HttpGet]
@@ -188,10 +110,10 @@ namespace EuroJobsCrm.Controllers
                 await _roleManager.CreateAsync(normalRole);
             }
 
-            var advancedRole = await _roleManager.FindByNameAsync(ADVANSED_USER_ROLE_NAME);
+            var advancedRole = await _roleManager.FindByNameAsync(ADVANCED_USER_ROLE_NAME);
             if (advancedRole == null)
             {
-                advancedRole = new IdentityRole(ADVANSED_USER_ROLE_NAME);
+                advancedRole = new IdentityRole(ADVANCED_USER_ROLE_NAME);
                 await _roleManager.CreateAsync(advancedRole);
             }
 
@@ -217,6 +139,41 @@ namespace EuroJobsCrm.Controllers
             }
 
             return true;
+        }
+
+        private async Task<UserDto> AddUserWithRole(UserDto user, string roleName)
+        {
+            try
+            {
+                ApplicationUser applicationUser = new ApplicationUser
+                {
+                    Email = user.Email,
+                    UserName = user.Email
+                };
+
+                IdentityResult result = await _userManager.CreateAsync(applicationUser, user.Password);
+                if (!result.Succeeded)
+                {
+                    return new UserDto
+                    {
+                        Success = false,
+                        ErrorMessage = string.Join("\r\n ", result.Errors.Select(e => e.Description).ToArray())
+                    };
+                }
+                await _userManager.AddToRoleAsync(applicationUser, roleName);
+                return new UserDto
+                {
+                    Id = applicationUser.Id,
+                    Email = applicationUser.Email,
+                    Password = string.Empty,
+                    UserName = applicationUser.UserName
+                };
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

@@ -7,9 +7,33 @@ angular.module('EuroJobsCrm.services')
             return $http.get('/api/Users/GetInternalUsers');
         };
 
-        users.saveUser= function (user) {
+        users.AddNormalUser = function (user) {
             return $http({
                 url: 'api/Users/AddNormalUser',
+                method: "POST",
+                data: user
+            });
+        }
+
+        users.AddAdvancedUser = function (user) {
+            return $http({
+                url: 'api/Users/AddAdvancedUser',
+                method: "POST",
+                data: user
+            });
+        }
+
+        users.AddAccountingUser = function (user) {
+            return $http({
+                url: 'api/Users/AddAccountingUser',
+                method: "POST",
+                data: user
+            });
+        }
+
+        users.AddAdminUser = function (user) {
+            return $http({
+                url: 'api/Users/AddAdmin',
                 method: "POST",
                 data: user
             });

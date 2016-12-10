@@ -1,17 +1,37 @@
 angular.module('EuroJobsCrm.controllers').controller('UsersController', function ($scope, $location, $http, $state, $translate, $mdDialog, usersService) {
     $scope.contragents = [];
     $scope.user = usersService.getUser();
+    $scope.addingUserMethod = undefined;
 
     $scope.close = function () {
         $mdDialog.hide();
     }
 
-    $scope.showAddNormalUserDialog = function (ev) {
+    $scope.showAddNormalUserDialog = function () {
+        $scope.addingUserMethod = usersService.AddNormalUser;
+        $scope.showAddingUserDialog();
+    }
+
+    $scope.showAddAdvancedUserDialog = function () {
+        $scope.addingUserMethod = usersService.AddAdvancedUser;
+        $scope.showAddingUserDialog();
+    }
+
+    $scope.showAddAccountingUserDialog = function () {
+        $scope.addingUserMethod = usersService.AddAccountingUser;
+        $scope.showAddingUserDialog();
+    }
+
+    $scope.showAdminUserDialog = function () {
+        $scope.addingUserMethod = usersService.AddAdminUser;
+        $scope.showAddingUserDialog();
+    }
+
+    $scope.showAddingUserDialog = function (){
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
             templateUrl: '/templates/users/user_dialog_tmpl.html',
-            targetEvent: ev,
             clickOutsideToClose: true,
         })
         .then(function (answer) {
@@ -21,21 +41,51 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
         });
     }
 
-    $scope.saveNormalUserClick = function () {
+    $scope.saveUserClick = function () {
         if ($scope.userForm.$invalid) {
             return;
         }
 
-        usersService.saveUser($scope.user).success(function (response) {
-            usersService.users.push(response);
+        $scope.addingUserMethod($scope.user).success(function (response) {
+            if (response.success != true) {
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        //.parent(angular.element(document.querySelector('#popupContainer')))
+                        .clickOutsideToClose(true)
+                        .title($translate.instant('ADDING_USER_ERROR'))
+                        .textContent(response.errorMessage)
+                        .ariaLabel('Error dialog')
+                        .ok('OK')
+
+                );
+                $mdDialog.hide();
+                return;
+            }
+
+            if ($scope.addingUserMethod == usersService.AddNormalUser) {
+                usersService.normalUsers.push(response);
+            }
+
+            if ($scope.addingUserMethod == usersService.AddAdvancedUser) {
+                usersService.advancedUsers.push(response);
+            }
+
+            if ($scope.addingUserMethod == usersService.AddAdminUser) {
+                usersService.admins.push(response);
+            }
+
+            if ($scope.addingUserMethod == usersService.AddAccountingUser) {
+                usersService.accountingUsers.push(response);
+            }
+
             $scope.user = usersService.getUser();
             $mdDialog.hide();
+
         }).error(function () {
             $state.go('error');
             $mdDialog.hide();
         });
     }
-
 
     $scope.showDeleteCtgConfirmDialog = function (contragentId) {
         var confirm = $mdDialog.confirm()
@@ -70,13 +120,19 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
     };
 
     if (usersService.users != undefined) {
-        $scope.users = usersService.users;
+        $scope.accountingUsers = usersService.accountingUsers;
+        $scope.admins = usersService.admins;
+        $scope.advancedUsers = usersService.advancedUsers;
+        $scope.normalUsers = usersService.normalUsers;
+
         return;
     }
 
     usersService.load().success(function (response) {
-        usersService.users = response;
-        $scope.users = usersService.users;
+        $scope.accountingUsers = usersService.accountingUsers = response['Accounting'];
+        $scope.admins = usersService.admins = response['Admin'];
+        $scope.advancedUsers = usersService.advancedUsers = response['Advanced user'];
+        $scope.normalUsers = usersService.normalUsers = response['Normal user'];
     }).error(function () {
         $state.go('error');
     });
