@@ -2,7 +2,7 @@
 
 namespace EuroJobsCrm.Dto
 {
-    public class EmploymentRequestDto
+    public class EmploymentRequestDto : DataTransferObjectBase
     {
         public int Id { get; set; }
         public int OfferId { get; set; }

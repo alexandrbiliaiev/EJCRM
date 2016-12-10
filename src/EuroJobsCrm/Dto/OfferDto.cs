@@ -3,7 +3,7 @@ using EuroJobsCrm.Models;
 
 namespace EuroJobsCrm.Dto
 {
-    public class OfferDto
+    public class OfferDto : DataTransferObjectBase
     {
         public OfferDto()
         {

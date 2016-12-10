@@ -2,7 +2,7 @@
 
 namespace EuroJobsCrm.Dto
 {
-    public class ContractDto
+    public class ContractDto : DataTransferObjectBase
     {
         public int Id { get; set; }
         public int ContragentId { get; set; }

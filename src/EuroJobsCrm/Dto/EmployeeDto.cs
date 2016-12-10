@@ -5,7 +5,7 @@ using EuroJobsCrm.Models;
 
 namespace EuroJobsCrm.Dto
 {
-    public class EmployeeDto
+    public class EmployeeDto : DataTransferObjectBase
     {
         public int Id { get; set; }
         public int ContragentId { get; set; }

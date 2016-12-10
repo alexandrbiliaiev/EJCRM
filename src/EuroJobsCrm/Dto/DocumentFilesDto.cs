@@ -6,7 +6,7 @@ using EuroJobsCrm.Models;
 
 namespace EuroJobsCrm.Dto
 {
-    public class DocumentFilesDto
+    public class DocumentFilesDto : DataTransferObjectBase
     {
         public int Id { get; set; }
         public int? InvoiceId { get; set; }

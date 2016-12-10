@@ -5,7 +5,7 @@ using EuroJobsCrm.Models;
 
 namespace EuroJobsCrm.Dto
 {
-    public class IdentityDocumentsDto
+    public class IdentityDocumentsDto : DataTransferObjectBase
     {
         public int Id { get; set; }
         public int? ParentDocumentId { get; set; }
