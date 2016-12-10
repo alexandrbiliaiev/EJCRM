@@ -180,6 +180,8 @@ namespace EuroJobsCrm.Models
 
                 entity.Property(e => e.Id).HasMaxLength(450);
 
+                entity.Property(e => e.Blocked).HasDefaultValueSql("0");
+
                 entity.Property(e => e.Email).HasMaxLength(256);
 
                 entity.Property(e => e.NormalizedEmail).HasMaxLength(256);

@@ -87,29 +87,17 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
         });
     }
 
-    $scope.showDeleteCtgConfirmDialog = function (contragentId) {
+    $scope.showResetPassConfirmDialog = function (userId) {
         var confirm = $mdDialog.confirm()
-            .title($translate.instant('CTG_DELETE_CONFIRM_TITLE'))
-            .textContent($translate.instant('CTG_DELETE_CONFIRM_TEXT'))
+            .title($translate.instant('RESET_PASS_CONFIRM_TITLE'))
+            .textContent($translate.instant('RESET_PASS_CONFIRM_TEXT'))
             .ariaLabel('label')
             .ok($translate.instant('DELETE_OK'))
             .cancel($translate.instant('DELETE_CANCEL'));
 
         $mdDialog.show(confirm).then(function () {
-            contragentsService.deleteContragent(contragentId).success(function (response) {
-                if (response != true) {
-                    return;
-                }
-
-                contragents = contragentsService.contragents;
-                for (i in contragents) {
-                    if (contragents[i].id != contragentId) {
-                        continue;
-                    }
-
-                    contragents.splice(i, 1);
-                    return;
-                }
+            contragentsService.resetPasswordForUser(userId).success(function (response) {
+               
 
             }).error(function (response) {
                 $state.go('error');

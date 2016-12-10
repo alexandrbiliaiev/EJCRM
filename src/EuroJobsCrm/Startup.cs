@@ -13,6 +13,7 @@ using EuroJobsCrm.Data;
 using EuroJobsCrm.Models;
 using EuroJobsCrm.Services;
 
+
 namespace EuroJobsCrm
 {
     public class Startup
@@ -85,7 +86,7 @@ namespace EuroJobsCrm
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
-
+       
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

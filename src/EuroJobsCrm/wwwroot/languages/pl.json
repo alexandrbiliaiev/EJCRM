@@ -201,6 +201,8 @@
     "ADMINS": "Administratorzy",
     "ACCOUNTINGS":"Księgowe",
     "NORMAL_USERS":"Użytkownicy",
-    "ADVANCED_USERS":"Zaawansowani użytkownicy"
-    
+    "ADVANCED_USERS":"Zaawansowani użytkownicy",
+    "RESET_PASSWORD": "Zresetuj hasło",
+    "RESET_PASS_CONFIRM_TITLE":"Resetowanie hasła",
+    "RESET_PASS_CONFIRM_TEXT":"Czy napewno chcesz zresetować hasło dla tego użytkownika?"
 }
