@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using EuroJobsCrm.Data;
 using EuroJobsCrm.Models;
 using EuroJobsCrm.Services;
+using EuroJobsCrm.Utils;
 
 
 namespace EuroJobsCrm
@@ -36,6 +37,7 @@ namespace EuroJobsCrm
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            EnvironmentUtil.Environment = env;
         }
 
         public IConfigurationRoot Configuration { get; }

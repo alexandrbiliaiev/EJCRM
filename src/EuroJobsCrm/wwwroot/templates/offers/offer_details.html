@@ -1,7 +1,7 @@
 <ui-view ng-controller="OfferManageController">
     <div layout="column" layout-padding>
         <div flex layout="column">
-            <div layout="column" flex >
+            <div layout="column" flex>
                 <md-toolbar>
                     <div flex class="md-toolbar-tools">
                         <h2>
@@ -260,13 +260,15 @@
                                     <div class="md-list-item-text">
                                         <h3><b>{{candidate.firstName}} {{candidate.middleName}} {{candidate.lastName}}</b></h3>
                                     </div>
-                                    <md-icon style="font-size:24px;" md-font-icon="ion-thumbsup" ng-click="acceptCandidateToOffer(candidate)">
-                                        <md-tooltip md-direction="left">
-                                            {{ 'ACCEPT' | translate }}
-                                        </md-tooltip>
-                                    </md-icon>
 
-                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
+                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="acceptCandidateToOffer(candidate)">
+                                        <i style="color: rgb(121,134,203)" class="material-icons">thumb_up</i>
+                                    </md-button>
+                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="rejectCandidateFromOffer(candidate)">
+                                         <i style="color: rgb(255,128,171)" class="material-icons">thumb_down</i>
+                                    </md-button>
+
+                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="deleteCandidateFromOffer(candidate)">
                                         <md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
                                     </md-button>
                                     <md-divider ng-if="!$last"></md-divider>
