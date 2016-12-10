@@ -4,6 +4,8 @@ using System.Linq;
 using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
 using Microsoft.AspNetCore.Mvc;
+using EuroJobsCrm.Services;
+using System.Threading.Tasks;
 
 namespace EuroJobsCrm.Controllers
 {
@@ -46,14 +48,14 @@ namespace EuroJobsCrm.Controllers
                 Offers ofr = context.Offers.FirstOrDefault(c => c.OfrId == offerId);
 
                 List<EmployeeDto> candidates =
-                    context.EmploymentRequests.Where(r => r.EtrOfrId == offerId && r.EtrStatus == 0)
-                        .Join(context.Employees, r => r.EtrEmpId, e => e.EmpId,
+                    context.EmploymentRequests.Where(r => r.EtrOfrId == offerId && r.EtrStatus == 0 && r.EtrAuditRd == null && r.EtrStatus !=2)
+                        .Join(context.Employees.Where(e => e.EmpAuditRd == null), r => r.EtrEmpId, e => e.EmpId,
                             (request, employee) => new {request, employee}).ToList()
                         .Select(e => new EmployeeDto(e.employee)).ToList();
 
                 List<EmployeeDto> employees =
-                  context.EmploymentRequests.Where(r => r.EtrOfrId == offerId && r.EtrStatus == 1)
-                      .Join(context.Employees, r => r.EtrEmpId, e => e.EmpId,
+                  context.EmploymentRequests.Where(r => r.EtrOfrId == offerId && r.EtrStatus == 1 && r.EtrAuditRd == null)
+                      .Join(context.Employees.Where(e => e.EmpAuditRd == null), r => r.EtrEmpId, e => e.EmpId,
                           (request, employee) => new { request, employee }).ToList()
                       .Select(e => new EmployeeDto(e.employee)).ToList();
 
@@ -180,7 +182,7 @@ namespace EuroJobsCrm.Controllers
 
         [HttpPost]
         [Route("/api/Offers/MakeRequest")]
-        public EmploymentRequestDto MakeEmploymentRequest([FromBody] EmploymentRequestDto employmentRequestDto)
+        public async Task<EmploymentRequestDto> MakeEmploymentRequest([FromBody] EmploymentRequestDto employmentRequestDto)
         {
             EmploymentRequests employmentRequest = new EmploymentRequests
             {
@@ -191,12 +193,27 @@ namespace EuroJobsCrm.Controllers
                 EtrEmpId = employmentRequestDto.EmployeeId,
                 EtrStatus = employmentRequestDto.Status
             };
+            var employee = new Employees();
+            var contragent = new Contragents();
+            var offer = new Offers();
 
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
                 context.EmploymentRequests.Add(employmentRequest);
                 context.SaveChanges();
+
+                employee = context.Employees.FirstOrDefault(c => c.EmpId == employmentRequest.EtrEmpId);
+                contragent = context.Contragents.FirstOrDefault(c => c.CgtId == employee.EmpCtgId);
+                offer = context.Offers.FirstOrDefault(o => o.OfrId == employmentRequest.EtrOfrId);
+
             }
+
+            IEmailMessageBuilder bodyBuilder = new PimpEmployeeBodyBuilder(new EmployeeDto(employee), new ContragentDto(contragent), new OfferDto(offer));
+            string emailBody = bodyBuilder.BuildBody();
+            string emailSubject = bodyBuilder.BuildSubject();
+
+            NotificationEmailSender emailSender = new NotificationEmailSender();
+            await emailSender.SendEmailAsync("alexandr.biliaiev@gmail.com", emailSubject, emailBody);
 
             employmentRequestDto.Id = employmentRequest.EtrId;
             return employmentRequestDto;
@@ -211,7 +228,7 @@ namespace EuroJobsCrm.Controllers
                 using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
                 {
                     EmploymentRequests employmentRequest =
-                        context.EmploymentRequests.FirstOrDefault(e => e.EtrOfrId == employmentRequestDto.OfferId && e.EtrEmpId == employmentRequestDto.EmployeeId);
+                        context.EmploymentRequests.FirstOrDefault(e => e.EtrOfrId == employmentRequestDto.OfferId && e.EtrEmpId == employmentRequestDto.EmployeeId && e.EtrAuditRd == null);
 
                     if (employmentRequest == null)
                     {
@@ -221,6 +238,37 @@ namespace EuroJobsCrm.Controllers
                     employmentRequest.EtrAuditMd = DateTime.UtcNow;
                     employmentRequest.EtrAuditMu = User.GetUserId();
                     employmentRequest.EtrStatus = employmentRequestDto.Status;
+
+                    context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                //todo: add logging
+                return false;
+            }
+        }
+
+        [HttpPost]
+        [Route("/api/Offers/DeleteRequest")]
+        public bool DeleteEmploymentRequest([FromBody] EmploymentRequestDto employmentRequestDto)
+        {
+            try
+            {
+                using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+                {
+                    EmploymentRequests employmentRequest =
+                        context.EmploymentRequests.FirstOrDefault(e => e.EtrOfrId == employmentRequestDto.OfferId && e.EtrEmpId == employmentRequestDto.EmployeeId && e.EtrAuditRd == null);
+
+                    if (employmentRequest == null)
+                    {
+                        return false;
+                    }
+
+                    employmentRequest.EtrAuditRd = DateTime.UtcNow;
+                    employmentRequest.EtrAuditRu = User.GetUserId();
 
                     context.SaveChanges();
                 }

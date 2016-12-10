@@ -36,8 +36,8 @@ namespace EuroJobsCrm.Controllers
             {
                 
 
-                var employees = context.Employees
-                    .GroupJoin(context.IdentityDocuments, e => e.EmpId, d => d.IdcEmpId,
+                var employees = context.Employees.Where(e=>e.EmpAuditRd == null)
+                    .GroupJoin(context.IdentityDocuments.Where(d=>d.IdcAuditRd == null), e => e.EmpId, d => d.IdcEmpId,
                         (e, d) => new { employee = e, documents = d })
                     .ToList()
                     .Select(e => new EmployeeDto(e.employee, e.documents, new List<DocumentFiles>()))

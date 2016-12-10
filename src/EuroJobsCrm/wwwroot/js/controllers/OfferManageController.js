@@ -21,6 +21,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     };
 
     $scope.showAddCandidateDialog = function () {
+        $scope.manageFreeEmployees();
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
@@ -36,6 +37,9 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     };
 
     $scope.addCandidateToOffer = function (emp) {
+
+        
+
         candidateRequest = {
             offerId: $scope.offer.id,
             employeeId: emp.id,
@@ -51,7 +55,50 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
             $mdDialog.hide();
         });
 
+
     }
+
+    $scope.deleteCandidateFromOffer = function (emp) {
+        candidateRequest = {
+            offerId: $scope.offer.id,
+            employeeId: emp.id,
+            status: 0
+        };
+
+        var confirm = $mdDialog.confirm()
+            .title($translate.instant('CLI_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('CLT_DELETE_CONFIRM_TEXT'))
+            .ariaLabel('label')
+            .ok($translate.instant('DELETE_OK'))
+            .cancel($translate.instant('DELETE_CANCEL'));
+
+        $mdDialog.show(confirm).then(function () {
+            offersService.deleteCandidateRequest(candidateRequest).success(function (response) {
+                if (response != true) {
+                    return;
+                }
+
+                for (i in $scope.offer.candidates) {
+                    if ($scope.offer.candidates[i].id != emp.id) {
+                        continue;
+                    }
+                    $scope.freeEmployees.push($scope.offer.candidates[i]);
+                    $scope.offer.candidates.splice(i, 1);
+                    return;
+                }
+
+
+
+            }).error(function (response) {
+                $state.go('error');
+            });
+        }, function () {
+
+        });
+
+
+    }
+
 
     $scope.acceptCandidateToOffer = function (emp) {
 
@@ -68,7 +115,29 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
                 if ($scope.offer.candidates[i].id != emp.id) {
                     continue;
                 }
+                $scope.offer.candidates.splice(i, 1);
+                return;
+            }
 
+        }).error(function () {
+            $state.go('error');
+        });
+    };
+
+    $scope.rejectCandidateFromOffer = function (emp) {
+
+        candidateRequest = {
+            offerId: $scope.offer.id,
+            employeeId: emp.id,
+            status: 2
+        };
+
+        offersService.pimpCandidateToEmployee(candidateRequest).success(function (response) {
+
+            for (i in $scope.offer.candidates) {
+                if ($scope.offer.candidates[i].id != emp.id) {
+                    continue;
+                }
                 $scope.offer.candidates.splice(i, 1);
                 return;
             }
@@ -87,9 +156,31 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     employeesService.load().success(function (response) {
         employeesService.employees = response;
         $scope.freeEmployees = employeesService.employees;
+        $scope.manageFreeEmployees();
     }).error(function () {
         $state.go('error');
     });
+
+
+    $scope.manageFreeEmployees = function () {
+
+        for (i in $scope.offer.candidates) {
+            for (j in $scope.freeEmployees) {
+                if ($scope.offer.candidates[i].id == $scope.freeEmployees[j].id) {
+                    $scope.freeEmployees.splice(j, 1);
+                }
+            }
+        }
+
+        for (i in $scope.offer.employees) {
+            for (j in $scope.freeEmployees) {
+                if ($scope.offer.employees[i].id == $scope.freeEmployees[j].id) {
+                    $scope.freeEmployees.splice(j, 1);
+                }
+
+            }
+        }
+    }
 
 
 

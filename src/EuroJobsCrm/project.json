@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-EuroJobsCrm-f04bc9c8-840d-4b93-bc7c-1d8b4ffadc42",
 
   "dependencies": {
@@ -48,7 +48,8 @@
     "Microsoft.EntityFrameworkCore.Design": {
       "type": "build",
       "version": "1.0.0-preview2-final"
-    }
+    },
+    "MailKit": "1.10.1"
   },
 
   "tools": {
