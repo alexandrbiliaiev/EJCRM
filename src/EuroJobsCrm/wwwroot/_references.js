@@ -22,6 +22,7 @@
 /// <reference path="js/services/usersservice.js" />
 /// <reference path="js/site.js" />
 /// <reference path="lib/angular/angular.js" />
+/// <reference path="lib/angular-cookies/angular-cookies.js" />
 /// <reference path="lib/angular-route/angular-route.js" />
 /// <reference path="lib/angular-translate/angular-translate.js" />
 /// <reference path="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js" />
