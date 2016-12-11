@@ -63,9 +63,10 @@ namespace EuroJobsCrm.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    //var user = await _userManager.FindByEmailAsync(model.Email);
-                    //var userRoles = await _userManager.GetRolesAsync(user);
-                    //HttpContext.Session.SetString("user_role", userRoles.FirstOrDefault());
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    var userRoles = await _userManager.GetRolesAsync(user);
+                    //writes role's name to cookies
+                    Response.Cookies.Append("user_role", userRoles.FirstOrDefault());
                     
                     _logger.LogInformation(1, "User logged in.");
                     return RedirectToLocal(returnUrl);

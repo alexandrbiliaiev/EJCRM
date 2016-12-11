@@ -47,6 +47,14 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
+        users.resetPasswordForUser = function(userId){
+            return $http({
+                url: 'api/Users/ResetPassword',
+                method: "POST",
+                data: userId
+            });
+        }
+
         users.getUser = function (id) {
             for (i in this.users) {
                 if (this.users[i].id == id) {
@@ -59,6 +67,22 @@ angular.module('EuroJobsCrm.services')
                 email: "",
                 password: "",
             }
+        }
+
+        users.setAdmins = function(admins){
+            users.admins = admins != undefined ? admins : new Array();
+        }
+
+        users.setAccountingUsers = function(accountingUsers ){
+            users.accountingUsers = accountingUsers != undefined ? accountingUsers : new Array();
+        }
+
+        users.setAdvancedUsers = function(advUsers){
+            users.advancedUsers = advUsers != undefined ? advUsers : new Array();
+        }
+
+        users.setNormalUsers = function(normalUsers){
+            users.normalUsers = normalUsers != undefined ? normalUsers : new Array();
         }
 
         return users;

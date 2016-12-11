@@ -4,6 +4,8 @@ namespace EuroJobsCrm.Dto
 {
     public class UserDto : DataTransferObjectBase
     {
+        private AspNetUsers us;
+
         public string Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
@@ -21,5 +23,12 @@ namespace EuroJobsCrm.Dto
             Id = user.Id;
         }
 
+        public UserDto(AspNetUsers user)
+        {
+
+            UserName = user.UserName;
+            Email = user.Email;
+            Id = user.Id;
+        }
     }
 }

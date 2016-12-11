@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using EuroJobsCrm.Dto;
@@ -10,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using MimeKit.Text;
 
 namespace EuroJobsCrm.Controllers
 {
@@ -38,23 +41,26 @@ namespace EuroJobsCrm.Controllers
 
         [HttpGet]
         [Route("api/Users/GetInternalUsers")]
-        public async Task<Dictionary<string, IList<UserDto>>> GetInternalUsers()
+        public Dictionary<string, List<UserDto>> GetInternalUsers()
         {
-            IList<ApplicationUser> normalUsers = await _userManager.GetUsersInRoleAsync(NORMAL_USER_ROLE_NAME);
-            IList<ApplicationUser> advancedUsers = await _userManager.GetUsersInRoleAsync(ADVANCED_USER_ROLE_NAME);
-            IList<ApplicationUser> accountingUsers = await _userManager.GetUsersInRoleAsync(ACCOUNTING_ROLE_NAME);
-            IList<ApplicationUser> admins = await _userManager.GetUsersInRoleAsync(ADMIN_ROLE_NAME);
-
-            Dictionary<string, IList<UserDto>> users = new Dictionary<string, IList<UserDto>>
+            using (var context = new DB_A12601_bielkaContext())
             {
-                {ADMIN_ROLE_NAME, admins.Select(u => new UserDto(u)).ToList()},
-                {ADVANCED_USER_ROLE_NAME, advancedUsers.Select(u => new UserDto(u)).ToList()},
-                {NORMAL_USER_ROLE_NAME, normalUsers.Select(u => new UserDto(u)).ToList()},
-                {ACCOUNTING_ROLE_NAME, accountingUsers.Select(u => new UserDto(u)).ToList()}
-            };
+                var users = context.AspNetUserRoles.Join(context.AspNetUsers,
+                        r => r.UserId,
+                        u => u.Id,
+                        (role, user) => new
+                        {
+                            RoleName = role.Role.Name,
+                            User = user,
+                        })
+                    .GroupBy(group => group.RoleName)
+                    .Select(group => new  { RoleName = group.Key, Users = group })
+                    .ToList()
+                    .ToDictionary(k => k.RoleName, v => v.Users.Select(us => new UserDto(us.User))
+                    .ToList());
 
-            
-            return users;
+                return users;
+            }
         }
 
         [HttpPost]
@@ -83,6 +89,25 @@ namespace EuroJobsCrm.Controllers
         public async Task<UserDto> AddAdmin([FromBody] UserDto user)
         {
             return await AddUserWithRole(user, ADMIN_ROLE_NAME);
+        }
+
+        [HttpPost]
+        [Route("api/Users/ResetPassword")]
+        public async Task<DataTransferObjectBase> ResetPassword([FromBody] string userId)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+            {
+                return new DataTransferObjectBase
+                {
+                    Success = false,
+                    ErrorMessage = "User is not found"
+                };
+            }
+            string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            string newPassword = GeneratePassword();
+            await _userManager.ResetPasswordAsync(user, resetToken, newPassword);
+            return new DataTransferObjectBase();
         }
 
         [HttpGet]
@@ -175,5 +200,16 @@ namespace EuroJobsCrm.Controllers
                 throw;
             }
         }
+
+        private string GeneratePassword()
+        {
+            string passwordBase = Guid.NewGuid().ToString().Substring(0, 10);
+            var random = new Random();
+            passwordBase += random.Next(100);
+            passwordBase += "!@#*&"[random.Next(3)];
+
+            return passwordBase;
+        }
+
     }
 }

@@ -2,6 +2,10 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
     $scope.contragents = [];
     $scope.user = usersService.getUser();
     $scope.addingUserMethod = undefined;
+    $scope.accountingUsers = new Array();
+    $scope.admins = new Array();
+    $scope.advancedUsers = new Array();
+    $scope.normalUsers = new Array();
 
     $scope.close = function () {
         $mdDialog.hide();
@@ -92,12 +96,18 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
             .title($translate.instant('RESET_PASS_CONFIRM_TITLE'))
             .textContent($translate.instant('RESET_PASS_CONFIRM_TEXT'))
             .ariaLabel('label')
-            .ok($translate.instant('DELETE_OK'))
+            .ok($translate.instant('YES'))
             .cancel($translate.instant('DELETE_CANCEL'));
 
         $mdDialog.show(confirm).then(function () {
-            contragentsService.resetPasswordForUser(userId).success(function (response) {
-               
+            usersService.resetPasswordForUser(userId).success(function (response) {
+                message = response.success ? $translate.instant('RESET_PASS_SUCCESS') : response.errorMessage;
+                $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title($translate.instant('RESET_PASS_CONFIRM_TITLE'))
+                        .textContent(message)
+                        .ariaLabel('Message')
+                        .ok('OK');
 
             }).error(function (response) {
                 $state.go('error');
@@ -117,10 +127,18 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
     }
 
     usersService.load().success(function (response) {
-        $scope.accountingUsers = usersService.accountingUsers = response['Accounting'];
-        $scope.admins = usersService.admins = response['Admin'];
-        $scope.advancedUsers = usersService.advancedUsers = response['Advanced user'];
-        $scope.normalUsers = usersService.normalUsers = response['Normal user'];
+
+        usersService.setAdmins(response['Admin']);
+        usersService.setAccountingUsers(response['Accounting']);
+        usersService.setAdvancedUsers(response['Advanced user']);
+        usersService.setNormalUsers(response['Normal user']);
+        
+
+        $scope.accountingUsers = usersService.accountingUsers;
+        $scope.admins = usersService.admins;
+        $scope.advancedUsers = usersService.advancedUsers;
+        $scope.normalUsers = usersService.normalUsers;
+      
     }).error(function () {
         $state.go('error');
     });
