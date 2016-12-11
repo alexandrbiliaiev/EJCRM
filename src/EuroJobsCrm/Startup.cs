@@ -14,6 +14,7 @@ using EuroJobsCrm.Models;
 using EuroJobsCrm.Services;
 using EuroJobsCrm.Utils;
 
+
 namespace EuroJobsCrm
 {
     public class Startup
@@ -55,6 +56,8 @@ namespace EuroJobsCrm
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            services.AddSession();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -87,6 +90,7 @@ namespace EuroJobsCrm
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

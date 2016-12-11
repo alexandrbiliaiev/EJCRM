@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using EuroJobsCrm.Dto;
@@ -10,13 +11,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using MimeKit.Text;
 
 namespace EuroJobsCrm.Controllers
 {
     public class UsersController : Controller
     {
         private const string NORMAL_USER_ROLE_NAME = "Normal user";
-        private const string ADVANSED_USER_ROLE_NAME = "Advanced user";
+        private const string ADVANCED_USER_ROLE_NAME = "Advanced user";
         private const string ACCOUNTING_ROLE_NAME = "Accounting";
         private const string SUPER_ADMIN_ROLE_NAME = "Super Admin";
         private const string ADMIN_ROLE_NAME = "Admin";
@@ -24,7 +27,6 @@ namespace EuroJobsCrm.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-
 
         public UsersController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -39,128 +41,73 @@ namespace EuroJobsCrm.Controllers
 
         [HttpGet]
         [Route("api/Users/GetInternalUsers")]
-        public async Task<IList<UserDto>> GetUsers()
+        public Dictionary<string, List<UserDto>> GetInternalUsers()
         {
-            var users = await _userManager.GetUsersInRoleAsync(NORMAL_USER_ROLE_NAME);
-
-            return users.Select(u => new UserDto
+            using (var context = new DB_A12601_bielkaContext())
             {
-                Id = u.Id,
-                Email = u.Email
-            }).ToList();
+                var users = context.AspNetUserRoles.Join(context.AspNetUsers,
+                        r => r.UserId,
+                        u => u.Id,
+                        (role, user) => new
+                        {
+                            RoleName = role.Role.Name,
+                            User = user,
+                        })
+                    .GroupBy(group => group.RoleName)
+                    .Select(group => new  { RoleName = group.Key, Users = group })
+                    .ToList()
+                    .ToDictionary(k => k.RoleName, v => v.Users.Select(us => new UserDto(us.User))
+                    .ToList());
+
+                return users;
+            }
         }
 
         [HttpPost]
         [Route("api/Users/AddNormalUser")]
         public async Task<UserDto> AddNormalUser([FromBody] UserDto user)
         {
-            ApplicationUser applicationUser = new ApplicationUser
-            {
-                Email = user.Email,
-                UserName = user.Email
-            };
-
-            IdentityResult result = await _userManager.CreateAsync(applicationUser, user.Password);
-            if (!result.Succeeded)
-            {
-                return new UserDto
-                {
-                    Success = false,
-                    ErrorMessage = string.Join("; ", result.Errors.Select(e => e.Description).ToArray())
-                };
-            }
-            await _userManager.AddToRoleAsync(applicationUser, NORMAL_USER_ROLE_NAME);
-            return new UserDto
-            {
-                Id = applicationUser.Id,
-                Email = applicationUser.Email,
-                Password = string.Empty
-            };
+            return await AddUserWithRole(user, NORMAL_USER_ROLE_NAME);
         }
 
         [HttpPost]
         [Route("api/Users/AddAdvancedUser")]
         public async Task<UserDto> AddAdvancedUser([FromBody] UserDto user)
         {
-            ApplicationUser applicationUser = new ApplicationUser
-            {
-                Email = user.Email,
-                UserName = user.Email
-            };
-
-            IdentityResult result = await _userManager.CreateAsync(applicationUser, user.Password);
-            if (!result.Succeeded)
-            {
-                return new UserDto
-                {
-                    Success = false,
-                    ErrorMessage = string.Join("; ", result.Errors.Select(e => e.Description).ToArray())
-                };
-            }
-            await _userManager.AddToRoleAsync(applicationUser, ADVANSED_USER_ROLE_NAME);
-            return new UserDto
-            {
-                Id = applicationUser.Id,
-                Email = applicationUser.Email,
-                Password = string.Empty
-            };
+            return await AddUserWithRole(user, ADVANCED_USER_ROLE_NAME);
         }
 
         [HttpPost]
         [Route("api/Users/AddAccountingUser")]
         public async Task<UserDto> AddAccountingUser([FromBody] UserDto user)
         {
-            ApplicationUser applicationUser = new ApplicationUser
-            {
-                Email = user.Email,
-                UserName = user.Email
-            };
-
-            IdentityResult result = await _userManager.CreateAsync(applicationUser, user.Password);
-            if (!result.Succeeded)
-            {
-                return new UserDto
-                {
-                    Success = false,
-                    ErrorMessage = string.Join("; ", result.Errors.Select(e => e.Description).ToArray())
-                };
-            }
-            await _userManager.AddToRoleAsync(applicationUser, ACCOUNTING_ROLE_NAME);
-            return new UserDto
-            {
-                Id = applicationUser.Id,
-                Email = applicationUser.Email,
-                Password = string.Empty
-            };
+            return await AddUserWithRole(user, ACCOUNTING_ROLE_NAME);
         }
 
         [HttpPost]
         [Route("api/Users/AddAdmin")]
         public async Task<UserDto> AddAdmin([FromBody] UserDto user)
         {
-            ApplicationUser applicationUser = new ApplicationUser
-            {
-                Email = user.Email,
-                UserName = user.Email
-            };
+            return await AddUserWithRole(user, ADMIN_ROLE_NAME);
+        }
 
-            IdentityResult result = await _userManager.CreateAsync(applicationUser, user.Password);
-            if (!result.Succeeded)
+        [HttpPost]
+        [Route("api/Users/ResetPassword")]
+        public async Task<DataTransferObjectBase> ResetPassword([FromBody] string userId)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
             {
-                return new UserDto
+                return new DataTransferObjectBase
                 {
                     Success = false,
-                    ErrorMessage = string.Join("; ", result.Errors.Select(e => e.Description).ToArray())
+                    ErrorMessage = "User is not found"
                 };
             }
-
-            await _userManager.AddToRoleAsync(applicationUser, ADMIN_ROLE_NAME);
-            return new UserDto
-            {
-                Id = applicationUser.Id,
-                Email = applicationUser.Email,
-                Password = string.Empty
-            };
+            string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            string newPassword = GeneratePassword();
+            await _userManager.ResetPasswordAsync(user, resetToken, newPassword);
+            return new DataTransferObjectBase();
         }
 
         [HttpGet]
@@ -188,10 +135,10 @@ namespace EuroJobsCrm.Controllers
                 await _roleManager.CreateAsync(normalRole);
             }
 
-            var advancedRole = await _roleManager.FindByNameAsync(ADVANSED_USER_ROLE_NAME);
+            var advancedRole = await _roleManager.FindByNameAsync(ADVANCED_USER_ROLE_NAME);
             if (advancedRole == null)
             {
-                advancedRole = new IdentityRole(ADVANSED_USER_ROLE_NAME);
+                advancedRole = new IdentityRole(ADVANCED_USER_ROLE_NAME);
                 await _roleManager.CreateAsync(advancedRole);
             }
 
@@ -218,5 +165,51 @@ namespace EuroJobsCrm.Controllers
 
             return true;
         }
+
+        private async Task<UserDto> AddUserWithRole(UserDto user, string roleName)
+        {
+            try
+            {
+                ApplicationUser applicationUser = new ApplicationUser
+                {
+                    Email = user.Email,
+                    UserName = user.Email
+                };
+
+                IdentityResult result = await _userManager.CreateAsync(applicationUser, user.Password);
+                if (!result.Succeeded)
+                {
+                    return new UserDto
+                    {
+                        Success = false,
+                        ErrorMessage = string.Join("\r\n ", result.Errors.Select(e => e.Description).ToArray())
+                    };
+                }
+                await _userManager.AddToRoleAsync(applicationUser, roleName);
+                return new UserDto
+                {
+                    Id = applicationUser.Id,
+                    Email = applicationUser.Email,
+                    Password = string.Empty,
+                    UserName = applicationUser.UserName
+                };
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        private string GeneratePassword()
+        {
+            string passwordBase = Guid.NewGuid().ToString().Substring(0, 10);
+            var random = new Random();
+            passwordBase += random.Next(100);
+            passwordBase += "!@#*&"[random.Next(3)];
+
+            return passwordBase;
+        }
+
     }
 }

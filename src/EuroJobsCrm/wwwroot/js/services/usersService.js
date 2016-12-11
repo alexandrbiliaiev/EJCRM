@@ -7,9 +7,33 @@ angular.module('EuroJobsCrm.services')
             return $http.get('/api/Users/GetInternalUsers');
         };
 
-        users.saveUser= function (user) {
+        users.AddNormalUser = function (user) {
             return $http({
                 url: 'api/Users/AddNormalUser',
+                method: "POST",
+                data: user
+            });
+        }
+
+        users.AddAdvancedUser = function (user) {
+            return $http({
+                url: 'api/Users/AddAdvancedUser',
+                method: "POST",
+                data: user
+            });
+        }
+
+        users.AddAccountingUser = function (user) {
+            return $http({
+                url: 'api/Users/AddAccountingUser',
+                method: "POST",
+                data: user
+            });
+        }
+
+        users.AddAdminUser = function (user) {
+            return $http({
+                url: 'api/Users/AddAdmin',
                 method: "POST",
                 data: user
             });
@@ -18,6 +42,14 @@ angular.module('EuroJobsCrm.services')
         users.deleteUser = function (userId) {
             return $http({
                 url: 'api/Clients/Delete',
+                method: "POST",
+                data: userId
+            });
+        }
+
+        users.resetPasswordForUser = function(userId){
+            return $http({
+                url: 'api/Users/ResetPassword',
                 method: "POST",
                 data: userId
             });
@@ -35,6 +67,22 @@ angular.module('EuroJobsCrm.services')
                 email: "",
                 password: "",
             }
+        }
+
+        users.setAdmins = function(admins){
+            users.admins = admins != undefined ? admins : new Array();
+        }
+
+        users.setAccountingUsers = function(accountingUsers ){
+            users.accountingUsers = accountingUsers != undefined ? accountingUsers : new Array();
+        }
+
+        users.setAdvancedUsers = function(advUsers){
+            users.advancedUsers = advUsers != undefined ? advUsers : new Array();
+        }
+
+        users.setNormalUsers = function(normalUsers){
+            users.normalUsers = normalUsers != undefined ? normalUsers : new Array();
         }
 
         return users;
