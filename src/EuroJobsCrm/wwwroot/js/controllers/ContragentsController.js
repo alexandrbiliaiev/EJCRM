@@ -1,7 +1,10 @@
-angular.module('EuroJobsCrm.controllers').controller('ContragentsController', function ($scope, $location, $http, $state, $translate, $mdDialog, contragentsService) {
+angular.module('EuroJobsCrm.controllers').controller('ContragentsController', function ($scope, $location, $http, $state, $translate, $mdDialog, $cookies, contragentsService) {
     $scope.contragents = [];
     $scope.index = 0;
     $scope.contragents = new Array();
+
+    console.log($cookies.get('user_role'));
+
 
     $scope.contragent = {
         status: 'a',
