@@ -261,14 +261,15 @@
                                         <h3><b>{{candidate.firstName}} {{candidate.middleName}} {{candidate.lastName}}</b></h3>
                                     </div>
 
-                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="acceptCandidateToOffer(candidate)">
+                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="acceptCandidateToOffer(candidate)" ng-show="acceptClaim">
                                         <i style="color: rgb(121,134,203)" class="material-icons">thumb_up</i>
                                     </md-button>
-                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="rejectCandidateFromOffer(candidate)">
+                                    
+                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="rejectCandidateFromOffer(candidate)" ng-show="rejectClaim">
                                          <i style="color: rgb(255,128,171)" class="material-icons">thumb_down</i>
                                     </md-button>
 
-                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="deleteCandidateFromOffer(candidate)">
+                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="deleteCandidateFromOffer(candidate)" ng-show="deleteClaim">
                                         <md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
                                     </md-button>
                                     <md-divider ng-if="!$last"></md-divider>

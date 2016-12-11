@@ -64,7 +64,7 @@
 										</md-tooltip>
 									</md-icon>
 								</md-button>
-								<md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteCtgConfirmDialog(contragent.id)">
+								<md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteCtgConfirmDialog(contragent.id)" ng-show="deleteClaim">
 									<md-icon md-svg-icon="/lib/icons/delete.svg">
 										<md-tooltip md-direction="down">
 											{{ 'DELETE' | translate }}

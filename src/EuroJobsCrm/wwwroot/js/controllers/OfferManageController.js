@@ -1,9 +1,10 @@
 angular.module('EuroJobsCrm.controllers').controller('OfferManageController', function ($scope, $location, $translate, $http, $state,
-    offersService, $mdDialog, $routeParams, employeesService) {
+    offersService, $mdDialog, $routeParams, $cookies, employeesService) {
     $scope.expandDetails = true;
     $scope.expandCandidates = true;
     $scope.expandEmployees = true;
     $scope.expandEmployees = true;
+
 
     $scope.moment = moment;
 
@@ -182,7 +183,10 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
         }
     }
 
-
-
+    $scope.userRole = $cookies.get('user_role');
+    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin';
+    $scope.acceptClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
+    $scope.rejectClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
+    
 
 });
