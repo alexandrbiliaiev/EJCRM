@@ -51,7 +51,7 @@ angular.module('EuroJobsCrm.services')
             return $http({
                 url: 'api/Users/ResetPassword',
                 method: "POST",
-                data: userId
+                data: { id: userId}
             });
         }
 

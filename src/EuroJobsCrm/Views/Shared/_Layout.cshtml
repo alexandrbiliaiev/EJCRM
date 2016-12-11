@@ -48,16 +48,24 @@
                     </div>
                     <div class="navbar-collapse collapse navbar-inverse-collapse">
                         @if (SignInManager.IsSignedIn(User)) {
-                        <ul class="nav navbar-nav">
-                            <li><a asp-area="" asp-controller="Clients" asp-action="Index" asp-fragment="clt_all">{{ 'Clients' | translate }}</a></li>
-                            <li><a asp-area="" asp-controller="Offers" asp-action="Index" asp-fragment="off_all">{{ 'Offers' | translate }}</a></li>
-                            <li><a asp-area="" asp-controller="Employee" asp-action="Index" asp-fragment="emp_all">{{ 'Employees' | translate }}</a></li>
-                         <!--   <li><a asp-area="" asp-controller="Invoice" asp-action="Index">{{ 'Invoice' | translate }}</a></li> -->
-                          <!--  <li><a asp-area="" asp-controller="Communication" asp-action="Index">{{ 'Communication' | translate }}</a></li> -->
-                            <li><a asp-area="" asp-controller="Contragents" asp-action="Index" asp-fragment="ctg_all">{{ 'Contragents' | translate }}</a></li>
-                           <li><a asp-area="" asp-controller="Users" asp-action="Index" asp-fragment="usr_all">{{ 'USERS' | translate }}</a></li>
-                        </ul>
-                        } @await Html.PartialAsync("_LoginPartial")
+                            <ul class="nav navbar-nav">
+                                @if (User.IsInRole("Admin") || User.IsInRole("Super Admin") || User.IsInRole("Advanced user") || User.IsInRole("Normal user"))
+                                {
+                                    <li><a asp-area="" asp-controller="Clients" asp-action="Index" asp-fragment="clt_all">{{ 'Clients' | translate }}</a></li>
+                                    <li><a asp-area="" asp-controller="Offers" asp-action="Index" asp-fragment="off_all">{{ 'Offers' | translate }}</a></li>
+                                    <li><a asp-area="" asp-controller="Employee" asp-action="Index" asp-fragment="emp_all">{{ 'Employees' | translate }}</a></li>
+                                    <li><a asp-area="" asp-controller="Contragents" asp-action="Index" asp-fragment="ctg_all">{{ 'Contragents' | translate }}</a></li>
+                                }
+
+                                <!-- <li><a asp-area="" asp-controller="Invoice" asp-action="Index">{{ 'Invoice' | translate }}</a></li> -->
+                                <!-- <li><a asp-area="" asp-controller="Communication" asp-action="Index">{{ 'Communication' | translate }}</a></li> -->
+                                @if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                                {
+                                    <li><a asp-area="" asp-controller="Users" asp-action="Index" asp-fragment="usr_all">{{ 'USERS' | translate }}</a></li>
+                                }
+                            </ul>
+                        } 
+                        @await Html.PartialAsync("_LoginPartial")
                     </div>
                 </div>
             </div>
@@ -76,6 +84,7 @@
                 <script src="~/js/site.js" asp-append-version="true"></script>
 
                 <script src="~/lib/angular/angular.js"></script>
+                <script src="~/lib/angular-cookies/angular-cookies.min.js"></script>
                 <script src="~/lib/angular-route/angular-route.min.js"></script>
 
                 <script src="~/lib/angular/angular-animate.min.js"></script>
@@ -126,6 +135,7 @@
                 <script src="~/js/site.js" asp-append-version="true"></script>
 
                 <script src="~/lib/angular/angular.js"></script>
+                <script src="~/lib/angular-cookies/angular-cookies.min.js"></script>
                 <script src="~/lib/angular-route/angular-route.min.js"></script>
 
                 <script src="~/lib/angular/angular-animate.min.js"></script>

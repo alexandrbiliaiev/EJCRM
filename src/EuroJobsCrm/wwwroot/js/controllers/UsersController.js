@@ -1,4 +1,4 @@
-angular.module('EuroJobsCrm.controllers').controller('UsersController', function ($scope, $location, $http, $state, $translate, $mdDialog, usersService) {
+angular.module('EuroJobsCrm.controllers').controller('UsersController', function ($scope, $location, $http, $state, $translate, $mdDialog, $cookies, usersService) {
     $scope.contragents = [];
     $scope.user = usersService.getUser();
     $scope.addingUserMethod = undefined;
@@ -6,6 +6,8 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
     $scope.admins = new Array();
     $scope.advancedUsers = new Array();
     $scope.normalUsers = new Array();
+
+    console.log($cookies.get('user_role'));
 
     $scope.close = function () {
         $mdDialog.hide();
@@ -102,12 +104,12 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
         $mdDialog.show(confirm).then(function () {
             usersService.resetPasswordForUser(userId).success(function (response) {
                 message = response.success ? $translate.instant('RESET_PASS_SUCCESS') : response.errorMessage;
-                $mdDialog.alert()
+                $mdDialog.show($mdDialog.alert()
                         .clickOutsideToClose(true)
                         .title($translate.instant('RESET_PASS_CONFIRM_TITLE'))
                         .textContent(message)
                         .ariaLabel('Message')
-                        .ok('OK');
+                        .ok('OK'));
 
             }).error(function (response) {
                 $state.go('error');

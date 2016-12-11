@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
 using EuroJobsCrm.Models.AccountViewModels;
+using EuroJobsCrm.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace EuroJobsCrm.Controllers
         private const string SUPER_ADMIN_ROLE_NAME = "Super Admin";
         private const string ADMIN_ROLE_NAME = "Admin";
         private const string GUEST_ROLE_NAME = "Guest";
+        private const string CONTAGENT_ROLE_NAME = "CONTRAGENT";
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -93,9 +95,9 @@ namespace EuroJobsCrm.Controllers
 
         [HttpPost]
         [Route("api/Users/ResetPassword")]
-        public async Task<DataTransferObjectBase> ResetPassword([FromBody] string userId)
+        public async Task<DataTransferObjectBase> ResetPassword([FromBody] UserDto user)
         {
-            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            var applicationUser = _userManager.Users.FirstOrDefault(u => u.Id == user.Id);
             if (user == null)
             {
                 return new DataTransferObjectBase
@@ -104,9 +106,18 @@ namespace EuroJobsCrm.Controllers
                     ErrorMessage = "User is not found"
                 };
             }
-            string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            string resetToken = await _userManager.GeneratePasswordResetTokenAsync(applicationUser);
             string newPassword = GeneratePassword();
-            await _userManager.ResetPasswordAsync(user, resetToken, newPassword);
+            var result = await _userManager.ResetPasswordAsync(applicationUser, resetToken, newPassword);
+
+            string requestIp = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            IEmailMessageBuilder messageBuilder = new ResetPasswordEmailBuilder(requestIp, newPassword);
+            IEmailSender sender = new NotificationEmailSender();
+            string subject = messageBuilder.BuildSubject();
+            string body = messageBuilder.BuildBody();
+
+            await sender.SendEmailAsync(applicationUser.Email, subject, body);
+
             return new DataTransferObjectBase();
         }
 
@@ -140,6 +151,13 @@ namespace EuroJobsCrm.Controllers
             {
                 advancedRole = new IdentityRole(ADVANCED_USER_ROLE_NAME);
                 await _roleManager.CreateAsync(advancedRole);
+            }
+
+            var contragentRole = await _roleManager.FindByNameAsync(CONTAGENT_ROLE_NAME);
+            if (contragentRole == null)
+            {
+                contragentRole = new IdentityRole(CONTAGENT_ROLE_NAME);
+                await _roleManager.CreateAsync(contragentRole);
             }
 
             var guestRole = await _roleManager.FindByNameAsync(GUEST_ROLE_NAME);
@@ -203,7 +221,8 @@ namespace EuroJobsCrm.Controllers
 
         private string GeneratePassword()
         {
-            string passwordBase = Guid.NewGuid().ToString().Substring(0, 10);
+            string passwordBase = "E" + Guid.NewGuid().ToString().Substring(0, 8);
+           
             var random = new Random();
             passwordBase += random.Next(100);
             passwordBase += "!@#*&"[random.Next(3)];

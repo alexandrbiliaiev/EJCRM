@@ -1,4 +1,4 @@
-﻿var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngFileUpload', 'ngRoute', 'pascalprecht.translate', 'angular-jsvat', 'ui.router', 'EuroJobsCrm.services', 'EuroJobsCrm.controllers', 'ng-mfb', 'ngMaterialDatePicker'])
+﻿var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngFileUpload', 'ngRoute', 'ngCookies', 'pascalprecht.translate', 'angular-jsvat', 'ui.router', 'EuroJobsCrm.services', 'EuroJobsCrm.controllers', 'ng-mfb', 'ngMaterialDatePicker'])
 
     .config(function ($translateProvider, $routeProvider, $stateProvider, $mdThemingProvider, $httpProvider, $mdDateLocaleProvider) {
         $translateProvider.useStaticFilesLoader({
