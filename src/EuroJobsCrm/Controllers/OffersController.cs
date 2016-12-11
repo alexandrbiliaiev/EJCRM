@@ -6,6 +6,7 @@ using EuroJobsCrm.Models;
 using Microsoft.AspNetCore.Mvc;
 using EuroJobsCrm.Services;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace EuroJobsCrm.Controllers
 {
@@ -196,6 +197,7 @@ namespace EuroJobsCrm.Controllers
             var employee = new Employees();
             var contragent = new Contragents();
             var offer = new Offers();
+            var responsibleUser = new AspNetUsers();
 
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
@@ -205,6 +207,7 @@ namespace EuroJobsCrm.Controllers
                 employee = context.Employees.FirstOrDefault(c => c.EmpId == employmentRequest.EtrEmpId);
                 contragent = context.Contragents.FirstOrDefault(c => c.CgtId == employee.EmpCtgId);
                 offer = context.Offers.FirstOrDefault(o => o.OfrId == employmentRequest.EtrOfrId);
+                responsibleUser = context.AspNetUsers.FirstOrDefault(u => u.Id == contragent.CgtResponsibleUser);
 
             }
 
@@ -213,7 +216,11 @@ namespace EuroJobsCrm.Controllers
             string emailSubject = bodyBuilder.BuildSubject();
 
             NotificationEmailSender emailSender = new NotificationEmailSender();
-            await emailSender.SendEmailAsync("alexandr.biliaiev@gmail.com", emailSubject, emailBody);
+            if (responsibleUser.Email != null)
+            {
+                await emailSender.SendEmailAsync(responsibleUser.Email, emailSubject, emailBody);
+            }
+                await emailSender.SendEmailAsync("tadeusz@eurojobs.info.pl", emailSubject, emailBody);
 
             employmentRequestDto.Id = employmentRequest.EtrId;
             return employmentRequestDto;
@@ -221,10 +228,16 @@ namespace EuroJobsCrm.Controllers
 
         [HttpPost]
         [Route("/api/Offers/ChangeRequestStatus")]
-        public bool ChangeEmploymentRequestStatus([FromBody] EmploymentRequestDto employmentRequestDto)
+        public async Task<bool> ChangeEmploymentRequestStatus([FromBody] EmploymentRequestDto employmentRequestDto)
         {
             try
             {
+                var employee = new Employees();
+                var contragent = new Contragents();
+                var offer = new Offers();
+                var responsibleUser = new AspNetUsers();
+                string status;
+
                 using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
                 {
                     EmploymentRequests employmentRequest =
@@ -239,8 +252,27 @@ namespace EuroJobsCrm.Controllers
                     employmentRequest.EtrAuditMu = User.GetUserId();
                     employmentRequest.EtrStatus = employmentRequestDto.Status;
 
+                    status = employmentRequestDto.Status == 1 ? "Accepted" : "Rejected";
+
+                    employee = context.Employees.FirstOrDefault(c => c.EmpId == employmentRequest.EtrEmpId);
+                    contragent = context.Contragents.FirstOrDefault(c => c.CgtId == employee.EmpCtgId);
+                    offer = context.Offers.FirstOrDefault(o => o.OfrId == employmentRequest.EtrOfrId);
+                    responsibleUser = context.AspNetUsers.FirstOrDefault(u => u.Id == contragent.CgtResponsibleUser);
+
                     context.SaveChanges();
                 }
+
+                IEmailMessageBuilder bodyBuilder = new ChangePimpStatusBodyBuilder(new EmployeeDto(employee), new ContragentDto(contragent), new OfferDto(offer),status);
+                string emailBody = bodyBuilder.BuildBody();
+                string emailSubject = bodyBuilder.BuildSubject();
+
+                NotificationEmailSender emailSender = new NotificationEmailSender();
+                if (responsibleUser.Email != null)
+                {
+                    await emailSender.SendEmailAsync(responsibleUser.Email, emailSubject, emailBody);
+                }
+                await emailSender.SendEmailAsync("tadeusz@eurojobs.info.pl", emailSubject, emailBody);
+
 
                 return true;
             }

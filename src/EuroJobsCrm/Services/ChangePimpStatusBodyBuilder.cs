@@ -9,17 +9,19 @@ using System.Threading.Tasks;
 
 namespace EuroJobsCrm.Services
 {
-    public class PimpEmployeeBodyBuilder : IEmailMessageBuilder
+    public class ChangePimpStatusBodyBuilder : IEmailMessageBuilder
     {
         private EmployeeDto _employee;
         private ContragentDto _contragent;
         private OfferDto _offer;
+        private string _status;
 
-        public PimpEmployeeBodyBuilder(EmployeeDto employee, ContragentDto contragent, OfferDto offer)
+        public ChangePimpStatusBodyBuilder(EmployeeDto employee, ContragentDto contragent, OfferDto offer, string status)
         {
             _employee = employee;
             _contragent = contragent;
             _offer = offer;
+            _status = status;
 
         }
         public string BuildBody()
@@ -28,20 +30,20 @@ namespace EuroJobsCrm.Services
 
             string emailHtmlTemplate = File.ReadAllText(environmentPath + "\\emailTemplates\\candidateSubmitionEmailTemplate.html");
 
-            string body = emailHtmlTemplate.Replace("[Header]", "New candidate request")
+            string body = emailHtmlTemplate.Replace("[Header]", "Candidate request Update")
                 .Replace("[Detail line 1]",$"Applies: {_contragent.Name}")
                 .Replace("[DETAILLINE2]",$"Candidate: {_employee.FirstName} {_employee.LastName}")
-                .Replace("[MAINTEXT]",$@"Dear colegue, <br/> Please confirm your choise in Eurojobs CRM. <br/> Offer: {_offer.Position}")
+                .Replace("[MAINTEXT]",$@"Dear colegue, <br/> Candidate was {_status}<br/> Offer: {_offer.Position}")
                 .Replace("[href]", $"http://localhost:52962/Offers#/off_edit/{_offer.Id}")
-                .Replace("[Confirmation]", "Confirm")
-                .Replace("[CONTENT]", "Please note, contragent will receive email with your decision.");
+                .Replace("[Confirmation]", "Go to Offer")
+                .Replace("[CONTENT]", "Please note, contragent will received email with your decision.");
             return body;
         }
 
         public string BuildSubject()
         {
             string subject = 
-$@"{_contragent.Name} added new candidate to offer {_offer.Position}";
+$@"Candidate from {_contragent.Name} was {_status} for {_offer.Position}";
             return subject;
         }
     }

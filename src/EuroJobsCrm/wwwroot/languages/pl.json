@@ -193,6 +193,7 @@
     "ADD_ADV_USER": "Dotaj zaawansowanego użytkownika",
     "USER":"Użytkownik",
     "PASSWORD":"Hasło",
+    "RESPONSIBLE_PERSON": "Osoba odpowiedzialna",
     "ADDING_USER_ERROR":"Błąd przy dodawaniu użytkownika",
     "PASSWORD_ERROR": "Hasło musi zawierać liczby, znaki specjalne $#!@* oraz duże litery",
     "USER_NAME":"Imię użytkownika",
