@@ -3,6 +3,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
     $scope.expandContactPersons = true;
     $scope.expandAddresses = true;
     $scope.expandEmployees = true;
+    $scope.expandResponsiblePerson = false;
     $scope.expandNotes = true;
     $scope.countries = countriesService.countries;
     $scope.birthdate = null;

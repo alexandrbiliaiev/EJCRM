@@ -192,5 +192,6 @@
     "ADD_USER": "Dodaj użytkownika",
     "ADD_ADV_USER": "Dotaj zaawansowanego użytkownika",
     "USER":"Użytkownik",
-    "PASSWORD":"Hasło"
+    "PASSWORD":"Hasło",
+    "RESPONSIBLE_PERSON": "Osoba odpowiedzialna"
 }
