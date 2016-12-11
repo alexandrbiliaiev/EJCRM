@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -86,6 +87,28 @@ namespace EuroJobsCrm.Controllers
                 context.SaveChanges();
                 contragent.Id = ctr.CgtId;
                 return contragent;
+            }
+        }
+
+        [HttpPost]
+        [Route("/api/Contragents/addResponsiblePersonToContragent")]
+        public async Task<ContragentDto> AddResponsiblePersonToContragent([FromBody] ResponsiblePersonToContragentParamDto param)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                var contragnet = context.Contragents.FirstOrDefault(c => c.CgtId == param.ContragentId);
+                if (contragnet == null)
+                {
+                    return new ContragentDto
+                    {
+                        Success = false,
+                        ErrorMessage = "Customer doesn't exist"
+                    };
+                }
+
+                contragnet.CgtResponsibleUser = param.UserId;
+                await context.SaveChangesAsync();
+                return new ContragentDto(contragnet);
             }
         }
 

@@ -1,7 +1,8 @@
-angular.module('EuroJobsCrm.controllers').controller('ContragentsController', function ($scope, $location, $http, $state, $translate, $mdDialog, contragentsService) {
+angular.module('EuroJobsCrm.controllers').controller('ContragentsController', function ($scope, $location, $http, $state, $translate, $mdDialog, contragentsService, usersService) {
     $scope.contragents = [];
     $scope.index = 0;
     $scope.contragents = new Array();
+    $scope.users = new Array();
 
     $scope.contragent = {
         status: 'a',
@@ -93,7 +94,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
     if (contragentsService.contragents != undefined) {
         $scope.contragents = contragentsService.contragents;
         return;
-    }
+    };
 
     contragentsService.load().success(function (response) {
         contragentsService.contragents = response;
@@ -101,4 +102,31 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
     }).error(function () {
         $state.go('error');
     });
+
+    usersService.load().success(function (response) {
+
+        usersService.setAdmins(response['Admin']);
+        usersService.setAdvancedUsers(response['Advanced user']);
+        usersService.setNormalUsers(response['Normal user']);
+
+        $scope.admins = usersService.admins;
+        $scope.advancedUsers = usersService.advancedUsers;
+        $scope.normalUsers = usersService.normalUsers;
+
+        for (i in $scope.admins) {
+            $scope.users.push($scope.admins[i]);
+        }
+
+        for (i in $scope.advancedUsers) {
+            $scope.users.push($scope.advancedUsers[i]);
+        }
+
+        for (i in $scope.normalUsers) {
+            $scope.users.push($scope.normalUsers[i]);
+        }
+
+    }).error(function () {
+        $state.go('error');
+    });
+
 });

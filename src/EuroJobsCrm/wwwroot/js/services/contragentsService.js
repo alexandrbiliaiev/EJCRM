@@ -15,6 +15,14 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
+        contragents.addResponsiblePersonToContragent = function (param) {
+            return $http({
+                url: 'api/Contragents/addResponsiblePersonToContragent',
+                method: "POST",
+                data: param
+            });
+        }
+
         contragents.deleteContragent = function (ctgId) {
             param = {
                 contragentId: ctgId

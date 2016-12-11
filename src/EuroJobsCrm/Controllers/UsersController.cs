@@ -45,7 +45,7 @@ namespace EuroJobsCrm.Controllers
         {
             using (var context = new DB_A12601_bielkaContext())
             {
-                var users = context.AspNetUserRoles.Join(context.AspNetUsers,
+                var users = context.AspNetUserRoles.Where(r=>r.Role.Name != SUPER_ADMIN_ROLE_NAME).Join(context.AspNetUsers,
                         r => r.UserId,
                         u => u.Id,
                         (role, user) => new

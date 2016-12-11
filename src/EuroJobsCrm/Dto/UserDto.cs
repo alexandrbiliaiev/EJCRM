@@ -26,9 +26,9 @@ namespace EuroJobsCrm.Dto
         public UserDto(AspNetUsers user)
         {
 
-            UserName = user.UserName;
-            Email = user.Email;
-            Id = user.Id;
+            UserName = user?.UserName;
+            Email = user?.Email;
+            Id = user?.Id;
         }
     }
 }

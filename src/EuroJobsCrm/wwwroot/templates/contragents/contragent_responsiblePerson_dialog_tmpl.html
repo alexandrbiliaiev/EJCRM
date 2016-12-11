@@ -1,0 +1,32 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{'RESPONSIBLE_PERSON' | translate}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="close()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <form name="responsiblePersonForm">
+                <md-list ng-cloak>
+                    <md-list-item class="md-1-line" ng-repeat="user in users">
+                        {{user.email}}
+                        <md-button aria-label="button" class="md-icon-button md-secondary" ng-click="saveResponsiblePersoon(user)">
+									<md-icon md-font-icon="ion-plus">
+										<md-tooltip md-direction="left">
+											{{ 'ADD' | translate }}
+										</md-tooltip>
+									</md-icon>
+								</md-button>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                </md-list>
+
+            </form>
+        </div>
+    </md-dialog-content>
+
+</md-dialog>
