@@ -193,9 +193,7 @@
     "ADD_ADV_USER": "Dotaj zaawansowanego użytkownika",
     "USER":"Użytkownik",
     "PASSWORD":"Hasło",
-<<<<<<< HEAD
-    "RESPONSIBLE_PERSON": "Osoba odpowiedzialna"
-=======
+    "RESPONSIBLE_PERSON": "Osoba odpowiedzialna",
     "ADDING_USER_ERROR":"Błąd przy dodawaniu użytkownika",
     "PASSWORD_ERROR": "Hasło musi zawierać liczby, znaki specjalne $#!@* oraz duże litery",
     "USER_NAME":"Imię użytkownika",
@@ -210,5 +208,4 @@
     "RESET_PASS_CONFIRM_TEXT":"Czy napewno chcesz zresetować hasło dla tego użytkownika?",
     "YES": "Tak",
     "RESET_PASS_SUCCESS":"Hasło zostało zresetowane. Wkrtótce ten użytkownik otrzyma emaila z nowym hasłem."
->>>>>>> d954bce80e3bc070d9f7dd89e7ac5a2450d1cfe5
 }
