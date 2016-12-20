@@ -54,6 +54,12 @@
                                     <li><a asp-area="" asp-controller="Clients" asp-action="Index" asp-fragment="clt_all">{{ 'Clients' | translate }}</a></li>
                                     <li><a asp-area="" asp-controller="Offers" asp-action="Index" asp-fragment="off_all">{{ 'Offers' | translate }}</a></li>
                                     <li><a asp-area="" asp-controller="Employee" asp-action="Index" asp-fragment="emp_all">{{ 'Employees' | translate }}</a></li>
+                                  
+                                }
+
+
+                                @if (!User.IsInRole("Accounting"))
+                                {
                                     <li><a asp-area="" asp-controller="Contragents" asp-action="Index" asp-fragment="ctg_all">{{ 'Contragents' | translate }}</a></li>
                                 }
 

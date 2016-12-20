@@ -50,7 +50,7 @@
 										{{ 'LEFT' | translate }}
 									</md-tooltip>
 								</md-icon>
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee.id)">
+								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee.id)" ng-show="editClaim">
 									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 								</md-button>
 								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)" ng-show="deleteClaim">

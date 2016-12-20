@@ -104,4 +104,9 @@ angular.module('EuroJobsCrm.controllers').controller('OffersController', functio
     }).error(function () {
         $state.go('error');
     });
+
+    $scope.userRole = $cookies.get('user_role');
+    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin';
+    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin' ||  $scope.userRole == 'Advanced user';
+   
 });
