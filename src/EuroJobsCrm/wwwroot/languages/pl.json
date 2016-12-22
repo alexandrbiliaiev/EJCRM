@@ -207,5 +207,6 @@
     "RESET_PASS_CONFIRM_TITLE":"Resetowanie hasła",
     "RESET_PASS_CONFIRM_TEXT":"Czy napewno chcesz zresetować hasło dla tego użytkownika?",
     "YES": "Tak",
-    "RESET_PASS_SUCCESS":"Hasło zostało zresetowane. Wkrtótce ten użytkownik otrzyma emaila z nowym hasłem."
+    "RESET_PASS_SUCCESS":"Hasło zostało zresetowane. Wkrtótce ten użytkownik otrzyma emaila z nowym hasłem.",
+    "CANDIDATES": "Kandydaci"
 }

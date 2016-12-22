@@ -291,22 +291,19 @@
                             <span>{{'EMPLOYEES' | translate}}</span>
                         </h2>
                         <span flex></span>
-                        <md-button aria-label="button" class="md-icon-button" ng-click="showAddCandidateDialog()">
-                            <md-icon md-font-icon="ion-plus"></md-icon>
-                        </md-button>
-                        <md-button aria-label="button" class="md-icon-button" ng-click="expandCandidates = !expandCandidates">
+                        <md-button aria-label="button" class="md-icon-button" ng-click="expandEmployees = !expandEmployees">
                             <md-icon md-font-icon="ion-navicon-round"></md-icon>
                         </md-button>
                     </div>
                 </md-toolbar>
             </div>
             <div layout="row" flex layout-wrap>
-                <div flex ng-show="expandCandidates" ng-cloak>
+                <div flex ng-show="expandEmployees" ng-cloak>
                     <section class="demo-container md-whiteframe-z1">
                         <md-content>
                             <md-list ng-cloak style="margin-top: -10px">
                                 <md-list-item class="md-2-line" ng-repeat="employee in offer.employees">
-                                    <md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="showEditContactPersonDialog(contactperson)">
+                                    <md-icon style="font-size:32px;" md-font-icon="ion-person" >
                                     </md-icon>
                                     <div class="md-list-item-text">
                                         <h3><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
@@ -328,13 +325,6 @@
                                         <md-tooltip md-direction="left">
                                             {{ 'LEFT' | translate }}
                                         </md-tooltip>
-                                    </md-icon>
-                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee.id)">
-                                        <md-icon md-svg-icon="ion-thumbsup"></md-icon>
-                                    </md-button>
-                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)">
-                                        <md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-                                    </md-button>
                                     <md-divider ng-if="!$last"></md-divider>
                                 </md-list-item>
                         </md-content>

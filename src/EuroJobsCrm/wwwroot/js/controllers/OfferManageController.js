@@ -3,7 +3,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     $scope.expandDetails = true;
     $scope.expandCandidates = true;
     $scope.expandEmployees = true;
-    $scope.expandEmployees = true;
+
 
     $scope.moment = moment;
 
