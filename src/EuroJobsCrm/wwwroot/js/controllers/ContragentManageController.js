@@ -1,5 +1,5 @@
 angular.module('EuroJobsCrm.controllers').controller('ContragentManageController', function ($scope, $location, $translate, $http, $state, contragentsService,
-    countriesService, contactpersonsService, addressesService, $mdDialog, $routeParams, employeesService, usersService) {
+    countriesService, contactpersonsService, addressesService, $mdDialog, $routeParams, $cookies, employeesService, usersService) {
     $scope.expandDetails = true;
     $scope.expandContactPersons = true;
     $scope.expandAddresses = true;
@@ -464,4 +464,10 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $state.go('error');
     });
 
+
+    $scope.userRole = $cookies.get('user_role');
+    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin';
+    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user';
+    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
+    
 });

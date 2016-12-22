@@ -129,4 +129,9 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         $state.go('error');
     });
 
+    $scope.userRole = $cookies.get('user_role');
+    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin';
+    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user';
+    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
+    
 });

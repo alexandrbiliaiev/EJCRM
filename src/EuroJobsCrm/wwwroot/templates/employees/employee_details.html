@@ -9,7 +9,7 @@
                             <span>{{'DETAIL_INFORMATION'| translate}}</span>
                         </h2>
                         <span flex></span>
-                        <md-button aria-label="button" class="md-icon-button" ng-click="showEditEmployeeDialog()">
+                        <md-button aria-label="button" class="md-icon-button" ng-click="showEditEmployeeDialog()" ng-show="addClaim">
                             <md-icon md-font-icon="ion-edit"></md-icon>
                         </md-button>
                         <md-button aria-label="button" class="md-icon-button" ng-click="expandDetails = !expandDetails">
@@ -108,7 +108,7 @@
                             <span>{{'DOCS_VISA'| translate}}</span>
                         </h2>
                         <span flex></span>
-                        <md-button aria-label="button" class="md-icon-button" ng-click="showAddDocumentDialog()">
+                        <md-button aria-label="button" class="md-icon-button" ng-click="showAddDocumentDialog()" ng-show="addClaim">
                             <md-icon md-font-icon="ion-plus-round"></md-icon>
                         </md-button>
                         <md-button aria-label="button" class="md-icon-button" ng-click="expandDocs = !expandDocs">
@@ -129,14 +129,14 @@
                                         {{ 'VALID_FROM' | translate }} {{moment(doc.validFrom).format('DD-MM-YYYY')}} {{ 'VALID_TO' | translate }} {{moment(doc.validTo).format('DD-MM-YYYY')}}
                                     </p>
                                 </div>
-                                <md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="showEditDocumentDialog(doc)">
+                                <md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="showEditDocumentDialog(doc)" ng-show="editClaim">
                                     <md-icon md-svg-icon="/lib/icons/edit.svg">
                                         <md-tooltip md-direction="down">
                                             {{ 'EDIT' | translate }}
                                         </md-tooltip>
                                     </md-icon>
                                 </md-button>
-                                <md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteDocConfirmDialog(doc.id)">
+                                <md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteDocConfirmDialog(doc.id)" ng-show="deleteClaim">
                                     <md-icon md-svg-icon="/lib/icons/delete.svg">
                                         <md-tooltip md-direction="down">
                                             {{ 'DELETE' | translate }}
@@ -155,7 +155,7 @@
     <!--Fucking material add buttons NOT ALL BUTTONS ARE AVAILABLE ON PAGE-->
 	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
 	
-		<a mfb-button mfb-button-close icon="ion-android-document" label="{{ 'ADD_DOCUMENT' | translate}}" ng-click="showAddDocumentDialog()"/>
+		<a mfb-button mfb-button-close icon="ion-android-document" label="{{ 'ADD_DOCUMENT' | translate}}" ng-click="showAddDocumentDialog()" ng-show="addClaim"/>
 	
 	</nav>
 	<!--Fucking material return button-bich -->

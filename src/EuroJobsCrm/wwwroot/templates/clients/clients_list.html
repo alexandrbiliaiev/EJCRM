@@ -59,14 +59,14 @@
 									</md-tooltip>
 								</md-icon>
 
-								<md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="editClient(client.id)">
+								<md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="editClient(client.id)" ng-show="editClaim">
 									<md-icon md-svg-icon="/lib/icons/edit.svg">
 										<md-tooltip md-direction="down">
 											{{ 'EDIT' | translate }}
 										</md-tooltip>
 									</md-icon>
 								</md-button>
-								<md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteClientConfirmDialog(client.id)">
+								<md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteClientConfirmDialog(client.id)" ng-show="deleteClaim">
 									<md-icon md-svg-icon="/lib/icons/delete.svg">
 										<md-tooltip md-direction="down">
 											{{ 'DELETE' | translate }}
@@ -82,13 +82,13 @@
 		</md-content>
 		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
 			<a mfb-button icon="ion-ios-search-strong" label="{{'SEARCH' | translate}}"></a>
-			<a mfb-button icon="ion-android-contact" label="{{'ADD_CONTRAGENT' | translate}}" ng-click="showAddContragentDialog()"></a>
+			<a mfb-button icon="ion-android-contact" label="{{'ADD_CONTRAGENT' | translate}}" ng-click="showAddContragentDialog()" ng-show="addClaim"></a>
 		</nav>
 
 
 		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
 			<a mfb-button icon="ion-ios-search-strong" label="{{'SEARCH' | translate}}"></a>
-			<a mfb-button icon="ion-android-contact" label="{{'ADD_CLIENT' | translate}}" ng-click="showAddClientDialog()"></a>
+			<a mfb-button icon="ion-android-contact" label="{{'ADD_CLIENT' | translate}}" ng-click="showAddClientDialog()" ng-show="addClaim"></a>
 		</nav>
 	</div>
 </ui-view>

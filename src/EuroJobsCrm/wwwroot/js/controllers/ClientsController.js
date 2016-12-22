@@ -1,4 +1,4 @@
-angular.module('EuroJobsCrm.controllers').controller('ClientsController', function ($scope, $location, $http, $state, $translate, $mdDialog, clientsService) {
+angular.module('EuroJobsCrm.controllers').controller('ClientsController', function ($scope, $location, $http, $state, $translate, $mdDialog, $cookies, clientsService) {
     $scope.clients = [];
 
     $scope.getDefaultClient = function () {
@@ -100,4 +100,11 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController', functi
     }).error(function () {
         $state.go('error');
     });
+
+    $scope.userRole = $cookies.get('user_role');
+    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin';
+    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user';
+    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
+    
+   
 });
