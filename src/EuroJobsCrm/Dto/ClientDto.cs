@@ -12,6 +12,9 @@ namespace EuroJobsCrm.Dto
         public string Nip { get; set; }
         public string Krs { get; set; }
         public string Regon { get; set; }
+        public int? Status { get; set; }
+        public int? Type { get; set; }
+        public string Branch { get; set; }
         public List<OfferDto> Offers { get; set; }
 
         public ClientDto()
@@ -27,6 +30,9 @@ namespace EuroJobsCrm.Dto
             Krs = client.CltKrs;
             Nip = client.CltNip;
             Regon = client.CltRegon;
+            Status = client.CltStatus;
+            Type = client.CltType;
+            Branch = client.CltBranch;
             Addresses = addresses.Select(a => new AddressDto(a)).ToList();
             ContactPersons = contactPersons.Select(c => new ContactPersonDto(c)).ToList();
             Offers = offers.Select(o => new OfferDto(o)).ToList();

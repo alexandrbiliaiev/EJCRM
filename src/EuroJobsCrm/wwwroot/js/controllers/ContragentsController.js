@@ -1,8 +1,13 @@
-angular.module('EuroJobsCrm.controllers').controller('ContragentsController', function ($scope, $location, $http, $state, $translate, $mdDialog, contragentsService, usersService) {
+angular.module('EuroJobsCrm.controllers').controller('ContragentsController', function ($scope, $location, $http, $state, $translate, $mdDialog, $cookies, contragentsService, usersService) {
     $scope.contragents = [];
     $scope.index = 0;
     $scope.contragents = new Array();
     $scope.users = new Array();
+
+    $scope.userRole = $cookies.get('user_role');
+    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
+    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
+    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
 
     $scope.contragent = {
         status: 'a',
@@ -129,9 +134,4 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         $state.go('error');
     });
 
-    $scope.userRole = $cookies.get('user_role');
-    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin';
-    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user';
-    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
-    
 });

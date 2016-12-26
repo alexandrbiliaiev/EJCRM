@@ -1,5 +1,10 @@
 angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController', function ($scope, $rootScope, $location, $translate, $http, $state, countriesService, employeesService,
-    $mdDialog, $routeParams, Upload, $timeout) {
+    $mdDialog, $routeParams, Upload, $timeout, $cookies) {
+
+    $scope.userRole = $cookies.get('user_role');
+    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
+    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
+    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
 
     $scope.expandDetails = true;
     $scope.expandDocs = true;
@@ -11,12 +16,12 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
     $scope.showEditEmployeeDialog = function () {
         $scope.birthdate = new Date($scope.employee.birthDate);
         $mdDialog.show({
-                scope: $scope,
-                preserveScope: true,
-                templateUrl: '/templates/employees/employee_dialog_tmpl.html',
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/employees/employee_dialog_tmpl.html',
 
-                clickOutsideToClose: true,
-            })
+            clickOutsideToClose: true,
+        })
             .then(function (answer) {
 
             }, function () {
@@ -26,16 +31,16 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
 
     $scope.showAddDocumentDialog = function () {
         $scope.document = employeesService.getDefaultDocument();
-        $scope.document.employeeId =  $scope.employee.id;
+        $scope.document.employeeId = $scope.employee.id;
         $scope.docFile = undefined;
         $scope.sendProgress = 0;
         $mdDialog.show({
-                scope: $scope,
-                preserveScope: true,
-                templateUrl: '/templates/documents/document_dialog_tmpl.html',
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/documents/document_dialog_tmpl.html',
 
-                clickOutsideToClose: true,
-            })
+            clickOutsideToClose: true,
+        })
             .then(function (answer) {
 
             }, function () {
@@ -45,20 +50,20 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
 
     $scope.showEditDocumentDialog = function (document) {
         $scope.document = document;
-        $scope.document.validFrom =  new Date($scope.document.validFrom); 
-        $scope.document.validTo =  new Date($scope.document.validTo);  
-        $scope.document.issueDate =  new Date($scope.document.issueDate);  
-        
-             
+        $scope.document.validFrom = new Date($scope.document.validFrom);
+        $scope.document.validTo = new Date($scope.document.validTo);
+        $scope.document.issueDate = new Date($scope.document.issueDate);
+
+
         $scope.docFile = undefined;
         $scope.sendProgress = 0;
         $mdDialog.show({
-                scope: $scope,
-                preserveScope: true,
-                templateUrl: '/templates/documents/document_dialog_tmpl.html',
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/documents/document_dialog_tmpl.html',
 
-                clickOutsideToClose: true,
-            })
+            clickOutsideToClose: true,
+        })
             .then(function (answer) {
 
             }, function () {
@@ -134,7 +139,7 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
 
         });
     }
-  
+
     $scope.saveEmployeeClick = function () {
         if ($scope.employeeForm.$invalid) {
             return;
@@ -154,17 +159,17 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
         employeesService.saveEmployee(employee).success(function (response) {
             if ($scope.employee.id == 0 || $scope.employee.id == undefined) {
                 $scope.contragent.employees.push(response);
-            }else{
-                for(i in employeesService.employees){
-                    if (employeesService.employees[i].id == response.id){
-                        for(j in employeesService.employees[i])
+            } else {
+                for (i in employeesService.employees) {
+                    if (employeesService.employees[i].id == response.id) {
+                        for (j in employeesService.employees[i])
                             employeesService.employees[i][j] = response[j];
                     }
                 }
-               
+
             }
 
-            
+
 
             $mdDialog.hide();
         }).error(function () {
@@ -179,10 +184,10 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
         }
 
         employeesService.saveDocument($scope.document).success(function (response) {
-            if ($scope.document.id== 0 || $scope.document.id == undefined) {
+            if ($scope.document.id == 0 || $scope.document.id == undefined) {
                 $scope.employee.identityDocuments.push(response);
-            }else{
-                for(i in $scope.document) 
+            } else {
+                for (i in $scope.document)
                     $scope.document[i] = response[i];
             }
 
@@ -212,7 +217,7 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
 
         file.upload.then(function (response) {
             $timeout(function () {
-                $scope.document.files.push({url : response.data, name : file.name});
+                $scope.document.files.push({ url: response.data, name: file.name });
                 file.result = response.data;
                 $scope.docFile = undefined;
                 $scope.sendProgress = 0;
@@ -236,9 +241,4 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
         $state.go('error');
     });
 
-    $scope.userRole = $cookies.get('user_role');
-    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin';
-    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user';
-    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
- 
 });

@@ -243,6 +243,18 @@ namespace EuroJobsCrm.Models
                     .IsRequired()
                     .HasColumnName("clt_regon")
                     .HasMaxLength(20);
+
+                entity.Property(e => e.CltStatus)
+                    .HasColumnName("clt_status");
+
+                entity.Property(e => e.CltType)
+                    .HasColumnName("clt_type");
+
+                entity.Property(e => e.CltBranch)
+                    .IsRequired()
+                    .HasColumnName("clt_branch")
+                    .HasMaxLength(30);
+
             });
 
             modelBuilder.Entity<ContactPersons>(entity =>

@@ -1,110 +1,111 @@
-angular.module('EuroJobsCrm.controllers').controller('ClientsController', function ($scope, $location, $http, $state, $translate, $mdDialog, $cookies, clientsService) {
-    $scope.clients = [];
+angular.module('EuroJobsCrm.controllers').controller('ClientsController',
+    function ($scope, $location, $http, $state, $translate, $mdDialog, $cookies,
+        clientsService) {
+        $scope.clients = [];
 
-    $scope.getDefaultClient = function () {
-        return  {
-            id: 0,
-            krs: "",
-            name: "",
-            nip: "",
-            regon: ""
-        }
-    }
+        $scope.userRole = $cookies.get('user_role');
+        $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
+        $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
+        $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
 
-    $scope.client = $scope.getDefaultClient();
-
-    $scope.editClient = function (clientId) {
-        $state.go('client', {
-            id: clientId
-        });
-    }
-
-    $scope.saveClientClick = function () {
-        if ($scope.clientForm.$invalid) {
-            return;
+        $scope.getDefaultClient = function () {
+            return {
+                id: 0,
+                krs: "",
+                name: "",
+                nip: "",
+                regon: ""
+            }
         }
 
-        client = $scope.client;
+        $scope.client = $scope.getDefaultClient();
 
-        clientsService.saveClient(client).success(function (response) {
-            clientsService.clients.push(response);
-            $scope.client = $scope.getDefaultClient();
+        $scope.editClient = function (clientId) {
+            $state.go('client', {
+                id: clientId
+            });
+        }
+
+        $scope.saveClientClick = function () {
+            if ($scope.clientForm.$invalid) {
+                return;
+            }
+
+            client = $scope.client;
+
+            clientsService.saveClient(client).success(function (response) {
+                clientsService.clients.push(response);
+                $scope.client = $scope.getDefaultClient();
+                $mdDialog.hide();
+            }).error(function () {
+                $state.go('error');
+                $mdDialog.hide();
+            });
+        }
+
+
+        $scope.close = function () {
             $mdDialog.hide();
-        }).error(function () {
-            $state.go('error');
-            $mdDialog.hide();
-        });
-    }
+        }
 
-
-    $scope.close = function () {
-        $mdDialog.hide();
-    }
-
-    $scope.showAddClientDialog = function (ev) {
-        client = $scope.getDefaultClient();
-        $mdDialog.show({
+        $scope.showAddClientDialog = function (ev) {
+            client = $scope.getDefaultClient();
+            $mdDialog.show({
                 scope: $scope,
                 preserveScope: true,
                 templateUrl: '/templates/clients/client_dialog_tmpl.html',
                 targetEvent: ev,
                 clickOutsideToClose: true,
             })
-            .then(function (answer) {
+                .then(function (answer) {
 
+                }, function () {
+
+                });
+        }
+
+        $scope.showDeleteClientConfirmDialog = function (clientId) {
+            var confirm = $mdDialog.confirm()
+                .title($translate.instant('CLI_DELETE_CONFIRM_TITLE'))
+                .textContent($translate.instant('CLT_DELETE_CONFIRM_TEXT'))
+                .ariaLabel('label')
+                .ok($translate.instant('DELETE_OK'))
+                .cancel($translate.instant('DELETE_CANCEL'));
+
+            $mdDialog.show(confirm).then(function () {
+                clientsService.deleteClient(clientId).success(function (response) {
+                    if (response != true) {
+                        return;
+                    }
+
+                    clients = clientsService.clients;
+                    for (i in clients) {
+                        if (clients[i].id != clientId) {
+                            continue;
+                        }
+
+                        clients.splice(i, 1);
+                        return;
+                    }
+
+                }).error(function (response) {
+                    $state.go('error');
+                });
             }, function () {
 
             });
-    }
+        };
 
-    $scope.showDeleteClientConfirmDialog = function (clientId) {
-        var confirm = $mdDialog.confirm()
-            .title($translate.instant('CLI_DELETE_CONFIRM_TITLE'))
-            .textContent($translate.instant('CLT_DELETE_CONFIRM_TEXT'))
-            .ariaLabel('label')
-            .ok($translate.instant('DELETE_OK'))
-            .cancel($translate.instant('DELETE_CANCEL'));
+        if (clientsService.clients != undefined) {
+            $scope.clients = clientsService.clients;
+            return;
+        }
 
-        $mdDialog.show(confirm).then(function () {
-            clientsService.deleteClient(clientId).success(function (response) {
-                if (response != true) {
-                    return;
-                }
-
-                clients = clientsService.clients;
-                for (i in clients) {
-                    if (clients[i].id != clientId) {
-                        continue;
-                    }
-
-                    clients.splice(i, 1);
-                    return;
-                }
-
-            }).error(function (response) {
-                $state.go('error');
-            });
-        }, function () {
-
+        clientsService.load().success(function (response) {
+            clientsService.clients = response;
+            $scope.clients = clientsService.clients;
+        }).error(function () {
+            $state.go('error');
         });
-    };
 
-    if (clientsService.clients != undefined) {
-        $scope.clients = clientsService.clients;
-        return;
-    }
-
-    clientsService.load().success(function (response) {
-        clientsService.clients = response;
-        $scope.clients = clientsService.clients;
-    }).error(function () {
-        $state.go('error');
     });
-
-    $scope.userRole = $cookies.get('user_role');
-    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin';
-    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user';
-    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
-    
-   
-});

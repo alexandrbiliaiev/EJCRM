@@ -32,8 +32,7 @@
     "CITY_REQUIRED": "Miejscowość jest wymagana",
     "USE_FOR_DOCUMENTS": "Adres główny",
     "COUNTRY": "Kraj",
-    "LEGAL_ADDRESS": "Adres firmy",
-    "PHYSICAL_ADDRESS": "Adres fizyczny",
+    "LEGAL_ADDRESS": "Adres siędziby firmy",
     "HOME_ADDRESS": "Adres domowy",
     "ADDRESS_TYPE": "Rodzaj adresu",
     "ADDRESS_DELETE_CONFIRM_TITLE": "Czy napewno chcesz usunąć ten adres?",
@@ -208,5 +207,10 @@
     "RESET_PASS_CONFIRM_TEXT":"Czy napewno chcesz zresetować hasło dla tego użytkownika?",
     "YES": "Tak",
     "RESET_PASS_SUCCESS":"Hasło zostało zresetowane. Wkrtótce ten użytkownik otrzyma emaila z nowym hasłem.",
-    "CANDIDATES": "Kandydaci"
+    "CANDIDATES": "Kandydaci",
+    "WORK_ADDRESS":"Adres wykonywania pracy",
+    "TO_DELETE":"Do usunięcia",
+    "TYPE": "Typ",
+    "LISING": "Lisingowy",
+    "NOT_LISING": "Nie lisingowy"
 }

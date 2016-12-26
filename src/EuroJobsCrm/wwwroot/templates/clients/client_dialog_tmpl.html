@@ -15,24 +15,32 @@
 					<label>{{'CLIENT_NAME'| translate}}</label>
 					<input name="client_name" ng-model="client.name" placeholder="Firma S. A." md-maxlength="100" required>
 					<div ng-messages="clientForm.client_name.$error" role="alert" multiple>
-						<div ng-message="required">{{'NAME_REQUIRED' | translate}} </div>
-						<div ng-message="md-maxlength">{{'NAME_IS_TO_LONG'| translate}}</div>
+						<div ng-message="required">{{'REQUIRED' | translate}} </div>
+						<div ng-message="md-maxlength">{{'TO_LONG'| translate}}</div>
 					</div>
 				</md-input-container>
+				<md-input-container class="md-block">
+					<label>{{'BRANCH'| translate}}</label>
+					<input name="tax_id" ng-model="client.branch" placeholder="IT" md-maxlength="10" required>
+					<div ng-messages="clientForm.tax_id.$error" role="alert" multiple>
+						<div ng-message="required">{{'REQUIRED' | translate}} </div>
+						<div ng-message="md-maxlength">{{'TO_LONG'| translate}}</div>
+					</div>
+				</md-input-container >
 				<md-input-container class="md-block">
 					<label>{{'TAX_ID'| translate}}</label>
 					<input name="tax_id" ng-model="client.nip" placeholder="{{'TAX_ID'| translate}}" md-maxlength="10" required>
 					<div ng-messages="clientForm.tax_id.$error" role="alert" multiple>
-						<div ng-message="required">{{'LICENSE_NUMBER_REQUIRED' | translate}} </div>
-						<div ng-message="md-maxlength">{{'LICENSE_NUMBER_IS_TO_LONG'| translate}}</div>
+						<div ng-message="required">{{'REQUIRED' | translate}} </div>
+						<div ng-message="md-maxlength">{{'TO_LONG'| translate}}</div>
 					</div>
-				</md-input-container >
+				</md-input-container>
 				<md-input-container class="md-block">
 					<label>{{ 'KRS' | translate }}</label>
 					<input name="krs" ng-model="client.krs" placeholder="KRS" md-maxlength="20" required>
 					<div ng-messages="clientForm.tax_id.$error" role="alert" multiple>
 						<div ng-message="required">{{'REQUIRED' | translate}} </div>
-						<div ng-message="md-maxlength">{{'IS_TO_LONG'| translate}}</div>
+						<div ng-message="md-maxlength">{{'TO_LONG'| translate}}</div>
 					</div>
 				</md-input-container>
 				<md-input-container class="md-block">
@@ -40,14 +48,22 @@
 					<input name="regon" ng-model="client.regon" placeholder="REGON" md-maxlength="14" required>
 					<div ng-messages="clientForm.regon.$error" role="alert" multiple>
 						<div ng-message="required">{{'REQUIRED' | translate}} </div>
-						<div ng-message="md-maxlength">{{'IS_TO_LONG'| translate}}</div>
+						<div ng-message="md-maxlength">{{'TO_LONG'| translate}}</div>
 					</div>
 				</md-input-container>
 				<md-input-container class="md-block">
+					<label>{{ 'TYPE' | translate }}</label>
+					<md-select name="type" ng-model="client.type" data-placeholder="{{ 'TYPE' | translate }}" required>
+						<md-option value="1">{{ 'LISING' | translate }}</md-option>
+						<md-option value="0">{{ 'NOT_LISING' | translate }}</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container class="md-block">
 					<label>{{ 'STATUS' | translate }}</label>
-					<md-select name="type" ng-model="client.status"  data-placeholder="{{ 'STATUS' | translate }}" required>
+					<md-select name="type" ng-model="client.status" data-placeholder="{{ 'STATUS' | translate }}" required>
 						<md-option value="1">{{ 'ACTIVE' | translate }}</md-option>
 						<md-option value="0">{{ 'INACTIVE' | translate }}</md-option>
+						<md-option value="2">{{ 'TO_DELETE' | translate }}</md-option>
 					</md-select>
 				</md-input-container>
 			</form>
@@ -55,7 +71,7 @@
 	</md-dialog-content>
 	<md-dialog-actions layout="row">
 		<md-button ng-click="saveClientClick()">
-			Save
+			{{'SAVE'| translate}}
 		</md-button>
 	</md-dialog-actions>
 </md-dialog>

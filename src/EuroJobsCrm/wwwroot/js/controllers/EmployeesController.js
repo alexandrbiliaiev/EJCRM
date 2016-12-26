@@ -1,19 +1,24 @@
 angular.module('EuroJobsCrm.controllers').controller('EmployeesController', function ($scope, $location, $http, $state, $translate, $mdDialog, $cookies, employeesService) {
     $scope.employees = [];
 
+    $scope.userRole = $cookies.get('user_role');
+    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
+    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
+    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
+
     $scope.moment = moment;
 
-  /*  $scope.getDefaultEmployee = function () {
-        return  {
-            id: 0,
-            krs: "",
-            name: "",
-            nip: "",
-            regon: ""
-        }
-    }
-
-    $scope.employee = $scope.getDefaultEmployee();*/
+    /*  $scope.getDefaultEmployee = function () {
+          return  {
+              id: 0,
+              krs: "",
+              name: "",
+              nip: "",
+              regon: ""
+          }
+      }
+  
+      $scope.employee = $scope.getDefaultEmployee();*/
 
     $scope.editEmployee = function (employeeId) {
         $state.go('employee', {
@@ -46,12 +51,12 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
     $scope.showAddEmployeeDialog = function (ev) {
         employee = $scope.getDefaultemployee();
         $mdDialog.show({
-                scope: $scope,
-                preserveScope: true,
-                templateUrl: '/templates/employees/employee_dialog_tmpl.html',
-                targetEvent: ev,
-                clickOutsideToClose: true,
-            })
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/employees/employee_dialog_tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+        })
             .then(function (answer) {
 
             }, function () {
@@ -103,10 +108,4 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
         $state.go('error');
     });
 
-    $scope.userRole = $cookies.get('user_role');
-    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin';
-    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user';
-    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin'  || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
- 
-   
 });

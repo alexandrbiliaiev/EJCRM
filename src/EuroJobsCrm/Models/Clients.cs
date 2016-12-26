@@ -16,5 +16,8 @@ namespace EuroJobsCrm.Models
         public string CltAuditMu { get; set; }
         public DateTime? CltAuditRd { get; set; }
         public string CltAuditRu { get; set; }
+        public int? CltStatus { get; set; }
+        public int? CltType { get; set; }
+        public string CltBranch { get; set; }
     }
 }

@@ -1,7 +1,12 @@
-angular.module('EuroJobsCrm.controllers').controller('OffersController', function ($scope, $location, $http, $state, $translate, $mdDialog, offersService) {
+angular.module('EuroJobsCrm.controllers').controller('OffersController', function ($scope, $location, $http, $state, $translate, $mdDialog, offersService, $cookies) {
     $scope.offers = [];
 
     $scope.moment = moment;
+
+    $scope.userRole = $cookies.get('user_role');
+    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
+    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
+    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
 
     /*  $scope.getDefaultoffer = function () {
           return  {
@@ -105,8 +110,4 @@ angular.module('EuroJobsCrm.controllers').controller('OffersController', functio
         $state.go('error');
     });
 
-    $scope.userRole = $cookies.get('user_role');
-    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin';
-    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super admin' ||  $scope.userRole == 'Advanced user';
-   
 });

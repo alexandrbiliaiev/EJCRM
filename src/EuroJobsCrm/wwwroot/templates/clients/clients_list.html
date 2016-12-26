@@ -9,6 +9,10 @@
 						</h2>
 						<span flex></span>
 
+						<md-button aria-label="button" aria-label="button" class="md-icon-button" ng-click="showAddClientDialog()" ng-show="addClaim">
+							<md-icon md-font-icon="ion-plus-round"></md-icon>
+						</md-button>
+
 						<md-button class="md-icon-button" aria-label="Search" ng-show="!showSearch" ng-click="showSearch = !showSearch">
 							<md-icon md-font-icon="ion-search"></md-icon>
 						</md-button>
@@ -19,7 +23,8 @@
 					<md-toolbar class="md-hue-1" ng-show="showSearch">
 						<div class="md-toolbar-tools">
 							<md-input-container class="md-block" flex="100" ng-show="showSearch">
-								<input aria-label="input" ng-model="searchString" style="color:white; font-size:14pt;" placeholder="{{'SEARCH'| translate}} ..." />
+								<input aria-label="input" ng-model="searchString" style="color:white; font-size:14pt;" placeholder="{{'SEARCH'| translate}} ..."
+								/>
 							</md-input-container>
 						</div>
 					</md-toolbar>
@@ -28,21 +33,21 @@
 					<md-content flex>
 						<md-list ng-cloak style="margin-top: -10px">
 							<md-list-item class="md-3-line" ng-repeat="client in clients | clientsSearchFor : searchString">
-								<md-icon style="font-size:24px;" md-font-icon="ion-ios-folder">
+								<md-icon class="material-icons md-36 md-dark" ng-click="editClient(client.id)">folder_shared
 								</md-icon>
+
 								<div class="md-list-item-text">
 									<table>
 										<td style="padding:0 30px 0 0;">
-											<h3><b>{{client.name}}</b></h3>
+											<h3 ng-click="editClient(client.id)"><b>{{client.name}}</b></h3>
 											<p> <b>{{'TAX_ID'| translate}}:</b> {{client.nip}}</p>
 											<p> <b>{{'KRS'| translate}}:</b> {{client.krs}}</p>
 											<p> <b>{{'REGON'| translate}}:</b> {{client.regon}}</p>
 										</td>
 										<td>
 											<p ng-repeat="cl_address in client.addresses">
-												<i ng-show="cl_address.type == 1">{{ 'LEGAL_ADDRESS' | translate }}: {{cl_address.address}}, {{cl_address.postCode}}, {{cl_address.city}}, {{cl_address.country}}</i>
-												<i ng-show="cl_address.type == 2"> {{ 'PHYSICAL_ADDRESS' | translate }}: {{cl_address.address}}, {{cl_address.postCode}}, {{cl_address.city}}, {{cl_address.country}}</i>
-												<i ng-show="cl_address.type == 3"> {{ 'HOME_ADDRESS' | translate }}: {{cl_address.address}}, {{cl_address.postCode}}, {{cl_address.city}}, {{cl_address.country}}</i>
+												<i ng-show="cl_address.type == 1"><b>{{ 'LEGAL_ADDRESS' | translate }}</b> </br> {{cl_address.address}}, {{cl_address.postCode}}, {{cl_address.city}}, {{cl_address.country}}</i>
+												<i ng-show="cl_address.type == 2"><b>{{ 'WORK_ADDRESS' | translate }}</b> </br> {{cl_address.address}}, {{cl_address.postCode}}, {{cl_address.city}}, {{cl_address.country}}</i>
 											</p>
 										</td>
 									</table>
@@ -60,14 +65,14 @@
 								</md-icon>
 
 								<md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="editClient(client.id)" ng-show="editClaim">
-									<md-icon md-svg-icon="/lib/icons/edit.svg">
+									<md-icon class="material-icons md-24 md-dark">open_in_new
 										<md-tooltip md-direction="down">
-											{{ 'EDIT' | translate }}
+											{{ 'DETAILS' | translate }}
 										</md-tooltip>
 									</md-icon>
 								</md-button>
 								<md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteClientConfirmDialog(client.id)" ng-show="deleteClaim">
-									<md-icon md-svg-icon="/lib/icons/delete.svg">
+									 <md-icon class="material-icons md-24 md-dark">delete_forever
 										<md-tooltip md-direction="down">
 											{{ 'DELETE' | translate }}
 										</md-tooltip>
@@ -80,14 +85,8 @@
 				</div>
 			</section>
 		</md-content>
-		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
-			<a mfb-button icon="ion-ios-search-strong" label="{{'SEARCH' | translate}}"></a>
-			<a mfb-button icon="ion-android-contact" label="{{'ADD_CONTRAGENT' | translate}}" ng-click="showAddContragentDialog()" ng-show="addClaim"></a>
-		</nav>
-
 
 		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
-			<a mfb-button icon="ion-ios-search-strong" label="{{'SEARCH' | translate}}"></a>
 			<a mfb-button icon="ion-android-contact" label="{{'ADD_CLIENT' | translate}}" ng-click="showAddClientDialog()" ng-show="addClaim"></a>
 		</nav>
 	</div>
