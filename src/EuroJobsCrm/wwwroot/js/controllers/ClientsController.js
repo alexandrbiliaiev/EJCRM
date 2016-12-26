@@ -14,7 +14,10 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
                 krs: "",
                 name: "",
                 nip: "",
-                regon: ""
+                regon: "",
+                type: 0,
+                status: 1,
+                branch: ""
             }
         }
 

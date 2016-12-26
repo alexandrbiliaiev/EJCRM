@@ -31,10 +31,11 @@ namespace EuroJobsCrm.Controllers
                     .Where(c => c.CltAuditRd == null)
                     .GroupJoin(context.Addresses.Where(a => a.AdrAuditRd == null), c => c.CltId, a => a.ArdCltId,
                         (c, a) => new {Client = c, Addresses = a})
-                    .GroupJoin(context.ContactPersons.Where(a => a.CtpAuditRd == null), c => c.Client.CltId, cp => cp.CtpCltId,
+                    .GroupJoin(context.ContactPersons.Where(a => a.CtpAuditRd == null), c => c.Client.CltId,
+                        cp => cp.CtpCltId,
                         (c, cp) => new {c.Client, c.Addresses, ContactPersons = cp})
                     .GroupJoin(context.Offers.Where(o => o.OfrAuditRd == null), c => c.Client.CltId, o => o.OfrCltId,
-                        (c, o) => new { c.Client, c.Addresses, c.ContactPersons, Offers = o })
+                        (c, o) => new {c.Client, c.Addresses, c.ContactPersons, Offers = o})
                     .ToList()
                     .Select(c => new ClientDto(c.Client, c.Addresses, c.ContactPersons, c.Offers))
                     .ToList();
@@ -73,6 +74,9 @@ namespace EuroJobsCrm.Controllers
                 clt.CltName = client.Name;
                 clt.CltNip = client.Nip;
                 clt.CltRegon = client.Regon;
+                clt.CltBranch = client.Branch;
+                clt.CltStatus = client.Status;
+                clt.CltType = client.Type;
                 clt.CltAuditMd = DateTime.UtcNow;
                 clt.CltAuditMu = User.GetUserId();
  

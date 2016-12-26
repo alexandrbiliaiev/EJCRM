@@ -570,6 +570,9 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("etr_audit_cu")
                     .HasMaxLength(100);
 
+                entity.Property(e => e.EtrCltId)
+                    .HasColumnName("etr_clt_id");
+
                 entity.Property(e => e.EtrAuditMd)
                     .HasColumnName("etr_audit_md")
                     .HasColumnType("datetime");

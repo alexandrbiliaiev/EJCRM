@@ -35,7 +35,11 @@ angular.module('EuroJobsCrm.services')
                 krs: "",
                 name: "",
                 nip: "",
-                regon: ""
+                regon: "",
+                type: 0,
+                status: 1,
+                branch: ""
+
             }
         }
 

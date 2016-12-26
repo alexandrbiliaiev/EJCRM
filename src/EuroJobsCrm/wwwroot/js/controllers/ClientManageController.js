@@ -7,9 +7,9 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
         $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
 
-        $scope.expandDetails = true;
-        $scope.expandContactPersons = true;
-        $scope.expandAddresses = true;
+        $scope.expandDetails = false;
+        $scope.expandContactPersons = false;
+        $scope.expandAddresses = false;
         $scope.expandDocuments = true;
         $scope.expandEmployees = true;
         $scope.expandPayments = true;
