@@ -153,7 +153,9 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
             lastName: $scope.employee.lastName,
             birthDate: $scope.birthdate,
             description: $scope.employee.description,
-            status: $scope.employee.status
+            status: $scope.employee.status,
+            cltId: $scope.employee.cltId,
+            offId: $scope.employee.offId
         }
 
         employeesService.saveEmployee(employee).success(function (response) {

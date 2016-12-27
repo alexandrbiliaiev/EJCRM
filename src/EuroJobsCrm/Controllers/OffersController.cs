@@ -42,23 +42,34 @@ namespace EuroJobsCrm.Controllers
 
         [HttpPost]
         [Route("/api/Offers/Get")]
-        public OfferDetailsDto GetOffer([FromBody] int offerId)
+        public  OfferDetailsDto GetOffer([FromBody] int offerId)
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
                 Offers ofr = context.Offers.FirstOrDefault(c => c.OfrId == offerId);
 
-                List<EmployeeDto> candidates =
-                    context.EmploymentRequests.Where(r => r.EtrOfrId == offerId && r.EtrStatus == 0 && r.EtrAuditRd == null && r.EtrStatus !=2)
-                        .Join(context.Employees.Where(e => e.EmpAuditRd == null), r => r.EtrEmpId, e => e.EmpId,
-                            (request, employee) => new {request, employee}).ToList()
-                        .Select(e => new EmployeeDto(e.employee)).ToList();
+                List<EmployeeDto> candidates = new List<EmployeeDto>();
+                List<EmployeeDto> employees = new List<EmployeeDto>();
 
-                List<EmployeeDto> employees =
-                  context.EmploymentRequests.Where(r => r.EtrOfrId == offerId && r.EtrStatus == 1 && r.EtrAuditRd == null)
-                      .Join(context.Employees.Where(e => e.EmpAuditRd == null), r => r.EtrEmpId, e => e.EmpId,
-                          (request, employee) => new { request, employee }).ToList()
-                      .Select(e => new EmployeeDto(e.employee)).ToList();
+                try
+                {
+                    candidates =
+                        context.EmploymentRequests.Where(r => r.EtrOfrId == offerId && r.EtrStatus == 0 && r.EtrAuditRd == null)
+                            .Join(context.Employees.Where(e => e.EmpAuditRd == null), r => r.EtrEmpId, e => e.EmpId,
+                                (request, employee) => new {request, employee}).ToList()
+                            .Select(e => new EmployeeDto(e.employee)).ToList();
+
+                    employees =
+                        context.EmploymentRequests.Where(
+                                r => r.EtrOfrId == offerId && r.EtrStatus == 1 && r.EtrAuditRd == null)
+                            .Join(context.Employees.Where(e => e.EmpAuditRd == null), r => r.EtrEmpId, e => e.EmpId,
+                                (request, employee) => new {request, employee}).ToList()
+                            .Select(e => new EmployeeDto(e.employee)).ToList();
+                }
+                catch (Exception)
+                {
+                    ;
+                }
 
                 OfferDetailsDto offerDetails = new OfferDetailsDto(ofr)
                 {
@@ -66,8 +77,11 @@ namespace EuroJobsCrm.Controllers
                     Employees = employees
                 };
 
+
+
                 return offerDetails;
             }
+            
         }
 
 
@@ -192,6 +206,7 @@ namespace EuroJobsCrm.Controllers
                 EtrOfrId = employmentRequestDto.OfferId,
                 EtrCntId = null,
                 EtrEmpId = employmentRequestDto.EmployeeId,
+                EtrCltId = employmentRequestDto.ClientId,
                 EtrStatus = employmentRequestDto.Status
             };
             var employee = new Employees();
@@ -258,6 +273,19 @@ namespace EuroJobsCrm.Controllers
                     contragent = context.Contragents.FirstOrDefault(c => c.CgtId == employee.EmpCtgId);
                     offer = context.Offers.FirstOrDefault(o => o.OfrId == employmentRequest.EtrOfrId);
                     responsibleUser = context.AspNetUsers.FirstOrDefault(u => u.Id == contragent.CgtResponsibleUser);
+
+                    if (employmentRequest.EtrStatus == 1)
+                    {
+                        employee.EmpCltId = employmentRequest.EtrCltId;
+                        employee.EmpOffId = employmentRequest.EtrOfrId;
+                    }
+
+                    if (employmentRequest.EtrStatus == 2)
+                    {
+                        employee.EmpCltId = null;
+                        employee.EmpOffId = null;
+                    }
+
 
                     context.SaveChanges();
                 }

@@ -85,6 +85,8 @@ namespace EuroJobsCrm.Dto
         public string Position { get; set; }
 
         public int? Gender { get; set; }
+        public int? AcceptedCount { get; set; }
+        public int? AwaitingCount { get; set; }
 
         public bool WorkMo
         {

@@ -1,5 +1,5 @@
 angular.module('EuroJobsCrm.controllers').controller('ClientsController',
-    function ($scope, $location, $http, $state, $translate, $mdDialog, $cookies,
+    function($scope, $location, $http, $state, $translate, $mdDialog, $cookies,
         clientsService) {
         $scope.clients = [];
 
@@ -8,7 +8,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
         $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
         $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
 
-        $scope.getDefaultClient = function () {
+        $scope.getDefaultClient = function() {
             return {
                 id: 0,
                 krs: "",
@@ -23,35 +23,35 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
 
         $scope.client = $scope.getDefaultClient();
 
-        $scope.editClient = function (clientId) {
+        $scope.editClient = function(clientId) {
             $state.go('client', {
                 id: clientId
             });
         }
 
-        $scope.saveClientClick = function () {
+        $scope.saveClientClick = function() {
             if ($scope.clientForm.$invalid) {
                 return;
             }
 
             client = $scope.client;
 
-            clientsService.saveClient(client).success(function (response) {
+            clientsService.saveClient(client).success(function(response) {
                 clientsService.clients.push(response);
                 $scope.client = $scope.getDefaultClient();
                 $mdDialog.hide();
-            }).error(function () {
+            }).error(function() {
                 $state.go('error');
                 $mdDialog.hide();
             });
         }
 
 
-        $scope.close = function () {
+        $scope.close = function() {
             $mdDialog.hide();
         }
 
-        $scope.showAddClientDialog = function (ev) {
+        $scope.showAddClientDialog = function(ev) {
             client = $scope.getDefaultClient();
             $mdDialog.show({
                 scope: $scope,
@@ -60,14 +60,14 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
                 targetEvent: ev,
                 clickOutsideToClose: true,
             })
-                .then(function (answer) {
+                .then(function(answer) {
 
-                }, function () {
+                }, function() {
 
                 });
         }
 
-        $scope.showDeleteClientConfirmDialog = function (clientId) {
+        $scope.showDeleteClientConfirmDialog = function(clientId) {
             var confirm = $mdDialog.confirm()
                 .title($translate.instant('CLI_DELETE_CONFIRM_TITLE'))
                 .textContent($translate.instant('CLT_DELETE_CONFIRM_TEXT'))
@@ -75,8 +75,8 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
                 .ok($translate.instant('DELETE_OK'))
                 .cancel($translate.instant('DELETE_CANCEL'));
 
-            $mdDialog.show(confirm).then(function () {
-                clientsService.deleteClient(clientId).success(function (response) {
+            $mdDialog.show(confirm).then(function() {
+                clientsService.deleteClient(clientId).success(function(response) {
                     if (response != true) {
                         return;
                     }
@@ -91,10 +91,10 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
                         return;
                     }
 
-                }).error(function (response) {
+                }).error(function(response) {
                     $state.go('error');
                 });
-            }, function () {
+            }, function() {
 
             });
         };
@@ -104,10 +104,26 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
             return;
         }
 
-        clientsService.load().success(function (response) {
+        clientsService.load().success(function(response) {
             clientsService.clients = response;
             $scope.clients = clientsService.clients;
-        }).error(function () {
+
+            for (i in $scope.clients.offers) {
+                count0 = 0;
+                count1 = 0;
+                for (j in i.employmentRequests) {
+                    if (j.status == 0) {
+                        count0 += 1;
+                    }
+                    if (j.status == 1) {
+                        count1 += 1;
+                    }
+                    i.push(count0);
+                    i.push(count1);
+                }
+            }
+
+        }).error(function() {
             $state.go('error');
         });
 

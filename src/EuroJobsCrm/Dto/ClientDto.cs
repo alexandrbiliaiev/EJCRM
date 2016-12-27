@@ -15,7 +15,10 @@ namespace EuroJobsCrm.Dto
         public int? Status { get; set; }
         public int? Type { get; set; }
         public string Branch { get; set; }
+        public int? FreeVacancies { get; set; }
         public List<OfferDto> Offers { get; set; }
+        public List<EmployeeDto> Employees { get; set; }
+        public List<EmploymentRequestDto> EmploymentRequests { get; set; }
 
         public ClientDto()
         {
@@ -23,7 +26,7 @@ namespace EuroJobsCrm.Dto
         }
 
         public ClientDto(Clients client, IEnumerable<Addresses> addresses, IEnumerable<ContactPersons> contactPersons,
-                         IEnumerable<Offers> offers)
+                         IEnumerable<Offers> offers, IEnumerable<Employees> acceptedEmployees)
         {
             Id = client.CltId;
             Name = client.CltName;
@@ -36,6 +39,7 @@ namespace EuroJobsCrm.Dto
             Addresses = addresses.Select(a => new AddressDto(a)).ToList();
             ContactPersons = contactPersons.Select(c => new ContactPersonDto(c)).ToList();
             Offers = offers.Select(o => new OfferDto(o)).ToList();
+            Employees = acceptedEmployees.Select(e => new EmployeeDto(e)).ToList();
         }
     }
 }

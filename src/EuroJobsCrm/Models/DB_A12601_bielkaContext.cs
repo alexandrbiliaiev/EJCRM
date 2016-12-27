@@ -552,6 +552,12 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("emp_responsible_user")
                     .HasMaxLength(100);
 
+                entity.Property(e => e.EmpCltId)
+                    .HasColumnName("emp_clt_id");
+
+                entity.Property(e => e.EmpOffId)
+                    .HasColumnName("emp_off_id");
+
                 entity.Property(e => e.EmpStatus).HasColumnName("emp_status");
             });
 

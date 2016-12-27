@@ -20,5 +20,7 @@ namespace EuroJobsCrm.Models
         public string EmpAuditMu { get; set; }
         public DateTime? EmpAuditRd { get; set; }
         public string EmpAuditRu { get; set; }
+        public int? EmpCltId { get; set; }
+        public int? EmpOffId { get; set; }
     }
 }

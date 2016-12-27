@@ -13,7 +13,8 @@ namespace EuroJobsCrm.Dto
             
         }
 
-        public OfferDetailsDto(Offers offer) : base(offer)
+        public 
+            OfferDetailsDto(Offers offer) : base(offer)
         {
             
         }

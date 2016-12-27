@@ -7,7 +7,7 @@ namespace EuroJobsCrm.Dto
         public int Id { get; set; }
         public int OfferId { get; set; }
         public int EmployeeId { get; set; }
-        public int ClientId { get; set; }
+        public int? ClientId { get; set; }
 
         /// <summary>
         /// 0 - pending

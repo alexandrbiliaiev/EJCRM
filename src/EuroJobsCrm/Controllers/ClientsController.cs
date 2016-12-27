@@ -36,11 +36,28 @@ namespace EuroJobsCrm.Controllers
                         (c, cp) => new {c.Client, c.Addresses, ContactPersons = cp})
                     .GroupJoin(context.Offers.Where(o => o.OfrAuditRd == null), c => c.Client.CltId, o => o.OfrCltId,
                         (c, o) => new {c.Client, c.Addresses, c.ContactPersons, Offers = o})
+                    .GroupJoin(context.Employees.Where(e => e.EmpAuditRd == null && e.EmpCltId != null),
+                        c => c.Client.CltId, e => e.EmpCltId,
+                        (c, e) => new {c.Client, c.Addresses, c.ContactPersons, c.Offers, AcceptedEmployees = e})
                     .ToList()
-                    .Select(c => new ClientDto(c.Client, c.Addresses, c.ContactPersons, c.Offers))
+                    .Select(
+                        c =>
+                            new ClientDto(c.Client, c.Addresses, c.ContactPersons, c.Offers, c.AcceptedEmployees))
                     .ToList();
 
-               return clients;
+                foreach (var client in clients)
+                {
+                    client.FreeVacancies = 0;
+
+                    foreach (var offer in client.Offers)
+                    {
+                        offer.AcceptedCount = context.EmploymentRequests.Where(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 1).Count();
+                        offer.AwaitingCount = context.EmploymentRequests.Where(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 0).Count();
+                        client.FreeVacancies += offer.VacanciesNumber - offer.AcceptedCount;
+                    }
+                }
+
+                return clients;
             }
         }
 

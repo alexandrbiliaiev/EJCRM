@@ -1,4 +1,4 @@
-angular.module('EuroJobsCrm.controllers').controller('OfferManageController', function ($scope, $location, $translate, $http, $state,
+angular.module('EuroJobsCrm.controllers').controller('OfferManageController', function($scope, $location, $translate, $http, $state,
     offersService, $mdDialog, $routeParams, $cookies, employeesService) {
     $scope.expandDetails = true;
     $scope.expandCandidates = true;
@@ -6,26 +6,30 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
     $scope.userRole = $cookies.get('user_role');
     $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
+    $scope.acceptClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
+    $scope.rejectClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
     $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
     $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
 
 
     $scope.moment = moment;
 
-    $scope.goBack = function () {
+    $scope.awaitingCandidates = [];
+
+    $scope.goBack = function() {
         $state.go('offers');
     }
 
-    $scope.close = function () {
+    $scope.close = function() {
         console.log($scope);
         $mdDialog.hide();
     }
 
-    $scope.getFormatedDate = function (date) {
+    $scope.getFormatedDate = function(date) {
         return moment(date).format('YYYY-MM-DD');
     };
 
-    $scope.showAddCandidateDialog = function () {
+    $scope.showAddCandidateDialog = function() {
         $scope.manageFreeEmployees();
         $mdDialog.show({
             scope: $scope,
@@ -34,28 +38,27 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
             clickOutsideToClose: true,
         })
-            .then(function (answer) {
+            .then(function(answer) {
 
-            }, function () {
+            }, function() {
 
             });
     };
 
-    $scope.addCandidateToOffer = function (emp) {
-
-
-
+    $scope.addCandidateToOffer = function(emp) {
         candidateRequest = {
             offerId: $scope.offer.id,
+            clientId: null,
             employeeId: emp.id,
+            clientId: $scope.offer.clientId,
             status: 0
         };
 
-        offersService.saveCandidateRequest(candidateRequest).success(function (response) {
+        offersService.saveCandidateRequest(candidateRequest).success(function(response) {
             $scope.offer.candidates.push(emp);
 
             $mdDialog.hide();
-        }).error(function () {
+        }).error(function() {
             $state.go('error');
             $mdDialog.hide();
         });
@@ -63,7 +66,13 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
     }
 
-    $scope.deleteCandidateFromOffer = function (emp) {
+    $scope.countCandidates = function() {
+        for (i in $scope.offer.employmentRequests) {
+
+        }
+    }
+
+    $scope.deleteCandidateFromOffer = function(emp) {
         candidateRequest = {
             offerId: $scope.offer.id,
             employeeId: emp.id,
@@ -77,8 +86,8 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
             .ok($translate.instant('DELETE_OK'))
             .cancel($translate.instant('DELETE_CANCEL'));
 
-        $mdDialog.show(confirm).then(function () {
-            offersService.deleteCandidateRequest(candidateRequest).success(function (response) {
+        $mdDialog.show(confirm).then(function() {
+            offersService.deleteCandidateRequest(candidateRequest).success(function(response) {
                 if (response != true) {
                     return;
                 }
@@ -94,10 +103,10 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
 
 
-            }).error(function (response) {
+            }).error(function(response) {
                 $state.go('error');
             });
-        }, function () {
+        }, function() {
 
         });
 
@@ -105,15 +114,16 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     }
 
 
-    $scope.acceptCandidateToOffer = function (emp) {
+    $scope.acceptCandidateToOffer = function(emp) {
 
         candidateRequest = {
             offerId: $scope.offer.id,
+            clientId: $scope.offer.clientId,
             employeeId: emp.id,
             status: 1
         };
 
-        offersService.pimpCandidateToEmployee(candidateRequest).success(function (response) {
+        offersService.pimpCandidateToEmployee(candidateRequest).success(function(response) {
             $scope.offer.employees.push(emp);
 
             for (i in $scope.offer.candidates) {
@@ -124,12 +134,12 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
                 return;
             }
 
-        }).error(function () {
+        }).error(function() {
             $state.go('error');
         });
     };
 
-    $scope.rejectCandidateFromOffer = function (emp) {
+    $scope.rejectCandidateFromOffer = function(emp) {
 
         candidateRequest = {
             offerId: $scope.offer.id,
@@ -137,7 +147,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
             status: 2
         };
 
-        offersService.pimpCandidateToEmployee(candidateRequest).success(function (response) {
+        offersService.pimpCandidateToEmployee(candidateRequest).success(function(response) {
 
             for (i in $scope.offer.candidates) {
                 if ($scope.offer.candidates[i].id != emp.id) {
@@ -147,27 +157,27 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
                 return;
             }
 
-        }).error(function () {
+        }).error(function() {
             $state.go('error');
         });
     };
 
-    offersService.getOffer($state.params.id).success(function (response) {
+    offersService.getOffer($state.params.id).success(function(response) {
         $scope.offer = response;
-    }).error(function () {
+    }).error(function() {
         $state.go('error');
     });
 
-    employeesService.load().success(function (response) {
+    employeesService.load().success(function(response) {
         employeesService.employees = response;
         $scope.freeEmployees = employeesService.employees;
         $scope.manageFreeEmployees();
-    }).error(function () {
+    }).error(function() {
         $state.go('error');
     });
 
 
-    $scope.manageFreeEmployees = function () {
+    $scope.manageFreeEmployees = function() {
 
         for (i in $scope.offer.candidates) {
             for (j in $scope.freeEmployees) {

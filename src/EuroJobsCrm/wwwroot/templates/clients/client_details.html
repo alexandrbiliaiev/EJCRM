@@ -2,6 +2,7 @@
 
 	<!--General information-->
 	<!--Contact persons -->
+	<!--Addresses -->
 	<div layout="row" layout-wrap layout-padding>
 		<div flex-xs flex-gt-xs="30" layout-xs="column">
 			<!--General information-->
@@ -9,7 +10,7 @@
 				<md-toolbar>
 					<div class="md-toolbar-tools">
 						<h2>
-							<span>{{'DETAIL_INFORMATION'| translate}}</span>
+							<span ng-click="expandDetails = !expandDetails">{{'DETAIL_INFORMATION'| translate}}</span>
 						</h2>
 						<span flex></span>
 						<md-button aria-label="button" class="md-icon-button" ng-click="showEditClientDialog()" ng-show="editClaim">
@@ -141,12 +142,14 @@
 			</section>
 		</div>
 		<!--Contact persons -->
+		<!--Addresses -->
 		<div flex-xs flex-gt-xs="70" layout-xs="column">
+			<!--Contact persons -->
 			<section class="demo-container md-whiteframe-z1">
 				<md-toolbar>
 					<div class="md-toolbar-tools">
 						<h2>
-							<span>{{'CONTACT_PERSONS' | translate}}</span>
+							<span ng-click="expandContactPersons=! expandContactPersons">{{'CONTACT_PERSONS' | translate}}</span>
 						</h2>
 						<span flex></span>
 						<md-button aria-label="button" aria-label="button" class="md-icon-button" ng-click="showNewContactPersonDialog()" ng-show="addClaim">
@@ -186,11 +189,12 @@
 				</div>
 			</section>
 			</br>
+			<!--Addresses -->
 			<section class="demo-container md-whiteframe-z1" style="margin-top: -7px">
 				<md-toolbar>
 					<div class="md-toolbar-tools">
 						<h2>
-							<span>{{'ADDRESSES' | translate}}</span>
+							<span ng-click="expandAddresses=! expandAddresses">{{'ADDRESSES' | translate}}</span>
 						</h2>
 						<span flex></span>
 						<md-button aria-label="button" class="md-icon-button" ng-click="showNewAddressDialog()" ng-show="addClaim">
@@ -226,7 +230,6 @@
 					</md-content>
 				</div>
 			</section>
-
 		</div>
 	</div>
 
@@ -237,14 +240,13 @@
 				<md-toolbar>
 					<div class="md-toolbar-tools">
 						<h2>
-							<span>{{'OFFERS'|translate}}</span>
+							<span ng-click="expandOffers=! expandOffers">{{'OFFERS'|translate}}</span>
 						</h2>
 						<span flex></span>
-
-						<md-button aria-label="button" class="md-icon-button" ng-show="!showSearch" ng-click="showSearch=! showSearch">
+						<md-button aria-label="button" class="md-icon-button" ng-show="!showOfferSearch" ng-click="showOfferSearch=! showOfferSearch">
 							<md-icon md-font-icon="ion-search"></md-icon>
 						</md-button>
-						<md-button aria-label="button" class="md-icon-button" ng-show="showSearch" ng-click="showSearch=! showSearch">
+						<md-button aria-label="button" class="md-icon-button" ng-show="showOfferSearch" ng-click="showOfferSearch=! showOfferSearch">
 							<md-icon md-font-icon="ion-android-close"></md-icon>
 						</md-button>
 						<md-button aria-label="button" class="md-icon-button" ng-click="showNewOfferDialog()" ng-show="addClaim">
@@ -254,7 +256,7 @@
 							<md-icon md-font-icon="ion-navicon-round"></md-icon>
 						</md-button>
 					</div>
-					<md-toolbar class="md-hue-1" ng-show="showSearch">
+					<md-toolbar class="md-hue-1" ng-show="showOfferSearch">
 						<div class="md-toolbar-tools">
 							<md-input-container class="md-block" flex="100">
 								<input aria-label="input" ng-model="contactperson.position" style="color:white; font-size:14pt;">
@@ -270,7 +272,7 @@
 					<md-content flex="100">
 						<md-list ng-cloak>
 							<md-list-item class="md-2-line" ng-repeat="offer in client.offers">
-								<md-icon style="font-size:32px;" md-font-icon="ion-document-text" ng-click="showEditAddressDialog(address)"></md-icon>
+								<md-icon style="font-size:32px;" md-font-icon="ion-document-text" ng-click="goToOfferDetails(offer.id)"></md-icon>
 								<div class="md-list-item-text">
 									<h4>{{'POSITION'| translate}}: <b>{{offer.position}}</b>,
 										<b ng-show="offer.branch==0">{{ 'BUILDING' | translate }}</b>
@@ -278,6 +280,7 @@
 										<b ng-show="offer.branch==2"> {{ 'IT' | translate }}</b>
 									</h4>
 									<p>{{ 'VACANCIES_NUMBER' | translate }}: <b>{{offer.vacanciesNumber}}</b></p>
+									<p>{{ 'AWAITING_COUNT' | translate }}: <b>{{offer.awaitingCount}}</b></p>
 								</div>
 								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditOfferDialog(offer)" ng-show="editClaim">
 									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
@@ -304,10 +307,10 @@
 						</h2>
 						<span flex></span>
 
-						<md-button aria-label="button" class="md-icon-button" ng-show="!showSearch" ng-click="showSearch=! showSearch">
+						<md-button aria-label="button" class="md-icon-button" ng-show="!showEmployeeSearch" ng-click="showEmployeeSearch=! showEmployeeSearch">
 							<md-icon md-font-icon="ion-search"></md-icon>
 						</md-button>
-						<md-button aria-label="button" class="md-icon-button" ng-show="showSearch" ng-click="showSearch=! showSearch">
+						<md-button aria-label="button" class="md-icon-button" ng-show="showEmployeeSearch" ng-click="showEmployeeSearch=! showEmployeeSearch">
 							<md-icon md-font-icon="ion-android-close"></md-icon>
 						</md-button>
 						<md-button aria-label="button" class="md-icon-button" ng-click="showNewEmployeeDialog()" ng-show="addClaim">
@@ -317,7 +320,7 @@
 							<md-icon md-font-icon="ion-navicon-round"></md-icon>
 						</md-button>
 					</div>
-					<md-toolbar class="md-hue-1" ng-show="showSearch">
+					<md-toolbar class="md-hue-1" ng-show="showEmployeeSearch">
 						<div class="md-toolbar-tools">
 							<md-input-container class="md-block" flex="100">
 								<input aria-label="input" ng-model="contactperson.position" style="color:white; font-size:14pt;">
@@ -332,27 +335,37 @@
 				<div ng-show="expandEmployees" ng-cloak>
 					<md-content>
 						<md-list ng-cloak style="">
-							<md-list-item class="md-2-line">
-								<md-icon style="font-size:32px;" md-font-icon="ion-person">
+							<md-list-item class="md-2-line" ng-repeat="employee in client.employees | employeesSearchFor:searchString">
+								<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="showEditContactPersonDialog(contactperson)">
 								</md-icon>
 								<div class="md-list-item-text">
-									<h3><b>Jan Tadeusz Kowalski </b></h3>
+									<h3><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
 									<p>
-										{{'OFFER'|translate}}: <b>Programista</b>
+										{{'BIRTHDATE'|translate}}: {{moment(employee.birthDate).format('DD-MM-YYYY')}}
 									</p>
 								</div>
-								<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled">
+								<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" ng-show="employee.status == '1'">
 									<md-tooltip md-direction="left">
 										{{ 'ACTIVE' | translate }}
 									</md-tooltip>
 								</md-icon>
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)" ng-show="editClaim">
+								<md-icon style="font-size:24px;" md-font-icon="ion-android-cancel" ng-show="employee.status == '0'">
+									<md-tooltip md-direction="left">
+										{{ 'INACTIVE' | translate }}
+									</md-tooltip>
+								</md-icon>
+								<md-icon style="font-size:24px;" md-font-icon="ion-sad" ng-show="employee.status == '2'">
+									<md-tooltip md-direction="left">
+										{{ 'LEFT' | translate }}
+									</md-tooltip>
+								</md-icon>
+								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee.id)" ng-show="editClaim">
 									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 								</md-button>
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)"
-									ng-show="deleteClaim">
+								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)" ng-show="deleteClaim">
 									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 								</md-button>
+								<md-divider ng-if="!$last"></md-divider>
 							</md-list-item>
 						</md-list>
 					</md-content>
