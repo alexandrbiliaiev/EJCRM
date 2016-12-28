@@ -1,5 +1,8 @@
 <ui-view>
-	<div id="popupContainer" ng-controller="ClientsController" class="container body-content">
+	<div layout="row" ng-show = "!isActive" layout-sm="column" layout-align="space-around" ng-controller="ClientsController">
+		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+	</div>
+	<div id="popupContainer" ng-controller="ClientsController" class="container body-content" ng-show = "isActive">
 		<md-content>
 			<section class="demo-container md-whiteframe-z1">
 				<md-toolbar>
@@ -30,7 +33,8 @@
 					</md-toolbar>
 				</md-toolbar>
 				<div layout="row" layout-padding="" ng-cloak>
-					<md-content flex>
+
+					<md-content flex ng-show="isActive">
 						<md-list ng-cloak style="margin-top: -10px">
 							<md-list-item class="md-3-line" ng-repeat="client in clients | clientsSearchFor : searchString">
 								<md-icon class="material-icons md-36 md-dark" ng-click="editClient(client.id)">folder_shared
@@ -51,8 +55,14 @@
 											</p>
 										</td>
 										<td>
-											<p><b>{{'FREE_VACANCIES' | translate}}</b></p>
-											<p> {{client.freeVacancies}}</p>
+											&nbsp&nbsp&nbsp&nbsp
+										</td>
+										<td>
+											<p>
+											<i><b>{{'FREE_VACANCIES' | translate}} </b>{{client.freeVacancies}}</i></br>
+											<i><b>{{'BUSY_VACANCIES' | translate}} </b>{{client.busyVacancies}}</i></br>
+											<i><b>{{'AWAITING_VACANCIES' | translate}} </b>{{client.awaitingVacancies}}</i>
+											</p>
 										</td>
 									</table>
 								</div>
@@ -76,7 +86,7 @@
 									</md-icon>
 								</md-button>
 								<md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteClientConfirmDialog(client.id)" ng-show="deleteClaim">
-									 <md-icon class="material-icons md-24 md-dark">delete_forever
+									<md-icon class="material-icons md-24 md-dark">delete_forever
 										<md-tooltip md-direction="down">
 											{{ 'DELETE' | translate }}
 										</md-tooltip>

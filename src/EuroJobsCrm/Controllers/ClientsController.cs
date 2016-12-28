@@ -48,12 +48,16 @@ namespace EuroJobsCrm.Controllers
                 foreach (var client in clients)
                 {
                     client.FreeVacancies = 0;
+                    client.AwaitingVacancies = 0;
+                    client.BusyVacancies = 0;
 
                     foreach (var offer in client.Offers)
                     {
                         offer.AcceptedCount = context.EmploymentRequests.Where(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 1).Count();
                         offer.AwaitingCount = context.EmploymentRequests.Where(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 0).Count();
                         client.FreeVacancies += offer.VacanciesNumber - offer.AcceptedCount;
+                        client.AwaitingVacancies += offer.AwaitingCount;
+                        client.BusyVacancies += offer.AcceptedCount;
                     }
                 }
 

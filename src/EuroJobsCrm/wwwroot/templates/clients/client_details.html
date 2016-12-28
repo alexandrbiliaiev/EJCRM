@@ -280,7 +280,8 @@
 										<b ng-show="offer.branch==2"> {{ 'IT' | translate }}</b>
 									</h4>
 									<p>{{ 'VACANCIES_NUMBER' | translate }}: <b>{{offer.vacanciesNumber}}</b></p>
-									<p>{{ 'AWAITING_COUNT' | translate }}: <b>{{offer.awaitingCount}}</b></p>
+									<p>{{ 'BUSY_VACANCIES' | translate }}: <b>{{offer.acceptedCount}}</b></p>
+									<p>{{ 'AWAITING_VACANCIES' | translate }}: <b>{{offer.awaitingCount}}</b></p>
 								</div>
 								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditOfferDialog(offer)" ng-show="editClaim">
 									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>

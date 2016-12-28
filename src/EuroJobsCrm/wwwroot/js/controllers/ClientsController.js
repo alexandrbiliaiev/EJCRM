@@ -8,6 +8,21 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
         $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
         $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
 
+        $scope.isActive = false;
+
+        if (clientsService.clients != undefined) {
+            $scope.clients = clientsService.clients;
+            return;
+        }
+
+        clientsService.load().success(function(response) {
+            clientsService.clients = response;
+            $scope.clients = clientsService.clients;
+            $scope.isActive = true;
+        }).error(function() {
+            $state.go('error');
+        });
+
         $scope.getDefaultClient = function() {
             return {
                 id: 0,
@@ -99,32 +114,6 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
             });
         };
 
-        if (clientsService.clients != undefined) {
-            $scope.clients = clientsService.clients;
-            return;
-        }
 
-        clientsService.load().success(function(response) {
-            clientsService.clients = response;
-            $scope.clients = clientsService.clients;
-
-            for (i in $scope.clients.offers) {
-                count0 = 0;
-                count1 = 0;
-                for (j in i.employmentRequests) {
-                    if (j.status == 0) {
-                        count0 += 1;
-                    }
-                    if (j.status == 1) {
-                        count1 += 1;
-                    }
-                    i.push(count0);
-                    i.push(count1);
-                }
-            }
-
-        }).error(function() {
-            $state.go('error');
-        });
 
     });

@@ -14,7 +14,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
     $scope.moment = moment;
 
-    $scope.awaitingCandidates = [];
+  
 
     $scope.goBack = function() {
         $state.go('offers');
@@ -66,11 +66,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
     }
 
-    $scope.countCandidates = function() {
-        for (i in $scope.offer.employmentRequests) {
 
-        }
-    }
 
     $scope.deleteCandidateFromOffer = function(emp) {
         candidateRequest = {

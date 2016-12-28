@@ -16,6 +16,8 @@ namespace EuroJobsCrm.Dto
         public int? Type { get; set; }
         public string Branch { get; set; }
         public int? FreeVacancies { get; set; }
+        public int? AwaitingVacancies { get; set; }
+        public int? BusyVacancies { get; set; }
         public List<OfferDto> Offers { get; set; }
         public List<EmployeeDto> Employees { get; set; }
         public List<EmploymentRequestDto> EmploymentRequests { get; set; }
