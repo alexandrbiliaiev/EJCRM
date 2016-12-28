@@ -7,6 +7,16 @@ angular.module('EuroJobsCrm.services')
             return $http.get('/api/Clients');
         };
 
+        clients.loadClient = function (clientId) {
+            return $http({
+                url: '/api/Client?',
+                method: "GET",
+                params: {
+                    clientId: clientId
+                }
+            });
+        };
+
         clients.saveClient = function (client) {
             return $http({
                 url: 'api/Clients/Save',

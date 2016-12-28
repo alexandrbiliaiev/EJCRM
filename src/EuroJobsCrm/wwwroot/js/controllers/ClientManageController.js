@@ -454,20 +454,12 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         //End Offers
 
 
-        if (clientsService.clients != undefined) {
-            $scope.client = clientsService.getClient($state.params.id);
-            return;
-        }
 
-        clientsService.load().success(function(response) {
-            clientsService.clients = response;
-            $scope.client = clientsService.getClient($state.params.id);
+        clientsService.loadClient($state.params.id).success(function(response) {
+            $scope.client = response;
         }).error(function() {
             $state.go('error');
         });
-
-
-
 
 
     });

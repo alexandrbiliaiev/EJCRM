@@ -37,11 +37,11 @@ namespace EuroJobsCrm.Dto
             Status = client.CltStatus;
             Type = client.CltType;
             Branch = client.CltBranch;
-            Addresses = addresses.Select(a => new AddressDto(a)).ToList();
-            ContactPersons = contactPersons.Select(c => new ContactPersonDto(c)).ToList();
-            Offers = offers.Select(o => new OfferDto(o)).ToList();
-            Employees = acceptedEmployees.Select(e => new EmployeeDto(e)).ToList();
-            Files = files.Select(f => new DocumentFilesDto(f)).ToList();
+            Addresses = addresses?.Select(a => new AddressDto(a)).ToList();
+            ContactPersons = contactPersons?.Select(c => new ContactPersonDto(c)).ToList();
+            Offers = offers?.Select(o => new OfferDto(o)).ToList();
+            Employees = acceptedEmployees?.Select(e => new EmployeeDto(e)).ToList();
+            Files = files?.Select(f => new DocumentFilesDto(f)).ToList();
         }
     }
 }
