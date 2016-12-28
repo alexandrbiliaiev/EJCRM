@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using EuroJobsCrm.Models;
 
 namespace EuroJobsCrm.Dto
@@ -21,6 +19,7 @@ namespace EuroJobsCrm.Dto
         public List<OfferDto> Offers { get; set; }
         public List<EmployeeDto> Employees { get; set; }
         public List<EmploymentRequestDto> EmploymentRequests { get; set; }
+        public List<DocumentFilesDto> Files { get; set; }
 
         public ClientDto()
         {
@@ -28,7 +27,7 @@ namespace EuroJobsCrm.Dto
         }
 
         public ClientDto(Clients client, IEnumerable<Addresses> addresses, IEnumerable<ContactPersons> contactPersons,
-                         IEnumerable<Offers> offers, IEnumerable<Employees> acceptedEmployees)
+                         IEnumerable<Offers> offers, IEnumerable<Employees> acceptedEmployees, IEnumerable<DocumentFiles> files)
         {
             Id = client.CltId;
             Name = client.CltName;
@@ -42,6 +41,7 @@ namespace EuroJobsCrm.Dto
             ContactPersons = contactPersons.Select(c => new ContactPersonDto(c)).ToList();
             Offers = offers.Select(o => new OfferDto(o)).ToList();
             Employees = acceptedEmployees.Select(e => new EmployeeDto(e)).ToList();
+            Files = files.Select(f => new DocumentFilesDto(f)).ToList();
         }
     }
 }

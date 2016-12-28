@@ -1,8 +1,8 @@
-<ui-view>
-	<div layout="row" ng-show = "!isActive" layout-sm="column" layout-align="space-around" ng-controller="ClientsController">
+
+	<div layout="row" ng-show = "!isActive" layout-sm="column" layout-align="space-around" >
 		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 	</div>
-	<div id="popupContainer" ng-controller="ClientsController" class="container body-content" ng-show = "isActive">
+	<div id="popupContainer" class="container body-content" ng-show = "isActive">
 		<md-content>
 			<section class="demo-container md-whiteframe-z1">
 				<md-toolbar>
@@ -104,4 +104,3 @@
 			<a mfb-button icon="ion-android-contact" label="{{'ADD_CLIENT' | translate}}" ng-click="showAddClientDialog()" ng-show="addClaim"></a>
 		</nav>
 	</div>
-</ui-view>

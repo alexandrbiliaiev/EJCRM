@@ -162,6 +162,11 @@ namespace EuroJobsCrm.Controllers
         [Route("api/Employees/SaveDocument")]
         public IdentityDocumentsDto SaveIdentityDocument([FromBody] IdentityDocumentsDto documentDto)
         {
+            return SaveDocument(documentDto);
+        }
+
+        private IdentityDocumentsDto SaveDocument(IdentityDocumentsDto documentDto)
+        {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
                 IdentityDocuments document;

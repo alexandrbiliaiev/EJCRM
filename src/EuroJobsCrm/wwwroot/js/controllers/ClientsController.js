@@ -8,14 +8,17 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
         $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
         $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
 
+      
         $scope.isActive = false;
 
         if (clientsService.clients != undefined) {
             $scope.clients = clientsService.clients;
+            $scope.isActive = true;
             return;
         }
 
         clientsService.load().success(function(response) {
+
             clientsService.clients = response;
             $scope.clients = clientsService.clients;
             $scope.isActive = true;

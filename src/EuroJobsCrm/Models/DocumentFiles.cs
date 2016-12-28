@@ -19,5 +19,7 @@ namespace EuroJobsCrm.Models
         public string DcfAuditMu { get; set; }
         public DateTime? DcfAuditRd { get; set; }
         public string DcfAuditRu { get; set; }
+        public int? DcfCliId { get; set; }
+        public int? DcfOfrId { get; set; }
     }
 }

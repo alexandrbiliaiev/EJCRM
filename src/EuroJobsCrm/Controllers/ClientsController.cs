@@ -39,10 +39,16 @@ namespace EuroJobsCrm.Controllers
                     .GroupJoin(context.Employees.Where(e => e.EmpAuditRd == null && e.EmpCltId != null),
                         c => c.Client.CltId, e => e.EmpCltId,
                         (c, e) => new {c.Client, c.Addresses, c.ContactPersons, c.Offers, AcceptedEmployees = e})
+                    .GroupJoin(context.DocumentFiles.Where(f => f.DcfAuditRd == null),
+                        c => c.Client.CltId, f => f.DcfCliId,
+                        (c, f) => new
+                        {
+                            c.Client, c.Addresses, c.ContactPersons, c.Offers, c.AcceptedEmployees, Files = f
+                        })
                     .ToList()
                     .Select(
                         c =>
-                            new ClientDto(c.Client, c.Addresses, c.ContactPersons, c.Offers, c.AcceptedEmployees))
+                            new ClientDto(c.Client, c.Addresses, c.ContactPersons, c.Offers, c.AcceptedEmployees, c.Files))
                     .ToList();
 
                 foreach (var client in clients)
@@ -53,8 +59,8 @@ namespace EuroJobsCrm.Controllers
 
                     foreach (var offer in client.Offers)
                     {
-                        offer.AcceptedCount = context.EmploymentRequests.Where(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 1).Count();
-                        offer.AwaitingCount = context.EmploymentRequests.Where(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 0).Count();
+                        offer.AcceptedCount = context.EmploymentRequests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 1);
+                        offer.AwaitingCount = context.EmploymentRequests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 0);
                         client.FreeVacancies += offer.VacanciesNumber - offer.AcceptedCount;
                         client.AwaitingVacancies += offer.AwaitingCount;
                         client.BusyVacancies += offer.AcceptedCount;

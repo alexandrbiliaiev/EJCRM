@@ -224,6 +224,10 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("clt_audit_ru")
                     .HasMaxLength(100);
 
+                entity.Property(e => e.CltBranch)
+                    .HasColumnName("clt_branch")
+                    .HasMaxLength(30);
+
                 entity.Property(e => e.CltKrs)
                     .IsRequired()
                     .HasColumnName("clt_krs")
@@ -244,17 +248,9 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("clt_regon")
                     .HasMaxLength(20);
 
-                entity.Property(e => e.CltStatus)
-                    .HasColumnName("clt_status");
+                entity.Property(e => e.CltStatus).HasColumnName("clt_status");
 
-                entity.Property(e => e.CltType)
-                    .HasColumnName("clt_type");
-
-                entity.Property(e => e.CltBranch)
-                    .IsRequired()
-                    .HasColumnName("clt_branch")
-                    .HasMaxLength(30);
-
+                entity.Property(e => e.CltType).HasColumnName("clt_type");
             });
 
             modelBuilder.Entity<ContactPersons>(entity =>
@@ -466,6 +462,8 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("dcf_audit_ru")
                     .HasMaxLength(100);
 
+                entity.Property(e => e.DcfCliId).HasColumnName("dcf_cli_id");
+
                 entity.Property(e => e.DcfCntId).HasColumnName("dcf_cnt_id");
 
                 entity.Property(e => e.DcfDescription)
@@ -484,6 +482,8 @@ namespace EuroJobsCrm.Models
                     .IsRequired()
                     .HasColumnName("dcf_name")
                     .HasMaxLength(300);
+
+                entity.Property(e => e.DcfOfrId).HasColumnName("dcf_ofr_id");
 
                 entity.Property(e => e.DcfUrl)
                     .IsRequired()
@@ -526,6 +526,8 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("emp_birth_date")
                     .HasColumnType("date");
 
+                entity.Property(e => e.EmpCltId).HasColumnName("emp_clt_id");
+
                 entity.Property(e => e.EmpCtgId).HasColumnName("emp_ctg_id");
 
                 entity.Property(e => e.EmpDescription)
@@ -548,15 +550,11 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("emp_middle_name")
                     .HasMaxLength(100);
 
+                entity.Property(e => e.EmpOffId).HasColumnName("emp_off_id");
+
                 entity.Property(e => e.EmpResponsibleUser)
                     .HasColumnName("emp_responsible_user")
                     .HasMaxLength(100);
-
-                entity.Property(e => e.EmpCltId)
-                    .HasColumnName("emp_clt_id");
-
-                entity.Property(e => e.EmpOffId)
-                    .HasColumnName("emp_off_id");
 
                 entity.Property(e => e.EmpStatus).HasColumnName("emp_status");
             });
@@ -576,9 +574,6 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("etr_audit_cu")
                     .HasMaxLength(100);
 
-                entity.Property(e => e.EtrCltId)
-                    .HasColumnName("etr_clt_id");
-
                 entity.Property(e => e.EtrAuditMd)
                     .HasColumnName("etr_audit_md")
                     .HasColumnType("datetime");
@@ -594,6 +589,8 @@ namespace EuroJobsCrm.Models
                 entity.Property(e => e.EtrAuditRu)
                     .HasColumnName("etr_audit_ru")
                     .HasMaxLength(100);
+
+                entity.Property(e => e.EtrCltId).HasColumnName("etr_clt_id");
 
                 entity.Property(e => e.EtrCntId).HasColumnName("etr_cnt_id");
 
