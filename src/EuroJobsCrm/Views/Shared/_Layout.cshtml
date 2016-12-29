@@ -44,12 +44,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="javascript:void(0)">EuroJobsCrm</a>
+                        <a class="navbar-brand" href="/">EuroJobsCrm</a>
                     </div>
                     <div class="navbar-collapse collapse navbar-inverse-collapse">
                         @if (SignInManager.IsSignedIn(User)) {
                             <ul class="nav navbar-nav">
-                                @if (User.IsInRole("Admin") || User.IsInRole("Super Admin") || User.IsInRole("Advanced user") || User.IsInRole("Normal user"))
+                                @if (User.IsInRole("Admin") || User.IsInRole("Super Admin") || User.IsInRole("Advanced User") || User.IsInRole("Normal user"))
                                 {
                                     <li><a asp-area="" asp-controller="Clients" asp-action="Index" asp-fragment="clt_all">{{ 'Clients' | translate }}</a></li>
                                     <li><a asp-area="" asp-controller="Offers" asp-action="Index" asp-fragment="off_all">{{ 'Offers' | translate }}</a></li>

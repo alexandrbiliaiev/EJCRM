@@ -11,9 +11,15 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
     $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
 
+    $scope.isRequesting = [];
 
     $scope.moment = moment;
 
+    $scope.blockButton = false;
+
+    for (emp in $scope.freeEmployees){
+        $scope.isRequesting[emp.id] = false;
+    }
   
 
     $scope.goBack = function() {
@@ -33,6 +39,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
         $scope.manageFreeEmployees();
         $mdDialog.show({
             scope: $scope,
+            isRequesting: $scope.isRequesting,
             preserveScope: true,
             templateUrl: '/templates/offers/candidates_dialog_tmpl.html',
 
@@ -54,9 +61,13 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
             status: 0
         };
 
+        $scope.isRequesting[emp.id] = true;
+        $scope.blockButton = true;
+
         offersService.saveCandidateRequest(candidateRequest).success(function(response) {
             $scope.offer.candidates.push(emp);
-
+            $scope.isRequesting[emp.id] = false;
+            $scope.blockButton = false;
             $mdDialog.hide();
         }).error(function() {
             $state.go('error');

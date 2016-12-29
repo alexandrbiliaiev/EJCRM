@@ -44,8 +44,8 @@ namespace EuroJobsCrm.Controllers
                             new ClientDto(c.Client, c.Addresses, null, c.Offers, c.AcceptedEmployees, null))
                     .ToList();
 
-                var employeesIds = clients.SelectMany(c => c.Employees.Select(e => e.Id)).ToList();
-                var employmentRequests = context.EmploymentRequests.Where(r => employeesIds.Contains(r.EtrEmpId)).ToList();
+               // var employeesIds = clients.SelectMany(c => c.Employees.Select(e => e.Id)).ToList();
+               // var employmentRequests = context.EmploymentRequests.Where(r => employeesIds.Contains(r.EtrEmpId)).ToList();
 
 
                 foreach (var client in clients)
@@ -56,8 +56,8 @@ namespace EuroJobsCrm.Controllers
 
                     foreach (var offer in client.Offers)
                     {
-                        offer.AcceptedCount = employmentRequests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 1);
-                        offer.AwaitingCount = employmentRequests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 0);
+                        offer.AcceptedCount = context.EmploymentRequests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 1);
+                        offer.AwaitingCount = context.EmploymentRequests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 0);
                         client.FreeVacancies += offer.VacanciesNumber - offer.AcceptedCount;
                         client.AwaitingVacancies += offer.AwaitingCount;
                         client.BusyVacancies += offer.AcceptedCount;
@@ -101,7 +101,20 @@ namespace EuroJobsCrm.Controllers
 
                 ClientDto client = new ClientDto(entity.Client, entity.Addresses, entity.ContactPersons, entity.Offers,
                     entity.AcceptedEmployees, entity.Files);
-                    
+
+                client.FreeVacancies = 0;
+                client.AwaitingVacancies = 0;
+                client.BusyVacancies = 0;
+
+                foreach (var offer in client.Offers)
+                {
+                    offer.AcceptedCount = context.EmploymentRequests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 1);
+                    offer.AwaitingCount = context.EmploymentRequests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 0);
+                    client.FreeVacancies += offer.VacanciesNumber - offer.AcceptedCount;
+                    client.AwaitingVacancies += offer.AwaitingCount;
+                    client.BusyVacancies += offer.AcceptedCount;
+                }
+
 
                 return client;
             }

@@ -9,7 +9,14 @@
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link glyp" >{{ 'Log out' | translate }}</button>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link glyp" >
+                    <i class="material-icons">account_circle
+                         <md-tooltip md-direction="down">
+                          
+                        </md-tooltip>
+                    </i>
+                    {{ 'LOGOUT' | translate }}
+                </button>
             </li>
         </ul>
     </form>
