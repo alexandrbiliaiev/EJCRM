@@ -6,21 +6,13 @@
 		<md-content>
 			<section class="demo-container md-whiteframe-z1">
 				<md-toolbar>
-					<div class="md-toolbar-tools">
+					<div class="md-toolbar-tools" ng-click="showSearch = !showSearch">
 						<h2>
 							<span>{{'Clients'|translate}}</span>
 						</h2>
 						<span flex></span>
-
-						<md-button aria-label="button" aria-label="button" class="md-icon-button" ng-click="showAddClientDialog()" ng-show="addClaim">
-							<md-icon md-font-icon="ion-plus-round"></md-icon>
-						</md-button>
-
-						<md-button class="md-icon-button" aria-label="Search" ng-show="!showSearch" ng-click="showSearch = !showSearch">
+						<md-button class="md-icon-button">
 							<md-icon md-font-icon="ion-search"></md-icon>
-						</md-button>
-						<md-button class="md-icon-button" aria-label="Search" ng-show="showSearch" ng-click="showSearch = !showSearch">
-							<md-icon md-font-icon="ion-android-close"></md-icon>
 						</md-button>
 					</div>
 					<md-toolbar class="md-hue-1" ng-show="showSearch">

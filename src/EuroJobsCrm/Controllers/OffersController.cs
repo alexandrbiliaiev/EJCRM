@@ -233,9 +233,9 @@ namespace EuroJobsCrm.Controllers
             NotificationEmailSender emailSender = new NotificationEmailSender();
             if (responsibleUser.Email != null)
             {
-                await emailSender.SendEmailAsync(responsibleUser.Email, emailSubject, emailBody);
+           //     await emailSender.SendEmailAsync(responsibleUser.Email, emailSubject, emailBody);
             }
-                await emailSender.SendEmailAsync("tadeusz@eurojobs.info.pl", emailSubject, emailBody);
+          //      await emailSender.SendEmailAsync("tadeusz@eurojobs.info.pl", emailSubject, emailBody);
 
             employmentRequestDto.Id = employmentRequest.EtrId;
             return employmentRequestDto;
@@ -297,9 +297,9 @@ namespace EuroJobsCrm.Controllers
                 NotificationEmailSender emailSender = new NotificationEmailSender();
                 if (responsibleUser.Email != null)
                 {
-                    await emailSender.SendEmailAsync(responsibleUser.Email, emailSubject, emailBody);
+             //       await emailSender.SendEmailAsync(responsibleUser.Email, emailSubject, emailBody);
                 }
-                await emailSender.SendEmailAsync("tadeusz@eurojobs.info.pl", emailSubject, emailBody);
+             //   await emailSender.SendEmailAsync("tadeusz@eurojobs.info.pl", emailSubject, emailBody);
 
 
                 return true;
