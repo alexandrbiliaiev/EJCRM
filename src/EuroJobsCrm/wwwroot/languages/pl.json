@@ -216,5 +216,9 @@
     "FREE_VACANCIES": "Iłość wolnych wakatów",
     "AWAITING_VACANCIES": "Oczekuje potwierdzenia",
     "BUSY_VACANCIES": "Zatrudniono osób",
-    "LOGOUT": "Wyloguj się"
+    "LOGOUT": "Wyloguj się",
+    "FILE":"Plik",
+    "FILE_NANE":"Nazwa pliku",
+    "FILE_DELETE_CONFIRM_TITLE":"Usuwanie pliku",
+    "FILE_DELETE_CONFIRM_TEXT":"Czy napewno chcesz usuną ten plik?"
 }

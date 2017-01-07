@@ -337,5 +337,49 @@
         </div>
     </div>
 
+    		<!--Files -->
+	<div layout="row" layout-padding>
+		<div flex flex-gt-xs layout-xs="column">
+			<section class="demo-container md-whiteframe-z1">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>{{'FILES'|translate}}</span>
+						</h2>
+						<span flex></span>
+						<md-button aria-label="button" class="md-icon-button" ng-click="showNewFileDialog()" ng-show="addClaim">
+							<md-icon md-font-icon="ion-plus-round"></md-icon>
+						</md-button>
+						<md-button aria-label="button" class="md-icon-button" ng-click="expandFiles = !expandFiles">
+							<md-icon md-font-icon="ion-navicon-round"></md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<div ng-show="expandFiles" ng-cloak>
+					<md-content>
+						<md-list ng-cloak >
+							<md-list-item class="md-2-line" ng-repeat="file in offer.files">
+								<md-icon style="font-size:32px;" md-font-icon="ion-document">
+								</md-icon>
+								<div class="md-list-item-text">
+									<h3><b>{{file.name}}</b></h3>
+								</div>
+								<md-button aria-label="button" class="md-icon-button md-secondary">
+									<a href="{{file.url}}" target="_blank" >
+										<md-icon md-font-icon="ion-ios-cloud-download"></md-icon>
+									</a>
+								</md-button>
+									<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteFileConfirmDialog(file.id)"
+												ng-show="deleteClaim">
+									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+								</md-button>
+							</md-list-item>
+						</md-list>
+					</md-content>
+				</div>
+			</section>
+		</div>
+	</div>
+
 
 </ui-view>

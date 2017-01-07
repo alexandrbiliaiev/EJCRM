@@ -9,6 +9,8 @@ namespace EuroJobsCrm.Models
         public int? DcfInvId { get; set; }
         public int? DcfCntId { get; set; }
         public int? DcfIdcId { get; set; }
+        public int? DcfCliId { get; set; }
+        public int? DcfOfrId { get; set; }
         public string DcfGoogleFileId { get; set; }
         public string DcfName { get; set; }
         public string DcfDescription { get; set; }
@@ -19,7 +21,5 @@ namespace EuroJobsCrm.Models
         public string DcfAuditMu { get; set; }
         public DateTime? DcfAuditRd { get; set; }
         public string DcfAuditRu { get; set; }
-        public int? DcfCliId { get; set; }
-        public int? DcfOfrId { get; set; }
     }
 }

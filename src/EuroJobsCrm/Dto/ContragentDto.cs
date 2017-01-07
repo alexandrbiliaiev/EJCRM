@@ -13,6 +13,7 @@ namespace EuroJobsCrm.Dto
         public DateTime? CreationDate { get; set; }
         public IEnumerable<EmployeeDto> Employees { get; set; }
         public UserDto ResponsibleUser { get; set; }
+        public IEnumerable<DocumentFilesDto> Files { get; set; }
 
         public ContragentDto()
         {
@@ -32,12 +33,13 @@ namespace EuroJobsCrm.Dto
 
         public ContragentDto(Contragents contragent, IEnumerable<Addresses> addresses, 
                 IEnumerable<ContactPersons> contactPersons, IEnumerable<Employees> employees,
-                AspNetUsers responsibleUser) : this(contragent)
+                IEnumerable<DocumentFiles> files, AspNetUsers responsibleUser) : this(contragent)
         {
             Addresses = addresses.Select(a => new AddressDto(a)).ToList();
             ContactPersons = contactPersons.Select(c => new ContactPersonDto(c)).ToList();
             Employees = employees.Select(e => new EmployeeDto(e)).ToList();
             ResponsibleUser = new UserDto(responsibleUser);
+            Files = files.Select(f => new DocumentFilesDto(f)).ToList();
         }
 
  

@@ -37,11 +37,15 @@ namespace EuroJobsCrm.Controllers
                     .GroupJoin(context.Employees.Where(e => e.EmpAuditRd == null && e.EmpCltId != null),
                         c => c.Client.CltId, e => e.EmpCltId,
                         (c, e) => new {c.Client, c.Addresses,  c.Offers, AcceptedEmployees = e})
-                    
+
+                    .GroupJoin(context.DocumentFiles.Where(e => e.DcfAuditRu == null && e.DcfCliId != null),
+                        c => c.Client.CltId, f => f.DcfCliId,
+                        (c, f) => new { c.Client, c.Addresses, c.Offers, c.AcceptedEmployees, Files = f  })
+
                     .ToList()
                     .Select(
                         c =>
-                            new ClientDto(c.Client, c.Addresses, null, c.Offers, c.AcceptedEmployees, null))
+                            new ClientDto(c.Client, c.Addresses, null, c.Offers, c.AcceptedEmployees, c.Files))
                     .ToList();
 
                // var employeesIds = clients.SelectMany(c => c.Employees.Select(e => e.Id)).ToList();
