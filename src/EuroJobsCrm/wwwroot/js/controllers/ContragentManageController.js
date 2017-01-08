@@ -1,5 +1,5 @@
 angular.module('EuroJobsCrm.controllers').controller('ContragentManageController',
-    function($scope, $location, $translate, $http, $state, contragentsService, $cookies,
+    function ($scope, $location, $translate, $http, $state, contragentsService, $cookies,
         countriesService, contactpersonsService, addressesService, $mdDialog, $routeParams, employeesService, usersService) {
 
         $scope.expandDetails = false;
@@ -18,15 +18,15 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $scope.userRole = $cookies.get('user_role');
         $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
         $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
-        $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
+        $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
+        $scope.detailClaim = $scope.addClaim;
 
 
-
-        $scope.goBack = function() {
+        $scope.goBack = function () {
             $state.go('contragents');
         }
 
-        $scope.close = function() {
+        $scope.close = function () {
             console.log($scope);
             $mdDialog.hide();
         }
@@ -34,7 +34,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
 
         //contragents
-        $scope.saveContragentClick = function() {
+        $scope.saveContragentClick = function () {
             if ($scope.contragentForm.$invalid) {
                 return;
             }
@@ -46,15 +46,15 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 status: $scope.contragent.status
             };
 
-            contragentsService.saveContragent(contragent).success(function(response) {
+            contragentsService.saveContragent(contragent).success(function (response) {
                 $mdDialog.hide();
-            }).error(function() {
+            }).error(function () {
                 $state.go('error');
                 $mdDialog.hide();
             });
         }
 
-        $scope.showEditContragentDialog = function(ev) {
+        $scope.showEditContragentDialog = function (ev) {
             $mdDialog.show({
                 scope: $scope,
                 preserveScope: true,
@@ -62,16 +62,16 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 targetEvent: ev,
                 clickOutsideToClose: true,
             })
-                .then(function(answer) {
+                .then(function (answer) {
 
-                }, function() {
+                }, function () {
 
                 });
         }
         //End Contragents
 
         //Addresses
-        $scope.setDefaultAddress = function() {
+        $scope.setDefaultAddress = function () {
             return {
                 address: "",
                 city: "",
@@ -86,26 +86,26 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
         $scope.address = $scope.setDefaultAddress();
 
-        $scope.saveAddressClick = function() {
+        $scope.saveAddressClick = function () {
             if ($scope.addressForm.$invalid) {
                 return;
             }
 
             address = $scope.address;
-            addressesService.saveAddress(address).success(function(response) {
+            addressesService.saveAddress(address).success(function (response) {
                 if (address.id == 0) {
                     $scope.contragent.addresses.push(response);
                 }
                 $scope.address = $scope.setDefaultAddress();
                 $mdDialog.hide();
-            }).error(function() {
+            }).error(function () {
                 $state.go('error');
                 $mdDialog.hide();
             });
 
         }
 
-        $scope.showNewAddressDialog = function(ev) {
+        $scope.showNewAddressDialog = function (ev) {
             $scope.address = $scope.setDefaultAddress();
 
             $mdDialog.show({
@@ -114,14 +114,14 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 templateUrl: '/templates/addresses/address_dialog_tmpl.html',
                 targetEvent: ev,
                 clickOutsideToClose: true,
-            }).then(function(answer) {
+            }).then(function (answer) {
 
-            }, function() {
+            }, function () {
 
             });
         }
 
-        $scope.showEditAddressDialog = function(address) {
+        $scope.showEditAddressDialog = function (address) {
             $scope.address = address;
             $mdDialog.show({
                 scope: $scope,
@@ -131,14 +131,14 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 clickOutsideToClose: true,
             })
 
-                .then(function(answer) {
+                .then(function (answer) {
 
-                }, function() {
+                }, function () {
 
                 });
         }
 
-        $scope.showDeleteAddressConfirmDialog = function(addresId) {
+        $scope.showDeleteAddressConfirmDialog = function (addresId) {
             var confirm = $mdDialog.confirm()
                 .title($translate.instant('ADDRESS_DELETE_CONFIRM_TITLE'))
                 .textContent($translate.instant('ADDRESS_DELETE_CONFIRM_TEXT'))
@@ -146,8 +146,8 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 .ok($translate.instant('DELETE_OK'))
                 .cancel($translate.instant('DELETE_CANCEL'));
 
-            $mdDialog.show(confirm).then(function() {
-                addressesService.deleteAddress(addresId).success(function(response) {
+            $mdDialog.show(confirm).then(function () {
+                addressesService.deleteAddress(addresId).success(function (response) {
                     if (response != true) {
                         return;
                     }
@@ -162,10 +162,10 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                         return;
                     }
 
-                }).error(function(response) {
+                }).error(function (response) {
                     $state.go('error');
                 });
-            }, function() {
+            }, function () {
 
             });
         };
@@ -174,7 +174,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
 
         //ContactPersons
-        $scope.setDefaultContactPerson = function() {
+        $scope.setDefaultContactPerson = function () {
             return {
                 id: 0,
                 contragentId: null,
@@ -192,7 +192,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
         $scope.contactperson = $scope.setDefaultContactPerson();
 
-        $scope.saveContactPersonClick = function() {
+        $scope.saveContactPersonClick = function () {
             if ($scope.contactpersonForm.$invalid) {
                 return;
             }
@@ -210,19 +210,19 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 messanger: $scope.contactperson.messanger
             }
 
-            contactpersonsService.saveContactPerson(contactperson).success(function(response) {
+            contactpersonsService.saveContactPerson(contactperson).success(function (response) {
                 if ($scope.contactperson.id == 0 || $scope.contactperson.id == undefined) {
                     $scope.contragent.contactPersons.push(response);
                 }
 
                 $mdDialog.hide();
-            }).error(function() {
+            }).error(function () {
                 $state.go('error');
                 $mdDialog.hide();
             });
         }
 
-        $scope.showNewContactPersonDialog = function(ev) {
+        $scope.showNewContactPersonDialog = function (ev) {
             $scope.contactperson = $scope.setDefaultContactPerson();
             $mdDialog.show({
                 scope: $scope,
@@ -232,14 +232,14 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 clickOutsideToClose: true,
             })
 
-                .then(function(answer) {
+                .then(function (answer) {
 
-                }, function() {
+                }, function () {
 
                 });
         }
 
-        $scope.showEditContactPersonDialog = function(contactPerson) {
+        $scope.showEditContactPersonDialog = function (contactPerson) {
             $scope.contactperson = contactPerson;
             $mdDialog.show({
                 scope: $scope,
@@ -248,14 +248,14 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 clickOutsideToClose: true,
             })
 
-                .then(function(answer) {
+                .then(function (answer) {
 
-                }, function() {
+                }, function () {
 
                 });
         }
 
-        $scope.showDeleteCtpConfirmDialog = function(contactPersonId) {
+        $scope.showDeleteCtpConfirmDialog = function (contactPersonId) {
             var confirm = $mdDialog.confirm()
                 .title($translate.instant('CTG_DELETE_CONFIRM_TITLE'))
                 .textContent($translate.instant('CTG_DELETE_CONFIRM_TEXT'))
@@ -263,8 +263,8 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 .ok($translate.instant('DELETE_OK'))
                 .cancel($translate.instant('DELETE_CANCEL'));
 
-            $mdDialog.show(confirm).then(function() {
-                contactpersonsService.deleteContactPerson(contactPersonId).success(function(response) {
+            $mdDialog.show(confirm).then(function () {
+                contactpersonsService.deleteContactPerson(contactPersonId).success(function (response) {
                     if (response != true) {
                         return;
                     }
@@ -279,10 +279,10 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                         return;
                     }
 
-                }).error(function(response) {
+                }).error(function (response) {
                     $state.go('error');
                 });
-            }, function() {
+            }, function () {
 
             });
         };
@@ -290,7 +290,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
 
         //Employees
-        $scope.setDefaultEmployee = function() {
+        $scope.setDefaultEmployee = function () {
             return {
                 id: 0,
                 firstName: null,
@@ -303,7 +303,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
         $scope.employee = $scope.setDefaultEmployee();
 
-        $scope.saveEmployeeClick = function() {
+        $scope.saveEmployeeClick = function () {
             if ($scope.employeeForm.$invalid) {
                 return;
             }
@@ -319,19 +319,19 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 status: $scope.employee.status
             }
 
-            employeesService.saveEmployee(employee).success(function(response) {
+            employeesService.saveEmployee(employee).success(function (response) {
                 if ($scope.employee.id == 0 || $scope.employee.id == undefined) {
                     $scope.contragent.employees.push(response);
                 }
 
                 $mdDialog.hide();
-            }).error(function() {
+            }).error(function () {
                 $state.go('error');
                 $mdDialog.hide();
             });
         }
 
-        $scope.showNewEmployeeDialog = function(ev) {
+        $scope.showNewEmployeeDialog = function (ev) {
             $scope.employee = $scope.setDefaultEmployee();
             $mdDialog.show({
                 scope: $scope,
@@ -341,15 +341,15 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 clickOutsideToClose: true,
             })
 
-                .then(function(answer) {
+                .then(function (answer) {
 
-                }, function() {
+                }, function () {
 
                 });
         }
 
 
-        $scope.showAddResponsiblePersonDialog = function(ev) {
+        $scope.showAddResponsiblePersonDialog = function (ev) {
             $scope.employee = $scope.setDefaultEmployee();
             $mdDialog.show({
                 scope: $scope,
@@ -359,14 +359,14 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 clickOutsideToClose: true,
             })
 
-                .then(function(answer) {
+                .then(function (answer) {
 
-                }, function() {
+                }, function () {
 
                 });
         }
 
-        $scope.saveResponsiblePersoon = function(usr) {
+        $scope.saveResponsiblePersoon = function (usr) {
 
             if ($scope.responsiblePersonForm.$invalid) {
                 return;
@@ -377,23 +377,23 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 userId: usr.id
             };
 
-            contragentsService.addResponsiblePersonToContragent(param).success(function(response) {
+            contragentsService.addResponsiblePersonToContragent(param).success(function (response) {
                 $mdDialog.hide();
                 $scope.contragent.responsibleUser = response.contragent.responsibleUser;
-            }).error(function() {
+            }).error(function () {
                 $state.go('error');
                 $mdDialog.hide();
             });
         }
 
-        $scope.editEmployee = function(employee) {
+        $scope.editEmployee = function (employee) {
             employeesService.setCurrentEmployee(employee);
             $state.go('employee', {
                 id: employee.id
             });
         }
 
-        $scope.showDeleteEmployeeConfirmDialog = function(employeeId) {
+        $scope.showDeleteEmployeeConfirmDialog = function (employeeId) {
             var confirm = $mdDialog.confirm()
                 .title($translate.instant('EMP_DELETE_CONFIRM_TITLE'))
                 .textContent($translate.instant('EMP_DELETE_CONFIRM_TEXT'))
@@ -401,8 +401,8 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 .ok($translate.instant('DELETE_OK'))
                 .cancel($translate.instant('DELETE_CANCEL'));
 
-            $mdDialog.show(confirm).then(function() {
-                employeesService.deleteEmployee(employeeId).success(function(response) {
+            $mdDialog.show(confirm).then(function () {
+                employeesService.deleteEmployee(employeeId).success(function (response) {
                     if (response != true) {
                         return;
                     }
@@ -417,16 +417,16 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                         return;
                     }
 
-                }).error(function(response) {
+                }).error(function (response) {
                     $state.go('error');
                 });
-            }, function() {
+            }, function () {
 
             });
         };
         //End Employees
 
-        $scope.getFormatedDate = function(date) {
+        $scope.getFormatedDate = function (date) {
             return moment(date).format('YYYY-MM-DD');
         };
 
@@ -437,14 +437,14 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
 
 
-        contragentsService.load().success(function(response) {
+        contragentsService.load().success(function (response) {
             contragentsService.contragents = response;
             $scope.contragent = contragentsService.getContragent($state.params.id);
-        }).error(function() {
+        }).error(function () {
             $state.go('error');
         });
 
-        usersService.load().success(function(response) {
+        usersService.load().success(function (response) {
 
             usersService.setAdmins(response['Admin']);
             usersService.setAdvancedUsers(response['Advanced user']);
@@ -466,7 +466,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 $scope.users.push($scope.normalUsers[i]);
             }
 
-        }).error(function() {
+        }).error(function () {
             $state.go('error');
         });
     });

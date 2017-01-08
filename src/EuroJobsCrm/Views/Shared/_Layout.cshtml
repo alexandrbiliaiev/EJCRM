@@ -69,6 +69,11 @@
                                 {
                                     <li><a asp-area="" asp-controller="Users" asp-action="Index" asp-fragment="usr_all">{{ 'USERS' | translate }}</a></li>
                                 }
+
+                                 @if (User.IsInRole("Admin") || User.IsInRole("Super Admin") || User.IsInRole("Advanced User") || User.IsInRole("Normal user"))
+                                {
+                                    <li><a asp-area="" asp-controller="Calendar" asp-action="Index" asp-fragment="cal">{{ 'CALENDAR' | translate }}</a></li>
+                                }
                             </ul>
                         } 
                         @await Html.PartialAsync("_LoginPartial")
@@ -111,6 +116,7 @@
                 <script src="~/js/services/addressesService.js"></script>
                 <script src="~/js/services/employeesService.js"></script>
                 <script src="~/js/services/offersService.js"></script>
+                <script src="~/js/services/calendarService.js"></script>
 
                 <script src="~/js/services/contragentsService.js"></script>
                 <script src="~/js/services/contactPersonsService.js"></script>
@@ -126,6 +132,7 @@
                 <script src="~/js/controllers/OffersController.js"></script>
                 <script src="~/js/controllers/OfferManageController.js"></script>
                 <script src="~/js/controllers/UsersController.js"></script>
+                <script src="~/js/controllers/CalendarController.js"></script>
 
                 <script src="~/js/filters/searchForFilter.js"></script>
 
@@ -166,6 +173,7 @@
                 <script src="~/js/services/clientsService.js"></script>
                 <script src="~/js/services/offersService.js"></script>
                 <script src="~/js/services/usersService.js"></script>
+                <script src="~/js/services/calendarService.js"></script>
                 
                 <script src="~/lib/mdPickers/mdPickers.js"></script>
 
@@ -180,6 +188,7 @@
                 <script src="~/js/controllers/OffersController.js"></script>
                 <script src="~/js/controllers/OfferManageController.js"></script>
                 <script src="~/js/controllers/UsersController.js"></script>
+                <script src="~/js/controllers/CalendarController.js"></script>
 
                 <script src="~/js/filters/searchForFilter.js"></script>
 

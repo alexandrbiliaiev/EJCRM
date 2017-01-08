@@ -6,8 +6,8 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
         $scope.userRole = $cookies.get('user_role');
         $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
         $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
-        $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal User';
-
+        $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
+$scope.detailClaim = $scope.addClaim;
       
         $scope.isActive = false;
 

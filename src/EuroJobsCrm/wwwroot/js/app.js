@@ -47,6 +47,9 @@
             }).state('users', {
                 url: "/usr_all",
                 templateUrl: 'templates/users/users_list.html',
+            }).state('calendar', {
+                url: "/cal",
+                templateUrl: 'templates/calendar/calendar.html',
             });
           
     });
