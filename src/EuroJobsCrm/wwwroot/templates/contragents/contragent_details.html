@@ -94,14 +94,15 @@
 									<h4><b>{{contactperson.name}} {{contactperson.surname}} ({{contactperson.position}})<b></h4>
 											<p>
 												{{'Email'|translate}}: <b>{{contactperson.email}}</b> {{'Phone'|translate}}: <b>{{contactperson.phoneNumber}}</b>
-										<br/>
-											{{'Skype'|translate}}: <b>{{contactperson.skype}}</b> {{'Messagner'|translate}}: <b>{{contactperson.messanger}}</b>
+										<br/> {{'Skype'|translate}}: <b>{{contactperson.skype}}</b> {{'Messagner'|translate}}: <b>{{contactperson.messanger}}</b>
 										</p>
 								</div>
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showEditContactPersonDialog(contactperson)" ng-show="editClaim">
+								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showEditContactPersonDialog(contactperson)"
+												ng-show="editClaim">
 									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 								</md-button>
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteCtpConfirmDialog(contactperson.id)" ng-show="deleteClaim">
+								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteCtpConfirmDialog(contactperson.id)"
+												ng-show="deleteClaim">
 									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 								</md-button>
 								<md-divider ng-if="!$last"></md-divider>
@@ -112,7 +113,6 @@
 			</section>
 		</div>
 	</div>
-
 	<!--Addresses-->
 	<div layout="row" layout-padding>
 		<!--Addresses-->
@@ -148,7 +148,8 @@
 									<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditAddressDialog(address)" ng-show="editClaim">
 										<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 									</md-button>
-									<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(address.id)" ng-show="deleteClaim">
+									<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(address.id)"
+													ng-show="deleteClaim">
 										<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 									</md-button>
 									<md-divider ng-if="!$last"></md-divider>
@@ -160,7 +161,6 @@
 			</div>
 		</div>
 	</div>
-
 	<!--Emoployees-->
 	<div layout="row" layout-padding>
 		<!--Emoployees-->
@@ -172,7 +172,6 @@
 							<span>{{'EMPLOYEES'|translate}}</span>
 						</h2>
 						<span flex></span>
-
 						<md-button aria-label="button" class="md-icon-button" ng-show="!showSearch" ng-click="showSearch = !showSearch">
 							<md-icon md-font-icon="ion-search"></md-icon>
 						</md-button>
@@ -191,7 +190,6 @@
 							<md-input-container class="md-block" flex="100">
 								<input aria-label="input" ng-model="contactperson.position" style="color:white; font-size:14pt;">
 							</md-input-container>
-
 							<span flex> </span>
 							<md-button aria-label="button">
 								<md-icon md-font-icon="ion-search"></md-icon>
@@ -228,7 +226,8 @@
 								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)" ng-show="editClaim">
 									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 								</md-button>
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)" ng-show="deleteClaim">
+								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)"
+												ng-show="deleteClaim">
 									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 								</md-button>
 								<md-divider ng-if="!$last"></md-divider>
@@ -239,9 +238,6 @@
 			</section>
 		</div>
 	</div>
-
-	
-
 	<!--Notes -->
 	<div layout="row" layout-padding>
 		<div flex flex-gt-xs layout-xs="column">
@@ -252,7 +248,6 @@
 							<span>{{'NOTES'|translate}}</span>
 						</h2>
 						<span flex></span>
-
 						<md-button aria-label="button" class="md-icon-button" ng-click="showNewNoteDialog()" ng-show="addClaim">
 							<md-icon md-font-icon="ion-plus-round"></md-icon>
 						</md-button>
@@ -261,37 +256,80 @@
 						</md-button>
 					</div>
 				</md-toolbar>
-					<div ng-show="expandNotes" ng-cloak>
-									<md-content>
-					<md-list ng-cloak style="">
-						<md-list-item class="md-2-line">
-							<md-icon style="font-size:32px;" md-font-icon="ion-alert-circled" >
-							</md-icon>
-							<div class="md-list-item-text">
-								<h3><b>Klient nie zapłacił za uslugi!!! </b></h3>
-								<p>
-									<i>Napisał Tadeusz o 12:33 2016-11-15</i>
-								</p>
-							</div>
-							<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" >
-								<md-tooltip md-direction="left">
-									{{ 'ACTIVE' | translate }}
-								</md-tooltip>
-							</md-icon>
-							<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)" ng-show="editClaim">
-								<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
-							</md-button>
-							<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)" ng-show="deleteClaim">
-								<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-							</md-button>
-						</md-list-item>
-					</md-list>
+				<div ng-show="expandNotes" ng-cloak>
+					<md-content>
+						<md-list ng-cloak style="">
+							<md-list-item class="md-2-line">
+								<md-icon style="font-size:32px;" md-font-icon="ion-alert-circled">
+								</md-icon>
+								<div class="md-list-item-text">
+									<h3><b>Klient nie zapłacił za uslugi!!! </b></h3>
+									<p>
+										<i>Napisał Tadeusz o 12:33 2016-11-15</i>
+									</p>
+								</div>
+								<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled">
+									<md-tooltip md-direction="left">
+										{{ 'ACTIVE' | translate }}
+									</md-tooltip>
+								</md-icon>
+								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)" ng-show="editClaim">
+									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
+								</md-button>
+								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)"
+												ng-show="deleteClaim">
+									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+								</md-button>
+							</md-list-item>
+						</md-list>
 					</md-content>
 				</div>
 			</section>
 		</div>
 	</div>
-
+	<!--Files -->
+	<div layout="row" layout-padding>
+		<div flex flex-gt-xs layout-xs="column">
+			<section class="demo-container md-whiteframe-z1">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>{{'FILES'|translate}}</span>
+						</h2>
+						<span flex></span>
+						<md-button aria-label="button" class="md-icon-button" ng-click="showNewFileDialog()" ng-show="addClaim">
+							<md-icon md-font-icon="ion-plus-round"></md-icon>
+						</md-button>
+						<md-button aria-label="button" class="md-icon-button" ng-click="expandFiles = !expandFiles">
+							<md-icon md-font-icon="ion-navicon-round"></md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<div ng-show="expandFiles" ng-cloak>
+					<md-content>
+						<md-list ng-cloak >
+							<md-list-item class="md-2-line" ng-repeat="file in contragent.files">
+								<md-icon style="font-size:32px;" md-font-icon="ion-document">
+								</md-icon>
+								<div class="md-list-item-text">
+									<h3><b>{{file.name}}</b></h3>
+								</div>
+								<md-button aria-label="button" class="md-icon-button md-secondary">
+									<a href="{{file.url}}" target="_blank" >
+										<md-icon md-font-icon="ion-ios-cloud-download"></md-icon>
+									</a>
+								</md-button>
+									<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteFileConfirmDialog(file.id)"
+												ng-show="deleteClaim">
+									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+								</md-button>
+							</md-list-item>
+						</md-list>
+					</md-content>
+				</div>
+			</section>
+		</div>
+	</div>
 	<!--Responsible Persons-->
 	<div layout="row" layout-padding>
 		<!--Addresses-->
@@ -304,7 +342,8 @@
 								<span>{{'RESPONSIBLE_PERSON' | translate}}</span>
 							</h2>
 							<span flex></span>
-							<md-button ng-show="contragent.responsibleUser.email == null" aria-label="button" class="md-icon-button" ng-click="showAddResponsiblePersonDialog()" nh-show="addClaim">
+							<md-button ng-show="contragent.responsibleUser.email == null" aria-label="button" class="md-icon-button" ng-click="showAddResponsiblePersonDialog()"
+											nh-show="addClaim">
 								<md-icon md-font-icon="ion-plus-round"></md-icon>
 							</md-button>
 							<md-button aria-label="button" class="md-icon-button" ng-click="expandResponsiblePerson = !expandResponsiblePerson">
@@ -318,9 +357,8 @@
 								<md-list-item class="md-2-line">
 									<md-icon style="font-size:32px;" md-font-icon="ion-person"></md-icon>
 									<div class="md-list-item-text">
-										<h4>{{'RESPONSIBLE_PERSON'| translate}}: <b>{{contragent.responsibleUser.email}}</b></h4>										
+										<h4>{{'RESPONSIBLE_PERSON'| translate}}: <b>{{contragent.responsibleUser.email}}</b></h4>
 									</div>
-									
 									<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="deleteResponsiblePerson(contragent)" ng-show="deleteClaim">
 										<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 									</md-button>
@@ -333,15 +371,17 @@
 			</div>
 		</div>
 	</div>
-
 	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
-		<a mfb-button icon="ion-ios-information" label="{{'ADD_NOTE' | translate}}" ng-click="showNewNoteDialog()" ng-show="addClaim"/>
-		<a mfb-button icon="ion-home" label="{{'ADD_ADDRESS' | translate}}" ng-click="showNewAddressDialog()" ng-show="addClaim" />
-		<a mfb-button icon="ion-person-add" label="{{'ADD_EMPLOYEE' | translate}}" ng-click="showNewEmployeeDialog()" ng-show="addClaim" />
-		<a mfb-button icon="ion-android-contact" label="{{'ADD_CONTACT_PERSON' | translate}}" ng-click="showNewContactPersonDialog()" ng-show="addClaim"
+		<a mfb-button icon="ion-ios-information" label="{{'ADD_NOTE' | translate}}" ng-click="showNewNoteDialog()" ng-show="addClaim"
 		/>
+		<a mfb-button icon="ion-home" label="{{'ADD_ADDRESS' | translate}}" ng-click="showNewAddressDialog()" ng-show="addClaim"
+		/>
+		<a mfb-button icon="ion-person-add" label="{{'ADD_EMPLOYEE' | translate}}" ng-click="showNewEmployeeDialog()" ng-show="addClaim"
+		/>
+		<a mfb-button icon="ion-android-contact" label="{{'ADD_CONTACT_PERSON' | translate}}" ng-click="showNewContactPersonDialog()"
+						ng-show="addClaim" />
 	</nav>
 	<nav mfb-menu position="tl" style="margin-top:100px;" active-icon="ion-android-arrow-back" resting-icon="ion-android-arrow-back"
-		ng-click="goBack()">
+					ng-click="goBack()">
 	</nav>
 </ui-view>

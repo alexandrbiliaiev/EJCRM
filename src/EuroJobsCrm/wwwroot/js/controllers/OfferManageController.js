@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 angular.module('EuroJobsCrm.controllers').controller('OfferManageController', function ($scope, $location, $translate, $http, $state,
     offersService, $mdDialog, $routeParams, $cookies, employeesService) {
+=======
+angular.module('EuroJobsCrm.controllers').controller('OfferManageController', function($scope, $location, $translate, $http, $state,
+    offersService, $mdDialog, $routeParams, $cookies, employeesService, fileService) {
+>>>>>>> 4a6d21f6b8b7ec119a0018c9b78d41a86a2923c2
     $scope.expandDetails = true;
     $scope.expandCandidates = true;
     $scope.expandEmployees = true;
@@ -204,5 +209,78 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
             }
         }
     }
+
+            $scope.showNewFileDialog = function () {
+            $scope.file = {
+                name: '',
+                description: '',
+                contragentId: $scope.offer.id
+            };
+            $mdDialog.show({
+                scope: $scope,
+                preserveScope: true,
+                templateUrl: '/templates/files/file_dialog.html',
+                clickOutsideToClose: true,
+            })
+
+            .then(function (answer) {
+
+            }, function () {
+
+            });
+        }
+
+        $scope.processFileForm = function () {
+
+            var data = new FormData();
+            data.append("file", $scope.newFile);
+            data.append("name", $scope.file.name);
+            data.append("description", $scope.file.description);
+            data.append("ownerId", $scope.offer.id);
+            data.append("ownerType", "offer");
+
+            fileService.saveFile(data).success(function (data) {
+                if (!data.success) {
+                    alert(data.errorMessage);
+
+                } else {
+                    $scope.offer.files.push(data);
+                }
+
+                $mdDialog.hide();
+            });
+        }
+
+        $scope.showDeleteFileConfirmDialog = function (fileId) {
+            var confirm = $mdDialog.confirm()
+                .title($translate.instant('FILE_DELETE_CONFIRM_TITLE'))
+                .textContent($translate.instant('FILE_DELETE_CONFIRM_TEXT'))
+                .ariaLabel('label')
+                .ok($translate.instant('DELETE_OK'))
+                .cancel($translate.instant('DELETE_CANCEL'));
+
+            $mdDialog.show(confirm).then(function () {
+                fileService.deleteFile(fileId).success(function (response) {
+                    if (response != true) {
+                        return;
+                    }
+
+                    files = $scope.offer.files;
+                    for (i in files) {
+                        if (files[i].id != fileId) {
+                            continue;
+                        }
+
+                        files.splice(i, 1);
+                        return;
+                    }
+
+                }).error(function (response) {
+                    $state.go('error');
+                });
+            }, function () {
+
+            });
+        };
 
 });

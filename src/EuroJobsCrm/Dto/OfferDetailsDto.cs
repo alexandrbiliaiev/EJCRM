@@ -7,14 +7,15 @@ namespace EuroJobsCrm.Dto
     {
         public List<EmployeeDto> Candidates { get; set; }
         public List<EmployeeDto> Employees { get; set; }
+        public List<DocumentFilesDto> Files { get; set; }
+
 
         public OfferDetailsDto()
         {
             
         }
 
-        public 
-            OfferDetailsDto(Offers offer) : base(offer)
+        public OfferDetailsDto(Offers offer) : base(offer)
         {
             
         }

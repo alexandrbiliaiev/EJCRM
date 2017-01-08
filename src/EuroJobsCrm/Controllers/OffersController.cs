@@ -50,9 +50,9 @@ namespace EuroJobsCrm.Controllers
 
                 List<EmployeeDto> candidates = new List<EmployeeDto>();
                 List<EmployeeDto> employees = new List<EmployeeDto>();
+                List<DocumentFilesDto> files = new List<DocumentFilesDto>();
 
-                try
-                {
+              
                     candidates =
                         context.EmploymentRequests.Where(r => r.EtrOfrId == offerId && r.EtrStatus == 0 && r.EtrAuditRd == null)
                             .Join(context.Employees.Where(e => e.EmpAuditRd == null), r => r.EtrEmpId, e => e.EmpId,
@@ -65,19 +65,16 @@ namespace EuroJobsCrm.Controllers
                             .Join(context.Employees.Where(e => e.EmpAuditRd == null), r => r.EtrEmpId, e => e.EmpId,
                                 (request, employee) => new {request, employee}).ToList()
                             .Select(e => new EmployeeDto(e.employee)).ToList();
-                }
-                catch (Exception)
-                {
-                    ;
-                }
+
+                files = context.DocumentFiles.Where(d => d.DcfAuditRu == null && d.DcfOfrId == offerId).ToList().
+                    Select(f => new DocumentFilesDto(f)).ToList();
 
                 OfferDetailsDto offerDetails = new OfferDetailsDto(ofr)
                 {
                     Candidates = candidates,
-                    Employees = employees
+                    Employees = employees,
+                    Files = files
                 };
-
-
 
                 return offerDetails;
             }

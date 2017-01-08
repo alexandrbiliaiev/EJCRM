@@ -1,0 +1,44 @@
+<md-dialog aria-label="Employees">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{'FILE' | translate}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="close()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content" style="width:900px">
+            <form name="fileForm">
+                <div layout="row">
+                    <md-input-container class="md-block" flex="100">
+                        <label>{{ 'FILE_NANE' | translate }}</label>
+                        <input name="name" ng-model="file.name">
+                    </md-input-container>
+                </div>
+                <div layout="row">
+                    <md-input-container class="md-block" flex="100">
+                        <label>{{ 'REMARKS' | translate }}</label>
+                        <textarea ng-model="file.description" md-maxlength="300" rows="2"></textarea>
+                    </md-input-container>
+                </div>
+                <div layout="row" flex="100" layout-wrap>
+                    <md-button class="md-raised md-primary">
+                        <label for="document-file-input" style="cursor:pointer; color:white;">
+							<md-icon md-font-icon="ion-document"></md-icon> Select file {{ docFile.name}} 
+						</label>
+                    </md-button>
+                    <input id="document-file-input" type="file" ngf-select ng-model="newFile" ngf-max-size="10MB" ngf-model-invalid="errorFile"
+                        style="display: none;" />
+                    <input type="submit" style="display:none"/>
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" flex>
+        <md-button  ng-click="processFileForm()">
+            {{'SAVE'|translate}}
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>
