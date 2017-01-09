@@ -1,98 +1,121 @@
-
-	<div layout="row" ng-show = "!isActive" layout-sm="column" layout-align="space-around" >
-		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-	</div>
-	<div id="popupContainer" class="container body-content" ng-show = "isActive">
-		<md-content>
-			<section class="demo-container md-whiteframe-z1">
-				<md-toolbar>
-					<div class="md-toolbar-tools" ng-click="showSearch = !showSearch">
-						<h2>
-							<span>{{'Clients'|translate}}</span>
-						</h2>
-						<span flex></span>
-						<md-button class="md-icon-button">
-							<md-icon md-font-icon="ion-search"></md-icon>
-						</md-button>
+<div layout="row" ng-show="!isActive" layout-sm="column" layout-align="space-around">
+	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<div id="popupContainer" class="container body-content" ng-show="isActive">
+	<md-content>
+		<section class="demo-container md-whiteframe-z1">
+			<md-toolbar>
+				<div class="md-toolbar-tools" ng-click="showSearch = !showSearch">
+					<h2>
+						<span>{{'Clients'|translate}}</span>
+					</h2>
+					<span flex></span>
+					<md-button class="md-icon-button">
+						<md-icon md-font-icon="ion-search"></md-icon>
+					</md-button>
+				</div>
+				<md-toolbar class="md-hue-1" ng-show="showSearch">
+					<div class="md-toolbar-tools">
+						<md-input-container class="md-block" flex="100" ng-show="showSearch">
+							<input aria-label="input" ng-model="searchString" style="color:white; font-size:14pt;" placeholder="{{'SEARCH'| translate}} ..."
+							/>
+						</md-input-container>
 					</div>
-					<md-toolbar class="md-hue-1" ng-show="showSearch">
-						<div class="md-toolbar-tools">
-							<md-input-container class="md-block" flex="100" ng-show="showSearch">
-								<input aria-label="input" ng-model="searchString" style="color:white; font-size:14pt;" placeholder="{{'SEARCH'| translate}} ..."
-								/>
-							</md-input-container>
-						</div>
-					</md-toolbar>
 				</md-toolbar>
-				<div layout="row" layout-padding="" ng-cloak>
+			</md-toolbar>
+			<div layout="row" layout-padding="" ng-cloak>
 
-					<md-content flex ng-show="isActive">
-						<md-list ng-cloak style="margin-top: -10px">
-							<md-list-item class="md-3-line" ng-repeat="client in clients | clientsSearchFor : searchString">
-								<md-icon class="material-icons md-36 md-dark" ng-click="editClient(client.id)">folder_shared
-								</md-icon>
+				<md-content flex ng-show="isActive">
 
-								<div class="md-list-item-text">
-									<table>
-										<td style="padding:0 30px 0 0;">
-											<h3 ng-click="editClient(client.id)"><b>{{client.name}}</b></h3>
-											<p> <b>{{'TAX_ID'| translate}}:</b> {{client.nip}}</p>
-											<p> <b>{{'KRS'| translate}}:</b> {{client.krs}}</p>
-											<p> <b>{{'REGON'| translate}}:</b> {{client.regon}}</p>
-										</td>
-										<td>
-											<p ng-repeat="cl_address in client.addresses">
+					<md-list ng-cloak style="margin-top: -20px">
+						<md-list-item class="md-3-line" ng-repeat="client in clients | clientsSearchFor : searchString" style="margin-top: 10px">
+							<md-icon class="material-icons md-36 md-dark" ng-click="editClient(client.id)">folder_shared
+							</md-icon>
+
+							<div layout="row" flex>
+								<div layout="column">
+									<div layout="row" layout-align="start center">
+										<div class="md-list-item-text">
+											<h3 ng-click="editClient(client.id)" style="color:#1b4891"><b>{{client.name}}</b></h3>
+										</div>
+									</div>
+									<div layout="row" style="margin-top: 3px">
+										<div layout="column" style="width:250px">
+											<div layout="row">
+												<div layout="column">
+													<span>	<b>{{'TAX_ID'| translate}}:</b></span>
+													<span>	<b>{{'KRS'| translate}}:</b>  </span>
+													<span>	<b>{{'REGON'| translate}}:</b>  </span>
+													<span ng-show="client.type == 0"> <b> {{'TYPE'|translate}}: </b>  </span>
+													<span ng-show="client.type == 1"> <b> {{'TYPE'|translate}}: </b>  </span>
+												</div>
+												<div layout="column" style="margin-left:5px">
+													<span>{{client.nip}} </span>
+													<span>{{client.krs}}</span>
+													<span>{{client.regon}}</span>
+													<span ng-show="client.type == 0"> {{'LISING'|translate}} </span>
+													<span ng-show="client.type == 1"> {{'NOT_LISING'|translate}} </span>
+												</div>
+											</div>
+										</div>
+										<div layout="column" style="width:300px">
+											<span ng-repeat="cl_address in client.addresses">
 												<i ng-show="cl_address.type == 1"><b>{{ 'LEGAL_ADDRESS' | translate }}</b> </br> {{cl_address.address}}, {{cl_address.postCode}}, {{cl_address.city}}, {{cl_address.country}}</i>
 												<i ng-show="cl_address.type == 2"><b>{{ 'WORK_ADDRESS' | translate }}</b> </br> {{cl_address.address}}, {{cl_address.postCode}}, {{cl_address.city}}, {{cl_address.country}}</i>
-											</p>
-										</td>
-										<td>
-											&nbsp&nbsp&nbsp&nbsp
-										</td>
-										<td>
+											</span>
+										</div>
+										<div layout="column" style="width:300px">
 											<p>
-											<i><b>{{'FREE_VACANCIES' | translate}} </b>{{client.freeVacancies}}</i></br>
-											<i><b>{{'BUSY_VACANCIES' | translate}} </b>{{client.busyVacancies}}</i></br>
-											<i><b>{{'AWAITING_VACANCIES' | translate}} </b>{{client.awaitingVacancies}}</i>
+												<i><b>{{'FREE_VACANCIES' | translate}} </b>{{client.freeVacancies}}</i></br>
+												<i><b>{{'BUSY_VACANCIES' | translate}} </b>{{client.busyVacancies}}</i></br>
+												<i><b>{{'AWAITING_VACANCIES' | translate}} </b>{{client.awaitingVacancies}}</i>
 											</p>
-										</td>
-									</table>
+										</div>
+									</div>
 								</div>
+							</div>
 
-								<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" ng-show="client.status == '1'">
-									<md-tooltip md-direction="left">
-										{{ 'ACTIVE' | translate }}
+							<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" ng-show="client.status == '1'">
+								<md-tooltip md-direction="left">
+									{{ 'ACTIVE' | translate }}
+								</md-tooltip>
+							</md-icon>
+							<md-icon style="font-size:24px;" md-font-icon="ion-android-cancel" ng-show="client.status == '0'">
+								<md-tooltip md-direction="left">
+									{{ 'INACTIVE' | translate }}
+								</md-tooltip>
+							</md-icon>
+
+
+							<md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="editClient(client.id)" ng-show="detailClaim">
+								<md-icon class="material-icons md-24 md-dark">open_in_new
+									<md-tooltip md-direction="down">
+										{{ 'DETAILS' | translate }}
 									</md-tooltip>
 								</md-icon>
-								<md-icon style="font-size:24px;" md-font-icon="ion-android-cancel" ng-show="client.status == '0'">
-									<md-tooltip md-direction="left">
-										{{ 'INACTIVE' | translate }}
+							</md-button>
+							<md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteClientConfirmDialog(client.id)" ng-show="deleteClaim">
+								<md-icon class="material-icons md-24 md-dark">delete_forever
+									<md-tooltip md-direction="down">
+										{{ 'DELETE' | translate }}
 									</md-tooltip>
 								</md-icon>
+							</md-button>
 
-								<md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="editClient(client.id)" ng-show="detailClaim">
-									<md-icon class="material-icons md-24 md-dark">open_in_new
-										<md-tooltip md-direction="down">
-											{{ 'DETAILS' | translate }}
-										</md-tooltip>
-									</md-icon>
-								</md-button>
-								<md-button aria-label="delete" class="md-icon-button md-secondary" ng-click="showDeleteClientConfirmDialog(client.id)" ng-show="deleteClaim">
-									<md-icon class="material-icons md-24 md-dark">delete_forever
-										<md-tooltip md-direction="down">
-											{{ 'DELETE' | translate }}
-										</md-tooltip>
-									</md-icon>
-								</md-button>
-								<md-divider ng-if="!$last"></md-divider>
-							</md-list-item>
-						</md-list>
-					</md-content>
-				</div>
-			</section>
-		</md-content>
 
-		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
-			<a mfb-button icon="ion-android-contact" label="{{'ADD_CLIENT' | translate}}" ng-click="showAddClientDialog()" ng-show="addClaim"></a>
-		</nav>
-	</div>
+							<md-divider style="margin-top: 3px" ng-if="!$last"></md-divider>
+						</md-list-item>
+
+					</md-list>
+				</md-content>
+			</div>
+
+
+</div>
+</section>
+</md-content>
+
+<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
+	<a mfb-button icon="ion-android-contact" label="{{'ADD_CLIENT' | translate}}" ng-click="showAddClientDialog()" ng-show="addClaim"></a>
+</nav>
+</div>
