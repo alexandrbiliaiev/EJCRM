@@ -111,9 +111,9 @@
     "EXPERIENCE_IS_TO_LONG": "Doświadczenie ma za dużo znaków",
     "LANGUAGES": "Język",
     "LANGUAGES_ARE_TO_LONG": "Język ma za dużo znaków",
-    "AGE_FROM": "Wiek od:",
+    "AGE_FROM": "Wiek od",
     "AGE_IS_TO_LONG": "Wiek ma za dużo znaków",
-    "AGE_TO": "Wiek do:",
+    "AGE_TO": "Wiek do",
     "GENDER": "Płeć",
     "ALL": "Pan/Pani",
     "MALE": "Pan",
@@ -125,7 +125,7 @@
     "ZLECENIE": "Zlecenie",
     "WORK_FROM": "Praca od:",
     "WORK_TO": "Praca do:",
-    "HOURS_PER_MONTH": "Ilość godzin pracy w miesiącu",
+    "HOURS_PER_MONTH": "Godzin na miesiąc",
     "OVERWORK": "Nadgodziny",
     "OVERWORK_NOT_POSSIBLE": "Nadgodziny nie możliwe",
     "WORK_DAYS": "Dni roboczę",
@@ -154,8 +154,8 @@
     "HOSTEL": "Hostel",
     "ROOM_PEOPLE_NUMBER": "Ilość ludzi w pokoju",
     "PERSONAL": "Osobisty",
-    "TRANSPORT_TO_WORK_KM": "Odległość do miejsca pracy (km)",
-    "TRANSPORT_TO_WORK_TYPE": "Transport do miejsca pracy",
+    "TRANSPORT_TO_WORK_KM": "Odległość do pracy (km)",
+    "TRANSPORT_TO_WORK_TYPE": "Transport do pracy",
     "NOT_PAYED": "Pracodawca nie płaci za dojazd pracownika",
     "PAYED": "Opłacony",
     "TRANSPORT_PAYMENT": "Opłata za transport",
@@ -221,6 +221,10 @@
     "FILE":"Plik",
     "FILE_NANE":"Nazwa pliku",
     "FILE_DELETE_CONFIRM_TITLE":"Usuwanie pliku",
-    "FILE_DELETE_CONFIRM_TEXT":"Czy napewno chcesz usuną ten plik?"
+    "FILE_DELETE_CONFIRM_TEXT":"Czy napewno chcesz usuną ten plik?",
+    "WORK": "Praca",
+    "TO":"do",
+    "AGE": "Wiek",
+    "FROM": "od"
 
 }

@@ -1,5 +1,7 @@
 ﻿html{
     background: #EEEEEE;
+
+
 }
 body {
     padding-top: 50px;
@@ -7,6 +9,17 @@ body {
     background: #EEEEEE;
     height: 100%;
 }
+
+text {
+    white-space: pre;
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word; 
+}
+
+
 
 
 /* Wrapping element */
@@ -69,6 +82,8 @@ body {
 }
 
 
+
+
 /* Rules for sizing the icon. */
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
@@ -82,4 +97,7 @@ body {
 /* Rules for using icons as white on a dark background. */
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+
+
 
