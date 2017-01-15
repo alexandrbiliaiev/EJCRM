@@ -370,8 +370,8 @@
                                         <div class="md-list-item-text">
                                             <label style="color:#1b4891">{{'ADDITIONAL_INFO'| translate}}</label>
                                             <div layout="row">
-                                                <p ng-show="offer.additionalInfo != null">{{offer.additionalInfo}}</p>
-                                                <p ng-show="offer.additionalInfo == null">Brak</p>
+                                                <text ng-show="offer.additionalInfo != null">{{offer.additionalInfo}}</text>
+                                                <span ng-show="offer.additionalInfo == null">Brak</span>
                                             </div>
                                         </div>
                                     </md-list-item>
