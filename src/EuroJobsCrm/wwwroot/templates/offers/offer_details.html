@@ -1,6 +1,9 @@
 <ui-view ng-controller="OfferManageController">
-    <div layout="column" layout-padding>
-        <div flex layout="column">
+    <div layout="row" ng-show="!isActive" layout-sm="column" layout-align="space-around">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <div layout="column" layout-padding ng-show="isActive">
+        <div flex layout="column" ng-show="isActive">
             <div layout="column" flex>
                 <md-toolbar>
                     <div flex class="md-toolbar-tools">
@@ -381,7 +384,7 @@
         </div>
 
 
-        <div layout="column" layout-padding>
+        <div layout="column" layout-padding ng-show="isActive">
             <div flex layout="column">
                 <div layout="column" flex>
                     <md-toolbar>
@@ -433,7 +436,7 @@
             </div>
         </div>
 
-        <div layout="column" layout-padding>
+        <div layout="column" layout-padding ng-show="isActive">
             <div flex layout="column">
                 <div layout="column" flex>
                     <md-toolbar>
@@ -488,7 +491,7 @@
         </div>
 
         <!--Files -->
-        <div layout="row" layout-padding>
+        <div layout="row" layout-padding ng-show="isActive">
             <div flex flex-gt-xs layout-xs="column">
                 <section class="demo-container md-whiteframe-z1">
                     <md-toolbar>
