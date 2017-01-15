@@ -1,11 +1,30 @@
+<div style="float:left; width: 150px;">
+    <div id="nav"></div>
+</div>
+<div class="space">
+    Week:
+    <a href="javascript:dp.startDate = dp.startDate.addMonths(-1); dp.update();">Previous</a>
+    |
+    <a href="javascript:dp.startDate = dp.startDate.addMonths(1); dp.update();">Next</a>
+</div>
+
 <div layout="row" flex="grow">
     <div id="dp"></div>
+</div>
 
-    <script type="text/javascript">
+<daypilot-calendar id="dpDay" config="config"></daypilot-calendar>
 
+<script type="text/javascript">
+    var nav = new DayPilot.Navigator("nav");
+    nav.selectMode = "week";
+    nav.onTimeRangeSelected = function(args) {
+        dp.startDate = args.start;
+        // load events
+        dp.update();
+    };
+    // ...
+    nav.init();
     var dp = new DayPilot.Month("dp");
     dp.init();
 
-    </script>
-    
-</div>
+</script>
