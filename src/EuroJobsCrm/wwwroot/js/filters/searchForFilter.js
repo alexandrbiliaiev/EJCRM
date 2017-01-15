@@ -86,7 +86,6 @@ angular.module('EuroJobsCrm')
 		angular.forEach(arr, function(item){
 
 			if(item.firstName.toLowerCase().indexOf(searchString) !== -1 || 
-               item.middleName.toLowerCase().indexOf(searchString) !== -1 || 
                item.lastName.toLowerCase().indexOf(searchString) !== -1){
 				result.push(item);
 			}

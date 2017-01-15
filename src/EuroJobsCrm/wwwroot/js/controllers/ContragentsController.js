@@ -3,6 +3,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
     $scope.index = 0;
     $scope.contragents = new Array();
     $scope.users = new Array();
+    $scope.showSearch = false;
 
     $scope.userRole = $cookies.get('user_role');
     $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
@@ -22,6 +23,10 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         });
     }
 
+    $scope.focusOnSearch = function () {
+        searchString = null;
+        document.getElementById("search").focus();
+    };
 
     $scope.saveContragentClick = function () {
         if ($scope.contragentForm.$invalid) {

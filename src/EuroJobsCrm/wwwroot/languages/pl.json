@@ -225,6 +225,7 @@
     "WORK": "Praca",
     "TO":"do",
     "AGE": "Wiek",
-    "FROM": "od"
+    "FROM": "od",
+    "DETAILS": "Detali"
 
 }

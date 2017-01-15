@@ -21,6 +21,11 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
         $scope.detailClaim = $scope.addClaim;
 
+
+        $scope.focusOnSearch = function () {
+            document.getElementById("search").focus();
+        };
+
         $scope.goBack = function () {
             $state.go('contragents');
         }
@@ -54,19 +59,19 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         }
 
         $scope.showEditContragentDialog = function (ev) {
-                $mdDialog.show({
-                        scope: $scope,
-                        preserveScope: true,
-                        templateUrl: '/templates/contragents/contragent_dialog_tmpl.html',
-                        targetEvent: ev,
-                        clickOutsideToClose: true,
-                    })
-                    .then(function (answer) {
+            $mdDialog.show({
+                scope: $scope,
+                preserveScope: true,
+                templateUrl: '/templates/contragents/contragent_dialog_tmpl.html',
+                targetEvent: ev,
+                clickOutsideToClose: true,
+            })
+                .then(function (answer) {
 
-                    }, function () {
-                    });
-            }
-            //End Contragents
+                }, function () {
+                });
+        }
+        //End Contragents
 
         //Addresses
         $scope.setDefaultAddress = function () {
@@ -131,7 +136,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 .then(function (answer) {
 
                 }, function () {
-            });
+                });
         }
 
         $scope.showDeleteAddressConfirmDialog = function (addresId) {
@@ -227,11 +232,11 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 targetEvent: ev,
                 clickOutsideToClose: true,
             })
-            .then(function (answer) {
+                .then(function (answer) {
 
-            }, function () {
+                }, function () {
 
-            });
+                });
         }
 
         $scope.showEditContactPersonDialog = function (contactPerson) {
@@ -242,11 +247,11 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 templateUrl: '/templates/contactpersons/contact_person_dialog_tmpl.html',
                 clickOutsideToClose: true,
             })
-            .then(function (answer) {
+                .then(function (answer) {
 
-            }, function () {
+                }, function () {
 
-            });
+                });
         }
 
         $scope.showDeleteCtpConfirmDialog = function (contactPersonId) {
@@ -334,11 +339,11 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 targetEvent: ev,
                 clickOutsideToClose: true,
             })
-            .then(function (answer) {
+                .then(function (answer) {
 
-            }, function () {
+                }, function () {
 
-            });
+                });
         }
 
         $scope.showNewFileDialog = function () {
@@ -354,11 +359,11 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 clickOutsideToClose: true,
             })
 
-            .then(function (answer) {
+                .then(function (answer) {
 
-            }, function () {
+                }, function () {
 
-            });
+                });
         }
 
         $scope.processFileForm = function () {
@@ -423,12 +428,12 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 targetEvent: ev,
                 clickOutsideToClose: true,
             })
-            .then(function (answer) {
+                .then(function (answer) {
 
-            }, function () {
+                }, function () {
 
 
-            });
+                });
         }
 
         $scope.saveResponsiblePersoon = function (usr) {
