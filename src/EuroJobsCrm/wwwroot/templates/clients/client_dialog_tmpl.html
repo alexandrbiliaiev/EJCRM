@@ -10,8 +10,8 @@
 	</md-toolbar>
 	<md-dialog-content>
 		<div class="md-dialog-content">
-			<div layout="row"  layout-align="center center" ng-show="Saving" >
-			{{'SAVING' | translate}}
+			<div layout="row" layout-align="center center" ng-show="Saving">
+				{{'SAVING' | translate}}
 			</div>
 			<div layout="row" ng-show="Saving" layout-sm="column" layout-align="space-around">
 				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
@@ -59,7 +59,7 @@
 				</md-input-container>
 				<md-input-container class="md-block">
 					<label>{{ 'TYPE' | translate }}</label>
-					<md-select name="type" ng-model="client.type"  data-placeholder="{{ 'TYPE' | translate }}">
+					<md-select name="type" ng-model="client.type" data-placeholder="{{ 'TYPE' | translate }}">
 						<md-option value="1">{{ 'LISING' | translate }}</md-option>
 						<md-option value="0">{{ 'NOT_LISING' | translate }}</md-option>
 					</md-select>
@@ -75,8 +75,8 @@
 			</form>
 		</div>
 	</md-dialog-content>
-	<md-dialog-actions layout="row">
-		<md-button ng-click="saveClientClick()" ng-show="!Saving">
+	<md-dialog-actions layout="row" ng-show="!Saving">
+		<md-button ng-click="saveClientClick()">
 			{{'SAVE'| translate}}
 		</md-button>
 	</md-dialog-actions>

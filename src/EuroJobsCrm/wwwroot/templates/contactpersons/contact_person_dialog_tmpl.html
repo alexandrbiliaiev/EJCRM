@@ -84,8 +84,8 @@
 			</form>
 		</div>
 	</md-dialog-content>
-	<md-dialog-actions layout="row">
-		<md-button ng-click="saveContactPersonClick()" ng-show="!Saving">
+	<md-dialog-actions layout="row" ng-show="!Saving">
+		<md-button ng-click="saveContactPersonClick()">
 			{{'SAVE'|translate}}
 		</md-button>
 	</md-dialog-actions>

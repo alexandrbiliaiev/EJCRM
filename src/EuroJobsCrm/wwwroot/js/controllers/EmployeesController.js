@@ -32,14 +32,16 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
         if ($scope.employeeForm.$invalid) {
             return;
         }
-
+        $scope.Saving = true;
         employee = $scope.employee;
 
         employeesService.saveemployee(employee).success(function (response) {
             employeesService.employees.push(response);
             $scope.employee = $scope.getDefaultemployee();
+            $scope.Saving = false;
             $mdDialog.hide();
         }).error(function () {
+            $scope.Saving = false;
             $state.go('error');
             $mdDialog.hide();
         });

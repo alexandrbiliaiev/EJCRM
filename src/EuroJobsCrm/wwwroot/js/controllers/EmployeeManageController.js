@@ -146,7 +146,7 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
         if ($scope.employeeForm.$invalid) {
             return;
         }
-
+        $scope.Saving = true;
         employee = {
             id: $scope.employee.id,
             contragentId: $scope.employee.contragentId,
@@ -174,10 +174,11 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
             }
 
 
-
+            $scope.Saving = false;
             $mdDialog.hide();
         }).error(function () {
             $state.go('error');
+            $scope.Saving = false;
             $mdDialog.hide();
         });
     }

@@ -3,7 +3,7 @@
         <div class="md-toolbar-tools">
             <h2>{{'ADDRESS_TITLE' | translate}} </h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="close()">
+            <md-button class="md-icon-button" ng-click="close()" ng-show="!Saving">
                 <md-icon aria-label="Close dialog">close</md-icon>
             </md-button>
         </div>
@@ -58,7 +58,7 @@
             </form>
         </div>
     </md-dialog-content>
-    <md-dialog-actions layout="row">
+    <md-dialog-actions layout="row" ng-show="!Saving">
         <md-button ng-click="saveAddressClick()">
             Save
         </md-button>
