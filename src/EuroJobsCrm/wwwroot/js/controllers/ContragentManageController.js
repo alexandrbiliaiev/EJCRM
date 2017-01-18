@@ -12,6 +12,8 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $scope.birthdate = null;
         $scope.showSearch = false;
         $scope.users = new Array();
+        $scope.isActive = false;
+        $scope.Saving = false;
 
         $scope.showEmployeeSearch = false;
 
@@ -21,6 +23,13 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
         $scope.detailClaim = $scope.addClaim;
 
+        contragentsService.load().success(function (response) {
+            contragentsService.contragents = response;
+            $scope.contragent = contragentsService.getContragent($state.params.id);
+            $scope.isActive = true;
+        }).error(function () {
+            $state.go('error');
+        });
 
         $scope.focusOnSearch = function () {
             document.getElementById("search").focus();
@@ -504,13 +513,6 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             $scope.contragent = contragentsService.getContragent($state.params.id);
             return;
         }
-
-        contragentsService.load().success(function (response) {
-            contragentsService.contragents = response;
-            $scope.contragent = contragentsService.getContragent($state.params.id);
-        }).error(function () {
-            $state.go('error');
-        });
 
         usersService.load().success(function (response) {
 

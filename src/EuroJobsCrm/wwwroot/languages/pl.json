@@ -226,6 +226,8 @@
     "TO":"do",
     "AGE": "Wiek",
     "FROM": "od",
-    "DETAILS": "Detali"
+    "DETAILS": "Detali",
+    "CLI_DELETE_CONFIRM_TITLE": "Czy chcesz usunąć klienta!?",
+    "SAVING": "Zapisuję..."
 
 }

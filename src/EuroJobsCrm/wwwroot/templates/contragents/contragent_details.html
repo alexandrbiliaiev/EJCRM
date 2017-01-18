@@ -1,7 +1,12 @@
 <ui-view ng-controller="ContragentManageController">
+
+    <div layout="row" ng-show="!isActive" layout-sm="column" layout-align="space-around">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+
 	<!--General information -->
 	<!--Contact Persons -->
-	<div layout="row" layout-wrap layout-padding>
+	<div layout="row" layout-wrap layout-padding ng-show="isActive">
 		<!--General information -->
 		<div flex-xs flex-gt-xs="30" layout-xs="column">
 			<section class="demo-container md-whiteframe-z1">
@@ -114,7 +119,7 @@
 		</div>
 	</div>
 	<!--Addresses-->
-	<div layout="row" layout-padding>
+	<div layout="row" layout-padding ng-show="isActive">
 		<!--Addresses-->
 		<div flex flex-gt-xs layout-xs="column">
 			<div flex-xs layout="column">
@@ -162,7 +167,7 @@
 		</div>
 	</div>
 	<!--Emoployees-->
-	<div layout="row" layout-padding>
+	<div layout="row" layout-padding ng-show="isActive">
 		<!--Emoployees-->
 		<div flex flex-gt-xs layout-xs="column">
 			<section class="demo-container md-whiteframe-z1">
@@ -244,7 +249,7 @@
 		</div>
 	</div>
 	<!--Notes -->
-	<div layout="row" layout-padding>
+	<div layout="row" layout-padding ng-show="isActive">
 		<div flex flex-gt-xs layout-xs="column">
 			<section class="demo-container md-whiteframe-z1">
 				<md-toolbar>
@@ -293,7 +298,7 @@
 		</div>
 	</div>
 	<!--Files -->
-	<div layout="row" layout-padding>
+	<div layout="row" layout-padding ng-show="isActive">
 		<div flex flex-gt-xs layout-xs="column">
 			<section class="demo-container md-whiteframe-z1">
 				<md-toolbar>
@@ -335,7 +340,7 @@
 		</div>
 	</div>
 	<!--Responsible Persons-->
-	<div layout="row" layout-padding>
+	<div layout="row" layout-padding ng-show="isActive">
 		<!--Addresses-->
 		<div flex flex-gt-xs layout-xs="column">
 			<div flex-xs layout="column">
@@ -375,7 +380,7 @@
 			</div>
 		</div>
 	</div>
-	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
+	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round" ng-show="isActive">
 		<a mfb-button icon="ion-ios-information" label="{{'ADD_NOTE' | translate}}" ng-click="showNewNoteDialog()" ng-show="addClaim"
 		/>
 		<a mfb-button icon="ion-home" label="{{'ADD_ADDRESS' | translate}}" ng-click="showNewAddressDialog()" ng-show="addClaim"

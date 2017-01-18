@@ -10,17 +10,23 @@
     </md-toolbar>
     <md-dialog-content>
         <div class="md-dialog-content">
-            <form name="responsiblePersonForm">
+            <div layout="row" layout-align="center center" ng-show="Saving">
+                {{'SAVING' | translate}}
+            </div>
+            <div layout="row" ng-show="Saving" layout-sm="column" layout-align="space-around">
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+            <form name="responsiblePersonForm" ng-show="!Saving">
                 <md-list ng-cloak>
                     <md-list-item class="md-1-line" ng-repeat="user in users">
                         {{user.email}}
                         <md-button aria-label="button" class="md-icon-button md-secondary" ng-click="saveResponsiblePersoon(user)">
-									<md-icon md-font-icon="ion-plus">
-										<md-tooltip md-direction="left">
-											{{ 'ADD' | translate }}
-										</md-tooltip>
-									</md-icon>
-								</md-button>
+                            <md-icon md-font-icon="ion-plus">
+                                <md-tooltip md-direction="left">
+                                    {{ 'ADD' | translate }}
+                                </md-tooltip>
+                            </md-icon>
+                        </md-button>
                         <md-divider></md-divider>
                     </md-list-item>
                 </md-list>

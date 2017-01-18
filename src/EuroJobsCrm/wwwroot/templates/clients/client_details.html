@@ -238,9 +238,6 @@
 			</div>
 		</div>
 
-
-
-		<!--OFFERS-->
 		<div layout="row" layout-wrap layout-padding>
 			<div flex-xs flex layout-xs="column">
 				<section class="demo-container md-whiteframe-z1">
@@ -250,12 +247,18 @@
 								<span ng-click="expandOffers=! expandOffers">{{'OFFERS'|translate}}</span>
 							</h2>
 							<span flex></span>
-							<md-button aria-label="button" class="md-icon-button" ng-show="!showOfferSearch" ng-click="showOfferSearch=! showOfferSearch">
+							<md-input-container class="md-block" md-no-float flex style="margin-top:42px; margin-left: 50px;">
+								<input id="search" aria-label="input" ng-model="searchOffersString" style="color:white; font-size:12pt;" placeholder="{{'SEARCH'| translate}} ..."
+								/>
+							</md-input-container>
+
+							<md-button class="md-icon-button" aria-label="Search" ng-show="searchOffersString == null || searchOffersString == '' ">
 								<md-icon md-font-icon="ion-search"></md-icon>
 							</md-button>
-							<md-button aria-label="button" class="md-icon-button" ng-show="showOfferSearch" ng-click="showOfferSearch=! showOfferSearch">
+							<md-button class="md-icon-button" aria-label="Search" ng-show="searchOffersString!= null && searchOffersString != ''" ng-click="searchString = null">
 								<md-icon md-font-icon="ion-android-close"></md-icon>
 							</md-button>
+
 							<md-button aria-label="button" class="md-icon-button" ng-click="showNewOfferDialog()" ng-show="addClaim">
 								<md-icon md-font-icon="ion-plus-round"></md-icon>
 							</md-button>
@@ -263,26 +266,15 @@
 								<md-icon md-font-icon="ion-navicon-round"></md-icon>
 							</md-button>
 						</div>
-						<md-toolbar class="md-hue-1" ng-show="showOfferSearch">
-							<div class="md-toolbar-tools">
-								<md-input-container class="md-block" flex="100">
-									<input aria-label="input" ng-model="contactperson.position" style="color:white; font-size:14pt;">
-								</md-input-container>
-
-								<span flex> </span>
-								<md-button aria-label="Back">
-									<md-icon md-font-icon="ion-search"></md-icon>
-							</div>
-						</md-toolbar>
 					</md-toolbar>
 					<div layout="row" ng-show="expandOffers" ng-cloak>
 						<md-content flex="100">
 							<md-list ng-cloak>
-								<md-list-item class="md-2-line" ng-repeat="offer in client.offers">
+								<md-list-item class="md-2-line" ng-repeat="offer in client.offers | offersSearchFor : searchOffersString">
 									<md-icon style="font-size:32px;" md-font-icon="ion-document-text" ng-click="goToOfferDetails(offer.id)"></md-icon>
 									<div class="md-list-item-text">
-										<h4>{{'POSITION'| translate}}: <b>{{offer.position}}, 
-										<b ng-show="offer.branch==0">{{ 'BUILDING' | translate }}</b>
+										<h4>{{'POSITION'| translate}}: <b>{{offer.position}}</b>,
+											<b ng-show="offer.branch==0">{{ 'BUILDING' | translate }}</b>
 											<b ng-show="offer.branch==1"> {{ 'PHISICAL_WORK' | translate }}</b>
 											<b ng-show="offer.branch==2"> {{ 'IT' | translate }}</b>
 										</h4>
@@ -313,6 +305,9 @@
 			</div>
 		</div>
 
+
+		<!--OFFERS-->
+
 		<!--EMPLOYEES-->
 		<div layout="row" layout-wrap layout-padding>
 			<div flex-xs flex layout-xs="column">
@@ -323,13 +318,19 @@
 								<span>{{'EMPLOYED_PEOPLE'|translate}}</span>
 							</h2>
 							<span flex></span>
+							<md-input-container class="md-block" md-no-float flex style="margin-top:42px; margin-left: 50px;">
+								<input id="search" aria-label="input" ng-model="searchEmployeeString" style="color:white; font-size:12pt;" placeholder="{{'SEARCH'| translate}} ..."
+								/>
+							</md-input-container>
 
-							<md-button aria-label="button" class="md-icon-button" ng-show="!showEmployeeSearch" ng-click="showEmployeeSearch=! showEmployeeSearch">
+							<md-button class="md-icon-button" aria-label="Search" ng-show="searchEmployeeString == null || searchEmployeeString == '' ">
 								<md-icon md-font-icon="ion-search"></md-icon>
 							</md-button>
-							<md-button aria-label="button" class="md-icon-button" ng-show="showEmployeeSearch" ng-click="showEmployeeSearch=! showEmployeeSearch">
+							<md-button class="md-icon-button" aria-label="Search" ng-show="searchEmployeeString!= null && searchEmployeeString != ''" ng-click="searchEmployeeString = null">
 								<md-icon md-font-icon="ion-android-close"></md-icon>
 							</md-button>
+
+
 							<md-button aria-label="button" class="md-icon-button" ng-click="showNewEmployeeDialog()" ng-show="addClaim">
 								<md-icon md-font-icon="ion-plus-round"></md-icon>
 							</md-button>
@@ -337,22 +338,12 @@
 								<md-icon md-font-icon="ion-navicon-round"></md-icon>
 							</md-button>
 						</div>
-						<md-toolbar class="md-hue-1" ng-show="showEmployeeSearch">
-							<div class="md-toolbar-tools">
-								<md-input-container class="md-block" flex="100">
-									<input aria-label="input" ng-model="contactperson.position" style="color:white; font-size:14pt;">
-								</md-input-container>
 
-								<span flex> </span>
-								<md-button aria-label="button" aria-label="Back">
-									<md-icon md-font-icon="ion-search"></md-icon>
-							</div>
-						</md-toolbar>
 					</md-toolbar>
 					<div ng-show="expandEmployees" ng-cloak>
 						<md-content>
 							<md-list ng-cloak style="">
-								<md-list-item class="md-2-line" ng-repeat="employee in client.employees | employeesSearchFor:searchString">
+								<md-list-item class="md-2-line" ng-repeat="employee in client.employees | employeesSearchFor:searchEmployeeString">
 									<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="viewEmployeeDatails(employee.id)">
 									</md-icon>
 									<div class="md-list-item-text">
@@ -391,6 +382,9 @@
 				</section>
 			</div>
 		</div>
+
+
+
 
 		<!--Documents -->
 		<!--Addresses -->

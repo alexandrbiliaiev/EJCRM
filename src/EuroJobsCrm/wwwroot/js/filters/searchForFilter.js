@@ -61,7 +61,7 @@ angular.module('EuroJobsCrm')
 		// Using the forEach helper method to loop through the array
 		angular.forEach(arr, function(item){
 
-			if(item.comments.toLowerCase().indexOf(searchString) !== -1){
+			if(item.position.toLowerCase().indexOf(searchString) !== -1){
 				result.push(item);
 			}
 

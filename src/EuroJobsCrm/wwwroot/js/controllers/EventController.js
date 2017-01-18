@@ -9,6 +9,7 @@
     $scope.sessionId = (Math.random() * 1000000).toFixed(0);
     $scope.bookedHotel;
     $scope.phone = '';
+    $scope.Saving = false;
 
     $scope.registerClick = function () {
         $scope.registrationActive = true;

@@ -1,5 +1,5 @@
 angular.module('EuroJobsCrm.controllers').controller('ClientsController',
-    function($scope, $location, $http, $state, $translate, $mdDialog, $cookies,
+    function ($scope, $location, $http, $state, $translate, $mdDialog, $cookies,
         clientsService) {
         $scope.clients = [];
 
@@ -7,8 +7,10 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
         $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
         $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
         $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
-$scope.detailClaim = $scope.addClaim;
-      
+        $scope.detailClaim = $scope.addClaim;
+
+        $scope.Saving = false;
+
         $scope.isActive = false;
 
         if (clientsService.clients != undefined) {
@@ -17,16 +19,16 @@ $scope.detailClaim = $scope.addClaim;
             return;
         }
 
-        clientsService.load().success(function(response) {
+        clientsService.load().success(function (response) {
 
             clientsService.clients = response;
             $scope.clients = clientsService.clients;
             $scope.isActive = true;
-        }).error(function() {
+        }).error(function () {
             $state.go('error');
         });
 
-        $scope.getDefaultClient = function() {
+        $scope.getDefaultClient = function () {
             return {
                 id: 0,
                 krs: "",
@@ -41,36 +43,37 @@ $scope.detailClaim = $scope.addClaim;
 
         $scope.client = $scope.getDefaultClient();
 
-        $scope.editClient = function(clientId) {
+        $scope.editClient = function (clientId) {
             $state.go('client', {
                 id: clientId
             });
         }
 
-        $scope.saveClientClick = function() {
+        $scope.saveClientClick = function () {
             if ($scope.clientForm.$invalid) {
                 return;
             }
 
+            $scope.Saving = true; 
             client = $scope.client;
 
-            clientsService.saveClient(client).success(function(response) {
+            clientsService.saveClient(client).success(function (response) {
                 clientsService.clients.push(response);
                 $scope.client = $scope.getDefaultClient();
                 $mdDialog.hide();
-            }).error(function() {
+            }).error(function () {
                 $state.go('error');
                 $mdDialog.hide();
             });
         }
 
 
-        $scope.close = function() {
+        $scope.close = function () {
             $mdDialog.hide();
         }
 
-        $scope.showAddClientDialog = function(ev) {
-            client = $scope.getDefaultClient();
+        $scope.showAddClientDialog = function (ev) {
+            $scope.client = $scope.getDefaultClient();
             $mdDialog.show({
                 scope: $scope,
                 preserveScope: true,
@@ -78,14 +81,14 @@ $scope.detailClaim = $scope.addClaim;
                 targetEvent: ev,
                 clickOutsideToClose: true,
             })
-                .then(function(answer) {
+                .then(function (answer) {
 
-                }, function() {
+                }, function () {
 
                 });
         }
 
-        $scope.showDeleteClientConfirmDialog = function(clientId) {
+        $scope.showDeleteClientConfirmDialog = function (clientId) {
             var confirm = $mdDialog.confirm()
                 .title($translate.instant('CLI_DELETE_CONFIRM_TITLE'))
                 .textContent($translate.instant('CLT_DELETE_CONFIRM_TEXT'))
@@ -93,8 +96,8 @@ $scope.detailClaim = $scope.addClaim;
                 .ok($translate.instant('DELETE_OK'))
                 .cancel($translate.instant('DELETE_CANCEL'));
 
-            $mdDialog.show(confirm).then(function() {
-                clientsService.deleteClient(clientId).success(function(response) {
+            $mdDialog.show(confirm).then(function () {
+                clientsService.deleteClient(clientId).success(function (response) {
                     if (response != true) {
                         return;
                     }
@@ -109,10 +112,10 @@ $scope.detailClaim = $scope.addClaim;
                         return;
                     }
 
-                }).error(function(response) {
+                }).error(function (response) {
                     $state.go('error');
                 });
-            }, function() {
+            }, function () {
 
             });
         };

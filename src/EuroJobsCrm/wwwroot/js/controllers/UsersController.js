@@ -6,6 +6,7 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
     $scope.admins = new Array();
     $scope.advancedUsers = new Array();
     $scope.normalUsers = new Array();
+    $scope.Saving = false;
 
     console.log($cookies.get('user_role'));
 

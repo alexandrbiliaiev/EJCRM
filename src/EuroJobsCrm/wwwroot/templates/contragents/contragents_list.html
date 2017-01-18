@@ -1,5 +1,8 @@
+    <div layout="row" ng-show="!isActive" layout-sm="column" layout-align="space-around">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
 
-<div id="popupContainer" class="container body-content">
+<div id="popupContainer" class="container body-content" ng-show="isActive">
 	<md-content>
 		<section class="demo-container md-whiteframe-z1">
 			<md-toolbar>

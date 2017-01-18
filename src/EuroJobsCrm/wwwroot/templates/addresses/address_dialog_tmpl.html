@@ -10,7 +10,13 @@
     </md-toolbar>
     <md-dialog-content>
         <div class="md-dialog-content">
-            <form name="addressForm">
+            <div layout="row" layout-align="center center" ng-show="Saving" >
+                {{'SAVING' | translate}}
+            </div>
+            <div layout="row" ng-show="Saving" layout-sm="column" layout-align="space-around">
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+            <form name="addressForm" ng-show="!Saving">
                 <md-input-container class="md-block" style="width:400px;">
                     <label>{{'ADDRESS_TITLE'| translate}}</label>
                     <input name="address" ng-model="address.address" placeholder="Mickiewica 12/8" md-maxlength="300" required>
@@ -46,7 +52,7 @@
                     <md-select name="type" ng-model="address.type" data-placeholder="" required>
                         <md-option value="1">{{ 'LEGAL_ADDRESS' | translate }}</md-option>
                         <md-option value="2">{{ 'WORK_ADDRESS' | translate }}</md-option>
-                       <!-- <md-option value="3">{{ 'HOME_ADDRESS' | translate }}</md-option> -->
+                        <!-- <md-option value="3">{{ 'HOME_ADDRESS' | translate }}</md-option> -->
                     </md-select>
                 </md-input-container>
             </form>
