@@ -3,14 +3,20 @@
 		<div class="md-toolbar-tools">
 			<h2>Contragent</h2>
 			<span flex></span>
-			<md-button class="md-icon-button" ng-click="close()">
+			<md-button class="md-icon-button" ng-click="close()" ng-show="!Saving">
 				<md-icon aria-label="Close dialog">close</md-icon>
 			</md-button>
 		</div>
 	</md-toolbar>
 	<md-dialog-content>
 		<div class="md-dialog-content">
-			<form name="contragentForm">
+			<div layout="row" layout-align="center center" ng-show="Saving" >
+				{{'SAVING' | translate}}
+			</div>
+			<div layout="row" ng-show="Saving" layout-sm="column" layout-align="space-around">
+				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<form name="contragentForm" ng-show="!Saving">
 				<md-input-container class="md-block" style="width:400px;">
 					<label>{{'CONTRAGENT_NAME'| translate}}</label>
 					<input name="contragent_name" ng-model="contragent.name" placeholder="Firma S. A." md-maxlength="100" required>
@@ -26,19 +32,19 @@
 						<div ng-message="required">{{'LICENSE_NUMBER_REQUIRED' | translate}} </div>
 						<div ng-message="md-maxlength">{{'LICENSE_NUMBER_IS_TO_LONG'| translate}}</div>
 					</div>
-				</md-input-container >
+				</md-input-container>
 				<md-input-container class="md-block">
 					<label>{{ 'STATUS' | translate }}</label>
-					<md-select name="type" ng-model="contragent.status"  data-placeholder="{{ 'STATUS' | translate }}" required>
+					<md-select name="type" ng-model="contragent.status" data-placeholder="{{ 'STATUS' | translate }}" required>
 						<md-option value="a">{{ 'ACTIVE' | translate }}</md-option>
 						<md-option value="i">{{ 'INACTIVE' | translate }}</md-option>
 					</md-select>
 				</md-input-container>
-			
+
 			</form>
 		</div>
 	</md-dialog-content>
-	<md-dialog-actions layout="row">
+	<md-dialog-actions layout="row" ng-show="!Saving">
 		<md-button ng-click="saveContragentClick()">
 			Save
 		</md-button>

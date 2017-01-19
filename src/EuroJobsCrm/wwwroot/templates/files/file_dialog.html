@@ -3,14 +3,20 @@
         <div class="md-toolbar-tools">
             <h2>{{'FILE' | translate}}</h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="close()">
+            <md-button class="md-icon-button" ng-click="close()" ng-show="!Saving">
                 <md-icon aria-label="Close dialog">close</md-icon>
             </md-button>
         </div>
     </md-toolbar>
     <md-dialog-content>
         <div class="md-dialog-content" style="width:900px">
-            <form name="fileForm">
+            <div layout="row" layout-align="center center" ng-show="Saving" >
+                {{'SAVING' | translate}}
+            </div>
+            <div layout="row" ng-show="Saving" layout-sm="column" layout-align="space-around">
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+            <form name="fileForm" ng-show="!Saving"> 
                 <div layout="row">
                     <md-input-container class="md-block" flex="100">
                         <label>{{ 'FILE_NANE' | translate }}</label>
@@ -36,7 +42,7 @@
             </form>
         </div>
     </md-dialog-content>
-    <md-dialog-actions layout="row" flex>
+    <md-dialog-actions layout="row" flex ng-show="!Saving">
         <md-button  ng-click="processFileForm()">
             {{'SAVE'|translate}}
         </md-button>

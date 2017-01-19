@@ -3,6 +3,8 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
     $scope.index = 0;
     $scope.contragents = new Array();
     $scope.users = new Array();
+    $scope.showSearch = false;
+    $scope.isActive = false;
 
     $scope.userRole = $cookies.get('user_role');
     $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
@@ -10,11 +12,22 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
     $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
     $scope.detailClaim = $scope.addClaim;
 
+    $scope.Saving = false;
+
+
     $scope.contragent = {
         status: 'a',
         name: '',
-        icenseNumber: ''
+        licenseNumber: ''
     }
+    contragentsService.load().success(function (response) {
+        contragentsService.contragents = response;
+        $scope.contragents = contragentsService.contragents;
+        $scope.isActive = true;
+    }).error(function () {
+        $state.go('error');
+    });
+
 
     $scope.editContragent = function (ctgId) {
         $state.go('contragent', {
@@ -22,6 +35,10 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         });
     }
 
+    $scope.focusOnSearch = function () {
+        searchString = null;
+        document.getElementById("search").focus();
+    };
 
     $scope.saveContragentClick = function () {
         if ($scope.contragentForm.$invalid) {
@@ -33,6 +50,8 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
             licenseNumber: $scope.contragent.licenseNumber,
             status: $scope.contragent.status
         };
+
+        $scope.Saving = true;
 
         contragentsService.saveContragent(contragent).success(function (response) {
             contragentsService.contragents.push(response);
@@ -51,6 +70,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
     }
 
     $scope.showAddContragentDialog = function (ev) {
+        $scope.Saving = false;
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
@@ -102,12 +122,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         return;
     };
 
-    contragentsService.load().success(function (response) {
-        contragentsService.contragents = response;
-        $scope.contragents = contragentsService.contragents;
-    }).error(function () {
-        $state.go('error');
-    });
+
 
     usersService.load().success(function (response) {
 

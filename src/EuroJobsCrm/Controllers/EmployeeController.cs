@@ -104,7 +104,7 @@ namespace EuroJobsCrm.Controllers
                 emp.EmpDescription = employee.Description;
                 emp.EmpFirstName = employee.FirstName;
                 emp.EmpLastName = employee.LastName ?? string.Empty;
-                emp.EmpMiddleName = employee.MiddleName;
+                emp.EmpMiddleName = employee.MiddleName ;
                 emp.EmpResponsibleUser = employee.ResponsibleUser;
                 emp.EmpAuditMu = User.GetUserId();
                 emp.EmpAuditMd = DateTime.UtcNow;

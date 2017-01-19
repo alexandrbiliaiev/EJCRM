@@ -1,1 +1,28 @@
-test
+<div layout="column">
+
+    <div layout="row" layout-align="space-between start">
+        <md-datepicker id="startDate" ng-model="startDate" ng-change="changeStartDate()" md-placeholder="Enter date"></md-datepicker>
+        <div>
+            <md-button ng-class="{'md-primary md-raised': dayViewEnabled}" ng-click="changeViewType('day')">
+                <md-icon md-font-icon="ion-android-calendar"></md-icon> Day
+            </md-button>
+            <md-button ng-class="{'md-primary md-raised': weekViewEnabled}" ng-click="changeViewType('week')">
+                <md-icon md-font-icon="ion-android-calendar"></md-icon>  Week
+            </md-button> 
+            <md-button ng-class="{'md-primary md-raised': monthViewEnabled}" ng-click="changeViewType('month')">
+                <md-icon md-font-icon="ion-android-calendar"></md-icon>  Month
+            </md-button> 
+        </div>
+    </div>
+
+    <div layout="row" ng-show="monthViewEnabled">
+        <daypilot-month id="dpMonth" daypilot-config="monthConfig" daypilot-events="events" ></daypilot-month>
+    </div>
+    <div layout="row" ng-show="dayViewEnabled || weekViewEnabled">
+        <daypilot-calendar id="dpDay" config="dayConfig"></daypilot-calendar>
+    </div>
+    
+</div>
+
+
+

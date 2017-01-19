@@ -11,12 +11,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.json">
+<<<<<<< HEAD
       <publishTime>10/12/2016 10:47:36</publishTime>
+=======
+      <publishTime>12/07/2016 17:58:44</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="crypto.dll">
       <publishTime>06/29/2016 09:11:24</publishTime>
     </File>
     <File Include="EuroJobsCrm.deps.json">
+<<<<<<< HEAD
       <publishTime>01/08/2017 19:54:00</publishTime>
     </File>
     <File Include="EuroJobsCrm.dll">
@@ -27,6 +32,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="EuroJobsCrm.runtimeconfig.json">
       <publishTime>01/08/2017 19:54:00</publishTime>
+=======
+      <publishTime>01/09/2017 16:21:02</publishTime>
+    </File>
+    <File Include="EuroJobsCrm.dll">
+      <publishTime>01/09/2017 16:20:20</publishTime>
+    </File>
+    <File Include="EuroJobsCrm.pdb">
+      <publishTime>01/09/2017 16:20:20</publishTime>
+    </File>
+    <File Include="EuroJobsCrm.runtimeconfig.json">
+      <publishTime>01/09/2017 16:21:02</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="MailKit.dll">
       <publishTime>04/12/2016 12:37:46</publishTime>
@@ -785,6 +802,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/11/2016 04:57:34</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
+<<<<<<< HEAD
       <publishTime>06/12/2016 20:53:58</publishTime>
     </File>
     <File Include="Views/Account/ExternalLoginConfirmation.cshtml">
@@ -822,18 +840,61 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Calendar/Index.cshtml">
       <publishTime>01/06/2017 16:57:25</publishTime>
+=======
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Account/ExternalLoginConfirmation.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Account/ExternalLoginFailure.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Account/ForgotPassword.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Account/ForgotPasswordConfirmation.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Account/Lockout.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Account/Login.cshtml">
+      <publishTime>11/01/2016 18:11:40</publishTime>
+    </File>
+    <File Include="Views/Account/Register.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Account/ResetPassword.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Account/ResetPasswordConfirmation.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Account/SendCode.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Account/VerifyCode.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Calendar/Index.cshtml">
+      <publishTime>01/08/2017 17:23:38</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="Views/Clients/Index.cshtml">
-      <publishTime>12/28/2016 20:41:56</publishTime>
+      <publishTime>12/28/2016 20:30:45</publishTime>
     </File>
     <File Include="Views/Contragents/Index.cshtml">
-      <publishTime>12/29/2016 13:52:13</publishTime>
+      <publishTime>12/28/2016 20:48:28</publishTime>
     </File>
     <File Include="Views/Dashboard/Index.cshtml">
+<<<<<<< HEAD
       <publishTime>06/12/2016 20:53:58</publishTime>
+=======
+      <publishTime>10/30/2016 10:43:45</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="Views/Employee/Index.cshtml">
-      <publishTime>12/28/2016 20:41:56</publishTime>
+      <publishTime>12/28/2016 20:45:12</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>10/30/2016 09:46:34</publishTime>
@@ -842,9 +903,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2016 09:46:34</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>12/22/2016 15:01:30</publishTime>
+      <publishTime>12/11/2016 17:13:26</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
+<<<<<<< HEAD
       <publishTime>06/12/2016 20:53:58</publishTime>
     </File>
     <File Include="Views/Manage/ChangePassword.cshtml">
@@ -861,26 +923,56 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Manage/VerifyPhoneNumber.cshtml">
       <publishTime>06/12/2016 20:53:58</publishTime>
+=======
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Manage/ChangePassword.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Manage/Index.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Manage/ManageLogins.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Manage/SetPassword.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/Manage/VerifyPhoneNumber.cshtml">
+      <publishTime>10/30/2016 09:46:38</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="Views/Offers/Index.cshtml">
-      <publishTime>12/28/2016 20:41:56</publishTime>
+      <publishTime>12/28/2016 20:16:42</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
+<<<<<<< HEAD
       <publishTime>06/12/2016 20:53:58</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>01/08/2017 17:20:36</publishTime>
+=======
+      <publishTime>10/30/2016 09:46:34</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>01/08/2017 19:04:21</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>12/29/2016 20:52:49</publishTime>
+      <publishTime>01/07/2017 10:41:18</publishTime>
     </File>
     <File Include="Views/Shared/_ValidationScriptsPartial.cshtml">
+<<<<<<< HEAD
       <publishTime>06/12/2016 20:53:58</publishTime>
+=======
+      <publishTime>10/30/2016 09:46:38</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="Views/Users/Index.cshtml">
-      <publishTime>12/29/2016 13:52:13</publishTime>
+      <publishTime>12/28/2016 20:46:45</publishTime>
     </File>
     <File Include="Views/_ViewImports.cshtml">
+<<<<<<< HEAD
       <publishTime>06/12/2016 20:53:58</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
@@ -918,11 +1010,54 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/css/server_error.png">
       <publishTime>06/12/2016 20:53:58</publishTime>
+=======
+      <publishTime>10/30/2016 09:46:38</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>10/30/2016 09:46:34</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>01/09/2017 16:21:03</publishTime>
+    </File>
+    <File Include="wwwroot/css/angular-bootstrap-calendar.min.css">
+      <publishTime>01/08/2017 17:35:41</publishTime>
+    </File>
+    <File Include="wwwroot/css/bootstrap-material-design.css">
+      <publishTime>11/18/2016 18:10:01</publishTime>
+    </File>
+    <File Include="wwwroot/css/bootstrap-material-design.css.map">
+      <publishTime>11/18/2016 18:10:01</publishTime>
+    </File>
+    <File Include="wwwroot/css/bootstrap-material-design.min.css">
+      <publishTime>11/18/2016 18:10:01</publishTime>
+    </File>
+    <File Include="wwwroot/css/bootstrap-material-design.min.css.map">
+      <publishTime>11/18/2016 18:10:01</publishTime>
+    </File>
+    <File Include="wwwroot/css/mfb.css">
+      <publishTime>11/20/2016 13:56:24</publishTime>
+    </File>
+    <File Include="wwwroot/css/ripples.css">
+      <publishTime>11/18/2016 18:10:01</publishTime>
+    </File>
+    <File Include="wwwroot/css/ripples.css.map">
+      <publishTime>11/18/2016 18:10:01</publishTime>
+    </File>
+    <File Include="wwwroot/css/ripples.min.css">
+      <publishTime>11/18/2016 18:10:01</publishTime>
+    </File>
+    <File Include="wwwroot/css/ripples.min.css.map">
+      <publishTime>11/18/2016 18:10:01</publishTime>
+    </File>
+    <File Include="wwwroot/css/server_error.png">
+      <publishTime>09/05/2016 22:37:41</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/css/site.css">
-      <publishTime>12/26/2016 00:53:23</publishTime>
+      <publishTime>12/27/2016 20:59:57</publishTime>
     </File>
     <File Include="wwwroot/css/site.min.css">
+<<<<<<< HEAD
       <publishTime>01/08/2017 19:53:49</publishTime>
     </File>
     <File Include="wwwroot/emailTemplates/candidateSubmitionEmailTemplate.html">
@@ -951,6 +1086,39 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/files/fc86c3dd-79cf-46f4-828f-b29a392bf359/ReservationFormMerged.cs">
       <publishTime>01/08/2017 17:13:07</publishTime>
+=======
+      <publishTime>01/09/2017 16:20:51</publishTime>
+    </File>
+    <File Include="wwwroot/emailTemplates/candidateSubmitionEmailTemplate.html">
+      <publishTime>12/10/2016 19:39:19</publishTime>
+    </File>
+    <File Include="wwwroot/emailTemplates/resetPasswordTemplate.html">
+      <publishTime>12/11/2016 14:06:28</publishTime>
+    </File>
+    <File Include="wwwroot/favicon.ico">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/files/033d1657-55b3-4203-b679-d582d1df05e6/new 2.txt">
+      <publishTime>01/07/2017 14:56:22</publishTime>
+    </File>
+    <File Include="wwwroot/files/2dd165f4-bd01-44c4-a0ae-b14636ed4e02/a-form-2.jpg">
+      <publishTime>01/07/2017 14:23:35</publishTime>
+    </File>
+    <File Include="wwwroot/files/603d0c3a-55d4-40d3-bae8-fe5e36cf42de/a-form-3.jpg">
+      <publishTime>01/07/2017 14:35:46</publishTime>
+    </File>
+    <File Include="wwwroot/files/8ae8f1d9-9aa8-4a47-a0b7-0e312d029b1e/a-form-1.jpg">
+      <publishTime>01/07/2017 14:30:29</publishTime>
+    </File>
+    <File Include="wwwroot/files/b03c4efb-8a47-479c-9da2-80dc22004f1a/ReservationFormMerged.cs">
+      <publishTime>01/07/2017 13:57:37</publishTime>
+    </File>
+    <File Include="wwwroot/files/c9f36146-f1cf-4940-af65-7ecb5777fc28/ver_stand.png">
+      <publishTime>01/08/2017 17:27:28</publishTime>
+    </File>
+    <File Include="wwwroot/files/fc86c3dd-79cf-46f4-828f-b29a392bf359/ReservationFormMerged.cs">
+      <publishTime>01/07/2017 13:59:00</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/images/bank_trasfer_logo.png">
       <publishTime>08/28/2016 13:09:18</publishTime>
@@ -992,7 +1160,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/28/2016 12:59:55</publishTime>
     </File>
     <File Include="wwwroot/images/server_error.png">
+<<<<<<< HEAD
       <publishTime>12/06/2016 20:53:58</publishTime>
+=======
+      <publishTime>09/05/2016 22:05:20</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/images/swiatlomir.png">
       <publishTime>05/10/2016 15:56:10</publishTime>
@@ -1004,6 +1176,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/10/2016 15:37:58</publishTime>
     </File>
     <File Include="wwwroot/js/app.js">
+<<<<<<< HEAD
       <publishTime>01/06/2017 17:28:33</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/CalendarController.js">
@@ -1011,26 +1184,44 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/js/controllers/ClientManageController.js">
       <publishTime>01/08/2017 17:13:07</publishTime>
+=======
+      <publishTime>01/08/2017 19:04:47</publishTime>
+    </File>
+    <File Include="wwwroot/js/controllers/CalendarController.js">
+      <publishTime>01/09/2017 16:15:37</publishTime>
+    </File>
+    <File Include="wwwroot/js/controllers/ClientManageController.js">
+      <publishTime>01/08/2017 17:23:38</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/js/controllers/ClientsController.js">
-      <publishTime>01/04/2017 11:21:51</publishTime>
+      <publishTime>01/08/2017 17:23:38</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/ContragentManageController.js">
+<<<<<<< HEAD
       <publishTime>01/08/2017 17:17:01</publishTime>
+=======
+      <publishTime>01/08/2017 17:23:38</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/js/controllers/ContragentsController.js">
-      <publishTime>01/04/2017 11:22:03</publishTime>
+      <publishTime>01/08/2017 17:23:38</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/ContragentsDialogController.js">
       <publishTime>01/11/2016 18:28:44</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/EmployeeManageController.js">
+<<<<<<< HEAD
       <publishTime>04/01/2017 11:22:11</publishTime>
+=======
+      <publishTime>01/08/2017 17:23:38</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/js/controllers/EmployeesController.js">
-      <publishTime>01/04/2017 11:22:17</publishTime>
+      <publishTime>01/08/2017 17:23:38</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/EventController.js">
+<<<<<<< HEAD
       <publishTime>12/06/2016 20:53:58</publishTime>
     </File>
     <File Include="wwwroot/js/controllers/OfferManageController.js">
@@ -1041,29 +1232,53 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/js/controllers/tabsController.js">
       <publishTime>12/06/2016 20:53:58</publishTime>
+=======
+      <publishTime>10/29/2016 19:43:30</publishTime>
+    </File>
+    <File Include="wwwroot/js/controllers/OfferManageController.js">
+      <publishTime>01/08/2017 17:23:38</publishTime>
+    </File>
+    <File Include="wwwroot/js/controllers/OffersController.js">
+      <publishTime>01/08/2017 17:23:38</publishTime>
+    </File>
+    <File Include="wwwroot/js/controllers/tabsController.js">
+      <publishTime>10/30/2016 10:42:45</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/js/controllers/UsersController.js">
-      <publishTime>01/02/2017 10:47:36</publishTime>
+      <publishTime>12/11/2016 15:34:26</publishTime>
     </File>
     <File Include="wwwroot/js/filters/searchForFilter.js">
+<<<<<<< HEAD
       <publishTime>12/06/2016 20:53:58</publishTime>
+=======
+      <publishTime>11/27/2016 14:00:20</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/js/ng-file-upload-shim.js">
-      <publishTime>12/22/2016 17:04:41</publishTime>
+      <publishTime>12/27/2016 20:59:58</publishTime>
     </File>
     <File Include="wwwroot/js/ng-file-upload.js">
-      <publishTime>12/22/2016 17:04:41</publishTime>
+      <publishTime>12/27/2016 20:59:58</publishTime>
     </File>
     <File Include="wwwroot/js/services/addressesService.js">
+<<<<<<< HEAD
       <publishTime>12/06/2016 20:53:58</publishTime>
     </File>
     <File Include="wwwroot/js/services/calendarService.js">
       <publishTime>01/06/2017 18:15:56</publishTime>
+=======
+      <publishTime>11/05/2016 20:05:58</publishTime>
+    </File>
+    <File Include="wwwroot/js/services/calendarService.js">
+      <publishTime>01/08/2017 17:23:38</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/js/services/clientsService.js">
-      <publishTime>12/29/2016 13:52:13</publishTime>
+      <publishTime>12/28/2016 21:25:49</publishTime>
     </File>
     <File Include="wwwroot/js/services/contactPersonsService.js">
+<<<<<<< HEAD
       <publishTime>12/06/2016 20:53:58</publishTime>
     </File>
     <File Include="wwwroot/js/services/contragentsService.js">
@@ -1092,11 +1307,42 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/languages/en.json">
       <publishTime>12/06/2016 20:53:58</publishTime>
+=======
+      <publishTime>11/05/2016 22:07:10</publishTime>
+    </File>
+    <File Include="wwwroot/js/services/contragentsService.js">
+      <publishTime>12/11/2016 16:49:23</publishTime>
+    </File>
+    <File Include="wwwroot/js/services/countriesService.js">
+      <publishTime>11/05/2016 19:32:16</publishTime>
+    </File>
+    <File Include="wwwroot/js/services/employeesService.js">
+      <publishTime>11/27/2016 12:42:41</publishTime>
+    </File>
+    <File Include="wwwroot/js/services/fileService.js">
+      <publishTime>01/07/2017 14:24:01</publishTime>
+    </File>
+    <File Include="wwwroot/js/services/offersService.js">
+      <publishTime>12/10/2016 19:39:19</publishTime>
+    </File>
+    <File Include="wwwroot/js/services/usersService.js">
+      <publishTime>12/11/2016 13:56:22</publishTime>
+    </File>
+    <File Include="wwwroot/js/site.js">
+      <publishTime>11/20/2016 13:52:26</publishTime>
+    </File>
+    <File Include="wwwroot/js/site.min.js">
+      <publishTime>10/30/2016 19:26:27</publishTime>
+    </File>
+    <File Include="wwwroot/languages/en.json">
+      <publishTime>11/07/2016 16:05:15</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/languages/fr.json">
       <publishTime>04/09/2016 21:40:20</publishTime>
     </File>
     <File Include="wwwroot/languages/pl.json">
+<<<<<<< HEAD
       <publishTime>01/08/2017 17:17:38</publishTime>
     </File>
     <File Include="wwwroot/languages/ru.json">
@@ -1488,29 +1734,443 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/lib/node_modules/angular-cookies/README.md">
       <publishTime>12/11/2016 16:48:26</publishTime>
+=======
+      <publishTime>01/08/2017 17:23:38</publishTime>
+    </File>
+    <File Include="wwwroot/languages/ru.json">
+      <publishTime>11/07/2016 16:05:15</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-bootstrap-calendar-tpls.min.js">
+      <publishTime>01/08/2017 17:35:41</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-bootstrap-calendar.min.js">
+      <publishTime>01/08/2017 17:35:41</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-busy/angular-busy.min.css">
+      <publishTime>08/28/2016 21:29:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-busy/angular-busy.min.js">
+      <publishTime>08/28/2016 21:29:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-cookies/.bower.json">
+      <publishTime>12/11/2016 15:30:53</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-cookies/angular-cookies.js">
+      <publishTime>12/11/2016 15:30:53</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-cookies/angular-cookies.min.js">
+      <publishTime>12/11/2016 15:30:53</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-cookies/angular-cookies.min.js.map">
+      <publishTime>12/11/2016 15:30:53</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-cookies/bower.json">
+      <publishTime>12/11/2016 15:30:53</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-cookies/index.js">
+      <publishTime>12/11/2016 15:30:53</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-cookies/LICENSE.md">
+      <publishTime>12/11/2016 15:30:53</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-cookies/package.json">
+      <publishTime>12/11/2016 15:30:53</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-cookies/README.md">
+      <publishTime>12/11/2016 15:30:53</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-route/.bower.json">
+      <publishTime>08/20/2016 21:56:08</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-route/angular-route.js">
+      <publishTime>08/20/2016 21:56:08</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-route/angular-route.min.js">
+      <publishTime>08/20/2016 21:56:08</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-route/angular-route.min.js.map">
+      <publishTime>08/20/2016 21:56:08</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-route/angular-ui-router.min.js">
+      <publishTime>09/05/2016 21:30:48</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-route/bower.json">
+      <publishTime>08/20/2016 21:56:08</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-route/index.js">
+      <publishTime>08/20/2016 21:56:08</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-route/LICENSE.md">
+      <publishTime>08/20/2016 21:56:08</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-route/package.json">
+      <publishTime>08/20/2016 21:56:08</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-route/README.md">
+      <publishTime>08/20/2016 21:56:08</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-translate-loader-static-files/.bower.json">
+      <publishTime>08/20/2016 18:33:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js">
+      <publishTime>08/20/2016 18:33:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js">
+      <publishTime>08/20/2016 18:33:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-translate-loader-static-files/bower.json">
+      <publishTime>08/20/2016 18:33:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-translate-loader-static-files/package.json">
+      <publishTime>08/20/2016 18:33:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-translate-loader-static-files/README.md">
+      <publishTime>08/20/2016 18:33:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-translate/.bower.json">
+      <publishTime>08/20/2016 18:33:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-translate/angular-translate.js">
+      <publishTime>08/20/2016 18:33:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-translate/angular-translate.min.js">
+      <publishTime>08/20/2016 18:33:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-translate/bower.json">
+      <publishTime>08/20/2016 18:33:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular-translate/README.md">
+      <publishTime>08/20/2016 18:33:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/.bower.json">
+      <publishTime>10/30/2016 19:26:26</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/angular-animate.min.js">
+      <publishTime>10/31/2016 07:54:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/angular-aria.min.js">
+      <publishTime>10/31/2016 07:54:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/angular-csp.css">
+      <publishTime>10/30/2016 19:26:26</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/angular-material.min.css">
+      <publishTime>10/31/2016 07:54:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/angular-material.min.js">
+      <publishTime>10/31/2016 07:54:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/angular-messages.min.js">
+      <publishTime>10/31/2016 07:54:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/angular.js">
+      <publishTime>10/30/2016 19:26:26</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/angular.min.js">
+      <publishTime>10/30/2016 19:26:26</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/angular.min.js.gzip">
+      <publishTime>10/30/2016 19:26:26</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/angular.min.js.map">
+      <publishTime>10/30/2016 19:26:26</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/bower.json">
+      <publishTime>10/30/2016 19:26:26</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/index.js">
+      <publishTime>10/30/2016 19:26:26</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/LICENSE.md">
+      <publishTime>10/30/2016 19:26:26</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/package.json">
+      <publishTime>10/30/2016 19:26:26</publishTime>
+    </File>
+    <File Include="wwwroot/lib/angular/README.md">
+      <publishTime>10/30/2016 19:26:26</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/.bower.json">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css.map">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css.map">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/npm.js">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/LICENSE">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/daypilot-all.min.js">
+      <publishTime>01/09/2017 16:12:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/icons/accept.svg">
+      <publishTime>12/10/2016 19:39:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/icons/add.svg">
+      <publishTime>11/03/2016 21:32:21</publishTime>
+    </File>
+    <File Include="wwwroot/lib/icons/delete.svg">
+      <publishTime>11/03/2016 21:35:11</publishTime>
+    </File>
+    <File Include="wwwroot/lib/icons/edit.svg">
+      <publishTime>11/03/2016 21:35:15</publishTime>
+    </File>
+    <File Include="wwwroot/lib/icons/edit_white.svg">
+      <publishTime>11/05/2016 11:57:47</publishTime>
+    </File>
+    <File Include="wwwroot/lib/icons/reject.svg">
+      <publishTime>12/10/2016 19:39:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/.bower.json">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/.bower.json">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/additional-methods.js">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/additional-methods.min.js">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/jquery.validate.js">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/jquery.validate.min.js">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/LICENSE.md">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/.bower.json">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.js">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.min.js">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.min.map">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/LICENSE.txt">
+      <publishTime>06/24/2016 12:03:04</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jsvat/angular-jsvat.min.js">
+      <publishTime>08/25/2016 18:42:58</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mdPickers/mdPickers.css">
+      <publishTime>11/20/2016 10:41:51</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mdPickers/mdPickers.js">
+      <publishTime>11/20/2016 10:41:51</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/.jsbeautifyrc">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/.npmignore">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/bower.json">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/CHANGELOG.md">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/ga.html">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/Gruntfile.js">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/LICENSE">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/.npmignore">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/lib/modernizr.touch.js">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/mfb.css">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/mfb.css.map">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/mfb.js">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/mfb.min.css">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/dist/mfb.min.js">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/Gruntfile.js">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/LICENSE">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/package.json">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/README.md">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/closure/bottom.js">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/closure/top.js">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/mfb.css.map">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/mfb.js">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/mfb.scss">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/_/_fountain.scss">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/_/_slidein-spring.scss">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/_/_slidein.scss">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/mfb/src/_/_zoomin.scss">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/package.json">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/README.md">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/mfb/src/mfb-directive.js">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/moment.js">
+      <publishTime>11/06/2016 16:28:32</publishTime>
+    </File>
+    <File Include="wwwroot/lib/ngDrive/module.js">
+      <publishTime>11/23/2016 17:50:42</publishTime>
+    </File>
+    <File Include="wwwroot/lib/node_modules/angular-cookies/angular-cookies.js">
+      <publishTime>12/11/2016 15:29:24</publishTime>
+    </File>
+    <File Include="wwwroot/lib/node_modules/angular-cookies/angular-cookies.min.js">
+      <publishTime>12/11/2016 15:29:24</publishTime>
+    </File>
+    <File Include="wwwroot/lib/node_modules/angular-cookies/angular-cookies.min.js.map">
+      <publishTime>12/11/2016 15:29:24</publishTime>
+    </File>
+    <File Include="wwwroot/lib/node_modules/angular-cookies/bower.json">
+      <publishTime>12/11/2016 15:29:24</publishTime>
+    </File>
+    <File Include="wwwroot/lib/node_modules/angular-cookies/index.js">
+      <publishTime>12/11/2016 15:29:24</publishTime>
+    </File>
+    <File Include="wwwroot/lib/node_modules/angular-cookies/LICENSE.md">
+      <publishTime>12/11/2016 15:29:24</publishTime>
+    </File>
+    <File Include="wwwroot/lib/node_modules/angular-cookies/package.json">
+      <publishTime>12/11/2016 15:29:24</publishTime>
+    </File>
+    <File Include="wwwroot/lib/node_modules/angular-cookies/README.md">
+      <publishTime>12/11/2016 15:29:24</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/templates/addresses/address_dialog_tmpl.html">
-      <publishTime>12/24/2016 18:40:10</publishTime>
+      <publishTime>12/27/2016 20:59:58</publishTime>
     </File>
     <File Include="wwwroot/templates/address_dialog_tmpl.html">
       <publishTime>11/05/2016 22:23:02</publishTime>
     </File>
     <File Include="wwwroot/templates/calendar/calendar.html">
+<<<<<<< HEAD
       <publishTime>01/06/2017 16:58:52</publishTime>
+=======
+      <publishTime>01/09/2017 16:15:48</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/templates/card_payment.html">
       <publishTime>09/11/2016 00:06:25</publishTime>
     </File>
     <File Include="wwwroot/templates/clients/clients_list.html">
+<<<<<<< HEAD
       <publishTime>01/08/2017 18:35:57</publishTime>
     </File>
     <File Include="wwwroot/templates/clients/client_details.html">
       <publishTime>01/08/2017 18:45:18</publishTime>
+=======
+      <publishTime>01/09/2017 16:18:15</publishTime>
+    </File>
+    <File Include="wwwroot/templates/clients/client_details.html">
+      <publishTime>01/09/2017 16:18:15</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/templates/clients/client_dialog_tmpl.html">
-      <publishTime>12/26/2016 02:50:25</publishTime>
+      <publishTime>12/27/2016 20:59:58</publishTime>
     </File>
     <File Include="wwwroot/templates/contactpersons/contact_person_dialog_tmpl.html">
+<<<<<<< HEAD
       <publishTime>12/06/2016 20:53:58</publishTime>
     </File>
     <File Include="wwwroot/templates/contragents/contragents_list.html">
@@ -1524,6 +2184,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/templates/contragents/contragent_responsiblePerson_dialog_tmpl.html">
       <publishTime>12/11/2016 16:30:02</publishTime>
+=======
+      <publishTime>11/07/2016 16:05:15</publishTime>
+    </File>
+    <File Include="wwwroot/templates/contragents/contragents_list.html">
+      <publishTime>01/08/2017 17:23:38</publishTime>
+    </File>
+    <File Include="wwwroot/templates/contragents/contragent_details.html">
+      <publishTime>01/08/2017 17:23:38</publishTime>
+    </File>
+    <File Include="wwwroot/templates/contragents/contragent_dialog_tmpl.html">
+      <publishTime>11/06/2016 16:28:33</publishTime>
+    </File>
+    <File Include="wwwroot/templates/contragents/contragent_responsiblePerson_dialog_tmpl.html">
+      <publishTime>12/11/2016 16:49:23</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/templates/contragents_list.html">
       <publishTime>11/05/2016 15:25:38</publishTime>
@@ -1538,15 +2213,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/05/2016 22:23:02</publishTime>
     </File>
     <File Include="wwwroot/templates/documents/document_dialog_tmpl.html">
+<<<<<<< HEAD
       <publishTime>12/06/2016 20:53:58</publishTime>
+=======
+      <publishTime>11/27/2016 12:16:07</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/templates/employees/employees_list.html">
-      <publishTime>12/29/2016 19:17:07</publishTime>
+      <publishTime>01/07/2017 10:41:18</publishTime>
     </File>
     <File Include="wwwroot/templates/employees/employee_details.html">
-      <publishTime>12/22/2016 15:01:30</publishTime>
+      <publishTime>12/20/2016 21:53:36</publishTime>
     </File>
     <File Include="wwwroot/templates/employees/employee_dialog_tmpl.html">
+<<<<<<< HEAD
       <publishTime>12/06/2016 20:53:58</publishTime>
     </File>
     <File Include="wwwroot/templates/error_503.html">
@@ -1554,27 +2234,50 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/templates/files/file_dialog.html">
       <publishTime>01/08/2017 17:13:07</publishTime>
+=======
+      <publishTime>11/27/2016 13:13:37</publishTime>
+    </File>
+    <File Include="wwwroot/templates/error_503.html">
+      <publishTime>11/01/2016 18:28:45</publishTime>
+    </File>
+    <File Include="wwwroot/templates/files/file_dialog.html">
+      <publishTime>01/07/2017 13:00:34</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/templates/offers/candidates_dialog_tmpl.html">
-      <publishTime>12/29/2016 19:40:59</publishTime>
+      <publishTime>01/07/2017 10:41:18</publishTime>
     </File>
     <File Include="wwwroot/templates/offers/offers_list.html">
-      <publishTime>12/28/2016 20:41:56</publishTime>
+      <publishTime>12/28/2016 20:16:49</publishTime>
     </File>
     <File Include="wwwroot/templates/offers/offer_details.html">
+<<<<<<< HEAD
       <publishTime>01/08/2017 17:13:07</publishTime>
     </File>
     <File Include="wwwroot/templates/offers/offer_dialog_tmpl.html">
       <publishTime>12/06/2016 20:53:58</publishTime>
+=======
+      <publishTime>01/07/2017 14:48:49</publishTime>
+    </File>
+    <File Include="wwwroot/templates/offers/offer_dialog_tmpl.html">
+      <publishTime>11/20/2016 17:22:36</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
     <File Include="wwwroot/templates/users/users_list.html">
-      <publishTime>12/29/2016 13:52:13</publishTime>
+      <publishTime>12/28/2016 20:46:03</publishTime>
     </File>
     <File Include="wwwroot/templates/users/user_dialog_tmpl.html">
+<<<<<<< HEAD
       <publishTime>12/11/2016 13:56:02</publishTime>
     </File>
     <File Include="wwwroot/_references.js">
       <publishTime>11/12/2016 16:48:29</publishTime>
+=======
+      <publishTime>12/10/2016 13:52:00</publishTime>
+    </File>
+    <File Include="wwwroot/_references.js">
+      <publishTime>01/07/2017 14:57:10</publishTime>
+>>>>>>> 948f24044d75f2cbb620075ecca7b2597f1353de
     </File>
   </ItemGroup>
 </Project>

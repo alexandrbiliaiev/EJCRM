@@ -1,4 +1,4 @@
-﻿var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngFileUpload', 'ngRoute', 'ngCookies', 'pascalprecht.translate', 'angular-jsvat', 'ui.router', 'EuroJobsCrm.services', 'EuroJobsCrm.controllers', 'ng-mfb', 'ngMaterialDatePicker'])
+﻿var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngFileUpload', 'ngRoute', 'ngCookies', 'pascalprecht.translate', 'angular-jsvat', 'ui.router', 'EuroJobsCrm.services', 'EuroJobsCrm.controllers', 'ng-mfb', 'ngMaterialDatePicker', 'daypilot'])
 
     .config(function ($translateProvider, $routeProvider, $stateProvider, $mdThemingProvider, $httpProvider, $mdDateLocaleProvider) {
         $translateProvider.useStaticFilesLoader({
@@ -25,7 +25,7 @@
             }).state('clients', {
                 url: "/clt_all",
                 templateUrl: 'templates/clients/clients_list.html',
-              
+
             }).state('contragent', {
                 url: "/ctg_edit/:id",
                 templateUrl: 'templates/contragents/contragent_details.html',
@@ -51,13 +51,13 @@
                 url: "/cal",
                 templateUrl: 'templates/calendar/calendar.html',
             });
-          
+
     });
 
 
 
-app.run(function($rootScope) {
-    $rootScope.$on('$stateChangeSuccess', function(event, to, toParams, from, fromParams) {
+app.run(function ($rootScope) {
+    $rootScope.$on('$stateChangeSuccess', function (event, to, toParams, from, fromParams) {
         //save the previous state in a rootScope variable so that it's accessible from everywhere
         $rootScope.previousState = from;
         $rootScope.previousStateParams = fromParams;
@@ -67,5 +67,6 @@ app.run(function($rootScope) {
 angular.module('EuroJobsCrm.filters', []);
 angular.module('EuroJobsCrm.services', []);
 angular.module('EuroJobsCrm.controllers', []);
+
 
 
