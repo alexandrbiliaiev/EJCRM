@@ -531,7 +531,6 @@ namespace EuroJobsCrm.Models
                 entity.Property(e => e.EmpCtgId).HasColumnName("emp_ctg_id");
 
                 entity.Property(e => e.EmpDescription)
-                    .IsRequired()
                     .HasColumnName("emp_description")
                     .HasMaxLength(1000);
 
@@ -546,9 +545,8 @@ namespace EuroJobsCrm.Models
                     .HasMaxLength(100);
 
                 entity.Property(e => e.EmpMiddleName)
-                    .IsRequired()
                     .HasColumnName("emp_middle_name")
-                    .HasMaxLength(100);
+                    .HasMaxLength(150);
 
                 entity.Property(e => e.EmpOffId).HasColumnName("emp_off_id");
 
@@ -672,7 +670,9 @@ namespace EuroJobsCrm.Models
                 entity.HasKey(e => e.NotId)
                     .HasName("PK_Notes");
 
-                entity.Property(e => e.NotId).HasColumnName("not_id");
+                entity.Property(e => e.NotId)
+                    .HasColumnName("not_id")
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.NotAuditMd)
                     .HasColumnName("not_audit_md")
@@ -842,6 +842,24 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("ofr_work_start")
                     .HasColumnType("datetime");
             });
+
+            modelBuilder.Entity<UsersToContragents>(entity =>
+            {
+                entity.HasKey(e => e.UtcId)
+                    .HasName("UsersToContragents_utc_id_uindex");
+
+                entity.Property(e => e.UtcId).HasColumnName("utc_id");
+
+                entity.Property(e => e.UtcCtgId).HasColumnName("utc_ctg_id");
+
+                entity.Property(e => e.UtcUsrId)
+                    .HasColumnName("utc_usr_id")
+                    .HasColumnType("varchar(100)");
+
+                entity.Property(e => e.UtcUsrName)
+                    .HasColumnName("utc_usr_name")
+                    .HasColumnType("varchar(50)");
+            });
         }
 
         public virtual DbSet<Addresses> Addresses { get; set; }
@@ -863,5 +881,6 @@ namespace EuroJobsCrm.Models
         public virtual DbSet<IdentityDocuments> IdentityDocuments { get; set; }
         public virtual DbSet<Notes> Notes { get; set; }
         public virtual DbSet<Offers> Offers { get; set; }
+        public virtual DbSet<UsersToContragents> UsersToContragents { get; set; }
     }
 }
