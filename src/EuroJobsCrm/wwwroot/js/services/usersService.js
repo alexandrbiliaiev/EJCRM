@@ -23,6 +23,14 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
+         users.AddContragentUser = function (user, id) {
+            return $http({
+                url: 'api/Users/AddContragentUser',
+                method: "POST",
+                data: user, id
+            });
+        }
+
         users.AddAccountingUser = function (user) {
             return $http({
                 url: 'api/Users/AddAccountingUser',

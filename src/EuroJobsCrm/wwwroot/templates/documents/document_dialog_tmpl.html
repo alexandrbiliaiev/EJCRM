@@ -111,7 +111,7 @@
 			</form>
 		</div>
 	</md-dialog-content>
-	<md-dialog-actions layout="row" flex>
+	<md-dialog-actions layout="row" flex ng-show="!Saving">
 		<md-button ng-click="saveDocumentClick()">
 			{{'SAVE'|translate}}
 		</md-button>

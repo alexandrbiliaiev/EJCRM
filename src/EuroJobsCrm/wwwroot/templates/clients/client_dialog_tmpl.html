@@ -3,14 +3,20 @@
 		<div class="md-toolbar-tools">
 			<h2>{{'CLIENT_TITLE'| translate}}</h2>
 			<span flex></span>
-			<md-button class="md-icon-button" ng-click="close()">
+			<md-button class="md-icon-button" ng-click="close()" ng-show="!Saving">
 				<md-icon aria-label="Close dialog">close</md-icon>
 			</md-button>
 		</div>
 	</md-toolbar>
 	<md-dialog-content>
 		<div class="md-dialog-content">
-			<form name="clientForm">
+			<div layout="row" layout-align="center center" ng-show="Saving">
+				{{'SAVING' | translate}}
+			</div>
+			<div layout="row" ng-show="Saving" layout-sm="column" layout-align="space-around">
+				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<form name="clientForm" ng-show="!Saving">
 				<md-input-container class="md-block" style="width:400px;">
 					<label>{{'CLIENT_NAME'| translate}}</label>
 					<input name="client_name" ng-model="client.name" placeholder="Firma S. A." md-maxlength="100" required>
@@ -26,7 +32,7 @@
 						<div ng-message="required">{{'REQUIRED' | translate}} </div>
 						<div ng-message="md-maxlength">{{'TO_LONG'| translate}}</div>
 					</div>
-				</md-input-container >
+				</md-input-container>
 				<md-input-container class="md-block">
 					<label>{{'TAX_ID'| translate}}</label>
 					<input name="tax_id" ng-model="client.nip" placeholder="{{'TAX_ID'| translate}}" md-maxlength="10" required>
@@ -53,14 +59,14 @@
 				</md-input-container>
 				<md-input-container class="md-block">
 					<label>{{ 'TYPE' | translate }}</label>
-					<md-select name="type" ng-model="client.type" data-placeholder="{{ 'TYPE' | translate }}" required>
+					<md-select name="type" ng-model="client.type" data-placeholder="{{ 'TYPE' | translate }}">
 						<md-option value="1">{{ 'LISING' | translate }}</md-option>
 						<md-option value="0">{{ 'NOT_LISING' | translate }}</md-option>
 					</md-select>
 				</md-input-container>
 				<md-input-container class="md-block">
 					<label>{{ 'STATUS' | translate }}</label>
-					<md-select name="type" ng-model="client.status" data-placeholder="{{ 'STATUS' | translate }}" required>
+					<md-select name="type" ng-model="client.status" data-placeholder="{{ 'STATUS' | translate }}">
 						<md-option value="1">{{ 'ACTIVE' | translate }}</md-option>
 						<md-option value="0">{{ 'INACTIVE' | translate }}</md-option>
 						<md-option value="2">{{ 'TO_DELETE' | translate }}</md-option>
@@ -69,7 +75,7 @@
 			</form>
 		</div>
 	</md-dialog-content>
-	<md-dialog-actions layout="row">
+	<md-dialog-actions layout="row" ng-show="!Saving">
 		<md-button ng-click="saveClientClick()">
 			{{'SAVE'| translate}}
 		</md-button>

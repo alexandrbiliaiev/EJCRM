@@ -6,6 +6,7 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
     $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
     $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
     $scope.detailClaim = $scope.addClaim;
+    $scope.Saving = false;
 
     $scope.moment = moment;
 
@@ -31,14 +32,16 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
         if ($scope.employeeForm.$invalid) {
             return;
         }
-
+        $scope.Saving = true;
         employee = $scope.employee;
 
         employeesService.saveemployee(employee).success(function (response) {
             employeesService.employees.push(response);
             $scope.employee = $scope.getDefaultemployee();
+            $scope.Saving = false;
             $mdDialog.hide();
         }).error(function () {
+            $scope.Saving = false;
             $state.go('error');
             $mdDialog.hide();
         });

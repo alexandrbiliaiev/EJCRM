@@ -9,6 +9,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
         $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
         $scope.detailClaim = $scope.addClaim;
+        $scope.Saving = false;
 
         $scope.expandDetails = false;
         $scope.expandContactPersons = false;
@@ -42,7 +43,6 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
             });
         }
 
-
         $scope.close = function () {
             console.log($scope);
             $mdDialog.hide();
@@ -61,6 +61,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
             }
 
             client = $scope.client;
+            $scope.Saving = true;
 
             clientsService.saveClient(client).success(function (response) {
                 $mdDialog.hide();
@@ -71,6 +72,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         }
 
         $scope.showEditClientDialog = function (ev) {
+            $scope.Saving = false;
             $mdDialog.show({
                 scope: $scope,
                 preserveScope: true,
@@ -107,7 +109,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
             if ($scope.addressForm.$invalid) {
                 return;
             }
-
+            $scope.Saving = true;
             address = $scope.address;
             address.clientId = $scope.client.id;
             address.contragentId = 0;
@@ -126,7 +128,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
 
         $scope.showNewAddressDialog = function (ev) {
             $scope.address = $scope.setDefaultAddress();
-
+            $scope.Saving = false;
             $mdDialog.show({
                 scope: $scope,
                 preserveScope: true,
@@ -142,6 +144,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
 
         $scope.showEditAddressDialog = function (address) {
             $scope.address = address;
+            $scope.Saving = false;
             $mdDialog.show({
                 scope: $scope,
                 preserveScope: true,
@@ -158,6 +161,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         }
 
         $scope.showDeleteAddressConfirmDialog = function (addresId) {
+            $scope.Saving = false;
             var confirm = $mdDialog.confirm()
                 .title($translate.instant('ADDRESS_DELETE_CONFIRM_TITLE'))
                 .textContent($translate.instant('ADDRESS_DELETE_CONFIRM_TEXT'))
@@ -214,6 +218,8 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
                 return;
             }
 
+            $scope.Saving = true;
+
             contactperson = $scope.contactperson;
             contactperson.clientId = $scope.client.id;
             contactpersonsService.saveContactPerson(contactperson).success(function (response) {
@@ -229,6 +235,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         }
 
         $scope.showNewContactPersonDialog = function (ev) {
+            $scope.Saving = false;
             $scope.contactperson = $scope.setDefaultContactPerson();
             $mdDialog.show({
                 scope: $scope,
@@ -246,6 +253,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         }
 
         $scope.showEditContactPersonDialog = function (contactPerson) {
+            $scope.Saving = false;
             $scope.contactperson = contactPerson;
             $mdDialog.show({
                 scope: $scope,
@@ -262,6 +270,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         }
 
         $scope.showDeleteCtpConfirmDialog = function (contactPersonId) {
+            $scope.Saving = false;
             var confirm = $mdDialog.confirm()
                 .title($translate.instant('CPN_DELETE_CONFIRM_TITLE'))
                 .textContent($translate.instant('CPN_DELETE_CONFIRM_TEXT'))
@@ -347,7 +356,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
             if ($scope.offerForm.$invalid) {
                 return;
             }
-
+            $scope.Saving = true;
             offer = $scope.offer;
             offer.clientId = $scope.client.id;
             offersService.saveOffer(offer).success(function (response) {
@@ -364,7 +373,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
 
         $scope.showNewOfferDialog = function (ev) {
             $scope.offer = $scope.setDefaultOffer();
-
+            $scope.Saving = false;
             $mdDialog.show({
                 scope: $scope,
                 preserveScope: true,
@@ -379,6 +388,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         }
 
         $scope.showEditOfferDialog = function (offer) {
+            $scope.Saving = false;
             $scope.offer = offer;
             $mdDialog.show({
                 scope: $scope,
@@ -396,6 +406,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         }
 
         $scope.showDeleteOfferConfirmDialog = function (offId) {
+            $scope.Saving = false;
             var confirm = $mdDialog.confirm()
                 .title($translate.instant('OFFER_DELETE_CONFIRM_TITLE'))
                 .textContent($translate.instant('OFFER_DELETE_CONFIRM_TEXT'))
@@ -428,6 +439,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         };
 
         $scope.showNewFileDialog = function () {
+            $scope.Saving = false;
             $scope.file = {
                 name: '',
                 description: '',
@@ -469,6 +481,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         }
 
         $scope.showDeleteFileConfirmDialog = function (fileId) {
+            $scope.Saving = false;
             var confirm = $mdDialog.confirm()
                 .title($translate.instant('FILE_DELETE_CONFIRM_TITLE'))
                 .textContent($translate.instant('FILE_DELETE_CONFIRM_TEXT'))

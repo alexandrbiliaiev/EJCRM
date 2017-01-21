@@ -5,7 +5,7 @@ namespace EuroJobsCrm.Models
 {
     public partial class Notes
     {
-        public int NotId { get; set; }
+        public string NotId { get; set; }
         public string NotSubject { get; set; }
         public string NotText { get; set; }
         public DateTime? NotDueDate { get; set; }

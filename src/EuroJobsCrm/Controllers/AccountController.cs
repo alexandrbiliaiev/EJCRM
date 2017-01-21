@@ -65,8 +65,29 @@ namespace EuroJobsCrm.Controllers
                 {
                     var user = await _userManager.FindByEmailAsync(model.Email);
                     var userRoles = await _userManager.GetRolesAsync(user);
-                    //writes role's name to cookies
-                    Response.Cookies.Append("user_role", userRoles.FirstOrDefault());
+
+                    using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+                    {
+
+                        UsersToContragents u;
+                        u = context.UsersToContragents.FirstOrDefault(c => c.UtcUsrId == user.Id);
+                        
+                        if (u == null)
+                        {
+                            Response.Cookies.Append("user_name", "NoName");
+                            Response.Cookies.Append("ctg_id", "-1");
+                           
+                        }
+                        else
+                        {
+                            if (u.UtcUsrName != null) Response.Cookies.Append("user_name", u.UtcUsrName);
+                            if (u.UtcCtgId != null) Response.Cookies.Append("ctg_id", u.UtcCtgId.ToString());
+
+                        }
+                       
+                    }
+                            //writes role's name to cookies
+                            Response.Cookies.Append("user_role", userRoles.FirstOrDefault());
                     
                     _logger.LogInformation(1, "User logged in.");
                     return RedirectToLocal(returnUrl);

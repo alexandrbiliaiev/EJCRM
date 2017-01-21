@@ -6,6 +6,7 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
     $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
     $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
     $scope.detailClaim = $scope.addClaim;
+    $scope.Saving = false;
 
     $scope.expandDetails = true;
     $scope.expandDocs = true;
@@ -145,7 +146,7 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
         if ($scope.employeeForm.$invalid) {
             return;
         }
-
+        $scope.Saving = true;
         employee = {
             id: $scope.employee.id,
             contragentId: $scope.employee.contragentId,
@@ -173,10 +174,11 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
             }
 
 
-
+            $scope.Saving = false;
             $mdDialog.hide();
         }).error(function () {
             $state.go('error');
+            $scope.Saving = false;
             $mdDialog.hide();
         });
     }

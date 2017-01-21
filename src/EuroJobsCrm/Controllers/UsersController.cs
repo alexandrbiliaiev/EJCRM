@@ -87,6 +87,13 @@ namespace EuroJobsCrm.Controllers
         }
 
         [HttpPost]
+        [Route("api/Users/AddContragentUser")]
+        public async Task<UserDto> AddContragentUser([FromBody] UserDto user)
+        {
+            return await AddUserWithRole(user, CONTAGENT_ROLE_NAME);
+        }
+
+        [HttpPost]
         [Route("api/Users/AddAdmin")]
         public async Task<UserDto> AddAdmin([FromBody] UserDto user)
         {
@@ -204,6 +211,21 @@ namespace EuroJobsCrm.Controllers
                     };
                 }
                 await _userManager.AddToRoleAsync(applicationUser, roleName);
+
+
+                using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+                {
+                    UsersToContragents uTc = new UsersToContragents();
+                    uTc.UtcUsrId = applicationUser.Id;
+                    uTc.UtcUsrName = user.UserName;
+                    if (user.CtgId != null) {
+                        uTc.UtcCtgId = user.CtgId;
+                    }
+                    context.Add(uTc);
+                    context.SaveChanges();
+                }
+                
+
                 return new UserDto
                 {
                     Id = applicationUser.Id,

@@ -28,20 +28,48 @@ namespace EuroJobsCrm.Controllers
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
+
+
                 List<ContragentDto> contagents = context.Contragents
                     .Where(c => c.CgtAuditRd == null)
                     .GroupJoin(context.Addresses.Where(a => a.AdrAuditRd == null), c => c.CgtId, a => a.AdrCgtId,
-                        (c, a) => new {Contragent = c, Addresses = a})
+                        (c, a) => new { Contragent = c, Addresses = a })
                     .GroupJoin(context.ContactPersons.Where(a => a.CtpAuditRd == null), c => c.Contragent.CgtId, cp => cp.CtpCgtId,
-                        (c, cp) => new {c.Contragent, c.Addresses, ContactPersons = cp})
+                        (c, cp) => new { c.Contragent, c.Addresses, ContactPersons = cp })
                     .GroupJoin(context.Employees.Where(a => a.EmpAuditRd == null), c => c.Contragent.CgtId, cp => cp.EmpCtgId,
                         (c, em) => new { c.Contragent, c.Addresses, c.ContactPersons, Employees = em })
                     .GroupJoin(context.DocumentFiles.Where(f => f.DcfAuditRu == null && f.DcfCntId != null), c => c.Contragent.CgtId, f => f.DcfCntId,
-                        (c, f) => new {  c.Contragent, c.Addresses, c.ContactPersons, c.Employees, Files = f})
-                    .Join(context.AspNetUsers, c => c.Contragent.CgtResponsibleUser, u => u.Id, 
-                        (c, u) => new { c.Contragent, c.Addresses, c.ContactPersons, c.Employees, c.Files, ResponsibleUser = u})
+                        (c, f) => new { c.Contragent, c.Addresses, c.ContactPersons, c.Employees, Files = f })
+                    .Join(context.AspNetUsers, c => c.Contragent.CgtResponsibleUser, u => u.Id,
+                        (c, u) => new { c.Contragent, c.Addresses, c.ContactPersons, c.Employees, c.Files, ResponsibleUser = u })
+                    .GroupJoin(context.AspNetUsers.Join(context.UsersToContragents, c => c.Id, u => u.UtcUsrId, (c, u) => new { User = c, ContragentUser = u })
+                    , c => c.Contragent.CgtId, u => u.ContragentUser.UtcCtgId,
+                        (c, u) => new
+                        {
+                            c.Contragent,
+                            c.Addresses,
+                            c.ContactPersons,
+                            c.Employees,
+                            c.Files,
+                            c.ResponsibleUser,
+                            ContragentUsers = u.Select(e => new
+                            {
+                                Id = e.User.Id,
+                                UserName = e.User.UserName,
+                                Email = e.User.Email,
+                                CtgId = e.ContragentUser.UtcCtgId,
+                                Name = e.ContragentUser.UtcUsrName
+                            })
+                        })
                     .ToList()
-                    .Select(c => new ContragentDto(c.Contragent, c.Addresses, c.ContactPersons, c.Employees, c.Files, c.ResponsibleUser))
+                    .Select(c => new ContragentDto(c.Contragent, c.Addresses, c.ContactPersons, c.Employees, c.Files, c.ResponsibleUser, c.ContragentUsers.Select(e => new UserDto
+                    {
+                        Id = e.Id,
+                        CtgId = e.CtgId,
+                        Email = e.Email,
+                        Name = e.Name,
+                        UserName = e.UserName
+                    }).ToList()))
                     .ToList();
 
                return contagents;
