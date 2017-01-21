@@ -73,6 +73,22 @@ namespace EuroJobsCrm.Controllers
         }
 
         [HttpGet]
+        [Route("/api/Clients/Lite")]
+        public IEnumerable<ClientDto> GetClientsListLite()
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                List<ClientDto> clients = context.Clients
+                    .Where(c => c.CltAuditRd == null)
+                    .ToList()
+                    .Select(c =>new ClientDto(c))
+                    .ToList();
+
+                return clients;
+            }
+        }
+
+        [HttpGet]
         [Route("/api/Client")]
         public ClientDto GetClient(int clientId)
         {

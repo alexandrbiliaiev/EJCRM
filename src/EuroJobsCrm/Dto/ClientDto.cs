@@ -27,7 +27,16 @@ namespace EuroJobsCrm.Dto
         }
 
         public ClientDto(Clients client, IEnumerable<Addresses> addresses, IEnumerable<ContactPersons> contactPersons,
-                         IEnumerable<Offers> offers, IEnumerable<Employees> acceptedEmployees, IEnumerable<DocumentFiles> files)
+                         IEnumerable<Offers> offers, IEnumerable<Employees> acceptedEmployees, IEnumerable<DocumentFiles> files):this(client)
+        {
+            Addresses = addresses?.Select(a => new AddressDto(a)).ToList();
+            ContactPersons = contactPersons?.Select(c => new ContactPersonDto(c)).ToList();
+            Offers = offers?.Select(o => new OfferDto(o)).ToList();
+            Employees = acceptedEmployees?.Select(e => new EmployeeDto(e)).ToList();
+            Files = files?.Select(f => new DocumentFilesDto(f)).ToList();
+        }
+
+        public ClientDto(Clients client)
         {
             Id = client.CltId;
             Name = client.CltName;
@@ -37,11 +46,6 @@ namespace EuroJobsCrm.Dto
             Status = client.CltStatus;
             Type = client.CltType;
             Branch = client.CltBranch;
-            Addresses = addresses?.Select(a => new AddressDto(a)).ToList();
-            ContactPersons = contactPersons?.Select(c => new ContactPersonDto(c)).ToList();
-            Offers = offers?.Select(o => new OfferDto(o)).ToList();
-            Employees = acceptedEmployees?.Select(e => new EmployeeDto(e)).ToList();
-            Files = files?.Select(f => new DocumentFilesDto(f)).ToList();
         }
     }
 }

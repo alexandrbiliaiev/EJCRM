@@ -8,6 +8,10 @@ angular.module('EuroJobsCrm.services')
             return $http.get('api/Employees/GetAll');
         };
 
+        employees.loadLite = function () {
+            return $http.get('api/Employees/GetAll/Lite');
+        };
+
         employees.saveEmployee = function (employee) {
             return $http({
                 url: 'api/Employees/Save',

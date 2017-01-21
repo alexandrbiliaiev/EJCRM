@@ -47,6 +47,21 @@ namespace EuroJobsCrm.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/Employees/GetAll/Lite")]
+        public IEnumerable<EmployeeDto> GetAllEmployeesLite()
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                var employees = context.Employees.Where(e => e.EmpAuditRd == null)
+                    .ToList()
+                    .Select(e => new EmployeeDto(e))
+                    .ToList();
+
+                return employees;
+            }
+        }
+
 
         [HttpPost]
         [Route("api/Employees/Get")]

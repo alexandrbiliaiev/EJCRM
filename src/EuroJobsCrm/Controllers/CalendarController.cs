@@ -22,12 +22,44 @@ namespace EuroJobsCrm.Controllers
             return View();
         }
 
-        [HttpGet("api/calendar")]
-        public bool Get()
+        [HttpGet("api/Calendar/Events")]
+        public List<EventDto> GetEvents()
         {
-            return true;
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                var eventsEntities = context.Notes.Where(n => n.NotAuditRd == null).ToList();
+                return eventsEntities.Select(e => new EventDto(e)).ToList();
+            }
+
         }
 
-      
+        [HttpPost]
+        [Route("api/Calendar/Event")]
+        public EventDetailsDto GetEvent([FromBody] EventDto eventdto)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                var eventsEntity = context.Notes.Where(n => n.NotId == eventdto.Id && n.NotAuditRd == null)
+                                                  .LeftJoin(context.AspNetUsers, n => n.NotTargetUser, u => u.Id,
+                                                            (n, u) => new { Note = n, User = u })
+                                                  .LeftJoin(context.Contragents, n => n.Note.NotCtgId, c => c.CgtId,
+                                                            (n, c) => new { n.Note, n.User, Contragent = c })
+                                                  .LeftJoin(context.Clients, n => n.Note.NotCltId, c => c.CltId,
+                                                            (n, c) => new { n.Note, n.User, n.Contragent, Client = c })
+                                                  .LeftJoin(context.Employees, n => n.Note.NotEmp, e => e.EmpId,
+                                                            (n, e) => new { n.Note, n.User, n.Contragent, n.Client, Employee = e })
+                                                  .FirstOrDefault();
+
+                return new EventDetailsDto(eventsEntity.Note)
+                {
+                    TargetUserName = eventsEntity.User?.UserName,
+                    ClientName = eventsEntity.Client?.CltName,
+                    ContragentName = eventsEntity.Contragent?.CgtName,
+                    EmployeeName = eventsEntity.Employee?.EmpFirstName + " " + eventsEntity.Employee?.EmpLastName
+                };
+
+            }
+
+        }
     }
 }

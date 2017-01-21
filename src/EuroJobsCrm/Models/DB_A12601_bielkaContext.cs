@@ -694,14 +694,18 @@ namespace EuroJobsCrm.Models
 
                 entity.Property(e => e.NotCtgId).HasColumnName("not_ctg_id");
 
-                entity.Property(e => e.NotDueDate)
-                    .HasColumnName("not_due_date")
-                    .HasColumnType("datetime");
-
                 entity.Property(e => e.NotEmp).HasColumnName("not_emp");
+
+                entity.Property(e => e.NotEndDate)
+                    .HasColumnName("not_end_date")
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.NotRemindDate)
                     .HasColumnName("not_remind_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.NotStartDate)
+                    .HasColumnName("not_start_date")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.NotSubject)

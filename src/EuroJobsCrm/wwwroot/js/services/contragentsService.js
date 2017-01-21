@@ -7,6 +7,10 @@ angular.module('EuroJobsCrm.services')
             return $http.get('/api/Contragents');
         };
 
+        contragents.loadLite = function () {
+            return $http.get('/api/Contragents/Lite');
+        };
+
         contragents.saveContragent = function (contragent) {
             return $http({
                 url: 'api/Contragents/Save',
