@@ -7,6 +7,10 @@ angular.module('EuroJobsCrm.services')
             return $http.get('/api/Clients');
         };
 
+        clients.loadLite = function () {
+            return $http.get('/api/Clients/Lite');
+        };
+
         clients.loadClient = function (clientId) {
             return $http({
                 url: '/api/Client?',

@@ -8,7 +8,7 @@ namespace EuroJobsCrm.Models
         public string NotId { get; set; }
         public string NotSubject { get; set; }
         public string NotText { get; set; }
-        public DateTime? NotDueDate { get; set; }
+        public DateTime? NotEndDate { get; set; }
         public DateTime? NotRemindDate { get; set; }
         public string NotTargetUser { get; set; }
         public int? NotCtgId { get; set; }
@@ -18,5 +18,6 @@ namespace EuroJobsCrm.Models
         public string NotAuditMu { get; set; }
         public DateTime? NotAuditRd { get; set; }
         public string NotAuditRu { get; set; }
+        public DateTime? NotStartDate { get; set; }
     }
 }

@@ -28,8 +28,6 @@ namespace EuroJobsCrm.Controllers
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-
-
                 List<ContragentDto> contagents = context.Contragents
                     .Where(c => c.CgtAuditRd == null)
                     .GroupJoin(context.Addresses.Where(a => a.AdrAuditRd == null), c => c.CgtId, a => a.AdrCgtId,
@@ -73,6 +71,22 @@ namespace EuroJobsCrm.Controllers
                     .ToList();
 
                return contagents;
+            }
+        }
+
+        [HttpGet]
+        [Route("/api/Contragents/Lite")]
+        public IEnumerable<ContragentDto> GetContragentsLite()
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                List<ContragentDto> contagents = context.Contragents
+                    .Where(c => c.CgtAuditRd == null)       
+                    .ToList()
+                    .Select(c => new ContragentDto(c))
+                    .ToList();
+
+                return contagents;
             }
         }
 

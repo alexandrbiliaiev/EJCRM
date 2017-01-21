@@ -14,6 +14,9 @@ angular.module('EuroJobsCrm.services')
                 method: "POST",
                 data: ctgid
             });
+
+        employees.loadLite = function () {
+            return $http.get('api/Employees/GetAll/Lite');
         };
 
         employees.saveEmployee = function (employee) {

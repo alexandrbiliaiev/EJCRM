@@ -47,6 +47,7 @@ namespace EuroJobsCrm.Controllers
             }
         }
 
+<<<<<<< HEAD
         [HttpPost]
         [Route("api/Employees/GetByCtg")]
         public IEnumerable<EmployeeDto> GetEmployeesByCtg([FromBody] string ctgId)
@@ -65,6 +66,17 @@ namespace EuroJobsCrm.Controllers
                         (e, d) => new { employee = e, documents = d })
                     .ToList()
                     .Select(e => new EmployeeDto(e.employee, e.documents, new List<DocumentFiles>()))
+=======
+        [HttpGet]
+        [Route("api/Employees/GetAll/Lite")]
+        public IEnumerable<EmployeeDto> GetAllEmployeesLite()
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                var employees = context.Employees.Where(e => e.EmpAuditRd == null)
+                    .ToList()
+                    .Select(e => new EmployeeDto(e))
+>>>>>>> 85ea3bfa2f4ab52640ff67231c705e8b5ef6acca
                     .ToList();
 
                 return employees;
