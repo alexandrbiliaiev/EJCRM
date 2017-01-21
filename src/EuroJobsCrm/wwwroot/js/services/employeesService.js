@@ -8,6 +8,14 @@ angular.module('EuroJobsCrm.services')
             return $http.get('api/Employees/GetAll');
         };
 
+        employees.loadByCtg = function (ctgid) {
+            return $http({
+                url: 'api/Employees/GetByCtg',
+                method: "POST",
+                data: ctgid
+            });
+        };
+
         employees.saveEmployee = function (employee) {
             return $http({
                 url: 'api/Employees/Save',
@@ -27,7 +35,7 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
-        employees.saveDocument = function (document){
+        employees.saveDocument = function (document) {
             return $http({
                 url: 'api/Employees/SaveDocument',
                 method: "POST",
@@ -35,16 +43,16 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
-         employees.deleteDocument = function(docId){
-             return $http({
+        employees.deleteDocument = function (docId) {
+            return $http({
                 url: 'api/Employees/DeleteDocument',
                 method: "POST",
                 data: docId
             });
         }
 
-        employees.deleteDocumentFile = function(fileId){
-             return $http({
+        employees.deleteDocumentFile = function (fileId) {
+            return $http({
                 url: 'api/Employees/DeleteFile',
                 method: "POST",
                 data: fileId
@@ -71,18 +79,18 @@ angular.module('EuroJobsCrm.services')
             }
 
             return new {
-                id : 0,
-                name:'',
+                id: 0,
+                name: '',
                 licenseNumber: '',
                 status: 'a'
             }
         }
 
-        employees.setCurrentEmployee = function(employee){
-                currentEmployee = employee;
+        employees.setCurrentEmployee = function (employee) {
+            currentEmployee = employee;
         }
 
-        employees.getCurrentEmployee = function(){
+        employees.getCurrentEmployee = function () {
             return currentEmployee;
         }
 
