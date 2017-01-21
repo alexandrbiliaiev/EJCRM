@@ -8,6 +8,7 @@ angular.module('EuroJobsCrm.services')
             return $http.get('api/Employees/GetAll');
         };
 
+
         employees.loadByCtg = function (ctgid) {
             return $http({
                 url: 'api/Employees/GetByCtg',
@@ -15,9 +16,10 @@ angular.module('EuroJobsCrm.services')
                 data: ctgid
             });
 
+
         employees.loadLite = function () {
             return $http.get('api/Employees/GetAll/Lite');
-        };
+        }
 
         employees.saveEmployee = function (employee) {
             return $http({
@@ -116,4 +118,4 @@ angular.module('EuroJobsCrm.services')
 
         return employees;
 
-    }]);
+    };
