@@ -11,6 +11,10 @@ namespace EuroJobsCrm.Dto
         public string Email { get; set; }
         public string Password { get; set; }
 
+        public int? CtgId { get; set; }
+        public string Name { get; set; }
+
+
         public UserDto()
         {
             
@@ -30,5 +34,6 @@ namespace EuroJobsCrm.Dto
             Email = user?.Email;
             Id = user?.Id;
         }
+
     }
 }

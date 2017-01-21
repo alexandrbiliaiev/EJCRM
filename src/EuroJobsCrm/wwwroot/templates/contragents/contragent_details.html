@@ -1,8 +1,8 @@
 <ui-view ng-controller="ContragentManageController">
 
-    <div layout="row" ng-show="!isActive" layout-sm="column" layout-align="space-around">
-        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-    </div>
+	<div layout="row" ng-show="!isActive" layout-sm="column" layout-align="space-around">
+		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+	</div>
 
 	<!--General information -->
 	<!--Contact Persons -->
@@ -380,6 +380,45 @@
 			</div>
 		</div>
 	</div>
+	<!--Users-->
+	<div layout="row" layout-padding ng-show="isActive">
+		<div flex flex-gt-xs layout-xs="column">
+			<section class="demo-container md-whiteframe-z1">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>{{'USERS'|translate}}</span>
+						</h2>
+						<span flex></span>
+						<md-button aria-label="button" class="md-icon-button" ng-click="showAddContragentUserDialog()" ng-show="addClaim">
+							<md-icon md-font-icon="ion-plus-round"></md-icon>
+						</md-button>
+						<md-button aria-label="button" class="md-icon-button" ng-click="expandContragentUsers = !expandContragentUsers">
+							<md-icon md-font-icon="ion-navicon-round"></md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<div ng-show="expandContragentUsers" ng-cloak>
+					<md-content>
+						<md-list ng-cloak>
+							<md-list-item class="md-2-line" ng-repeat="user in contragent.contragentUsers">
+								<md-icon style="font-size:32px;" md-font-icon="ion-person">
+								</md-icon>
+								<div class="md-list-item-text">
+									<h3><b>{{user.name}}</b></h3>
+									<p><i>{{user.email}}</i></p>
+								</div>
+								<md-divider ng-if="!$last"></md-divider>
+							</md-list-item>
+						</md-list>
+					</md-content>
+				</div>
+			</section>
+		</div>
+	</div>
+
+
+
 	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round" ng-show="isActive">
 		<a mfb-button icon="ion-ios-information" label="{{'ADD_NOTE' | translate}}" ng-click="showNewNoteDialog()" ng-show="addClaim"
 		/>

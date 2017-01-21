@@ -85,6 +85,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
             });
     }
 
+
     $scope.showDeleteCtgConfirmDialog = function (contragentId) {
         var confirm = $mdDialog.confirm()
             .title($translate.instant('CTG_DELETE_CONFIRM_TITLE'))
@@ -150,4 +151,6 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentsController', fu
         $state.go('error');
     });
 
+
+   
 });

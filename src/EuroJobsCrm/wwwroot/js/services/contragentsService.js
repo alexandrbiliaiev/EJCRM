@@ -42,14 +42,22 @@ angular.module('EuroJobsCrm.services')
             }
 
             return new {
-                id : 0,
-                name:'',
+                id: 0,
+                name: '',
                 licenseNumber: '',
                 status: 'a'
             }
         }
 
-        
+        contragents.AddContragentUser = function (user) {
+            return $http({
+                url: 'api/Users/AddContragentUser',
+                method: "POST",
+                data: user
+            });
+        }
+
+
 
         return contragents;
 
