@@ -8,3 +8,4 @@ src/EuroJobsCrm/bin/Release/
 src/EuroJobsCrm/obj/Release/netcoreapp1.0/.IncrementalCache
 src/EuroJobsCrm/obj/
 src/EuroJobsCrm/bin/
+*.suo
