@@ -19,5 +19,7 @@ namespace EuroJobsCrm.Models
         public DateTime? NotAuditRd { get; set; }
         public string NotAuditRu { get; set; }
         public DateTime? NotStartDate { get; set; }
+        public DateTime? NotAuditCd { get; set; }
+        public string NotAuditCu { get; set; }
     }
 }
