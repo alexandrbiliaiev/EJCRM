@@ -10,6 +10,7 @@ namespace EuroJobsCrm.Dto
         public List<DocumentFilesDto> Files { get; set; }
 
 
+
         public OfferDetailsDto()
         {
             

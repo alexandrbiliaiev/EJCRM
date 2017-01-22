@@ -2,25 +2,17 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
     $scope.employees = [];
 
     $scope.userRole = $cookies.get('user_role');
+    $scope.ctgId = $cookies.get('ctg_id');
     $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
     $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
     $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
     $scope.detailClaim = $scope.addClaim;
     $scope.Saving = false;
 
-    $scope.moment = moment;
 
-    /*  $scope.getDefaultEmployee = function () {
-          return  {
-              id: 0,
-              krs: "",
-              name: "",
-              nip: "",
-              regon: ""
-          }
-      }
-  
-      $scope.employee = $scope.getDefaultEmployee();*/
+
+
+    $scope.moment = moment;
 
     $scope.editEmployee = function (employeeId) {
         $state.go('employee', {
@@ -105,11 +97,22 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
         return;
     }
 
-    employeesService.load().success(function (response) {
-        employeesService.employees = response;
-        $scope.employees = employeesService.employees;
-    }).error(function () {
-        $state.go('error');
-    });
+    if ($scope.ctgId == '-1') {
+        employeesService.load().success(function (response) {
+            employeesService.employees = response;
+            $scope.employees = employeesService.employees;
+        }).error(function () {
+            $state.go('error');
+        });
+    }
+    else {
+        employeesService.loadByCtg($scope.ctgId).success(function (response) {
+            employeesService.employees = response;
+            $scope.employees = employeesService.employees;
+        }).error(function () {
+            $state.go('error');
+        });
+    }
+
 
 });

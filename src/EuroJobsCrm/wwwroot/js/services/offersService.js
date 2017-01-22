@@ -13,6 +13,16 @@ angular.module('EuroJobsCrm.services')
         };
 
 
+         offers.getOfferByCtg = function (req) {
+
+            return $http({
+                url: 'api/Offers/GetByCtg',
+                method: "POST",
+                data: req
+            });
+        };
+
+
         
 
         offers.saveCandidateRequest = function (candidateRequest) {

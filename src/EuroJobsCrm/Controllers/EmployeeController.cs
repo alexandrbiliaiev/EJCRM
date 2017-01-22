@@ -47,15 +47,24 @@ namespace EuroJobsCrm.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("api/Employees/GetAll/Lite")]
-        public IEnumerable<EmployeeDto> GetAllEmployeesLite()
+        [HttpPost]
+        [Route("api/Employees/GetByCtg")]
+        public IEnumerable<EmployeeDto> GetEmployeesByCtg([FromBody] string ctgId)
         {
+            var user = _userManager.FindByIdAsync(User.GetUserId());
+
+            var roles = _userManager.GetRolesAsync(user.Result);
+            var ffdsfd = roles.Result;
+
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                var employees = context.Employees.Where(e => e.EmpAuditRd == null)
+
+
+                var employees = context.Employees.Where(e => e.EmpAuditRd == null && e.EmpCtgId == Int32.Parse(ctgId))
+                    .GroupJoin(context.IdentityDocuments.Where(d => d.IdcAuditRd == null), e => e.EmpId, d => d.IdcEmpId,
+                        (e, d) => new { employee = e, documents = d })
                     .ToList()
-                    .Select(e => new EmployeeDto(e))
+                    .Select(e => new EmployeeDto(e.employee, e.documents, new List<DocumentFiles>()))
                     .ToList();
 
                 return employees;
@@ -86,6 +95,8 @@ namespace EuroJobsCrm.Controllers
                 return emp;
             }
         }
+
+
 
         [HttpPost]
         [Route("api/Employees/Save")]

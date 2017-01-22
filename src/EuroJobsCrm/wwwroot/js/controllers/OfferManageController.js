@@ -6,6 +6,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     $scope.expandEmployees = true;
 
     $scope.userRole = $cookies.get('user_role');
+    $scope.ctgId = $cookies.get('ctg_id');
     $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
     $scope.acceptClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
     $scope.rejectClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
@@ -18,12 +19,28 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
     $scope.isActive = false;
 
-    offersService.getOffer($state.params.id).success(function (response) {
-        $scope.offer = response;
-        $scope.isActive = true;
-    }).error(function () {
-        $state.go('error');
-    });
+    if ($scope.ctgId == '-1') {
+        offersService.getOffer($state.params.id).success(function (response) {
+            $scope.offer = response;
+            $scope.isActive = true;
+        }).error(function () {
+            $state.go('error');
+        });
+    }
+    else {
+        var params = {
+            offerId: $state.params.id,
+            contragentId: $scope.ctgId
+        };
+
+        offersService.getOfferByCtg(params).success(function (response) {
+            $scope.offer = response;
+            $scope.isActive = true;
+        }).error(function () {
+            $state.go('error');
+        });
+    }
+
 
     $scope.moment = moment;
 
@@ -182,14 +199,24 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     };
 
 
+    if ($scope.ctgId == '-1') {
+        employeesService.load().success(function (response) {
+            employeesService.employees = response;
+            $scope.freeEmployees = employeesService.employees;
+            $scope.manageFreeEmployees();
+        }).error(function () {
+            $state.go('error');
+        });
+    }
+    else {
+        employeesService.loadByCtg($scope.ctgId).success(function (response) {
+            employeesService.employees = response;
+            $scope.freeEmployees = employeesService.employees;
+        }).error(function () {
+            $state.go('error');
+        });
+    }
 
-    employeesService.load().success(function (response) {
-        employeesService.employees = response;
-        $scope.freeEmployees = employeesService.employees;
-        $scope.manageFreeEmployees();
-    }).error(function () {
-        $state.go('error');
-    });
 
 
     $scope.manageFreeEmployees = function () {

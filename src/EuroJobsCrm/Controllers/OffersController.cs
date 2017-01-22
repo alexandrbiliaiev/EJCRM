@@ -36,8 +36,56 @@ namespace EuroJobsCrm.Controllers
                                                       .Select(o => new OfferDto(o))
                                                       .ToList();
 
+                foreach (var offer in offers)
+                {
+                    offer.AcceptedCount = context.EmploymentRequests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 1);
+                }
+
                 return offers;
             }
+        }
+
+        [HttpPost]
+        [Route("/api/Offers/GetByCtg")]
+        public OfferDetailsDto GetOffer([FromBody] CandidateOfferRequestDto cor)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                Offers ofr = context.Offers.FirstOrDefault(c => c.OfrId == cor.OfferId);
+
+                List<EmployeeDto> candidates = new List<EmployeeDto>();
+                List<EmployeeDto> employees = new List<EmployeeDto>();
+                List<DocumentFilesDto> files = new List<DocumentFilesDto>();
+
+
+                candidates =
+                    context.EmploymentRequests.Where(r => r.EtrOfrId == cor.OfferId && r.EtrStatus == 0 && r.EtrAuditRd == null)
+                        .Join(context.Employees.Where(e => e.EmpAuditRd == null && e.EmpCtgId == cor.ContragentId), r => r.EtrEmpId, e => e.EmpId,
+                            (request, employee) => new { request, employee }).ToList()
+                        .Select(e => new EmployeeDto(e.employee)).ToList();
+
+                employees =
+                    context.EmploymentRequests.Where(
+                            r => r.EtrOfrId == cor.OfferId && r.EtrStatus == 1 && r.EtrAuditRd == null)
+                        .Join(context.Employees.Where(e => e.EmpAuditRd == null && e.EmpCtgId == cor.ContragentId), r => r.EtrEmpId, e => e.EmpId,
+                            (request, employee) => new { request, employee }).ToList()
+                        .Select(e => new EmployeeDto(e.employee)).ToList();
+
+                files = context.DocumentFiles.Where(d => d.DcfAuditRu == null && d.DcfOfrId == cor.OfferId).ToList().
+                    Select(f => new DocumentFilesDto(f)).ToList();
+
+               
+
+                OfferDetailsDto offerDetails = new OfferDetailsDto(ofr)
+                {
+                    Candidates = candidates,
+                    Employees = employees,
+                    Files = files
+                };
+
+                return offerDetails;
+            }
+
         }
 
         [HttpPost]
