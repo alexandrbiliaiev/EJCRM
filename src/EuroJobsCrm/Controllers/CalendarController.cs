@@ -30,11 +30,10 @@ namespace EuroJobsCrm.Controllers
                 var eventsEntities = context.Notes.Where(n => n.NotAuditRd == null).ToList();
                 return eventsEntities.Select(e => new EventDto(e)).ToList();
             }
-
         }
 
         [HttpPost]
-        [Route("api/Calendar/Event")]
+        [Route("api/Calendar/Events")]
         public EventDetailsDto GetEvent([FromBody] EventDto eventdto)
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
@@ -60,6 +59,64 @@ namespace EuroJobsCrm.Controllers
 
             }
 
+        }
+
+        [HttpPost]
+        [Route("api/Calendar/Events/Save")]
+        public EventDetailsDto SaveEvent([FromBody] EventDto eventdto)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                Notes eventEntity = context.Notes.FirstOrDefault(n => n.NotId == eventdto.Id);
+                if (eventEntity == null)
+                {
+                    eventEntity = new Notes()
+                    {
+                        NotAuditCd = DateTime.Now,
+                        NotAuditCu = User.GetUserId(),
+                        NotId = eventdto.Id
+                    };
+
+                    context.Notes.Add(eventEntity);
+                }
+
+                eventEntity.NotAuditMd = DateTime.Now;
+                eventEntity.NotAuditMu = User.GetUserId();
+
+                eventEntity.NotCltId = eventdto.ClientId;
+                eventEntity.NotCtgId = eventdto.ContragentId;
+                eventEntity.NotEmp = eventdto.EmployeeId;
+                eventEntity.NotEndDate = eventdto.EndDate;
+                eventEntity.NotRemindDate = eventdto.RemindDate;
+                eventEntity.NotStartDate = eventdto.StartDate;
+                eventEntity.NotSubject = eventdto.Subject;
+                eventEntity.NotTargetUser = eventdto.TargetUser;
+                eventEntity.NotText = eventdto.NoteText;
+
+                context.SaveChanges();
+            }
+
+            return GetEvent(eventdto);
+        }
+
+        [HttpPost]
+        [Route("api/Calendar/Events/Delete")]
+        public bool DeleteEvent([FromBody] EventDto eventdto)
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                Notes eventEntity = context.Notes.FirstOrDefault(n => n.NotId == eventdto.Id);
+                if (eventEntity == null)
+                {
+                    return false;
+                }
+
+                eventEntity.NotAuditRd = DateTime.Now;
+                eventEntity.NotAuditRu = User.GetUserId();
+
+                context.SaveChanges();
+                return true;
+            }
         }
     }
 }

@@ -9,7 +9,7 @@
         </div>
     </md-toolbar>
 
-    <div layout="column" layout-align="space-around center" ng-show="Loading" style="height: 150px;">
+    <div layout="column" layout-align="space-around center" ng-show="Loading || Saving" style="height: 150px;">
         <md-progress-circular  md-mode="indeterminate"></md-progress-circular>
         <div layout="row" layout-align="center center" ng-show="Saving">
             {{'SAVING' | translate}}
@@ -25,15 +25,15 @@
                 <div layout="row" layout-align="space-between center">
                     <md-input-container class="md-block">
                         <label>{{'START_DATE'| translate}}</label>
-                        <md-datepicker name="start_date" ng-model="date" />
+                        <md-datepicker name="start_date" ng-change="eventStartDateChange()" ng-model="currentEvent.startDate" />
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label>{{'END_DATE'| translate}}</label>
-                        <md-datepicker name="start_date" ng-model="date" />
+                        <md-datepicker name="start_date" ng-change="eventEndDateChange()" ng-model="currentEvent.endDate" />
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label>{{'EVENT_REMIND'| translate}}</label>
-                        <md-datepicker name="remind_date" ng-model="date" />
+                        <md-datepicker name="remind_date" ng-change="eventRemindDateChange()" ng-model="currentEvent.remindDate" />
                     </md-input-container>
 
                 </div>
@@ -58,6 +58,7 @@
                         <label >{{'TARGET_USER'| translate}}</label>
                         <md-select placeholder="{{'TARGET_USER'| translate}}" ng-model="currentEvent.targetUser"
                                    md-on-open="loadUsers()" style="min-width: 200px;">
+                            <md-option ng-value="null">-</md-option>
                             <md-option ng-value="user.id" ng-repeat="user in users">{{user.userName}}</md-option>
                             <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
                         </md-select>
@@ -69,6 +70,7 @@
                         <label >{{'TARGET_CONTRAGENT'| translate}}</label>
                         <md-select placeholder="{{'TARGET_CONTRAGENT'| translate}}" ng-model="currentEvent.contragentId"
                                    md-on-open="loadContragents()" style="min-width: 200px;">
+                            <md-option ng-value="null">-</md-option>
                             <md-option ng-value="cnt.id" ng-repeat="cnt in contragents">{{cnt.name}}</md-option>
                             <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
                         </md-select>
@@ -77,6 +79,7 @@
                         <label >{{'TARGET_CLIENT'| translate}}</label>
                         <md-select placeholder="{{'TARGET_CLIENT'| translate}}" ng-model="currentEvent.clientId"
                                    md-on-open="loadClients()" style="min-width: 200px;">
+                            <md-option ng-value="null">-</md-option>
                             <md-option ng-value="cli.id" ng-repeat="cli in clients">{{cli.name}}</md-option>
                             <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
                         </md-select>
@@ -85,6 +88,7 @@
                         <label >{{'TARGET_EMPLOYEE'| translate}}</label>
                         <md-select placeholder="{{'TARGET_EMPLOYEE'| translate}}" ng-model="currentEvent.employeeId"
                                    md-on-open="loadEmployees()" style="min-width: 200px;">
+                            <md-option ng-value="null">-</md-option>
                             <md-option ng-value="emp.id" ng-repeat="emp in employees">{{emp.firstName}} {{emp.lastName}}</md-option>
                             <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
                         </md-select>
@@ -93,8 +97,11 @@
             </form>
         </div>
     </md-dialog-content>
-    <md-dialog-actions layout="row" ng-show="!Saving && !Loading">
-        <md-button ng-click="saveClientClick()">
+    <md-dialog-actions layout="row" layout-align="space-between center" ng-show="!Saving && !Loading">
+        <md-button ng-click="deleteEventClick()" class="md-warn">
+            {{'DELETE'| translate}}
+        </md-button>
+        <md-button ng-click="saveEventClick()">
             {{'SAVE'| translate}}
         </md-button>
     </md-dialog-actions>

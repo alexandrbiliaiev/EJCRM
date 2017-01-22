@@ -674,6 +674,14 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("not_id")
                     .HasMaxLength(100);
 
+                entity.Property(e => e.NotAuditCd)
+                    .HasColumnName("not_audit_cd")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.NotAuditCu)
+                    .HasColumnName("not_audit_cu")
+                    .HasMaxLength(150);
+
                 entity.Property(e => e.NotAuditMd)
                     .HasColumnName("not_audit_md")
                     .HasColumnType("datetime");
