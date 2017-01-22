@@ -1,8 +1,6 @@
 <ui-view ng-controller="ContragentManageController">
 
-	<div layout="row" ng-show="!isActive" layout-sm="column" layout-align="space-around">
-		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-	</div>
+	<div ng-include="'/templates/loader.html'"></div>
 
 	<!--General information -->
 	<!--Contact Persons -->

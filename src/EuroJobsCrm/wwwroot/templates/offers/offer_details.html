@@ -1,7 +1,5 @@
 <ui-view ng-controller="OfferManageController">
-    <div layout="row" ng-show="!isActive" layout-sm="column" layout-align="space-around">
-        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-    </div>
+<div ng-include="'/templates/loader.html'"></div>
     <div layout="column" layout-padding ng-show="isActive">
         <div flex layout="column" ng-show="isActive">
             <div layout="column" flex>
@@ -17,7 +15,7 @@
                     </div>
                 </md-toolbar>
             </div>
-            <div flex layout="column" ng-show = "expandDetails">
+            <div flex layout="column" ng-show="expandDetails">
                 <section class="demo-container md-whiteframe-z1">
                     <md-content>
                         <div layout="row" flex layout-wrap>
@@ -491,7 +489,7 @@
         </div>
 
         <!--Files -->
-        <div layout="row" layout-padding ng-show="isActive">
+        <div layout="row" layout-padding ng-show="isActive && !hideClaim">
             <div flex flex-gt-xs layout-xs="column">
                 <section class="demo-container md-whiteframe-z1">
                     <md-toolbar>

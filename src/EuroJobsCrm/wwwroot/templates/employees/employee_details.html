@@ -1,5 +1,6 @@
 <ui-view ng-controller="EmployeeManageController">
-    <div layout="column" layout-align="space-between stretch">
+    <div ng-include="'/templates/loader.html'"></div>
+    <div layout="column" layout-align="space-between stretch" ng-show="isActive">
         <!--General information -->
         <div layout="column">
             <section class="demo-container md-whiteframe-z1">
@@ -153,13 +154,14 @@
     </div>
 
     <!--Fucking material add buttons NOT ALL BUTTONS ARE AVAILABLE ON PAGE-->
-	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round">
-	
-		<a mfb-button mfb-button-close icon="ion-android-document" label="{{ 'ADD_DOCUMENT' | translate}}" ng-click="showAddDocumentDialog()" ng-show="addClaim"/>
-	
-	</nav>
-	<!--Fucking material return button-bich -->
-	<nav mfb-menu position="tl" style="margin-top:100px;" active-icon="ion-android-arrow-back" resting-icon="ion-android-arrow-back"
-		ng-click="goBack()">
-	</nav>
+    <nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round" ng-show="isActive">
+
+        <a mfb-button mfb-button-close icon="ion-android-document" label="{{ 'ADD_DOCUMENT' | translate}}" ng-click="showAddDocumentDialog()"
+            ng-show="addClaim" />
+
+    </nav>
+    <!--Fucking material return button-bich -->
+    <nav mfb-menu position="tl" style="margin-top:100px;" active-icon="ion-android-arrow-back" resting-icon="ion-android-arrow-back"
+        ng-click="goBack()">
+    </nav>
 </ui-view>

@@ -10,12 +10,9 @@
 	</md-toolbar>
 	<md-dialog-content>
 		<div class="md-dialog-content">
-			<div layout="row" layout-align="center center" ng-show="Saving" >
-				{{'SAVING' | translate}}
-			</div>
-			<div layout="row" ng-show="Saving" layout-sm="column" layout-align="space-around">
-				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-			</div>
+			
+			<div ng-include="'/templates/saving_loader.html'"></div>
+
 			<form name="contragentForm" ng-show="!Saving">
 				<md-input-container class="md-block" style="width:400px;">
 					<label>{{'CONTRAGENT_NAME'| translate}}</label>

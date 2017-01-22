@@ -1,4 +1,6 @@
-<div layout="row" layout-wrap layout-padding>
+<div ng-include="'/templates/loader.html'"></div>
+
+<div layout="row" layout-wrap layout-padding ng-show="isActive">
 	<div flex-xs flex layout-xs="column">
 		<section class="demo-container md-whiteframe-z1">
 			<md-toolbar>
@@ -22,16 +24,13 @@
 					<md-button aria-label="button" class="md-icon-button" ng-click="showNewOfferDialog()" ng-show="addClaim">
 						<md-icon md-font-icon="ion-plus-round"></md-icon>
 					</md-button>
-					<md-button aria-label="button" class="md-icon-button" ng-click="expandOffers=! expandOffers">
-						<md-icon md-font-icon="ion-navicon-round"></md-icon>
-					</md-button>
 				</div>
 			</md-toolbar>
-			<div layout="row" ng-show="expandOffers" ng-cloak>
+			<div layout="row" ng-cloak>
 				<md-content flex="100">
 					<md-list ng-cloak>
 						<md-list-item class="md-2-line" ng-repeat="offer in offers | offersSearchFor : searchOffersString">
-							<md-icon style="font-size:32px;" md-font-icon="ion-document-text" ng-click="goToOfferDetails(offer.id)"></md-icon>
+							<md-icon style="font-size:32px;" md-font-icon="ion-document-text" ng-click="editOffer(offer.id)"></md-icon>
 							<div class="md-list-item-text">
 								<div layout="row" flex>
 									<div layout="column">

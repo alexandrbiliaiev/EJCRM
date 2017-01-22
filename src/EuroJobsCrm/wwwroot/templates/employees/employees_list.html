@@ -1,71 +1,79 @@
+<div ng-include="'/templates/loader.html'"></div>
+<div id="popupContainer" class="container body-content" ng-show="isActive">
+	<md-content>
+		<section class="demo-container md-whiteframe-z1">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<h2>
+						<span>{{'Employees'|translate}}</span>
+					</h2>
+					<span flex></span>
+					<md-input-container class="md-block" md-no-float flex style="margin-top:42px; margin-left: 50px;">
+						<input id="search" aria-label="input" ng-model="searchEmployeeString" style="color:white; font-size:12pt;" placeholder="{{'SEARCH'| translate}} ..."
+						/>
+					</md-input-container>
 
-	<div id="popupContainer" class="container body-content">
-		<md-content>
-			<section class="demo-container md-whiteframe-z1">
-				<md-toolbar>
-					<div class="md-toolbar-tools">
-						<h2>
-							<span>{{'Employees'|translate}}</span>
-						</h2>
-						<span flex></span>
-						<md-button class="md-icon-button" aria-label="Search" ng-show="!showSearch" ng-click="showSearch = !showSearch">
-							<md-icon md-font-icon="ion-search"></md-icon>
-						</md-button>
-						<md-button class="md-icon-button" aria-label="Search" ng-show="showSearch" ng-click="showSearch = !showSearch">
-							<md-icon md-font-icon="ion-android-close"></md-icon>
-						</md-button>
-					</div>
-					<md-toolbar class="md-hue-1" ng-show="showSearch">
-						<div class="md-toolbar-tools">
-							<md-input-container class="md-block" flex="100" ng-show="showSearch">
-								<input aria-label="input" ng-model="searchString" style="color:white; font-size:14pt;" placeholder="{{'SEARCH'| translate}} ..." />
-							</md-input-container>
-						</div>
-					</md-toolbar>
-				</md-toolbar>
-				<div layout="row" layout-padding="" ng-cloak>
-					<md-content flex>
-						<md-list ng-cloak style="margin-top: -10px">
-							<md-list-item class="md-2-line" ng-repeat="employee in employees | employeesSearchFor:searchString">
-								<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="showEditContactPersonDialog(contactperson)">
-								</md-icon>
-								<div class="md-list-item-text">
-									<h3><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
-									<p>
-										{{'BIRTHDATE'|translate}}: {{moment(employee.birthDate).format('DD-MM-YYYY')}}
-									</p>
-								</div>
-								<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" ng-show="employee.status == '1'">
-									<md-tooltip md-direction="left">
-										{{ 'ACTIVE' | translate }}
-									</md-tooltip>
-								</md-icon>
-								<md-icon style="font-size:24px;" md-font-icon="ion-android-cancel" ng-show="employee.status == '0'">
-									<md-tooltip md-direction="left">
-										{{ 'INACTIVE' | translate }}
-									</md-tooltip>
-								</md-icon>
-								<md-icon style="font-size:24px;" md-font-icon="ion-sad" ng-show="employee.status == '2'">
-									<md-tooltip md-direction="left">
-										{{ 'LEFT' | translate }}
-									</md-tooltip>
-								</md-icon>
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee.id)" ng-show="editClaim">
-									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
-								</md-button>
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)" ng-show="deleteClaim">
-									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-								</md-button>
-								<md-divider ng-if="!$last"></md-divider>
-							</md-list-item>
-						</md-list>
-					</md-content>
+					<md-button class="md-icon-button" aria-label="Search" ng-show="searchEmployeeString == null || searchEmployeeString == '' ">
+						<md-icon md-font-icon="ion-search"></md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="Search" ng-show="searchEmployeeString!= null && searchEmployeeString != ''"
+						ng-click="searchEmployeeString = null">
+						<md-icon md-font-icon="ion-android-close"></md-icon>
+					</md-button>
+					<md-button aria-label="button" class="md-icon-button" ng-click="showAddEmployeeDialog()" ng-show="addClaim">
+						<md-icon md-font-icon="ion-plus-round"></md-icon>
+					</md-button>
 				</div>
-			</section>
-		</md-content>
+			</md-toolbar>
+			</md-toolbar>
+			<div layout="row" layout-padding="" ng-cloak>
+				<md-content flex>
+					<md-list ng-cloak style="margin-top: -10px">
+						<md-list-item class="md-2-line" ng-repeat="employee in employees | employeesSearchFor:searchEmployeeString">
+							<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="editEmployee(employee.id)">
+							</md-icon>
+							<div class="md-list-item-text">
+								<h3 ng-click="editEmployee(employee.id)"><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
+								<p>
+									{{'BIRTHDATE'|translate}}: {{moment(employee.birthDate).format('DD-MM-YYYY')}}
+								</p>
+							</div>
+							<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" ng-show="employee.status == '1'">
+								<md-tooltip md-direction="left">
+									{{ 'ACTIVE' | translate }}
+								</md-tooltip>
+							</md-icon>
+							<md-icon style="font-size:24px;" md-font-icon="ion-android-cancel" ng-show="employee.status == '0'">
+								<md-tooltip md-direction="left">
+									{{ 'INACTIVE' | translate }}
+								</md-tooltip>
+							</md-icon>
+							<md-icon style="font-size:24px;" md-font-icon="ion-sad" ng-show="employee.status == '2'">
+								<md-tooltip md-direction="left">
+									{{ 'LEFT' | translate }}
+								</md-tooltip>
+							</md-icon>
 
-
-		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
-			<a mfb-button icon="ion-ios-search-strong" label="{{'SEARCH' | translate}}"></a>
-		</nav>
-	</div>
+							<md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="editEmployee(employee.id)">
+								<md-icon class="material-icons md-24 md-dark">open_in_new
+									<md-tooltip md-direction="down">
+										{{ 'DETAILS' | translate }}
+									</md-tooltip>
+								</md-icon>
+							</md-button>
+							<md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="showDeleteEmployeeConfirmDialog(employee.id)"
+								ng-show="deleteClaim">
+								<md-icon class="material-icons md-24 md-dark">delete_forever
+									<md-tooltip md-direction="down">
+										{{ 'DELETE' | translate }}
+									</md-tooltip>
+								</md-icon>
+							</md-button>
+							<md-divider ng-if="!$last"></md-divider>
+						</md-list-item>
+					</md-list>
+				</md-content>
+			</div>
+		</section>
+	</md-content>
+</div>

@@ -10,6 +10,7 @@ angular.module('EuroJobsCrm.controllers').controller('OffersController', functio
     $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
     $scope.detailClaim = $scope.addClaim;
     $scope.Saving = false;
+    $scope.isActive = false;
     $scope.expandOffers = true;
 
     $scope.awaitingCandidates = [];
@@ -30,9 +31,7 @@ angular.module('EuroJobsCrm.controllers').controller('OffersController', functio
         if ($scope.offerForm.$invalid) {
             return;
         }
-
         offer = $scope.offer;
-
         offersService.saveoffer(offer).success(function (response) {
             offersService.offers.push(response);
             $scope.offer = $scope.getDefaultoffer();
@@ -102,7 +101,9 @@ angular.module('EuroJobsCrm.controllers').controller('OffersController', functio
     offersService.load().success(function (response) {
         offersService.offers = response;
         $scope.offers = offersService.offers;
+        $scope.isActive = true;
     }).error(function () {
+        $scope.isActive = true;
         $state.go('error');
     });
 

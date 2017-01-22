@@ -1,51 +1,82 @@
-angular.module('EuroJobsCrm.controllers').controller('EmployeesController', function ($scope, $location, $http, $state, $translate, $mdDialog, $cookies, employeesService) {
+angular.module('EuroJobsCrm.controllers').controller('EmployeesController', function($scope, $location, $http, $state, $translate, $mdDialog, $cookies, employeesService) {
     $scope.employees = [];
 
     $scope.userRole = $cookies.get('user_role');
     $scope.ctgId = $cookies.get('ctg_id');
+
     $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
-    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
-    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
-    $scope.detailClaim = $scope.addClaim;
+    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin'
+        || $scope.userRole == 'Advanced User';
+    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin'
+        || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user'
+        || $scope.userRole == 'CONTRAGENT';
+    $scope.deleteClaim = $scope.addClaim;
+
+    $scope.isActive = false;
     $scope.Saving = false;
 
+    $scope.birthdate = null;
 
+    $scope.setDefaultEmployee = function() {
+        return {
+            id: 0,
+            contragentId: -1,
+            firstName: null,
+            middleName: null,
+            lastName: null,
+            birthDate: null,
+            description: null,
+            status: null,
+            cltId: null,
+            offId: null
+        }
+    }
 
+    $scope.employee = $scope.setDefaultEmployee();
 
     $scope.moment = moment;
 
-    $scope.editEmployee = function (employeeId) {
+    $scope.editEmployee = function(employeeId) {
         $state.go('employee', {
             id: employeeId
         });
     }
 
-    $scope.saveEmployeeClick = function () {
+    $scope.saveEmployeeClick = function() {
         if ($scope.employeeForm.$invalid) {
             return;
         }
         $scope.Saving = true;
-        employee = $scope.employee;
+        employee = {
+            id: $scope.employee.id,
+            contragentId: $scope.ctgId,
+            firstName: $scope.employee.firstName,
+            middleName: $scope.employee.middleName,
+            lastName: $scope.employee.lastName,
+            birthDate: $scope.birthdate,
+            description: $scope.employee.description,
+            status: $scope.employee.status,
+            cltId: $scope.employee.cltId,
+            offId: $scope.employee.offId
+        }
 
-        employeesService.saveemployee(employee).success(function (response) {
-            employeesService.employees.push(response);
-            $scope.employee = $scope.getDefaultemployee();
+        employeesService.saveEmployee(employee).success(function(response) {
+            $scope.employees.push(response);
             $scope.Saving = false;
             $mdDialog.hide();
-        }).error(function () {
-            $scope.Saving = false;
+        }).error(function() {
             $state.go('error');
+            $scope.Saving = false;
             $mdDialog.hide();
         });
     }
 
-
-    $scope.close = function () {
+    $scope.close = function() {
         $mdDialog.hide();
     }
 
-    $scope.showAddEmployeeDialog = function (ev) {
-        employee = $scope.getDefaultemployee();
+    $scope.showAddEmployeeDialog = function(ev) {
+        employee = $scope.setDefaultEmployee();
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
@@ -53,23 +84,23 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
             targetEvent: ev,
             clickOutsideToClose: true,
         })
-            .then(function (answer) {
+            .then(function(answer) {
 
-            }, function () {
+            }, function() {
 
             });
     }
 
-    $scope.showDeleteEmployeeConfirmDialog = function (employeeId) {
+    $scope.showDeleteEmployeeConfirmDialog = function(employeeId) {
         var confirm = $mdDialog.confirm()
-            .title($translate.instant('CLI_DELETE_CONFIRM_TITLE'))
-            .textContent($translate.instant('CLT_DELETE_CONFIRM_TEXT'))
+            .title($translate.instant('EMP_DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('EMP_DELETE_CONFIRM_TEXT'))
             .ariaLabel('label')
             .ok($translate.instant('DELETE_OK'))
             .cancel($translate.instant('DELETE_CANCEL'));
 
-        $mdDialog.show(confirm).then(function () {
-            employeesService.deleteemployee(employeeId).success(function (response) {
+        $mdDialog.show(confirm).then(function() {
+            employeesService.deleteEmployee(employeeId).success(function(response) {
                 if (response != true) {
                     return;
                 }
@@ -84,10 +115,10 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
                     return;
                 }
 
-            }).error(function (response) {
+            }).error(function(response) {
                 $state.go('error');
             });
-        }, function () {
+        }, function() {
 
         });
     };
@@ -98,18 +129,22 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
     }
 
     if ($scope.ctgId == '-1') {
-        employeesService.load().success(function (response) {
+        employeesService.load().success(function(response) {
             employeesService.employees = response;
             $scope.employees = employeesService.employees;
-        }).error(function () {
+            $scope.isActive = true;
+        }).error(function() {
+            $scope.isActive = true;
             $state.go('error');
         });
     }
     else {
-        employeesService.loadByCtg($scope.ctgId).success(function (response) {
+        employeesService.loadByCtg($scope.ctgId).success(function(response) {
             employeesService.employees = response;
             $scope.employees = employeesService.employees;
-        }).error(function () {
+            $scope.isActive = true;
+        }).error(function() {
+            $scope.isActive = true;
             $state.go('error');
         });
     }

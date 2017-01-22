@@ -11,8 +11,12 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     $scope.acceptClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
     $scope.rejectClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
     $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
-    $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user';
+    $scope.addClaim = $scope.userRole == 'Admin'
+        || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User'
+        || $scope.userRole == 'Normal user';
     $scope.detailClaim = $scope.addClaim;
+    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'CONTRAGENT';
+    $scope.hideClaim = $scope.userRole == 'CONTRAGENT';
     $scope.Saving = false;
 
     $scope.isRequesting = [];
@@ -65,7 +69,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     };
 
     $scope.showAddCandidateDialog = function () {
-        $scope.manageFreeEmployees();
+        $scope.reloadFreeEmployees();
         $mdDialog.show({
             scope: $scope,
             isRequesting: $scope.isRequesting,
@@ -203,13 +207,13 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
         employeesService.load().success(function (response) {
             employeesService.employees = response;
             $scope.freeEmployees = employeesService.employees;
-            $scope.manageFreeEmployees();
+            //   $scope.manageFreeEmployees();
         }).error(function () {
             $state.go('error');
         });
     }
     else {
-        employeesService.loadByCtg($scope.ctgId).success(function (response) {
+        employeesService.GetByCtgForReq($scope.ctgId).success(function (response) {
             employeesService.employees = response;
             $scope.freeEmployees = employeesService.employees;
         }).error(function () {
@@ -218,26 +222,48 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
     }
 
 
-
-    $scope.manageFreeEmployees = function () {
-
-        for (i in $scope.offer.candidates) {
-            for (j in $scope.freeEmployees) {
-                if ($scope.offer.candidates[i].id == $scope.freeEmployees[j].id) {
-                    $scope.freeEmployees.splice(j, 1);
-                }
-            }
+    $scope.reloadFreeEmployees = function () {
+        if ($scope.ctgId == '-1') {
+            employeesService.load().success(function (response) {
+                employeesService.employees = response;
+                $scope.freeEmployees = employeesService.employees;
+                // $scope.manageFreeEmployees();
+            }).error(function () {
+                $state.go('error');
+            });
+        }
+        else {
+            employeesService.GetByCtgForReq($scope.ctgId).success(function (response) {
+                employeesService.employees = response;
+                $scope.freeEmployees = employeesService.employees;
+            }).error(function () {
+                $state.go('error');
+            });
         }
 
-        for (i in $scope.offer.employees) {
-            for (j in $scope.freeEmployees) {
-                if ($scope.offer.employees[i].id == $scope.freeEmployees[j].id) {
-                    $scope.freeEmployees.splice(j, 1);
-                }
-
-            }
-        }
     }
+
+
+    /*
+        $scope.manageFreeEmployees = function () {
+    
+            for (i in $scope.offer.candidates) {
+                for (j in $scope.freeEmployees) {
+                    if ($scope.offer.candidates[i].id == $scope.freeEmployees[j].id) {
+                        $scope.freeEmployees.splice(j, 1);
+                    }
+                }
+            }
+    
+            for (i in $scope.offer.employees) {
+                for (j in $scope.freeEmployees) {
+                    if ($scope.offer.employees[i].id == $scope.freeEmployees[j].id) {
+                        $scope.freeEmployees.splice(j, 1);
+                    }
+    
+                }
+            }
+        } */
 
     $scope.showNewFileDialog = function () {
         $scope.file = {
