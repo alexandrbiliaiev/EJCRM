@@ -32,7 +32,7 @@ namespace EuroJobsCrm.Controllers
 
         public UsersController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            _userManager = userManager; 
+            _userManager = userManager;
             _roleManager = roleManager;
         }
 
@@ -47,40 +47,19 @@ namespace EuroJobsCrm.Controllers
         {
             using (var context = new DB_A12601_bielkaContext())
             {
-                var users = context.AspNetUserRoles.Where(r => r.Role.Name != SUPER_ADMIN_ROLE_NAME).
-                    Join(context.AspNetUsers.Join(context.UsersToContragents,
-                        c => c.Id,
-                        u => u.UtcUsrId,
-                        (c, u) => new { User = c, ContragentUser = u }),
-                            r => r.UserId,
-                            u => u.User.Id,
-                             (role, user) => new
-                             {
-                                 RoleName = role.Role.Name,
-                                 User = user,
-                                 CtgUser = user.ContragentUser
-                             }).ToList().
-                             Select(us => new UserDto
-                             {
-                                 Id = us.User.User.Id,
-                                 UserName = us.User.User.UserName,
-                                 Email = us.User.User.Email,
-                                 CtgId = us.User.ContragentUser.UtcCtgId,
-                                 Name = us.User.ContragentUser.UtcUsrName,
-                                 UserRole = us.RoleName
-                             }).ToList()
-                             .GroupBy(group => group.UserRole)
-                             .Select(group => new { RoleName = group.Key, Users = group })
-                             .ToList()
-                             .ToDictionary(k => k.RoleName, v => v.Users.Select(us => new UserDto {
-                                 Id = us.Id,
-                                 UserName = us.UserName,
-                                 Email = us.Email,
-                                 CtgId = us.CtgId,
-                                 Name = us.Name,
-                                 UserRole = us.UserRole
-                             })
-                             .ToList());
+                var users = context.AspNetUserRoles.Where(r=>r.Role.Name != SUPER_ADMIN_ROLE_NAME).Join(context.AspNetUsers,
+                        r => r.UserId,
+                        u => u.Id,
+                        (role, user) => new
+                        {
+                            RoleName = role.Role.Name,
+                            User = user,
+                        })
+                    .GroupBy(group => group.RoleName)
+                    .Select(group => new  { RoleName = group.Key, Users = group })
+                    .ToList()
+                    .ToDictionary(k => k.RoleName, v => v.Users.Select(us => new UserDto(us.User))
+                    .ToList());
 
                 return users;
             }

@@ -14,6 +14,8 @@ namespace EuroJobsCrm.Dto
         public int? CtgId { get; set; }
         public string Name { get; set; }
 
+        public string UserRole { get; set; }
+
 
         public UserDto()
         {

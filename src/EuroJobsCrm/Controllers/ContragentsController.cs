@@ -38,7 +38,7 @@ namespace EuroJobsCrm.Controllers
                         (c, em) => new { c.Contragent, c.Addresses, c.ContactPersons, Employees = em })
                     .GroupJoin(context.DocumentFiles.Where(f => f.DcfAuditRu == null && f.DcfCntId != null), c => c.Contragent.CgtId, f => f.DcfCntId,
                         (c, f) => new { c.Contragent, c.Addresses, c.ContactPersons, c.Employees, Files = f })
-                    .Join(context.AspNetUsers, c => c.Contragent.CgtResponsibleUser, u => u.Id,
+                    .LeftJoin(context.AspNetUsers, c => c.Contragent.CgtResponsibleUser, u => u.Id,
                         (c, u) => new { c.Contragent, c.Addresses, c.ContactPersons, c.Employees, c.Files, ResponsibleUser = u })
                     .GroupJoin(context.AspNetUsers.Join(context.UsersToContragents, c => c.Id, u => u.UtcUsrId, (c, u) => new { User = c, ContragentUser = u })
                     , c => c.Contragent.CgtId, u => u.ContragentUser.UtcCtgId,
@@ -66,7 +66,8 @@ namespace EuroJobsCrm.Controllers
                         CtgId = e.CtgId,
                         Email = e.Email,
                         Name = e.Name,
-                        UserName = e.UserName
+                        UserName = e.UserName,
+                        UserRole = null
                     }).ToList()))
                     .ToList();
 

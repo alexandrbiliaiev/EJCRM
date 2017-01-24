@@ -1,112 +1,114 @@
-	<div id="popupContainer"  class="container body-content">
-		<md-content >
-			<section class="demo-container md-whiteframe-z1">
-				<md-toolbar>
-					<div class="md-toolbar-tools">
-						<h2>
-							<span>{{'USERS'|translate}}</span>
-						</h2>
-						<span flex></span>
+<div id="popupContainer" class="container body-content">
+	<md-content>
+		<section class="demo-container md-whiteframe-z1">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<h2>
+						<span>{{'USERS'|translate}}</span>
+					</h2>
+					<span flex></span>
 
-						<md-button class="md-icon-button" aria-label="Search" ng-show="!showSearch" ng-click="showSearch = !showSearch">
-							<md-icon md-font-icon="ion-search"></md-icon>
-						</md-button>
-						<md-button class="md-icon-button" aria-label="Search" ng-show="showSearch" ng-click="showSearch = !showSearch">
-							<md-icon md-font-icon="ion-android-close"></md-icon>
-						</md-button>
-					</div>
-					<md-toolbar class="md-hue-1" ng-show="showSearch">
-						<div class="md-toolbar-tools">
-							<md-input-container class="md-block" flex="100" ng-show="showSearch">
-								<input aria-label="input" ng-model="searchString" style="color:white; font-size:14pt;" placeholder="{{'SEARCH'| translate}} ..." />
-							</md-input-container>
-						</div>
-					</md-toolbar>
-				</md-toolbar>
-				<div layout="row" layout-padding ng-cloak>
-					<md-content flex>
-						<md-list ng-cloak>
-							<md-subheader class="md-no-sticky" >{{'ADMINS'|translate}}</md-subheader>
-							<md-list-item class="md-2-line" ng-repeat="user in admins">
-								<md-icon style="font-size:32px;" md-font-icon="ion-ios-people" ></md-icon>
-								<div class="md-list-item-text">
-									<h4>{{'USER_NAME'| translate}}: <b>{{user.userName}}</b></h4>
-									<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
-								</div>
-							
-								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showResetPassConfirmDialog(user.id)">
-									<md-icon md-font-icon="ion-ios-refresh">
-										<md-tooltip md-direction="left">
-											{{ 'RESET_PASSWORD' | translate }}
-										</md-tooltip>
-									</md-icon>
-								</md-button>
-							</md-list-item>
-
-							<md-subheader class="md-no-sticky" >{{'ACCOUNTINGS'|translate}}</md-subheader>
-							<md-list-item class="md-2-line" ng-repeat="user in accountingUsers">
-								<md-icon style="font-size:32px;" md-font-icon="ion-calculator" ></md-icon>
-								<div class="md-list-item-text">
-									<h4>{{'USER_NAME'| translate}}: <b>{{user.userName}}</b></h4>
-									<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
-								</div>
-							
-								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showResetPassConfirmDialog(user.id)">
-									<md-icon md-font-icon="ion-ios-refresh">
-										<md-tooltip md-direction="left">
-											{{ 'RESET_PASSWORD' | translate }}
-										</md-tooltip>
-									</md-icon>
-								</md-button>
-							</md-list-item>
-
-							<md-subheader class="md-no-sticky" >{{'ADVANCED_USERS'|translate}}</md-subheader>
-							<md-list-item class="md-2-line" ng-repeat="user in advancedUsers">
-								<md-icon style="font-size:32px;" md-font-icon="ion-person-stalker" ></md-icon>
-								<div class="md-list-item-text">
-									<h4>{{'USER_NAME'| translate}}: <b>{{user.userName}}</b></h4>
-									<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
-								</div>
-							
-								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showResetPassConfirmDialog(user.id)">
-									<md-icon md-font-icon="ion-ios-refresh">
-										<md-tooltip md-direction="left">
-											{{ 'RESET_PASSWORD' | translate }}
-										</md-tooltip>
-									</md-icon>
-								</md-button>
-							</md-list-item>
-
-							<md-subheader class="md-no-sticky" >{{'NORMAL_USERS'|translate}}</md-subheader>
-							<md-list-item class="md-2-line" ng-repeat="user in normalUsers">
-								<md-icon style="font-size:32px;" md-font-icon="ion-person" ></md-icon>
-								<div class="md-list-item-text">
-									<h4>{{'USER_NAME'| translate}}: <b>{{user.userName}}</b></h4>
-									<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
-								</div>
-							
-								<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showResetPassConfirmDialog(user.id)">
-									<md-icon md-font-icon="ion-ios-refresh">
-										<md-tooltip md-direction="left">
-											{{ 'RESET_PASSWORD' | translate }}
-										</md-tooltip>
-									</md-icon>
-								</md-button>
-							</md-list-item>
-						</md-list>
-						
-				
-					</md-content>
+					<md-button class="md-icon-button" aria-label="Search" ng-show="!showSearch" ng-click="showSearch = !showSearch">
+						<md-icon md-font-icon="ion-search"></md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="Search" ng-show="showSearch" ng-click="showSearch = !showSearch">
+						<md-icon md-font-icon="ion-android-close"></md-icon>
+					</md-button>
 				</div>
-			</section>
-		</md-content>
-		
-		<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
-			<a mfb-button icon="ion-person" label="{{'ADD_USER' | translate}}" ng-click="showAddNormalUserDialog()"></a>            
-			<a mfb-button icon="ion-person-stalker" label="{{'ADD_ADV_USER' | translate}}" ng-click="showAddAdvancedUserDialog()"></a>
-			<a mfb-button icon="ion-calculator" label="{{'ADD_ACCOUNTING_USER' | translate}}" ng-click="showAddAccountingUserDialog()"></a>
-			<a mfb-button icon="ion-ios-people" label="{{'ADD_ADMIN' | translate}}" ng-click="showAdminUserDialog()"></a>
-			
-			
-		</nav>
-	</div>
+				<md-toolbar class="md-hue-1" ng-show="showSearch">
+					<div class="md-toolbar-tools">
+						<md-input-container class="md-block" flex="100" ng-show="showSearch">
+							<input aria-label="input" ng-model="searchString" style="color:white; font-size:14pt;" placeholder="{{'SEARCH'| translate}} ..."
+							/>
+						</md-input-container>
+					</div>
+				</md-toolbar>
+			</md-toolbar>
+			<div layout="row" layout-padding ng-cloak>
+				<md-content flex>
+					<md-list ng-cloak>
+						<md-subheader class="md-no-sticky">{{'ADMINS'|translate}}</md-subheader>
+
+						<md-list-item class="md-2-line" ng-repeat="user in admins">
+							<md-icon style="font-size:32px;" md-font-icon="ion-ios-people"></md-icon>
+							<div class="md-list-item-text">
+								<h4>{{'USER_NAME'| translate}}: <b>{{user.name}}</b></h4>
+								<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
+							</div>
+
+							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showResetPassConfirmDialog(user.id)">
+								<md-icon md-font-icon="ion-ios-refresh">
+									<md-tooltip md-direction="left">
+										{{ 'RESET_PASSWORD' | translate }}
+									</md-tooltip>
+								</md-icon>
+							</md-button>
+						</md-list-item>
+
+						<md-subheader class="md-no-sticky">{{'ACCOUNTINGS'|translate}}</md-subheader>
+						<md-list-item class="md-2-line" ng-repeat="user in accountingUsers">
+							<md-icon style="font-size:32px;" md-font-icon="ion-calculator"></md-icon>
+							<div class="md-list-item-text">
+								<h4>{{'USER_NAME'| translate}}: <b>{{user.name}}</b></h4>
+								<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
+							</div>
+
+							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showResetPassConfirmDialog(user.id)">
+								<md-icon md-font-icon="ion-ios-refresh">
+									<md-tooltip md-direction="left">
+										{{ 'RESET_PASSWORD' | translate }}
+									</md-tooltip>
+								</md-icon>
+							</md-button>
+						</md-list-item>
+
+						<md-subheader class="md-no-sticky">{{'ADVANCED_USERS'|translate}}</md-subheader>
+						<md-list-item class="md-2-line" ng-repeat="user in advancedUsers">
+							<md-icon style="font-size:32px;" md-font-icon="ion-person-stalker"></md-icon>
+							<div class="md-list-item-text">
+								<h4>{{'USER_NAME'| translate}}: <b>{{user.name}}</b></h4>
+								<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
+							</div>
+
+							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showResetPassConfirmDialog(user.id)">
+								<md-icon md-font-icon="ion-ios-refresh">
+									<md-tooltip md-direction="left">
+										{{ 'RESET_PASSWORD' | translate }}
+									</md-tooltip>
+								</md-icon>
+							</md-button>
+						</md-list-item>
+
+						<md-subheader class="md-no-sticky">{{'NORMAL_USERS'|translate}}</md-subheader>
+						<md-list-item class="md-2-line" ng-repeat="user in normalUsers">
+							<md-icon style="font-size:32px;" md-font-icon="ion-person"></md-icon>
+							<div class="md-list-item-text">
+								<h4>{{'USER_NAME'| translate}}: <b>{{user.name}}</b></h4>
+								<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
+							</div>
+
+							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showResetPassConfirmDialog(user.id)">
+								<md-icon md-font-icon="ion-ios-refresh">
+									<md-tooltip md-direction="left">
+										{{ 'RESET_PASSWORD' | translate }}
+									</md-tooltip>
+								</md-icon>
+							</md-button>
+						</md-list-item>
+					</md-list>
+
+
+				</md-content>
+			</div>
+		</section>
+	</md-content>
+
+	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
+		<a mfb-button icon="ion-person" label="{{'ADD_USER' | translate}}" ng-click="showAddNormalUserDialog()"></a>
+		<a mfb-button icon="ion-person-stalker" label="{{'ADD_ADV_USER' | translate}}" ng-click="showAddAdvancedUserDialog()"></a>
+		<a mfb-button icon="ion-calculator" label="{{'ADD_ACCOUNTING_USER' | translate}}" ng-click="showAddAccountingUserDialog()"></a>
+		<a mfb-button icon="ion-ios-people" label="{{'ADD_ADMIN' | translate}}" ng-click="showAdminUserDialog()"></a>
+
+
+	</nav>
+</div>

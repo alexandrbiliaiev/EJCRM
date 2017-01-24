@@ -70,19 +70,23 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
             }
 
             if ($scope.addingUserMethod == usersService.AddNormalUser) {
-                usersService.normalUsers.push(response);
+                //usersService.normalUsers.push(response);
+                 $scope.reloadUsers();
             }
 
             if ($scope.addingUserMethod == usersService.AddAdvancedUser) {
-                usersService.advancedUsers.push(response);
+                //usersService.advancedUsers.push(response);
+                $scope.reloadUsers();
             }
 
             if ($scope.addingUserMethod == usersService.AddAdminUser) {
-                usersService.admins.push(response);
+               // usersService.admins.push(response);
+               $scope.reloadUsers();
             }
 
             if ($scope.addingUserMethod == usersService.AddAccountingUser) {
-                usersService.accountingUsers.push(response);
+               // usersService.accountingUsers.push(response);
+               $scope.reloadUsers();
             }
 
             $scope.user = usersService.getUser();
@@ -145,4 +149,24 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
     }).error(function () {
         $state.go('error');
     });
+
+    $scope.reloadUsers = function()
+    {
+        usersService.load().success(function (response) {
+
+        usersService.setAdmins(response['Admin']);
+        usersService.setAccountingUsers(response['Accounting']);
+        usersService.setAdvancedUsers(response['Advanced user']);
+        usersService.setNormalUsers(response['Normal user']);
+        
+
+        $scope.accountingUsers = usersService.accountingUsers;
+        $scope.admins = usersService.admins;
+        $scope.advancedUsers = usersService.advancedUsers;
+        $scope.normalUsers = usersService.normalUsers;
+      
+    }).error(function () {
+        $state.go('error');
+    });
+    }
 });
