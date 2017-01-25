@@ -208,10 +208,10 @@
 					<md-content flex>
 						<md-list ng-cloak style="margin-top: -11px">
 							<md-list-item class="md-2-line" ng-repeat="employee in contragent.employees | employeesSearchFor : searchString">
-								<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="showEditContactPersonDialog(contactperson)">
+								<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="editEmployee(employee)">
 								</md-icon>
 								<div class="md-list-item-text">
-									<h3><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
+									<h3 ng-click="editEmployee(employee)"><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
 									<p>
 										{{'BIRTHDATE'|translate}}: {{getFormatedDate(birthDate)}}
 									</p>
@@ -231,9 +231,16 @@
 										{{ 'LEFT' | translate }}
 									</md-tooltip>
 								</md-icon>
-								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)" ng-show="editClaim">
+								<!--<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)" ng-show="editClaim">
 									<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
-								</md-button>
+								</md-button> -->
+								<md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="editEmployee(employee)">
+										<md-icon class="material-icons md-24 md-dark">open_in_new
+											<md-tooltip md-direction="down">
+												{{ 'DETAILS' | translate }}
+											</md-tooltip>
+										</md-icon>
+									</md-button>
 								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)"
 									ng-show="deleteClaim">
 									<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>

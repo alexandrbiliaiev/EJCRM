@@ -7,12 +7,13 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
     $scope.userRole = $cookies.get('user_role');
     $scope.ctgId = $cookies.get('ctg_id');
-    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
-    $scope.acceptClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
-    $scope.rejectClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
-    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User';
+    $scope.acceptClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin'
+        || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
+    $scope.rejectClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin'
+        || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
+    $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced user';
     $scope.addClaim = $scope.userRole == 'Admin'
-        || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced User'
+        || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced user'
         || $scope.userRole == 'Normal user';
     $scope.detailClaim = $scope.addClaim;
     $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'CONTRAGENT';
@@ -23,7 +24,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
     $scope.isActive = false;
 
-    if ($scope.ctgId == '-1' || $scope.ctgId == null ) {
+    if ($scope.ctgId == '-1' || $scope.ctgId == null) {
         offersService.getOffer($state.params.id).success(function (response) {
             $scope.offer = response;
             $scope.isActive = true;
@@ -45,8 +46,13 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
         });
     }
 
-
     $scope.moment = moment;
+
+    $scope.goToEmployee = function (employee) {
+        $state.go('employee', {
+            id: employee.id
+        });
+    }
 
     $scope.blockButton = false;
 

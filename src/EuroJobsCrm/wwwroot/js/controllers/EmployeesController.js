@@ -6,9 +6,9 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
 
     $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
     $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin'
-        || $scope.userRole == 'Advanced User';
+        || $scope.userRole == 'Advanced user';
     $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin'
-        || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user'
+        || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user'
         || $scope.userRole == 'CONTRAGENT';
     $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
 

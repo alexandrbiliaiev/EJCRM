@@ -16,7 +16,7 @@
             <div layout="row" ng-show="Saving" layout-sm="column" layout-align="space-around">
                 <md-progress-circular md-mode="indeterminate"></md-progress-circular>
             </div>
-
+			<div ng-include="'/templates/saving_loader.html'"></div>
 			<form name="userForm"  ng-show="!Saving">
 
 				<div layout="column" layout-align="space-between none" layout-wrap>

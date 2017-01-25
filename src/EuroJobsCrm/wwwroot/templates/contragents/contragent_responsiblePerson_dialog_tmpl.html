@@ -13,7 +13,7 @@
             
             <div ng-include="'/templates/saving_loader.html'"></div>
 
-            <form name="responsiblePersonForm" ng-show="!Saving">
+            <form name="responsiblePersonForm" >
                 <md-list ng-cloak>
                     <md-list-item class="md-1-line" ng-repeat="user in users">
                         {{user.email}}

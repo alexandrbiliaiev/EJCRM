@@ -264,22 +264,22 @@ namespace EuroJobsCrm.Controllers
                 context.EmploymentRequests.Add(employmentRequest);
                 context.SaveChanges();
 
-                employee = context.Employees.FirstOrDefault(c => c.EmpId == employmentRequest.EtrEmpId);
-                contragent = context.Contragents.FirstOrDefault(c => c.CgtId == employee.EmpCtgId);
-                offer = context.Offers.FirstOrDefault(o => o.OfrId == employmentRequest.EtrOfrId);
-                responsibleUser = context.AspNetUsers.FirstOrDefault(u => u.Id == contragent.CgtResponsibleUser);
+            //    employee = context.Employees.FirstOrDefault(c => c.EmpId == employmentRequest.EtrEmpId);
+             //   contragent = context.Contragents.FirstOrDefault(c => c.CgtId == employee.EmpCtgId);
+             //   offer = context.Offers.FirstOrDefault(o => o.OfrId == employmentRequest.EtrOfrId);
+              //  responsibleUser = context.AspNetUsers.FirstOrDefault(u => u.Id == contragent.CgtResponsibleUser);
 
             }
 
-            IEmailMessageBuilder bodyBuilder = new PimpEmployeeBodyBuilder(new EmployeeDto(employee), new ContragentDto(contragent), new OfferDto(offer));
-            string emailBody = bodyBuilder.BuildBody();
-            string emailSubject = bodyBuilder.BuildSubject();
+           // IEmailMessageBuilder bodyBuilder = new PimpEmployeeBodyBuilder(new EmployeeDto(employee), new ContragentDto(contragent), new OfferDto(offer));
+           // string emailBody = bodyBuilder.BuildBody();
+           // string emailSubject = bodyBuilder.BuildSubject();
 
-            NotificationEmailSender emailSender = new NotificationEmailSender();
-            if (responsibleUser.Email != null)
-            {
+           // NotificationEmailSender emailSender = new NotificationEmailSender();
+           // if (responsibleUser.Email != null)
+          //  {
            //     await emailSender.SendEmailAsync(responsibleUser.Email, emailSubject, emailBody);
-            }
+        //    }
           //      await emailSender.SendEmailAsync("tadeusz@eurojobs.info.pl", emailSubject, emailBody);
 
             employmentRequestDto.Id = employmentRequest.EtrId;

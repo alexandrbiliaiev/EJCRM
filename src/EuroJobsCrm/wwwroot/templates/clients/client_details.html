@@ -340,7 +340,7 @@
 									<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="viewEmployeeDatails(employee.id)">
 									</md-icon>
 									<div class="md-list-item-text">
-										<h3><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
+										<h3 ng-click="viewEmployeeDatails(employee.id)"><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
 										<p>
 											{{'BIRTHDATE'|translate}}: {{moment(employee.birthDate).format('DD-MM-YYYY')}}
 										</p>
@@ -360,7 +360,7 @@
 											{{ 'LEFT' | translate }}
 										</md-tooltip>
 									</md-icon>
-									<md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="goToEmployeeDetails(employee.id)">
+									<md-button aria-label="edit" class="md-icon-button md-secondary" ng-click="viewEmployeeDatails(employee.id)">
 										<md-icon class="material-icons md-24 md-dark">open_in_new
 											<md-tooltip md-direction="down">
 												{{ 'DETAILS' | translate }}

@@ -7,6 +7,7 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
     $scope.advancedUsers = new Array();
     $scope.normalUsers = new Array();
     $scope.Saving = false;
+    $scope.isActive = false;
 
     console.log($cookies.get('user_role'));
 
@@ -53,6 +54,7 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
             return;
         }
 
+        $scope.Saving = true;
         $scope.addingUserMethod($scope.user).success(function (response) {
             if (response.success != true) {
                 $mdDialog.show(
@@ -91,6 +93,7 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
 
             $scope.user = usersService.getUser();
             $mdDialog.hide();
+            $scope.Saving = false;
 
         }).error(function () {
             $state.go('error');
@@ -145,6 +148,8 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
         $scope.admins = usersService.admins;
         $scope.advancedUsers = usersService.advancedUsers;
         $scope.normalUsers = usersService.normalUsers;
+
+        $scope.isActive = true;
       
     }).error(function () {
         $state.go('error');
