@@ -10,7 +10,7 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeesController', func
     $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin'
         || $scope.userRole == 'Advanced User' || $scope.userRole == 'Normal user'
         || $scope.userRole == 'CONTRAGENT';
-    $scope.deleteClaim = $scope.addClaim;
+    $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
 
     $scope.isActive = false;
     $scope.Saving = false;

@@ -23,7 +23,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
     $scope.isActive = false;
 
-    if ($scope.ctgId == '-1') {
+    if ($scope.ctgId == '-1' || $scope.ctgId == null ) {
         offersService.getOffer($state.params.id).success(function (response) {
             $scope.offer = response;
             $scope.isActive = true;
@@ -224,7 +224,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
     $scope.reloadFreeEmployees = function () {
         if ($scope.ctgId == '-1') {
-            employeesService.load().success(function (response) {
+            employeesService.loadFreeEmp().success(function (response) {
                 employeesService.employees = response;
                 $scope.freeEmployees = employeesService.employees;
                 // $scope.manageFreeEmployees();

@@ -16,6 +16,11 @@ angular.module('EuroJobsCrm.services')
                 data: ctgid
             });
         }
+
+        employees.loadFreeEmp = function (){
+            return $http.get('api/Employees/GetAllFree');
+        }
+
          employees.GetByCtgForReq = function (ctgid) {
             return $http({
                 url: 'api/Employees/GetByCtgForReq',

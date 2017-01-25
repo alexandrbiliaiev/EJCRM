@@ -47,6 +47,31 @@ namespace EuroJobsCrm.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/Employees/GetAllFree")]
+        public IEnumerable<EmployeeDto> GetAllFreeEmployees()
+        {
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                var empReq = context.EmploymentRequests.Where(r => r.EtrAuditRd == null).ToList();
+
+
+                var employees = context.Employees.Where(e => e.EmpAuditRd == null)
+                    .GroupJoin(context.IdentityDocuments.Where(d => d.IdcAuditRd == null), e => e.EmpId, d => d.IdcEmpId,
+                        (e, d) => new { employee = e, documents = d })
+                    .ToList()
+                    .Select(e => new EmployeeDto(e.employee, e.documents, new List<DocumentFiles>()))
+                    .ToList();
+
+                foreach (EmploymentRequests e in empReq)
+                {
+                    employees.RemoveAll(x => x.Id == e.EtrEmpId);
+                }
+
+                return employees;
+            }
+        }
+
         [HttpPost]
         [Route("api/Employees/GetByCtgForReq")]
         public IEnumerable<EmployeeDto> GetEmployeesByCtgForReq([FromBody] string ctgId)

@@ -20,7 +20,6 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
         }
 
         clientsService.load().success(function (response) {
-
             clientsService.clients = response;
             $scope.clients = clientsService.clients;
             $scope.isActive = true;

@@ -72,17 +72,22 @@ namespace EuroJobsCrm.Controllers
                         UsersToContragents u;
                         u = context.UsersToContragents.FirstOrDefault(c => c.UtcUsrId == user.Id);
                         
-                        if (u == null)
+                        if (u.UtcCtgId == null)
                         {
-                            Response.Cookies.Append("user_name", "NoName");
-                            Response.Cookies.Append("ctg_id", "-1");
-                           
+                            Response.Cookies.Append("ctg_id", "-1");  
                         }
                         else
                         {
-                            if (u.UtcUsrName != null) Response.Cookies.Append("user_name", u.UtcUsrName);
                             if (u.UtcCtgId != null) Response.Cookies.Append("ctg_id", u.UtcCtgId.ToString());
+                        }
 
+                        if (u.UtcUsrName == null)
+                        {
+                            Response.Cookies.Append("user_name", "NoName");
+                        }
+                        else
+                        {
+                            Response.Cookies.Append("user_name", u.UtcUsrName);
                         }
                        
                     }
