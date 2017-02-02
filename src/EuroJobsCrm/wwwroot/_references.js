@@ -8,6 +8,7 @@
 /// <reference path="js/controllers/employeemanagecontroller.js" />
 /// <reference path="js/controllers/employeescontroller.js" />
 /// <reference path="js/controllers/EventController.js" />
+/// <reference path="js/controllers/languagecontroller.js" />
 /// <reference path="js/controllers/OfferManageController.js" />
 /// <reference path="js/controllers/offerscontroller.js" />
 /// <reference path="js/controllers/tabsController.js" />

@@ -50,11 +50,11 @@
                     </div>
                     <div class="navbar-collapse collapse navbar-inverse-collapse">
                         @if (SignInManager.IsSignedIn(User)) {
-                            <ul class="nav navbar-nav">
+                            <ul class="nav navbar-nav" ng-cloak>
 
                                 @if (User.IsInRole("CONTRAGENT"))
                                 {
-                                    <li><a asp-area="" asp-controller="Offers" asp-action="Index" asp-fragment="off_all">{{ 'Offers' | translate }}</a></li>
+                                    <li><a k asp-area="" asp-controller="Offers" asp-action="Index" asp-fragment="off_all">{{ 'Offers' | translate }}</a></li>
                                     <li><a asp-area="" asp-controller="Employee" asp-action="Index" asp-fragment="emp_all">{{ 'Employees' | translate }}</a></li>
                                 }
                                 else
@@ -83,6 +83,8 @@
                                     <li><a asp-area="" asp-controller="Calendar" asp-action="Index" asp-fragment="cal">{{ 'CALENDAR' | translate }}</a></li>
                                 }
                                 }
+
+                                
                             </ul>
                         } 
                         @await Html.PartialAsync("_LoginPartial")
@@ -94,7 +96,12 @@
                 @RenderBody()
                 <hr />
                 <footer>
-                    <p>&copy; 2016 - EuroJobsCrm</p>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p>&copy; 2016 - EuroJobsCrm</p>
+                            </div>
+                        </div>
+                    
                 </footer>
             </div>
 

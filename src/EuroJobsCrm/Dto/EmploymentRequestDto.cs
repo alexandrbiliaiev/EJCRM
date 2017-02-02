@@ -13,7 +13,8 @@ namespace EuroJobsCrm.Dto
         /// 0 - pending
         /// 1 - accepted
         /// 2 - rejected
-        /// 3 - finished
+        /// 3 - finished good (candidate returns to contragent)
+        /// 4 - finished not good (change candidate status to "Run" and block futher adding to offers)
         /// </summary>
         public int Status { get; set; }
         public int? ContractId { get; set; }

@@ -12,6 +12,7 @@ angular.module('EuroJobsCrm.controllers').controller('OffersController', functio
     $scope.Saving = false;
     $scope.isActive = false;
     $scope.expandOffers = true;
+    $scope.currentLang;
 
     $scope.awaitingCandidates = [];
 
@@ -97,6 +98,11 @@ angular.module('EuroJobsCrm.controllers').controller('OffersController', functio
         $scope.offers = offersService.offers;
         return;
     }
+
+    $scope.changeLanguage = function (langKey) {
+        $translate.use(langKey);
+        $scope.currentLang = $translate.proposedLanguage() || $translate.use();
+    };
 
     offersService.load().success(function (response) {
         offersService.offers = response;

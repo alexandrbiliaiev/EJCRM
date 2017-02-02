@@ -4,12 +4,15 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
+
+
+
 @if (SignInManager.IsSignedIn(User))
 {
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link glyp" >
+                <button ng-cloak type="submit" class="btn btn-link navbar-btn navbar-link glyp" >
                     <i class="material-icons">account_circle
                          <md-tooltip md-direction="down">
                           
@@ -27,3 +30,19 @@ else
         <li><a asp-area="" asp-controller="Account" asp-action="Login">{{ 'Log in' | translate }}</a></li>
     </ul>
 }
+
+
+
+<ul class="nav navbar-nav navbar-right" >
+
+
+   <md-select ng-cloak name="type" ng-model="" data-placeholder="currentLang" ng-controller="OffersController">
+		<md-option md-value = '1' ng-click = "changeLanguage('pl')">{{ 'PL' | translate }}</md-option>
+		<md-option ng-click = "changeLanguage('ru')">{{ 'RU' | translate }}</md-option>
+		<md-option ng-click = "changeLanguage('en')">{{ 'EN' | translate }}</md-option>
+  </md-select> 
+
+      <!-- <li ng-controller="OffersController" ng-show = "currentLang != 'en'"><a ng-click = "changeLanguage('en')" >{{ 'EN' | translate }}</a></li>
+        <li ng-controller="OffersController" ng-show = "currentLang != 'pl'"><a ng-click = "changeLanguage('pl')" >{{ 'PL' | translate }}</a></li>
+        <li ng-controller="OffersController" ng-show = "currentLang != 'ru'"><a ng-click = "changeLanguage('ru')" >{{ 'RU' | translate }}</a></li> -->
+</ul>
