@@ -1,4 +1,44 @@
-﻿var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngFileUpload', 'ngRoute', 'ngCookies', 'pascalprecht.translate', 'angular-jsvat', 'ui.router', 'EuroJobsCrm.services', 'EuroJobsCrm.controllers', 'ng-mfb', 'ngMaterialDatePicker', 'daypilot'])
+﻿Array.prototype.ContainsId = function (id) {
+    for (var i in this){
+        if (this[i].id == id){
+            return true;
+        }
+    }
+    return false;
+}
+
+Array.prototype.getById = function (id) {
+    for (var i in this){
+        if (this[i].id == id){
+            return this[i];
+        }
+    }
+    return undefined;
+}
+
+Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
+
+Date.prototype.addTime = function(h, m) {
+    this.setTime(this.getTime() + (h*60*60*1000) + (m*60*1000));
+    return this;
+}
+
+Date.prototype.normalize = function() {
+    offset = this.getTimezoneOffset()*60*1000;
+    this.setTime(this.getTime() - offset);
+    return this;
+}
+
+Date.prototype.addHours = function(hours) {
+    this.setTime(this.getTime() + hours * 60 * 60 * 1000);
+    return this;
+}
+
+var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngFileUpload', 'ngRoute', 'ngCookies', 'pascalprecht.translate', 'angular-jsvat', 'ui.router', 'EuroJobsCrm.services', 'EuroJobsCrm.controllers', 'ng-mfb', 'ngMaterialDatePicker', 'daypilot'])
 
     .config(function ($translateProvider, $routeProvider, $stateProvider, $mdThemingProvider, $httpProvider, $mdDateLocaleProvider) {
         $translateProvider.useStaticFilesLoader({

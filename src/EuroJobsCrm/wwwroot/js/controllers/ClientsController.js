@@ -13,6 +13,8 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
 
         $scope.isActive = false;
 
+        $scope.moment = moment;
+
         if (clientsService.clients != undefined) {
             $scope.clients = clientsService.clients;
             $scope.isActive = true;

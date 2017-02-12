@@ -20,6 +20,7 @@ namespace EuroJobsCrm.Dto
         public List<EmployeeDto> Employees { get; set; }
         public List<EmploymentRequestDto> EmploymentRequests { get; set; }
         public List<DocumentFilesDto> Files { get; set; }
+        public List<EventDetailsDto> Notes { get; set; }
 
         public ClientDto()
         {
@@ -34,6 +35,7 @@ namespace EuroJobsCrm.Dto
             Offers = offers?.Select(o => new OfferDto(o)).ToList();
             Employees = acceptedEmployees?.Select(e => new EmployeeDto(e)).ToList();
             Files = files?.Select(f => new DocumentFilesDto(f)).ToList();
+            
         }
 
         public ClientDto(Clients client)

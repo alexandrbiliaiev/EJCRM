@@ -141,6 +141,11 @@ a:active {
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
+.event-footer-text{
+    color: #928d8f;
+    font-size: 9px;
+}
+
 
 
 

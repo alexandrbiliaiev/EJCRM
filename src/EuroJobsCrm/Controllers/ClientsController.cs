@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -89,26 +88,30 @@ namespace EuroJobsCrm.Controllers
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
-
                 var clientEntity = context.Clients.FirstOrDefault(c => c.CltAuditRd == null && c.CltId == clientId);
                 var addresses = context.Addresses.Where(a => a.AdrAuditRd == null && clientId == a.ArdCltId).ToList();
                 var contactPersons = context.ContactPersons.Where(a => a.CtpAuditRd == null && clientId == a.CtpCltId).ToList();
                 var offers = context.Offers.Where(o => o.OfrAuditRd == null && clientId == o.OfrCltId).ToList();
                 var acceptedEmployees = context.Employees.Where(e => e.EmpAuditRd == null && e.EmpCltId != null && clientId == e.EmpCltId).ToList();
                 var files = context.DocumentFiles.Where(f => f.DcfAuditRd == null && clientId == f.DcfCliId).ToList();
-
-                var time = sw.ElapsedMilliseconds;
-
+                var notes = context.Notes.Where(n => n.NotAuditRd == null && n.NotCltId == clientId).LeftJoin(context.UsersToContragents,
+                    n => n.NotAuditCu, u => u.UtcUsrId, (n, u) => new
+                    {
+                        Note = n, UserData = u
+                    }).ToList();
 
                 ClientDto client = new ClientDto(clientEntity, addresses, contactPersons, offers,
-                    acceptedEmployees, files);
-
-
-                client.FreeVacancies = 0;
-                client.AwaitingVacancies = 0;
-                client.BusyVacancies = 0;
+                    acceptedEmployees, files)
+                {
+                    FreeVacancies = 0,
+                    AwaitingVacancies = 0,
+                    BusyVacancies = 0,
+                    Notes = notes.Select(n=> new EventDetailsDto(n.Note)
+                    {
+                        TargetUserName = n.UserData.UtcUsrName,
+                        TargetUser = n.UserData.UtcUsrId
+                    }).ToList()
+                };
 
                 foreach (var offer in client.Offers)
                 {

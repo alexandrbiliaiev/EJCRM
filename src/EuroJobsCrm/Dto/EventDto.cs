@@ -15,6 +15,7 @@ namespace EuroJobsCrm.Dto
         public int? ContragentId { get; set; }
         public int? ClientId { get; set; }
         public int? EmployeeId { get; set; }
+        public DateTime? CreatingDate { get; set; }
 
         public EventDto()
         {
@@ -33,6 +34,7 @@ namespace EuroJobsCrm.Dto
             ContragentId = n.NotCtgId;
             ClientId = n.NotCltId;
             EmployeeId = n.NotEmp;
+            CreatingDate = n.NotAuditCd;
         }
     }
 
