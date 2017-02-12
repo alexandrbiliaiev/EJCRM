@@ -81,8 +81,51 @@ text {
   opacity:0;
 }
 
+md-nav-bar .md-nav-bar {
+  background: rgb(63,81,181);
+  
+}
+  .md-button._md-nav-button.md-unselected {
+    color: white;
+  }
 
+md-nav-bar md-nav-ink-bar {
+  background: rgb(63,81,181);
+}
 
+md-nav-bar.md-default-theme .md-button._md-nav-button.md-unselected, md-nav-bar .md-button._md-nav-button.md-unselected {
+    color: white;
+}
+
+.md-button.md-default-theme.md-accent, .md-button.md-accent {
+    color: white;
+}
+
+a { color: inherit; } 
+
+a:link {
+    color: inherit;
+}
+
+/* visited link */
+a:visited {
+    color: inherit;
+}
+
+/* mouse over link */
+a:hover {
+    color: inherit;
+}
+
+/* selected link */
+a:active {
+    color: inherit;
+}
+
+  md-nav-ink-bar {
+    color: '{{accent-color}}';
+    background: '{{accent-color}}';
+  }
 
 /* Rules for sizing the icon. */
 .material-icons.md-18 { font-size: 18px; }

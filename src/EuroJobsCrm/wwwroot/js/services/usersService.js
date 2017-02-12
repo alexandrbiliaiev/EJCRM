@@ -15,6 +15,14 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
+        users.ChangeUserLanguage = function (utc) {
+             return $http({
+                url: 'api/Users/ChangeUserLanguage',
+                method: "POST",
+                data: utc
+            });
+        }
+
         users.AddAdvancedUser = function (user) {
             return $http({
                 url: 'api/Users/AddAdvancedUser',
@@ -23,7 +31,7 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
-         users.AddContragentUser = function (user, id) {
+        users.AddContragentUser = function (user, id) {
             return $http({
                 url: 'api/Users/AddContragentUser',
                 method: "POST",
@@ -55,11 +63,11 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
-        users.resetPasswordForUser = function(userId){
+        users.resetPasswordForUser = function (userId) {
             return $http({
                 url: 'api/Users/ResetPassword',
                 method: "POST",
-                data: { id: userId}
+                data: { id: userId }
             });
         }
 
@@ -77,19 +85,19 @@ angular.module('EuroJobsCrm.services')
             }
         }
 
-        users.setAdmins = function(admins){
+        users.setAdmins = function (admins) {
             users.admins = admins != undefined ? admins : new Array();
         }
 
-        users.setAccountingUsers = function(accountingUsers ){
+        users.setAccountingUsers = function (accountingUsers) {
             users.accountingUsers = accountingUsers != undefined ? accountingUsers : new Array();
         }
 
-        users.setAdvancedUsers = function(advUsers){
+        users.setAdvancedUsers = function (advUsers) {
             users.advancedUsers = advUsers != undefined ? advUsers : new Array();
         }
 
-        users.setNormalUsers = function(normalUsers){
+        users.setNormalUsers = function (normalUsers) {
             users.normalUsers = normalUsers != undefined ? normalUsers : new Array();
         }
 

@@ -9,5 +9,6 @@ namespace EuroJobsCrm.Models
         public string UtcUsrId { get; set; }
         public string UtcUsrName { get; set; }
         public int? UtcCtgId { get; set; }
+        public string UtcLng { get; set; }
     }
 }

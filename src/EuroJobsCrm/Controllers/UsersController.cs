@@ -87,6 +87,25 @@ namespace EuroJobsCrm.Controllers
         }
 
         [HttpPost]
+        [Route("api/Users/ChangeUserLanguage")]
+        public bool ChangeUserLanguage([FromBody] UsersToContragentsDto utc)
+        {
+            using (var context = new DB_A12601_bielkaContext())
+            {
+                var data = context.UsersToContragents.Where(u => u.UtcUsrId == utc.UsrId).FirstOrDefault();
+
+                data.UtcLng = utc.PrefLng;
+
+                context.SaveChanges();
+
+            }
+
+            return true;
+        }
+
+
+
+        [HttpPost]
         [Route("api/Users/AddNormalUser")]
         public async Task<UserDto> AddNormalUser([FromBody] UserDto user)
         {

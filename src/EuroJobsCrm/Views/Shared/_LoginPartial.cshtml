@@ -11,17 +11,34 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
+            <li style="margin-top: 8px;">
+                <md-menu >
+                    <md-button ng-click="$mdOpenMenu()" class="md-icon-button" aria-label="Open sample menu">
+                    {{currentLang}}
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item>
+                            <md-button ng-click="changeLanguage('pl')">PL</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="changeLanguage('en')">EN</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="changeLanguage('ua')">UA</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="changeLanguage('ru')">RU</md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </li>
             <li>
-                <button ng-cloak type="submit" class="btn btn-link navbar-btn navbar-link glyp" >
-                    <i class="material-icons">account_circle
-                         <md-tooltip md-direction="down">
-                          
-                        </md-tooltip>
-                    </i>
+                <button ng-cloak type="submit" class="btn btn-link navbar-btn navbar-link glyp">
                     {{ 'LOGOUT' | translate }}
                 </button>
             </li>
-        </ul>
+
+    </ul>
     </form>
 }
 else
@@ -30,19 +47,3 @@ else
         <li><a asp-area="" asp-controller="Account" asp-action="Login">{{ 'Log in' | translate }}</a></li>
     </ul>
 }
-
-
-
-<ul class="nav navbar-nav navbar-right" >
-
-
-   <md-select ng-cloak name="type" ng-model="" data-placeholder="currentLang" ng-controller="OffersController">
-		<md-option md-value = '1' ng-click = "changeLanguage('pl')">{{ 'PL' | translate }}</md-option>
-		<md-option ng-click = "changeLanguage('ru')">{{ 'RU' | translate }}</md-option>
-		<md-option ng-click = "changeLanguage('en')">{{ 'EN' | translate }}</md-option>
-  </md-select> 
-
-      <!-- <li ng-controller="OffersController" ng-show = "currentLang != 'en'"><a ng-click = "changeLanguage('en')" >{{ 'EN' | translate }}</a></li>
-        <li ng-controller="OffersController" ng-show = "currentLang != 'pl'"><a ng-click = "changeLanguage('pl')" >{{ 'PL' | translate }}</a></li>
-        <li ng-controller="OffersController" ng-show = "currentLang != 'ru'"><a ng-click = "changeLanguage('ru')" >{{ 'RU' | translate }}</a></li> -->
-</ul>
