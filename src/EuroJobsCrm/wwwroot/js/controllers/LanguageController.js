@@ -1,21 +1,45 @@
 angular.module('EuroJobsCrm.controllers').controller('LanguageController',
     function ($scope, $location, $translate, $http, $state, $mdDialog, $routeParams, $cookies,
         clientsService, countriesService, contactpersonsService, addressesService, offersService,
-        employeesService, fileService) {
+        employeesService, fileService, usersService) {
+
+        $scope.currentLang = $cookies.get('user_lng');
+
+        $scope.$location = $location;
 
 
-        $scope.setLanguage = setLanguage;
+        $scope.changeLanguage = function (lang) {
 
-        function setLanguage(lang) {
-            $cookies.__APPLICATION_LANGUAGE = lang;
-            $translate.use(lang);
+            utc = {
+                UsrId: $cookies.get('id'),
+                prefLng: lang
+            }
+
+            usersService.ChangeUserLanguage(utc).success(function (response) {
+                $translate.use(lang);
+                $cookies.put('user_lng', lang);
+                $scope.currentLang = lang;
+            }).error(function () {
+                $state.go('error');
+            });
         }
 
-        function init() {
-            var lang = $cookies.__APPLICATION_LANGUAGE || 'en';
-            setLanguage(lang);
+        $translate.use($cookies.get('user_lng'));
+
+
+
+        this.notificationsEnabled = true;
+        this.toggleNotifications = function () {
+            this.notificationsEnabled = !this.notificationsEnabled;
+        };
+
+        $scope.goToClients = function () {
+            $state.go('clients');
         }
 
-        init();
+    
+
+
+
 
     })

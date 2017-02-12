@@ -89,11 +89,17 @@ namespace EuroJobsCrm.Controllers
                         {
                             Response.Cookies.Append("user_name", u.UtcUsrName);
                         }
-                       
+
+                        //write preffered language to cookies
+                        Response.Cookies.Append("user_lng", u.UtcLng);
+                        Response.Cookies.Append("id", u.UtcUsrId);
+
                     }
                             //writes role's name to cookies
                             Response.Cookies.Append("user_role", userRoles.FirstOrDefault());
-                    
+                            
+
+
                     _logger.LogInformation(1, "User logged in.");
                     return RedirectToLocal(returnUrl);
                 }

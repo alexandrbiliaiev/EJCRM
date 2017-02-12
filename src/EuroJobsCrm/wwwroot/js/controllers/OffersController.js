@@ -16,6 +16,10 @@ angular.module('EuroJobsCrm.controllers').controller('OffersController', functio
 
     $scope.awaitingCandidates = [];
 
+    $scope.goToOffers = function() {
+        $state.go('offers');
+    }
+
     $scope.countCandidates = function () {
         for (i in $scope.offer.employmentRequests) {
 

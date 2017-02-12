@@ -864,13 +864,17 @@ namespace EuroJobsCrm.Models
 
                 entity.Property(e => e.UtcCtgId).HasColumnName("utc_ctg_id");
 
+                entity.Property(e => e.UtcLng)
+                    .HasColumnName("utc_lng")
+                    .HasColumnType("varchar(2)");
+
                 entity.Property(e => e.UtcUsrId)
                     .HasColumnName("utc_usr_id")
                     .HasColumnType("varchar(100)");
 
                 entity.Property(e => e.UtcUsrName)
                     .HasColumnName("utc_usr_name")
-                    .HasColumnType("varchar(50)");
+                    .HasMaxLength(50);
             });
         }
 
