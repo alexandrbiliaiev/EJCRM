@@ -97,7 +97,10 @@
 									<h4><b>{{contactperson.name}} {{contactperson.surname}} ({{contactperson.position}})<b></h4>
 											<p>
 												{{'Email'|translate}}: <b>{{contactperson.email}}</b> {{'Phone'|translate}}: <b>{{contactperson.phoneNumber}}</b>
-										<br/> {{'Skype'|translate}}: <b>{{contactperson.skype}}</b> {{'Messagner'|translate}}: <b>{{contactperson.messanger}}</b>
+										<br/> {{'Skype'|translate}}: <b>{{contactperson.skype}}</b> 
+										<b>{{'Skype'|translate}}</b>: {{contactperson.skype}} 
+                                                <b ng-show="contactperson.messangerType == 0">WhatsApp</b>
+                                                <b ng-show="contactperson.messangerType == 1">Viber</b>: {{contactperson.messanger}}
 										</p>
 								</div>
 								<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showEditContactPersonDialog(contactperson)"
