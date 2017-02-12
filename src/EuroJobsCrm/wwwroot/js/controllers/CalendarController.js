@@ -2,46 +2,6 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
                                                                                      $routeParams, $cookies, calendarService, usersService,
                                                                                      contragentsService, clientsService, employeesService) {
 
-    Array.prototype.ContainsId = function (id) {
-        for (var i in this){
-            if (this[i].id == id){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    Array.prototype.getById = function (id) {
-        for (var i in this){
-            if (this[i].id == id){
-                return this[i];
-            }
-        }
-        return undefined;
-    }
-
-    Date.prototype.addDays = function(days) {
-        var date = new Date(this.valueOf());
-        date.setDate(date.getDate() + days);
-        return date;
-    }
-
-    Date.prototype.addTime = function(h, m) {
-        this.setTime(this.getTime() + (h*60*60*1000) + (m*60*1000));
-        return this;
-    }
-
-    Date.prototype.normalize = function() {
-        offset = this.getTimezoneOffset()*60*1000;
-        this.setTime(this.getTime() - offset);
-        return this;
-    }
-
-    Date.prototype.addHours = function(hours) {
-        this.setTime(this.getTime() + hours * 60 * 60 * 1000);
-        return this;
-    }
-
     function convertToDayPilotEvent(response) {
         response.start = new DayPilot.Date(response.startDate);
         response.end = new DayPilot.Date(response.endDate);
@@ -192,7 +152,10 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
 
         $scope.currentEvent.startDate = $scope.currentEvent.startDate.normalize();
         $scope.currentEvent.endDate = $scope.currentEvent.endDate.normalize();
-        $scope.currentEvent.endDate = $scope.currentEvent.remindDate.normalize();
+        if ($scope.currentEvent.remindDate != undefined)
+        {
+            $scope.currentEvent.remindDate = $scope.currentEvent.remindDate.normalize();
+        }
 
         $scope.Saving = true;
         calendarService.saveEvent($scope.currentEvent).success(function (response) {

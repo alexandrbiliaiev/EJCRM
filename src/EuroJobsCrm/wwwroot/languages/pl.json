@@ -240,5 +240,8 @@
     "TARGET_EMPLOYEE":"Dodaj do pracownika",
     "LOADING":"Trwa ładowanie danych...",
     "TIME":"Czas",
-    "STREET": "Ulica"
+    "STREET": "Ulica",
+    "ADDED_BY":"Dodano przez:",
+    "DELETE_CONFIRM_TITLE":"Usunięcie",
+    "DELETE_CONFIRM_TEXT":"Czy napewno chcesz usunąć?"
 }
