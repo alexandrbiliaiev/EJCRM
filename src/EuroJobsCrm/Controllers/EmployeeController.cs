@@ -5,6 +5,7 @@ using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace EuroJobsCrm.Controllers
 {
@@ -343,6 +344,77 @@ namespace EuroJobsCrm.Controllers
             }
         }
 
-        
+
+        [HttpPost]
+        [Route("/api/Offers/FinishEmployeeContract")]
+        public async Task<bool> FinishEmployeeContract([FromBody] EmploymentRequestDto employmentRequestDto)
+        {
+            try
+            {
+                var employee = new Employees();
+                var contragent = new Contragents();
+                var offer = new Offers();
+                var responsibleUser = new AspNetUsers();
+                string status;
+
+                using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+                {
+                    EmploymentRequests employmentRequest =
+                        context.EmploymentRequests.FirstOrDefault(e => e.EtrOfrId == employmentRequestDto.OfferId && e.EtrEmpId == employmentRequestDto.EmployeeId && e.EtrAuditRd == null);
+
+                    if (employmentRequest == null)
+                    {
+                        return false;
+                    }
+
+                    employmentRequest.EtrAuditMd = DateTime.UtcNow;
+                    employmentRequest.EtrAuditMu = User.GetUserId();
+                    employmentRequest.EtrStatus = employmentRequestDto.Status;
+
+                    status = employmentRequestDto.Status == 1 ? "Accepted" : "Rejected";
+
+                    employee = context.Employees.FirstOrDefault(c => c.EmpId == employmentRequest.EtrEmpId);
+                    contragent = context.Contragents.FirstOrDefault(c => c.CgtId == employee.EmpCtgId);
+                    offer = context.Offers.FirstOrDefault(o => o.OfrId == employmentRequest.EtrOfrId);
+                    responsibleUser = context.AspNetUsers.FirstOrDefault(u => u.Id == contragent.CgtResponsibleUser);
+
+                    if (employmentRequest.EtrStatus == 1)
+                    {
+                        employee.EmpCltId = employmentRequest.EtrCltId;
+                        employee.EmpOffId = employmentRequest.EtrOfrId;
+                    }
+
+                    if (employmentRequest.EtrStatus == 2)
+                    {
+                        employee.EmpCltId = null;
+                        employee.EmpOffId = null;
+                    }
+
+
+                    context.SaveChanges();
+                }
+
+            //    IEmailMessageBuilder bodyBuilder = new ChangePimpStatusBodyBuilder(new EmployeeDto(employee), new ContragentDto(contragent), new OfferDto(offer), status);
+            //    string emailBody = bodyBuilder.BuildBody();
+            //    string emailSubject = bodyBuilder.BuildSubject();
+
+            //    NotificationEmailSender emailSender = new NotificationEmailSender();
+            //    if (responsibleUser.Email != null)
+            //    {
+            //        //       await emailSender.SendEmailAsync(responsibleUser.Email, emailSubject, emailBody);
+            //    }
+                //   await emailSender.SendEmailAsync("tadeusz@eurojobs.info.pl", emailSubject, emailBody);
+
+
+                return true;
+            }
+            catch (Exception)
+            {
+                //todo: add logging
+                return false;
+            }
+        }
+
+
     }
 }

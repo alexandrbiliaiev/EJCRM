@@ -232,13 +232,13 @@
     "EVENT_TITLE":"Zdarzenie",
     "START_DATE": "Data początku",
     "END_DATE":"Data końca",
-    "EVENT_TITLE":"Tytuł",
     "EVENT_NOTE":"Treść",
     "EVENT_REMIND":"Data przypomnienia",
     "TARGET_USER":"Przydziel do uytkownika",
     "TARGET_CONTRAGENT":"Dodaj do kontrahenta",
     "TARGET_CLIENT":"Dodaj do klienta",
     "TARGET_EMPLOYEE":"Dodaj do pracownika",
+    "LOADING":"Trwa ładowanie danych..."
     "LOADING":"Trwa ładowanie danych...",
     "TIME":"Czas"
 }

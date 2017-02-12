@@ -11,7 +11,7 @@
         };
 
         $translateProvider.useSanitizeValueStrategy('escapeParameters');
-        $translateProvider.preferredLanguage('pl');
+        //$translateProvider.preferredLanguage('pl');
         $translateProvider.forceAsyncReload(true);
         $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
 
@@ -25,7 +25,6 @@
             }).state('clients', {
                 url: "/clt_all",
                 templateUrl: 'templates/clients/clients_list.html',
-
             }).state('contragent', {
                 url: "/ctg_edit/:id",
                 templateUrl: 'templates/contragents/contragent_details.html',

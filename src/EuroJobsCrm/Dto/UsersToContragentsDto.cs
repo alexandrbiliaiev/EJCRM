@@ -9,6 +9,7 @@ namespace EuroJobsCrm.Dto
         public string UsrId { get; set; }
         public string UsrName { get; set; }
         public int? CtgId { get; set; }
+        public string PrefLng { get; set; }
 
         public UsersToContragentsDto()
         {
@@ -20,6 +21,7 @@ namespace EuroJobsCrm.Dto
             UsrId = ustoctg.UtcUsrId;
             UsrName = ustoctg.UtcUsrName;
             CtgId = ustoctg.UtcCtgId;
+            PrefLng = ustoctg.UtcLng;
         }
 
     }

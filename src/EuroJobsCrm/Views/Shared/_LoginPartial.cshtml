@@ -4,21 +4,41 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
+
+
+
 @if (SignInManager.IsSignedIn(User))
 {
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
+            <li style="margin-top: 8px;">
+                <md-menu >
+                    <md-button ng-click="$mdOpenMenu()" class="md-icon-button" aria-label="Open sample menu">
+                    {{currentLang}}
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item>
+                            <md-button ng-click="changeLanguage('pl')">PL</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="changeLanguage('en')">EN</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="changeLanguage('ua')">UA</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="changeLanguage('ru')">RU</md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </li>
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link glyp" >
-                    <i class="material-icons">account_circle
-                         <md-tooltip md-direction="down">
-                          
-                        </md-tooltip>
-                    </i>
+                <button ng-cloak type="submit" class="btn btn-link navbar-btn navbar-link glyp">
                     {{ 'LOGOUT' | translate }}
                 </button>
             </li>
-        </ul>
+
+    </ul>
     </form>
 }
 else
