@@ -24,7 +24,7 @@
 				</md-input-container>
 				<md-input-container class="md-block">
 					<label>{{'BRANCH'| translate}}</label>
-					<input name="tax_id" ng-model="client.branch" placeholder="IT" md-maxlength="10" required>
+					<input name="tax_id" ng-model="client.branch" placeholder="IT" md-maxlength="20" required>
 					<div ng-messages="clientForm.tax_id.$error" role="alert" multiple>
 						<div ng-message="required">{{'REQUIRED' | translate}} </div>
 						<div ng-message="md-maxlength">{{'TO_LONG'| translate}}</div>
@@ -32,7 +32,7 @@
 				</md-input-container>
 				<md-input-container class="md-block">
 					<label>{{'TAX_ID'| translate}}</label>
-					<input name="tax_id" ng-model="client.nip" placeholder="{{'TAX_ID'| translate}}" md-maxlength="10" required>
+					<input name="tax_id" ng-model="client.nip" placeholder="{{'TAX_ID'| translate}}" md-maxlength="16" required>
 					<div ng-messages="clientForm.tax_id.$error" role="alert" multiple>
 						<div ng-message="required">{{'REQUIRED' | translate}} </div>
 						<div ng-message="md-maxlength">{{'TO_LONG'| translate}}</div>

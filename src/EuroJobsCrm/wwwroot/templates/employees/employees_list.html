@@ -8,9 +8,9 @@
 						<span>{{'Employees'|translate}}</span>
 					</h2>
 					<span flex></span>
-					<md-input-container class="md-block" md-no-float flex style="margin-top:42px; margin-left: 50px;">
-						<input id="search" aria-label="input" ng-model="searchEmployeeString" style="color:white; font-size:12pt;" placeholder="{{'SEARCH'| translate}} ..."
-						/>
+					<md-input-container class="md-block searchPlaceholder" md-no-float flex style="margin-top:42px; margin-left: 50px;">
+						<label style="margin-bottom:0;" ng-show="searchEmployeeString == null || searchEmployeeString == '' ">{{'SEARCH'| translate}} ...</label>
+						<input id="search" aria-label="input" ng-model="searchEmployeeString" style="color:white; font-size:12pt;" />
 					</md-input-container>
 
 					<md-button class="md-icon-button" aria-label="Search" ng-show="searchEmployeeString == null || searchEmployeeString == '' ">
@@ -19,10 +19,10 @@
 					<md-button class="md-icon-button" aria-label="Search" ng-show="searchEmployeeString!= null && searchEmployeeString != ''"
 						ng-click="searchEmployeeString = null">
 						<md-icon md-font-icon="ion-android-close"></md-icon>
-					</md-button>
-					<md-button aria-label="button" class="md-icon-button" ng-click="showAddEmployeeDialog()" ng-show="ctgId != -1" >
-						<md-icon md-font-icon="ion-plus-round"></md-icon>
-					</md-button>
+						</md-button>
+						<md-button aria-label="button" class="md-icon-button" ng-click="showAddEmployeeDialog()" ng-show="ctgId != -1">
+							<md-icon md-font-icon="ion-plus-round"></md-icon>
+						</md-button>
 				</div>
 			</md-toolbar>
 			</md-toolbar>
@@ -68,8 +68,8 @@
 										{{ 'DELETE' | translate }}
 									</md-tooltip>
 								</md-icon>
-							</md-button>
-							<md-divider ng-if="!$last"></md-divider>
+								</md-button>
+								<md-divider ng-if="!$last"></md-divider>
 						</md-list-item>
 					</md-list>
 				</md-content>

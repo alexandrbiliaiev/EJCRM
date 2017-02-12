@@ -8,9 +8,9 @@
 						<span>{{'Clients'|translate}}</span>
 					</h2>
 					<span flex></span>
-					<md-input-container class="md-block" md-no-float flex style="margin-top:42px; margin-left: 50px;">
-						<input id="search" aria-label="input" ng-model="searchString" style="color:white; font-size:12pt;" placeholder="{{'SEARCH'| translate}} ..."
-						/>
+					<md-input-container class="md-block searchPlaceholder" md-no-float flex style="margin-top:42px; margin-left: 50px;">
+						<label style="margin-bottom:0;" ng-show="searchString == null || searchString == '' ">{{'SEARCH'| translate}} ...</label>
+						<input id="search" aria-label="input" ng-model="searchString" style="color:white; font-size:12pt;" />
 					</md-input-container>
 
 					<md-button class="md-icon-button" aria-label="Search" ng-show="searchString == null || searchString == '' ">
@@ -112,10 +112,9 @@
 </div>
 </section>
 </md-content>
-<div ng-show = "isActive">
-<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
-	<a mfb-button icon="ion-android-contact" label="{{'ADD_CLIENT' | translate}}" ng-click="showAddClientDialog()" ng-show="addClaim"></a>
-</nav>
+<div ng-show="isActive">
+	<nav mfb-menu position="br" effect="zoomin" active-icon="ion-more" resting-icon="ion-more">
+		<a mfb-button icon="ion-android-contact" label="{{'ADD_CLIENT' | translate}}" ng-click="showAddClientDialog()" ng-show="addClaim"></a>
+	</nav>
 </div>
 </div>
-

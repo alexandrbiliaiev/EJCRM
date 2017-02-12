@@ -10,12 +10,12 @@
 	</md-toolbar>
 	<md-dialog-content>
 		<div class="md-dialog-content" style="width:800px">
-			
+
 			<div ng-include="'/templates/saving_loader.html'"></div>
 
 			<!--NAME SURNAME-->
-			<form name="contactpersonForm"  ng-show="!Saving">
-				<div layout="row" layout-align="space-between none" >
+			<form name="contactpersonForm" ng-show="!Saving">
+				<div layout="row" layout-align="space-between none">
 					<md-input-container class="md-block" flex="45">
 						<label>{{'CP_NAME'| translate}}</label>
 						<input name="contactperson_name" ng-model="contactperson.name" placeholder="Jan" md-maxlength="100" required>
@@ -52,8 +52,8 @@
 					</md-input-container>
 				</div>
 				<!--phone skype viber-->
-				<div layout="row"  layout-align="space-between center">
-					<md-input-container class="md-block" flex="30">
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="45">
 						<label>{{'CP_PHONE'| translate}}</label>
 						<input name="contactperson_phone" ng-model="contactperson.phoneNumber" placeholder="+48 999 999 999" md-maxlength="100">
 						<div ng-messages="contactpersonForm.contactperson_phone.$error" role="alert" multiple>
@@ -62,15 +62,24 @@
 					</md-input-container>
 
 
-					<md-input-container class="md-block" flex="30">
+					<md-input-container class="md-block" flex="45">
 						<label>{{'CP_SKYPE'| translate}}</label>
 						<input name="contactperson_skype" ng-model="contactperson.skype" placeholder="SkypeLogin" md-maxlength="100">
 						<div ng-messages="contactpersonForm.contactperson_skype.$error" role="alert" multiple>
 							<div ng-message="md-maxlength">{{'SKYPE_IS_TO_LONG'| translate}}</div>
 						</div>
 					</md-input-container>
+				</div>
+				<div layout="row" layout-align="space-between center">
+					<md-input-container class="md-block" flex="45" style="margin-top: -5px;">
+						<md-select name="type" ng-model="contactperson.messangerType" data-placeholder="{{ 'MESSANGER_TYPE' | translate }}">
+							<md-option value="1">Viber</md-option>
+							<md-option value="0">WhatsApp</md-option>
+							<!--<md-option value="2">{{ 'TO_DELETE' | translate }}</md-option> -->
+						</md-select>
+					</md-input-container>
 
-					<md-input-container class="md-block" flex="30">
+					<md-input-container class="md-block" flex="45">
 						<label>{{'CP_MESSANGER'| translate}}</label>
 						<input name="contactperson_messanger" ng-model="contactperson.messanger" placeholder="+48 999 999 999" md-maxlength="100">
 						<div ng-messages="contactpersonForm.contactperson_messanger.$error" role="alert" multiple>

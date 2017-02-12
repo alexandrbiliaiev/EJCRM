@@ -52,6 +52,7 @@ namespace EuroJobsCrm.Controllers
                 ctp.CtpSkype = contactPerson.Skype;
                 ctp.CtpAuditMd = DateTime.UtcNow;
                 ctp.CtpAuditMu = User.GetUserId();
+                ctp.CtpMessangerType = contactPerson.MessangerType;
 
 
                 context.SaveChanges();

@@ -14,6 +14,7 @@ namespace EuroJobsCrm.Dto
         public string Skype { get; set; }
         public string PhoneNumber { get; set; }
         public string Messanger { get; set; }
+        public int? MessangerType { get; set; }
 
         public ContactPersonDto()
         {
@@ -27,6 +28,7 @@ namespace EuroJobsCrm.Dto
             ContragentId = contactPerson.CtpCgtId;
             Email = contactPerson.CtpEmail;
             Messanger = contactPerson.CtpMessanger;
+            MessangerType = contactPerson.CtpMessangerType;
             Name = contactPerson.CtpName;
             PhoneNumber = contactPerson.CtpPhoneNumber;
             Position = contactPerson.CtpPosition;

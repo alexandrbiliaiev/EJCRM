@@ -19,7 +19,7 @@
             <form name="addressForm" ng-show="!Saving">
                 <md-input-container class="md-block" style="width:400px;">
                     <label>{{'ADDRESS_TITLE'| translate}}</label>
-                    <input name="address" ng-model="address.address" placeholder="Mickiewica 12/8" md-maxlength="300" required>
+                    <input name="address" ng-model="address.address" placeholder="{{'STREET'| translate}}" md-maxlength="300" required>
                     <div ng-messages="addressForm.address.$error" role="alert" multiple>
                         <div ng-message="required">{{'ADDRESS_REQUIRED' | translate}} </div>
                         <div ng-message="md-maxlength">{{'ADDRESS_IS_TO_LONG'| translate}}</div>

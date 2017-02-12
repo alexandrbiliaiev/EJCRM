@@ -173,18 +173,20 @@
 												<b>{{'Email'|translate}}</b>: {{contactperson.email}} <b>{{'Phone'|translate}}</b>: {{contactperson.phoneNumber}}
 											</p>
 											<p>
-												<b>{{'Skype'|translate}}</b>: {{contactperson.skype}} <b>{{'Messagner'|translate}}</b>: {{contactperson.messanger}}
+												<b>{{'Skype'|translate}}</b>: {{contactperson.skype}} 
+												<b ng-show="contactperson.messangerType == 1">Viber</b>
+												<b ng-show="contactperson.messangerType == 0">WhatsApp</b>: {{contactperson.messanger}}
 											</p>
 									</div>
 									<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditContactPersonDialog(contactperson)"
 										ng-show="editClaim">
 										<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
-									</md-button>
-									<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteCtpConfirmDialog(contactperson.id)"
-										ng-show="deleteClaim">
-										<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-									</md-button>
-									<md-divider ng-if="!$last"></md-divider>
+										</md-button>
+										<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteCtpConfirmDialog(contactperson.id)"
+											ng-show="deleteClaim">
+											<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+											</md-button>
+											<md-divider ng-if="!$last"></md-divider>
 								</md-list-item>
 							</md-list>
 						</md-content>
@@ -225,8 +227,8 @@
 									<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(address.id)"
 										ng-show="deleteClaim">
 										<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-									</md-button>
-									<md-divider ng-if="!$last"></md-divider>
+										</md-button>
+										<md-divider ng-if="!$last"></md-divider>
 								</md-list-item>
 							</md-list>
 						</md-content>
@@ -244,9 +246,9 @@
 								<span ng-click="expandOffers=! expandOffers">{{'OFFERS'|translate}}</span>
 							</h2>
 							<span flex></span>
-							<md-input-container class="md-block" md-no-float flex style="margin-top:42px; margin-left: 50px;">
-								<input id="search" aria-label="input" ng-model="searchOffersString" style="color:white; font-size:12pt;" placeholder="{{'SEARCH'| translate}} ..."
-								/>
+							<md-input-container class="md-block searchPlaceholder" md-no-float flex style="margin-top:42px; margin-left: 50px;">
+								<label style="margin-bottom:0;" ng-show = "searchOffersString == null || searchOffersString == '' ">{{'SEARCH'| translate}} ...</label>
+								<input id="search" aria-label="input" ng-model="searchOffersString" style="color:white; font-size:12pt;" />
 							</md-input-container>
 
 							<md-button class="md-icon-button" aria-label="Search" ng-show="searchOffersString == null || searchOffersString == '' ">
@@ -315,9 +317,9 @@
 								<span>{{'EMPLOYED_PEOPLE'|translate}}</span>
 							</h2>
 							<span flex></span>
-							<md-input-container class="md-block" md-no-float flex style="margin-top:42px; margin-left: 50px;">
-								<input id="search" aria-label="input" ng-model="searchEmployeeString" style="color:white; font-size:12pt;" placeholder="{{'SEARCH'| translate}} ..."
-								/>
+							<md-input-container class="md-block searchPlaceholder" md-no-float flex style="margin-top:42px; margin-left: 50px;">
+								<label style="margin-bottom:0;" ng-show = "searchEmployeeString == null || searchEmployeeString == '' ">{{'SEARCH'| translate}} ...</label>
+								<input id="search" aria-label="input" ng-model="searchEmployeeString" style="color:white; font-size:12pt;"/>
 							</md-input-container>
 
 							<md-button class="md-icon-button" aria-label="Search" ng-show="searchEmployeeString == null || searchEmployeeString == '' ">
@@ -326,10 +328,10 @@
 							<md-button class="md-icon-button" aria-label="Search" ng-show="searchEmployeeString!= null && searchEmployeeString != ''"
 								ng-click="searchEmployeeString = null">
 								<md-icon md-font-icon="ion-android-close"></md-icon>
-							</md-button>
-							<md-button aria-label="button" class="md-icon-button" ng-click="expandEmployees=! expandEmployees">
-								<md-icon md-font-icon="ion-navicon-round"></md-icon>
-							</md-button>
+								</md-button>
+								<md-button aria-label="button" class="md-icon-button" ng-click="expandEmployees=! expandEmployees">
+									<md-icon md-font-icon="ion-navicon-round"></md-icon>
+								</md-button>
 						</div>
 
 					</md-toolbar>
@@ -473,7 +475,7 @@
 									<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)"
 										ng-show="deleteClaim">
 										<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-									</md-button>
+										</md-button>
 								</md-list-item>
 							</md-list>
 						</md-content>
@@ -504,6 +506,6 @@
 	<!--Fucking material return button-bich -->
 	<nav mfb-menu position="tl" style="margin-top:100px;" active-icon="ion-android-arrow-back" resting-icon="ion-android-arrow-back"
 		ng-click="goBack()">
-	</nav>
+		</nav>
 
 </ui-view>

@@ -296,6 +296,8 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("ctp_messanger")
                     .HasMaxLength(150);
 
+                entity.Property(e => e.CtpMessangerType).HasColumnName("ctp_messanger_type");
+
                 entity.Property(e => e.CtpName)
                     .HasColumnName("ctp_name")
                     .HasMaxLength(150);

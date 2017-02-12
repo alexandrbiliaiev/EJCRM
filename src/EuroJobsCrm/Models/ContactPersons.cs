@@ -15,11 +15,13 @@ namespace EuroJobsCrm.Models
         public string CtpSkype { get; set; }
         public string CtpPhoneNumber { get; set; }
         public string CtpMessanger { get; set; }
+        public int? CtpMessangerType { get; set; }
         public DateTime? CtpAuditCd { get; set; }
         public string CtpAuditCu { get; set; }
         public DateTime? CtpAuditMd { get; set; }
         public string CtpAuditMu { get; set; }
         public DateTime? CtpAuditRd { get; set; }
         public string CtpAuditRu { get; set; }
+
     }
 }

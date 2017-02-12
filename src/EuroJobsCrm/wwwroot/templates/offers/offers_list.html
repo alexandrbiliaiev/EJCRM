@@ -9,15 +9,15 @@
 						<span ng-click="expandOffers=! expandOffers">{{'OFFERS'|translate}}</span>
 					</h2>
 					<span flex></span>
-					<md-input-container class="md-block" md-no-float flex style="margin-top:42px; margin-left: 50px;">
-						<input id="search" aria-label="input" ng-model="searchOffersString" style="color:white; font-size:12pt;" placeholder="{{'SEARCH'| translate}} ..."
-						/>
+					<md-input-container class="md-block searchPlaceholder" md-no-float flex style="margin-top:42px; margin-left: 50px;">
+						<label style="margin-bottom:0;" ng-show="searchOffersString == null || searchOffersString == '' ">{{'SEARCH'| translate}} ...</label>
+						<input id="search" aria-label="input" ng-model="searchOffersString" style="color:white; font-size:12pt;" />
 					</md-input-container>
 
 					<md-button class="md-icon-button" aria-label="Search" ng-show="searchOffersString == null || searchOffersString == '' ">
 						<md-icon md-font-icon="ion-search"></md-icon>
 					</md-button>
-					<md-button class="md-icon-button" aria-label="Search" ng-show="searchOffersString!= null && searchOffersString != ''" ng-click="searchString = null">
+					<md-button class="md-icon-button" aria-label="Search" ng-show="searchOffersString!= null && searchOffersString != ''" ng-click="searchOffersString = null">
 						<md-icon md-font-icon="ion-android-close"></md-icon>
 					</md-button>
 

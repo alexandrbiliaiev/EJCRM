@@ -4,15 +4,15 @@
 	<md-content>
 		<section class="demo-container md-whiteframe-z1">
 			<md-toolbar>
-				<div class="md-toolbar-tools" ng-click="focusOnSearch()">
+				<div class="md-toolbar-tools">
 					<h2>
 						<span>{{'Contragents'|translate}}</span>
 					</h2>
 					<span flex></span>
 
-					<md-input-container class="md-block" flex style="margin-top:42px; margin-left: 50px;">
-						<input id="search" aria-label="input" ng-model="searchString" style="color:white; font-size:12pt;" placeholder="{{'SEARCH'| translate}} ..."
-						/>
+					<md-input-container class="md-block searchPlaceholder" flex style="margin-top:42px; margin-left: 50px;">
+						<label style="margin-bottom:0;" ng-show="searchString == null || searchString == '' ">{{'SEARCH'| translate}} ...</label>
+						<input id="search" aria-label="input" ng-model="searchString" style="color:white; font-size:12pt;"/>
 					</md-input-container>
 					
 					<md-button class="md-icon-button" aria-label="Search" ng-show="searchString == null || searchString == '' ">
