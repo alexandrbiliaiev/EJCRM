@@ -1,4 +1,4 @@
-<md-dialog aria-label="Events" >
+<md-dialog aria-label="Events">
     <md-toolbar ng-show="!Saving && !Loading">
         <div class="md-toolbar-tools">
             <h2>{{'EVENT_TITLE'| translate}}</h2>
@@ -10,7 +10,7 @@
     </md-toolbar>
 
     <div layout="column" layout-align="space-around center" ng-show="Loading || Saving" style="height: 150px;">
-        <md-progress-circular  md-mode="indeterminate"></md-progress-circular>
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
         <div layout="row" layout-align="center center" ng-show="Saving">
             {{'SAVING' | translate}}
         </div>
@@ -20,30 +20,55 @@
     </div>
 
     <md-dialog-content ng-show="!Loading && !Saving">
-        <div class="md-dialog-content" style="width: 700px" >
-            <form name="eventForm"  layout="column">
-                <div layout="row" layout-align="space-between center">
+        <div class="md-dialog-content" style="width: 750px">
+            <form name="eventForm" layout="column">
+
+                <div layout="row" layout-align="start start">
                     <md-input-container class="md-block">
                         <label>{{'START_DATE'| translate}}</label>
-                        <md-datepicker name="start_date" ng-change="eventStartDateChange()" ng-model="currentEvent.startDate" />
+                        <md-datepicker name="start_date" ng-change="eventStartDateChange()"
+                                       ng-model="currentEvent.startDate"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex="20">
+                        <label>{{'TIME'| translate}}</label>
+                        <input mdc-datetime-picker="" date="false" time="true" type="text" placeholder="Time"
+                               min-date="minDate" format="HH:mm"
+                               ng-model="currentEvent.startDate" class="md-input">
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label>{{'END_DATE'| translate}}</label>
-                        <md-datepicker name="start_date" ng-change="eventEndDateChange()" ng-model="currentEvent.endDate" />
+                        <md-datepicker name="start_date" ng-change="eventEndDateChange()"
+                                       ng-model="currentEvent.endDate"/>
                     </md-input-container>
+                    <md-input-container class="md-block" flex="20">
+                        <label>{{'TIME'| translate}}</label>
+                        <input mdc-datetime-picker="" date="false" time="true" type="text" placeholder="Time"
+                               min-date="minDate" format="HH:mm"
+                               ng-model="currentEvent.endDate" class="md-input">
+                    </md-input-container>
+                </div>
+                <div layout="row" layout-align="start start">
                     <md-input-container class="md-block">
                         <label>{{'EVENT_REMIND'| translate}}</label>
-                        <md-datepicker name="remind_date" ng-change="eventRemindDateChange()" ng-model="currentEvent.remindDate" />
+                        <md-datepicker name="remind_date" ng-change="eventRemindDateChange()"
+                                       ng-model="currentEvent.remindDate"/>
                     </md-input-container>
-
+                    <md-input-container class="md-block">
+                        <label>{{'TIME'| translate}}</label>
+                        <input mdc-datetime-picker="" date="false" time="true" type="text" placeholder="Time"
+                               min-date="minDate" format="HH:mm"
+                               ng-model="currentEvent.remindDate" class="md-input">
+                    </md-input-container>
                 </div>
+
 
                 <div layout="column" layout-align=" stretch">
                     <md-input-container class="md-block">
                         <label>{{'EVENT_TITLE'| translate}}</label>
-                        <input name="subject" ng-model="currentEvent.subject" placeholder="{{'EVENT_TITLE'| translate}}" required>
+                        <input name="subject" ng-model="currentEvent.subject" placeholder="{{'EVENT_TITLE'| translate}}"
+                               required>
                         <div ng-messages="eventForm.subject.$error" role="alert">
-                            <div ng-message="required">{{'REQUIRED' | translate}} </div>
+                            <div ng-message="required">{{'REQUIRED' | translate}}</div>
                         </div>
                     </md-input-container>
                 </div>
@@ -55,7 +80,7 @@
 
                 <div layout="column" layout-align=" stretch">
                     <md-input-container class="md-block">
-                        <label >{{'TARGET_USER'| translate}}</label>
+                        <label>{{'TARGET_USER'| translate}}</label>
                         <md-select placeholder="{{'TARGET_USER'| translate}}" ng-model="currentEvent.targetUser"
                                    md-on-open="loadUsers()" style="min-width: 200px;">
                             <md-option ng-value="null">-</md-option>
@@ -67,7 +92,7 @@
 
                 <div layout="row" layout-align="space-between center ">
                     <md-input-container class="md-block">
-                        <label >{{'TARGET_CONTRAGENT'| translate}}</label>
+                        <label>{{'TARGET_CONTRAGENT'| translate}}</label>
                         <md-select placeholder="{{'TARGET_CONTRAGENT'| translate}}" ng-model="currentEvent.contragentId"
                                    md-on-open="loadContragents()" style="min-width: 200px;">
                             <md-option ng-value="null">-</md-option>
@@ -76,7 +101,7 @@
                         </md-select>
                     </md-input-container>
                     <md-input-container class="md-block">
-                        <label >{{'TARGET_CLIENT'| translate}}</label>
+                        <label>{{'TARGET_CLIENT'| translate}}</label>
                         <md-select placeholder="{{'TARGET_CLIENT'| translate}}" ng-model="currentEvent.clientId"
                                    md-on-open="loadClients()" style="min-width: 200px;">
                             <md-option ng-value="null">-</md-option>
@@ -85,11 +110,13 @@
                         </md-select>
                     </md-input-container>
                     <md-input-container class="md-block">
-                        <label >{{'TARGET_EMPLOYEE'| translate}}</label>
+                        <label>{{'TARGET_EMPLOYEE'| translate}}</label>
                         <md-select placeholder="{{'TARGET_EMPLOYEE'| translate}}" ng-model="currentEvent.employeeId"
                                    md-on-open="loadEmployees()" style="min-width: 200px;">
                             <md-option ng-value="null">-</md-option>
-                            <md-option ng-value="emp.id" ng-repeat="emp in employees">{{emp.firstName}} {{emp.lastName}}</md-option>
+                            <md-option ng-value="emp.id" ng-repeat="emp in employees">{{emp.firstName}}
+                                {{emp.lastName}}
+                            </md-option>
                             <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
                         </md-select>
                     </md-input-container>

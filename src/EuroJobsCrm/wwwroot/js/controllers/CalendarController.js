@@ -39,13 +39,18 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
         return this;
     }
 
+    Date.prototype.addHours = function(hours) {
+        this.setTime(this.getTime() + hours * 60 * 60 * 1000);
+        return this;
+    }
+
     function convertToDayPilotEvent(response) {
         response.start = new DayPilot.Date(response.startDate);
         response.end = new DayPilot.Date(response.endDate);
         response.text = response.subject;
-        response.startDate = new Date(response.startDate);
-        response.endDate = new Date(response.endDate);
-        response.remindDate = new Date(response.remindDate);
+        response.startDate = new Date(response.startDate).addHours(-1);
+        response.endDate = new Date(response.endDate).addHours(-1);
+        response.remindDate = new Date(response.remindDate).addHours(-1);
     }
 
     $scope.startDate = new Date();
@@ -95,8 +100,8 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
             end: args.end,
             id: DayPilot.guid(),
             text: "",
-            startDate: new Date(args.start.value),
-            endDate: new Date(args.end),
+            startDate: new Date(args.start.value).addHours(-1),
+            endDate: new Date(args.end).addHours(-1),
         };
         $scope.showEventDialog();
     }
@@ -187,6 +192,10 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
             return;
         }
 
+        $scope.currentEvent.startDate = $scope.currentEvent.startDate.normalize();
+        $scope.currentEvent.endDate = $scope.currentEvent.endDate.normalize();
+        $scope.currentEvent.endDate = $scope.currentEvent.remindDate.normalize();
+
         $scope.Saving = true;
         calendarService.saveEvent($scope.currentEvent).success(function (response) {
             convertToDayPilotEvent(response);
@@ -234,15 +243,15 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
     }
 
     $scope.eventStartDateChange = function () {
-        $scope.currentEvent.startDate = $scope.currentEvent.startDate.normalize();
+        $scope.currentEvent.startDate = $scope.currentEvent.startDate;
         var pilotDate = new Date($scope.currentEvent.start);
-        $scope.currentEvent.startDate.addTime(pilotDate.getHours() - 1, pilotDate.getMinutes());
+        $scope.currentEvent.startDate.addTime(pilotDate.getHours(), pilotDate.getMinutes());
     }
 
     $scope.eventEndDateChange = function () {
-        $scope.currentEvent.endDate = $scope.currentEvent.endDate.normalize();
+        $scope.currentEvent.endDate = $scope.currentEvent.endDate;
         var pilotDate = new Date($scope.currentEvent.end);
-        $scope.currentEvent.endDate.addTime(pilotDate.getHours() -1, pilotDate.getMinutes());
+        $scope.currentEvent.endDate.addTime(pilotDate.getHours(), pilotDate.getMinutes());
     }
 
     $scope.eventRemindDateChange = function () {

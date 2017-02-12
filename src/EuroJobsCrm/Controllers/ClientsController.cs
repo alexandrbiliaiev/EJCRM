@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace EuroJobsCrm.Controllers
 {
@@ -37,19 +38,14 @@ namespace EuroJobsCrm.Controllers
                     .GroupJoin(context.Employees.Where(e => e.EmpAuditRd == null && e.EmpCltId != null),
                         c => c.Client.CltId, e => e.EmpCltId,
                         (c, e) => new {c.Client, c.Addresses,  c.Offers, AcceptedEmployees = e})
-                    .GroupJoin(context.DocumentFiles.Where(e => e.DcfAuditRu == null && e.DcfCliId != null),
-                        c => c.Client.CltId, f => f.DcfCliId,
-                        (c, f) => new { c.Client, c.Addresses, c.Offers, c.AcceptedEmployees, Files = f  })
-
                     .ToList()
                     .Select(
                         c =>
-                            new ClientDto(c.Client, c.Addresses, null, c.Offers, c.AcceptedEmployees, c.Files))
+                            new ClientDto(c.Client, c.Addresses, null, c.Offers, c.AcceptedEmployees, null))
                     .ToList();
 
-               // var employeesIds = clients.SelectMany(c => c.Employees.Select(e => e.Id)).ToList();
-               // var employmentRequests = context.EmploymentRequests.Where(r => employeesIds.Contains(r.EtrEmpId)).ToList();
-
+                var offerIds = clients.SelectMany(c => c.Offers.Select(o => o.Id).ToArray()).Distinct().ToList();
+                var requests = context.EmploymentRequests.Where(e => offerIds.Contains(e.EtrOfrId)).ToList();
 
                 foreach (var client in clients)
                 {
@@ -59,8 +55,8 @@ namespace EuroJobsCrm.Controllers
 
                     foreach (var offer in client.Offers)
                     {
-                        offer.AcceptedCount = context.EmploymentRequests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 1);
-                        offer.AwaitingCount = context.EmploymentRequests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 0);
+                        offer.AcceptedCount = requests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 1);
+                        offer.AwaitingCount = requests.Count(er => er.EtrOfrId == offer.Id && er.EtrAuditRd == null && er.EtrStatus == 0);
                         client.FreeVacancies += offer.VacanciesNumber - offer.AcceptedCount;
                         client.AwaitingVacancies += offer.AwaitingCount;
                         client.BusyVacancies += offer.AcceptedCount;
@@ -93,33 +89,22 @@ namespace EuroJobsCrm.Controllers
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                var entity = context.Clients
-                    .Where(c => c.CltAuditRd == null && c.CltId == clientId)
-                    .GroupJoin(context.Addresses.Where(a => a.AdrAuditRd == null), c => c.CltId, a => a.ArdCltId,
-                        (c, a) => new {Client = c, Addresses = a})
-                    .GroupJoin(context.ContactPersons.Where(a => a.CtpAuditRd == null), c => c.Client.CltId,
-                        cp => cp.CtpCltId,
-                        (c, cp) => new {c.Client, c.Addresses, ContactPersons = cp})
-                    .GroupJoin(context.Offers.Where(o => o.OfrAuditRd == null), c => c.Client.CltId, o => o.OfrCltId,
-                        (c, o) => new {c.Client, c.Addresses, c.ContactPersons, Offers = o})
-                    .GroupJoin(context.Employees.Where(e => e.EmpAuditRd == null && e.EmpCltId != null),
-                        c => c.Client.CltId, e => e.EmpCltId,
-                        (c, e) => new {c.Client, c.Addresses, c.ContactPersons, c.Offers, AcceptedEmployees = e})
-                    .GroupJoin(context.DocumentFiles.Where(f => f.DcfAuditRd == null),
-                        c => c.Client.CltId, f => f.DcfCliId,
-                        (c, f) => new
-                        {
-                            c.Client,
-                            c.Addresses,
-                            c.ContactPersons,
-                            c.Offers,
-                            c.AcceptedEmployees,
-                            Files = f
-                        })
-                    .FirstOrDefault();
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
 
-                ClientDto client = new ClientDto(entity.Client, entity.Addresses, entity.ContactPersons, entity.Offers,
-                    entity.AcceptedEmployees, entity.Files);
+                var clientEntity = context.Clients.FirstOrDefault(c => c.CltAuditRd == null && c.CltId == clientId);
+                var addresses = context.Addresses.Where(a => a.AdrAuditRd == null && clientId == a.ArdCltId).ToList();
+                var contactPersons = context.ContactPersons.Where(a => a.CtpAuditRd == null && clientId == a.CtpCltId).ToList();
+                var offers = context.Offers.Where(o => o.OfrAuditRd == null && clientId == o.OfrCltId).ToList();
+                var acceptedEmployees = context.Employees.Where(e => e.EmpAuditRd == null && e.EmpCltId != null && clientId == e.EmpCltId).ToList();
+                var files = context.DocumentFiles.Where(f => f.DcfAuditRd == null && clientId == f.DcfCliId).ToList();
+
+                var time = sw.ElapsedMilliseconds;
+
+
+                ClientDto client = new ClientDto(clientEntity, addresses, contactPersons, offers,
+                    acceptedEmployees, files);
+
 
                 client.FreeVacancies = 0;
                 client.AwaitingVacancies = 0;

@@ -239,6 +239,6 @@
     "TARGET_CONTRAGENT":"Dodaj do kontrahenta",
     "TARGET_CLIENT":"Dodaj do klienta",
     "TARGET_EMPLOYEE":"Dodaj do pracownika",
-    "LOADING":"Trwa ładowanie danych..."
-
+    "LOADING":"Trwa ładowanie danych...",
+    "TIME":"Czas"
 }

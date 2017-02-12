@@ -11,5 +11,6 @@
     "SEARCH": "Search",
     "CONTRAGENT_NAME": "Contragent name",
     "DETAIL_INFORMATION": "General information",
-    "CONTACT_PERSONS":"Contact persons"
+    "CONTACT_PERSONS":"Contact persons",
+    "EVENT_REMIND":"Remind date"
 }
