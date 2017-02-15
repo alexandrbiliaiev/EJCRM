@@ -14,6 +14,7 @@ namespace EuroJobsCrm.Dto
         public IEnumerable<EmployeeDto> Employees { get; set; }
         public UserDto ResponsibleUser { get; set; }
         public IEnumerable<DocumentFilesDto> Files { get; set; }
+        public List<EventDetailsDto> Notes { get; set; }
 
         public IEnumerable<UserDto> ContragentUsers { get; set; }
 

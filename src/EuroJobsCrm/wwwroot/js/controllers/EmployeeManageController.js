@@ -1,5 +1,6 @@
 angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController', function ($scope, $rootScope, $location, $translate, $http, $state, countriesService, employeesService,
-    $mdDialog, $routeParams, Upload, $timeout, $cookies) {
+    $mdDialog, $routeParams, Upload, $timeout, $cookies, calendarService) {
+
 
     $scope.userRole = $cookies.get('user_role');
     $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
@@ -240,8 +241,122 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
         });
     }
 
-    employeeId = $state.params.id;
 
+
+
+    $scope.addNoteDialog = function () {
+        $scope.currentEvent = {
+            start: new DayPilot.Date(new Date()),
+            end: new DayPilot.Date(new Date()),
+            id: DayPilot.guid(),
+            text: "",
+            startDate: new Date(),
+            endDate: new Date(),
+            employeeId: $scope.employee.id,
+            employeeName: $scope.employee.name,
+        };
+
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/calendar/event_tmpl.html',
+            clickOutsideToClose: true,
+        })
+            .then(function (answer) {
+
+            }, function () {
+
+            });
+
+    }
+
+    $scope.editNoteDialog = function (note) {
+        note.startDate = new Date(note.startDate).addHours(-1);
+        note.endDate = new Date(note.endDate).addHours(-1);
+        note.remindDate = new Date(note.remindDate).addHours(-1);
+        $scope.currentEvent = note;
+
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/calendar/event_tmpl.html',
+            clickOutsideToClose: true,
+        })
+            .then(function (answer) {
+
+            }, function () {
+
+            });
+
+    }
+
+    $scope.deleteNoteDialog = function (noteId) {
+        $scope.Saving = false;
+        var confirm = $mdDialog.confirm()
+            .title($translate.instant('DELETE_CONFIRM_TITLE'))
+            .textContent($translate.instant('DELETE_CONFIRM_TEXT'))
+            .ariaLabel('label')
+            .ok($translate.instant('DELETE_OK'))
+            .cancel($translate.instant('DELETE_CANCEL'));
+
+        $mdDialog.show(confirm).then(function () {
+            calendarService.deleteEvent(noteId).success(function (response) {
+                for (var i = 0; i < $scope.employee.notes.length; i++) {
+                    if ($scope.employee.notes[i].id == noteId) {
+                        $scope.employee.notes.splice(i, 1);
+                        break;
+                    }
+                }
+
+                $scope.Saving = false;
+                $mdDialog.hide();
+            }).error(function () {
+                $state.go('error');
+                $scope.Saving = false;
+                $mdDialog.hide();
+            })
+        }, function () {
+
+        });
+    }
+
+    $scope.saveEventClick = function () {
+        if ($scope.eventForm.$invalid) {
+            return;
+        }
+
+        $scope.currentEvent.startDate = $scope.currentEvent.startDate.normalize();
+        $scope.currentEvent.endDate = $scope.currentEvent.endDate.normalize();
+        if ($scope.currentEvent.remindDate != undefined) {
+            $scope.currentEvent.remindDate = $scope.currentEvent.remindDate.normalize();
+        }
+
+        $scope.Saving = true;
+        calendarService.saveEvent($scope.currentEvent).success(function (response) {
+            if (!$scope.employee.notes.ContainsId(response.id)) {
+                $scope.employee.notes.push(response);
+            } else {
+                for (var i = 0; i <$scope.client.notes.length; i++) {
+                    if ($scope.employee.notes[i].id == response.id) {
+                        $scope.employee.notes.splice(i, 1);
+                        $scope.employee.notes.push(response);
+                        break;
+                    }
+                }
+            }
+
+            $scope.Saving = false;
+            $mdDialog.hide();
+        }).error(function () {
+            $state.go('error');
+            $scope.Saving = false;
+            $mdDialog.hide();
+        })
+
+    }
+
+
+    employeeId = $state.params.id;
     employeesService.getEmployeeFromDb(employeeId).success(function (response) {
         $scope.employee = response;
         $scope.employeeBirthday = moment(response.birthDate).format('DD-MM-YYYY');

@@ -19,7 +19,7 @@ namespace EuroJobsCrm.Dto
         public int? CltId { get; set; }
         public int? OffId { get; set; }
         public List<IdentityDocumentsDto> IdentityDocuments { get; set; }
-
+        public List<EventDetailsDto> Notes { get; set; }
         public EmployeeDto()
         {
 

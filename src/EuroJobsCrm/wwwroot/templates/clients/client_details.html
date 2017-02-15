@@ -451,17 +451,19 @@
 
 
         <!--Notes -->
-        <div layout="row" layout-padding>
-            <div flex flex-gt-xs layout-xs="column">
-                <section class="demo-container md-whiteframe-z1">
-                    <md-toolbar>
-                        <div class="md-toolbar-tools">
-                            <h2>
-                                <span>{{'NOTES'|translate}}</span>
-                            </h2>
-                            <span flex></span>
+		<!--Notes -->
+		<div layout="row" layout-padding>
+			<div flex flex-gt-xs layout-xs="column">
+				<section class="demo-container md-whiteframe-z1">
+					<md-toolbar>
+						<div class="md-toolbar-tools">
+							<h2>
+								<span>{{'NOTES'|translate}}</span>
+							</h2>
+							<span flex></span>
 
-							<md-button aria-label="button" class="md-icon-button" ng-click="showNewEmployeeDialog()" ng-show="addClaim">
+							<md-button aria-label="button" class="md-icon-button" ng-click="addNoteDialog()"
+									   ng-show="addClaim">
 								<md-icon md-font-icon="ion-plus-round "></md-icon>
 							</md-button>
 							<md-button aria-label="button " class="md-icon-button" ng-click="expandNotes=! expandNotes">
@@ -471,29 +473,35 @@
 					</md-toolbar>
 					<div ng-show="expandNotes" ng-cloak>
 						<md-content>
-							<md-list ng-cloak style="">
-								<md-list-item class="md-2-line">
-									<md-icon style="font-size:32px;" md-font-icon="ion-alert-circled">
+							<md-list ng-cloak>
+								<md-list-item class="md-2-line" ng-repeat="note in client.notes">
+									<md-icon style="font-size:32px;" md-font-icon="ion-chatbox">
 									</md-icon>
 									<div class="md-list-item-text">
-										<h3><b>Klient nie zap?aci? za uslugi!!! </b></h3>
+
+										<h3><b>{{note.subject}}</b></h3>
 										<p>
-											<i>Napisa? Tadeusz o 12:33 2016-11-15</i>
-										</p>
+											<i>{{note.noteText}}</i>
+										</p><br/>
+
+										<div class="event-footer-text">
+											<span>{{'ADDED_BY' | translate}} {{note.targetUserName}}</span>
+											<span style="margin-left: 10px;">{{moment(note.creatingDate).format('DD-MM-YYYY HH:mm')}}</span>
+										</div>
 									</div>
-									<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled">
-										<md-tooltip md-direction="left">
-											{{ 'ACTIVE' | translate }}
-										</md-tooltip>
-									</md-icon>
-									<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="editEmployee(employee)" ng-show="editClaim">
+
+									<md-button aria-label="button" class="md-icon-button md-secondary "
+											   ng-click="editNoteDialog(note)" ng-show="editClaim">
 										<md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
 									</md-button>
-									<md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)"
-										ng-show="deleteClaim">
+									<md-button aria-label="button" class="md-icon-button md-secondary "
+											   ng-click="deleteNoteDialog(note.id)"
+											   ng-show="deleteClaim">
 										<md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
 									</md-button>
+									<md-divider></md-divider>
 								</md-list-item>
+
 							</md-list>
 						</md-content>
 					</div>
@@ -501,7 +509,8 @@
 			</div>
 		</div>
 
-        <!--Files -->
+
+		<!--Files -->
 
 
 		<!--Fucking material add buttons NOT ALL BUTTONS ARE AVAILABLE ON PAGE-->

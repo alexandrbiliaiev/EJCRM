@@ -1,6 +1,7 @@
 angular.module('EuroJobsCrm.controllers').controller('ContragentManageController',
     function ($scope, $location, $translate, $http, $state, contragentsService, $cookies,
-        countriesService, contactpersonsService, addressesService, $mdDialog, $routeParams, employeesService, usersService, fileService) {
+        countriesService, contactpersonsService, addressesService, $mdDialog, $routeParams, employeesService, usersService,
+              fileService, calendarService) {
 
         $scope.user = usersService.getUser();
 
@@ -25,6 +26,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced user';
         $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
         $scope.detailClaim = $scope.addClaim;
+        $scope.moment = moment;
 
         contragentsService.load().success(function (response) {
             contragentsService.contragents = response;
@@ -561,6 +563,120 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             });
         };
         //End Employees
+
+        $scope.addNoteDialog = function () {
+            $scope.currentEvent = {
+                start: new DayPilot.Date(new Date()),
+                end: new DayPilot.Date(new Date()),
+                id: DayPilot.guid(),
+                text: "",
+                startDate: new Date(),
+                endDate: new Date(),
+                contragentId: $scope.contragent.id,
+                clientName: $scope.contragent.name,
+            };
+
+            $mdDialog.show({
+                scope: $scope,
+                preserveScope: true,
+                templateUrl: '/templates/calendar/event_tmpl.html',
+                clickOutsideToClose: true,
+            })
+                .then(function (answer) {
+
+                }, function () {
+
+                });
+
+        }
+
+        $scope.editNoteDialog = function (note) {
+            note.startDate = new Date(note.startDate).addHours(-1);
+            note.endDate = new Date(note.endDate).addHours(-1);
+            note.remindDate = new Date(note.remindDate).addHours(-1);
+            $scope.currentEvent = note;
+
+            $mdDialog.show({
+                scope: $scope,
+                preserveScope: true,
+                templateUrl: '/templates/calendar/event_tmpl.html',
+                clickOutsideToClose: true,
+            })
+                .then(function (answer) {
+
+                }, function () {
+
+                });
+
+        }
+
+        $scope.deleteNoteDialog = function (noteId) {
+            $scope.Saving = false;
+            var confirm = $mdDialog.confirm()
+                .title($translate.instant('DELETE_CONFIRM_TITLE'))
+                .textContent($translate.instant('DELETE_CONFIRM_TEXT'))
+                .ariaLabel('label')
+                .ok($translate.instant('DELETE_OK'))
+                .cancel($translate.instant('DELETE_CANCEL'));
+
+            $mdDialog.show(confirm).then(function () {
+                calendarService.deleteEvent(noteId).success(function (response) {
+                    for (var i = 0; i < $scope.contragent.notes.length; i++) {
+                        if ($scope.contragent.notes[i].id == noteId) {
+                            $scope.contragent.notes.splice(i, 1);
+                            break;
+                        }
+                    }
+
+                    $scope.Saving = false;
+                    $mdDialog.hide();
+                }).error(function () {
+                    $state.go('error');
+                    $scope.Saving = false;
+                    $mdDialog.hide();
+                })
+            }, function () {
+
+            });
+        }
+
+        $scope.saveEventClick = function () {
+            if ($scope.eventForm.$invalid) {
+                return;
+            }
+
+            $scope.currentEvent.startDate = $scope.currentEvent.startDate.normalize();
+            $scope.currentEvent.endDate = $scope.currentEvent.endDate.normalize();
+            if ($scope.currentEvent.remindDate != undefined) {
+                $scope.currentEvent.remindDate = $scope.currentEvent.remindDate.normalize();
+            }
+
+            $scope.Saving = true;
+            calendarService.saveEvent($scope.currentEvent).success(function (response) {
+                if (!$scope.contragent.notes.ContainsId(response.id)) {
+                    $scope.contragent.notes.push(response);
+                } else {
+                    for (var i = 0; i <$scope.client.notes.length; i++) {
+                        if ($scope.contragent.notes[i].id == response.id) {
+                            $scope.contragent.notes.splice(i, 1);
+                            $scope.contragent.notes.push(response);
+                            break;
+                        }
+                    }
+                }
+
+                $scope.Saving = false;
+                $mdDialog.hide();
+            }).error(function () {
+                $state.go('error');
+                $scope.Saving = false;
+                $mdDialog.hide();
+            })
+
+        }
+
+
+        //data loading
 
         $scope.getFormatedDate = function (date) {
             return moment(date).format('YYYY-MM-DD');

@@ -31,17 +31,39 @@ namespace EuroJobsCrm.Controllers
                 List<ContragentDto> contagents = context.Contragents
                     .Where(c => c.CgtAuditRd == null)
                     .GroupJoin(context.Addresses.Where(a => a.AdrAuditRd == null), c => c.CgtId, a => a.AdrCgtId,
-                        (c, a) => new { Contragent = c, Addresses = a })
-                    .GroupJoin(context.ContactPersons.Where(a => a.CtpAuditRd == null), c => c.Contragent.CgtId, cp => cp.CtpCgtId,
-                        (c, cp) => new { c.Contragent, c.Addresses, ContactPersons = cp })
-                    .GroupJoin(context.Employees.Where(a => a.EmpAuditRd == null), c => c.Contragent.CgtId, cp => cp.EmpCtgId,
-                        (c, em) => new { c.Contragent, c.Addresses, c.ContactPersons, Employees = em })
-                    .GroupJoin(context.DocumentFiles.Where(f => f.DcfAuditRu == null && f.DcfCntId != null), c => c.Contragent.CgtId, f => f.DcfCntId,
-                        (c, f) => new { c.Contragent, c.Addresses, c.ContactPersons, c.Employees, Files = f })
+                        (c, a) => new {Contragent = c, Addresses = a})
+                    .GroupJoin(context.ContactPersons.Where(a => a.CtpAuditRd == null), c => c.Contragent.CgtId,
+                        cp => cp.CtpCgtId,
+                        (c, cp) => new {c.Contragent, c.Addresses, ContactPersons = cp})
+                    .GroupJoin(context.Employees.Where(a => a.EmpAuditRd == null), c => c.Contragent.CgtId,
+                        cp => cp.EmpCtgId,
+                        (c, em) => new {c.Contragent, c.Addresses, c.ContactPersons, Employees = em})
+                    .GroupJoin(context.DocumentFiles.Where(f => f.DcfAuditRu == null && f.DcfCntId != null),
+                        c => c.Contragent.CgtId, f => f.DcfCntId,
+                        (c, f) => new {c.Contragent, c.Addresses, c.ContactPersons, c.Employees, Files = f})
                     .LeftJoin(context.AspNetUsers, c => c.Contragent.CgtResponsibleUser, u => u.Id,
-                        (c, u) => new { c.Contragent, c.Addresses, c.ContactPersons, c.Employees, c.Files, ResponsibleUser = u })
-                    .GroupJoin(context.AspNetUsers.Join(context.UsersToContragents, c => c.Id, u => u.UtcUsrId, (c, u) => new { User = c, ContragentUser = u })
-                    , c => c.Contragent.CgtId, u => u.ContragentUser.UtcCtgId,
+                        (c, u) =>
+                            new {c.Contragent, c.Addresses, c.ContactPersons, c.Employees, c.Files, ResponsibleUser = u})
+                    .GroupJoin(context.Notes.Where(n => n.NotAuditRu == null).LeftJoin(context.UsersToContragents,
+                            n => n.NotAuditCu, u => u.UtcUsrId, (n, u) => new
+                            {
+                                Note = n,
+                                UserData = u
+                            }), c => c.Contragent.CgtId, n => n.Note.NotCtgId,
+                        (c, n) => new
+                        {
+                            c.Contragent,
+                            c.Addresses,
+                            c.ContactPersons,
+                            c.Files,
+                            c.Employees,
+                            c.ResponsibleUser,
+                            Notes = n
+                        })
+                    .GroupJoin(
+                        context.AspNetUsers.Join(context.UsersToContragents, c => c.Id, u => u.UtcUsrId,
+                            (c, u) => new {User = c, ContragentUser = u})
+                        , c => c.Contragent.CgtId, u => u.ContragentUser.UtcCtgId,
                         (c, u) => new
                         {
                             c.Contragent,
@@ -50,6 +72,7 @@ namespace EuroJobsCrm.Controllers
                             c.Employees,
                             c.Files,
                             c.ResponsibleUser,
+                            c.Notes,
                             ContragentUsers = u.Select(e => new
                             {
                                 Id = e.User.Id,
@@ -60,18 +83,28 @@ namespace EuroJobsCrm.Controllers
                             })
                         })
                     .ToList()
-                    .Select(c => new ContragentDto(c.Contragent, c.Addresses, c.ContactPersons, c.Employees, c.Files, c.ResponsibleUser, c.ContragentUsers.Select(e => new UserDto
-                    {
-                        Id = e.Id,
-                        CtgId = e.CtgId,
-                        Email = e.Email,
-                        Name = e.Name,
-                        UserName = e.UserName,
-                        UserRole = null
-                    }).ToList()))
+                    .Select(
+                        c =>
+                            new ContragentDto(c.Contragent, c.Addresses, c.ContactPersons, c.Employees, c.Files,
+                                c.ResponsibleUser, c.ContragentUsers.Select(e => new UserDto
+                                {
+                                    Id = e.Id,
+                                    CtgId = e.CtgId,
+                                    Email = e.Email,
+                                    Name = e.Name,
+                                    UserName = e.UserName,
+                                    UserRole = null,
+                                }).ToList())
+                            {
+                                Notes = c.Notes.Select(n => new EventDetailsDto(n.Note)
+                                {
+                                    TargetUserName = n.UserData?.UtcUsrName,
+                                    TargetUser = n.UserData?.UtcUsrId
+                                }).ToList()
+                            })
                     .ToList();
 
-               return contagents;
+                return contagents;
             }
         }
 

@@ -35,13 +35,14 @@ namespace EuroJobsCrm.Controllers
 
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                
-
+  
                 var employees = context.Employees.Where(e=>e.EmpAuditRd == null)
                     .GroupJoin(context.IdentityDocuments.Where(d=>d.IdcAuditRd == null), e => e.EmpId, d => d.IdcEmpId,
                         (e, d) => new { employee = e, documents = d })
+                  
                     .ToList()
-                    .Select(e => new EmployeeDto(e.employee, e.documents, new List<DocumentFiles>()))
+                    .Select(e => new EmployeeDto(e.employee, e.documents, new List<DocumentFiles>())
+                    )
                     .ToList();
 
                 return employees;
@@ -153,9 +154,25 @@ namespace EuroJobsCrm.Controllers
                 List<DocumentFiles> files = context.DocumentFiles
                                                           .Where(d => documentsIds.Contains(d.DcfIdcId) && d.DcfAuditRd == null)
                                                           .ToList();
+                
+                var notes =  context.Notes.Where(n => n.NotAuditRd == null && n.NotEmp == employeeId).LeftJoin(context.UsersToContragents,
+                    n => n.NotAuditCu, u => u.UtcUsrId, (n, u) => new
+                    {
+                        Note = n,
+                        UserData = u
+                    }).ToList();
 
                 EmployeeDto emp = employeeData
                     .Select(e => new EmployeeDto(e.employee, e.documents, files)).FirstOrDefault();
+
+                if (emp != null)
+                {
+                    emp.Notes = notes.Select(n => new EventDetailsDto(n.Note)
+                    {
+                        TargetUser = n.UserData.UtcUsrId,
+                        TargetUserName = n.UserData.UtcUsrName,
+                    }).ToList();
+                }
 
                 return emp;
             }
