@@ -1,7 +1,7 @@
 angular.module('EuroJobsCrm.controllers').controller('ContragentManageController',
     function ($scope, $location, $translate, $http, $state, contragentsService, $cookies,
         countriesService, contactpersonsService, addressesService, $mdDialog, $routeParams, employeesService, usersService,
-              fileService, calendarService) {
+        fileService, calendarService) {
 
         $scope.user = usersService.getUser();
 
@@ -15,6 +15,8 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $scope.birthdate = null;
         $scope.showSearch = false;
         $scope.users = new Array();
+        $scope.responsibleUsers = new Array();
+        $scope.responsibleUserName = null;
         $scope.isActive = false;
         $scope.Saving = false;
         $scope.expandContragentUsers = true;
@@ -31,6 +33,13 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         contragentsService.load().success(function (response) {
             contragentsService.contragents = response;
             $scope.contragent = contragentsService.getContragent($state.params.id);
+
+            for (i in $scope.responsibleUsers) {
+                if ($scope.responsibleUsers[i].id == $scope.contragent.responsibleUser.id) {
+                    $scope.responsibleUserName = $scope.responsibleUsers[i].name;
+                }
+            }
+
             $scope.isActive = true;
         }).error(function () {
             $state.go('error');
@@ -64,7 +73,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 ctgId: $scope.contragent.id
             };
 
-            contragentsService.AddContragentUser(contragentUser,$scope.contragent.id).success(function (response) {
+            contragentsService.AddContragentUser(contragentUser, $scope.contragent.id).success(function (response) {
                 $scope.Saving = false;
                 $mdDialog.hide();
                 $scope.contragent.contragentUsers.push(contragentUser);
@@ -516,7 +525,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             contragentsService.addResponsiblePersonToContragent(param).success(function (response) {
                 $scope.Saving = false;
                 $mdDialog.hide();
-                $scope.contragent.responsibleUser = response.contragent.responsibleUser;
+                $scope.contragent.responsibleUser = usr;
             }).error(function () {
                 $scope.Saving = false;
                 $state.go('error');
@@ -656,7 +665,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 if (!$scope.contragent.notes.ContainsId(response.id)) {
                     $scope.contragent.notes.push(response);
                 } else {
-                    for (var i = 0; i <$scope.client.notes.length; i++) {
+                    for (var i = 0; i < $scope.client.notes.length; i++) {
                         if ($scope.contragent.notes[i].id == response.id) {
                             $scope.contragent.notes.splice(i, 1);
                             $scope.contragent.notes.push(response);
@@ -684,8 +693,27 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
         if (contragentsService.contragents != undefined) {
             $scope.contragent = contragentsService.getContragent($state.params.id);
+            for (i in $scope.responsibleUsers) {
+                if ($scope.responsibleUsers[i].id == $scope.contragent.responsibleUser.id) {
+                    $scope.responsibleUserName = $scope.responsibleUsers[i].name;
+                }
+            }
             return;
         }
+
+        usersService.GetResponsibleUsersList().success(function (response) {
+            $scope.responsibleUsers = response;
+
+        }).error(function () {
+            $state.go('error');
+        });
+
+
+
+
+
+
+
 
         usersService.load().success(function (response) {
 

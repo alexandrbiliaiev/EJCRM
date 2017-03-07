@@ -15,6 +15,14 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
+        users.GetResponsibleUsersList = function()
+        {
+            return $http({
+                url: 'api/Users/GetResponsibleUsersList',
+                method: "GET"
+            });
+        }
+
         users.ChangeUserLanguage = function (utc) {
              return $http({
                 url: 'api/Users/ChangeUserLanguage',

@@ -13,11 +13,11 @@
             
             <div ng-include="'/templates/saving_loader.html'"></div>
 
-            <form name="responsiblePersonForm" >
+            <form name="responsiblePersonForm" ng-show = "!isSaving">
                 <md-list ng-cloak>
-                    <md-list-item class="md-1-line" ng-repeat="user in users">
-                        {{user.email}}
-                        <md-button aria-label="button" class="md-icon-button md-secondary" ng-click="saveResponsiblePersoon(user)">
+                    <md-list-item class="md-1-line" ng-repeat="resU in responsibleUsers">
+                        {{resU.email}},  {{resU.name}}
+                        <md-button aria-label="button" class="md-icon-button md-secondary" ng-click="saveResponsiblePersoon(resU)">
                             <md-icon md-font-icon="ion-plus">
                                 <md-tooltip md-direction="left">
                                     {{ 'ADD' | translate }}

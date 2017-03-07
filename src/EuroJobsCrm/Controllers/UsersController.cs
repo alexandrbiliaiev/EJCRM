@@ -41,6 +41,42 @@ namespace EuroJobsCrm.Controllers
             return View();
         }
 
+
+
+        [HttpGet]
+        [Route("api/Users/GetResponsibleUsersList")]
+        public List<UserDto> GetResponsibleUsersList()
+        {
+            using (var context = new DB_A12601_bielkaContext())
+            {
+                var users = context.AspNetUserRoles.Where(r => r.Role.Name != SUPER_ADMIN_ROLE_NAME && r.Role.Name != ACCOUNTING_ROLE_NAME && r.Role.Name != CONTAGENT_ROLE_NAME).
+                    Join(context.AspNetUsers.Join(context.UsersToContragents.Where(u => u.UtcCtgId == 0 || u.UtcCtgId == null),
+                        c => c.Id,
+                        u => u.UtcUsrId,
+                        (c, u) => new { User = c, ContragentUser = u }),
+                            r => r.UserId,
+                            u => u.User.Id,
+                             (role, user) => new
+                             {
+                                 RoleName = role.Role.Name,
+                                 User = user,
+                                 CtgUser = user.ContragentUser
+                             }).ToList().
+                             Select(us => new UserDto
+                             {
+                                 Id = us.User.User.Id,
+                                 UserName = us.User.User.UserName,
+                                 Email = us.User.User.Email,
+                                 CtgId = us.User.ContragentUser.UtcCtgId,
+                                 Name = us.User.ContragentUser.UtcUsrName,
+                                 UserRole = us.RoleName
+                             }).ToList();
+
+                return users;
+            }
+        }
+
+
         [HttpGet]
         [Route("api/Users/GetInternalUsers")]
         public Dictionary<string, List<UserDto>> GetInternalUsers()
