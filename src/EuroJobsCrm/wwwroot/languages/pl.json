@@ -245,5 +245,7 @@
     "DELETE_CONFIRM_TITLE":"Usunięcie",
     "DELETE_CONFIRM_TEXT":"Czy napewno chcesz usunąć?",
     "ERROR": "Wystąpił błąd",
-    "CONTACT_ADMIN": "Proszę o kontakt z administratorem"
+    "CONTACT_ADMIN": "Proszę o kontakt z administratorem",
+    "CREATEDATE":"Data utorzenia:",
+    "POSITION":"Stanowisko:"
 }

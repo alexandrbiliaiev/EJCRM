@@ -6,6 +6,7 @@ using EuroJobsCrm.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 
 namespace EuroJobsCrm.Controllers
 {
@@ -36,14 +37,28 @@ namespace EuroJobsCrm.Controllers
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
   
+
                 var employees = context.Employees.Where(e=>e.EmpAuditRd == null)
                     .GroupJoin(context.IdentityDocuments.Where(d=>d.IdcAuditRd == null), e => e.EmpId, d => d.IdcEmpId,
                         (e, d) => new { employee = e, documents = d })
                   
                     .ToList()
                     .Select(e => new EmployeeDto(e.employee, e.documents, new List<DocumentFiles>())
-                    )
+                    {
+                        CreateDate = e.employee.EmpAuditCd ?? DateTime.Now
+                    })
                     .ToList();
+
+                var employeesIds = employees.Select(e => e.Id).ToArray();
+                var emploeesPositions = context.EmploymentRequests.Where(
+                        r => r.EtrAuditRd == null && r.EtrStatus == 1 && employeesIds.Contains(r.EtrEmpId))
+                    .LeftJoin(context.Offers, r => r.EtrOfrId, o => o.OfrId, (r, o) => new {r.EtrEmpId, o.OfrPosition})
+                    .ToLookup(e => e.EtrEmpId, e => e.OfrPosition);
+
+                foreach (var employee in employees)
+                {
+                    employee.Position = emploeesPositions.FirstOrDefault(p => p.Key == employee.Id)?.FirstOrDefault();
+                }
 
                 return employees;
             }

@@ -33,10 +33,20 @@
 							<md-icon style="font-size:32px;" md-font-icon="ion-person" ng-click="editEmployee(employee.id)">
 							</md-icon>
 							<div class="md-list-item-text">
-								<h3 ng-click="editEmployee(employee.id)"><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
-								<p>
-									{{'BIRTHDATE'|translate}}: {{moment(employee.birthDate).format('DD-MM-YYYY')}}
-								</p>
+								<div layout="row">
+									<div layout="column" flex="50">
+										<h3 ng-click="editEmployee(employee.id)"><b>{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</b></h3>
+										<p>
+											{{'BIRTHDATE'|translate}}: {{moment(employee.birthDate).format('DD-MM-YYYY')}}
+										</p>
+									</div>
+									<div layout="column">
+										<h3><b>{{'POSITION'|translate}} {{employee.position}}</b></h3>
+										<p>
+											{{'CREATEDATE'|translate}} {{moment(employee.createDate).format('DD-MM-YYYY')}}
+										</p>
+									</div>
+								</div>
 							</div>
 							<md-icon style="font-size:24px;" md-font-icon="ion-checkmark-circled" ng-show="employee.status == '1'">
 								<md-tooltip md-direction="left">

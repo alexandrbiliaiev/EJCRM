@@ -15,6 +15,8 @@ namespace EuroJobsCrm.Dto
         public DateTime BirthDate { get; set; }
         public string Description { get; set; }
         public string ResponsibleUser { get; set; }
+        public string Position { get; set; }
+        public DateTime CreateDate { get; set; }
         public int? Status { get; set; }
         public int? CltId { get; set; }
         public int? OffId { get; set; }
