@@ -99,6 +99,29 @@ namespace EuroJobsCrm.Controllers
             return GetEvent(eventdto);
         }
 
+
+        [HttpGet]
+        [Route("api/Calendar/Events/GetMyEvents")]
+        public int GetMyEvents()
+        {
+            int count = 0;
+
+            string id = User.GetUserId();
+
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                count = context.Notes.Where(n => 
+                (n.NotAuditCu == id || n.NotTargetUser == id) 
+                && (n.NotRemindDate == DateTime.Now || (n.NotStartDate <= DateTime.Now && n.NotEndDate <= DateTime.Now))
+                && n.NotAuditRd == null).Count();
+            }
+
+            return count;
+        }
+
+
+
+
         [HttpPost]
         [Route("api/Calendar/Events/Delete")]
         public bool DeleteEvent([FromBody] EventDto eventdto)

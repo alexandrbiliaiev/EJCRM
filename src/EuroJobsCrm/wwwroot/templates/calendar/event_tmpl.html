@@ -84,7 +84,7 @@
                         <md-select placeholder="{{'TARGET_USER'| translate}}" ng-model="currentEvent.targetUser"
                                    md-on-open="loadUsers()" style="min-width: 200px;">
                             <md-option ng-value="null">-</md-option>
-                            <md-option ng-value="user.id" ng-repeat="user in users">{{user.userName}}</md-option>
+                            <md-option ng-value="user.id" ng-repeat="user in users">{{user.name}}</md-option>
                             <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
                         </md-select>
                     </md-input-container>

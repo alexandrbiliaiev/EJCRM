@@ -15,6 +15,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
 
         $scope.moment = moment;
 
+
         if (clientsService.clients != undefined) {
             $scope.clients = clientsService.clients;
             $scope.isActive = true;
@@ -55,7 +56,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientsController',
                 return;
             }
 
-            $scope.Saving = true; 
+            $scope.Saving = true;
             client = $scope.client;
 
             clientsService.saveClient(client).success(function (response) {

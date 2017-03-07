@@ -87,7 +87,7 @@
 
                                  @if (User.IsInRole("Admin") || User.IsInRole("Super Admin") || User.IsInRole("Advanced user") || User.IsInRole("Normal user"))
                                 {
-                                    <li><a asp-area="" asp-controller="Calendar" asp-action="Index" asp-fragment="cal">{{ 'CALENDAR' | translate }}</a></li>
+                                    <li><a asp-area="" asp-controller="Calendar" asp-action="Index" asp-fragment="cal">{{ 'CALENDAR' | translate }} <sup>{{count}}<sup></a></li>
                                 }
                                 }
 

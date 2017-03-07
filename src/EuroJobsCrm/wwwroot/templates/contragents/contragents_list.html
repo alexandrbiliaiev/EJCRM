@@ -27,12 +27,12 @@
 				<md-content flex>
 					<md-list ng-cloak style="margin-top: -20px">
 						<md-list-item class="md-2-line" ng-repeat="contragent in contragents | contragentsSearchFor:searchString ">
-							<md-icon style="font-size:24px;" md-font-icon="ion-ios-folder">
+							<md-icon style="font-size:24px;" md-font-icon="ion-ios-folder" ng-click="editContragent(contragent.id)">
 							</md-icon>
 							<div class="md-list-item-text">
 								<table>
 									<td style="padding:0 30px 0 0;">
-										<h3><b>{{contragent.name}}</b></h3>
+										<h3 ng-click="editContragent(contragent.id)"><b>{{contragent.name}}</b></h3>
 										<h4> <b>{{'LICENSE_NUMBER' | translate}}:</b> {{contragent.licenseNumber}} </h4>
 									</td>
 									<td>

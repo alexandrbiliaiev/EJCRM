@@ -1,6 +1,6 @@
 angular.module('EuroJobsCrm.controllers').controller('CalendarController', function ($scope, $location, $translate, $http, $state, $mdDialog,
-                                                                                     $routeParams, $cookies, calendarService, usersService,
-                                                                                     contragentsService, clientsService, employeesService) {
+    $routeParams, $cookies, calendarService, usersService,
+    contragentsService, clientsService, employeesService) {
 
     function convertToDayPilotEvent(response) {
         response.start = new DayPilot.Date(response.startDate);
@@ -11,6 +11,8 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
         response.remindDate = new Date(response.remindDate).addHours(-1);
     }
 
+
+
     $scope.startDate = new Date();
 
     $scope.onEventClick = function (args) {
@@ -19,27 +21,27 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
             convertToDayPilotEvent(response);
 
             if (response.clientId != null &&
-                ($scope.clients == undefined || !$scope.clients.ContainsId(response.clientId))){
+                ($scope.clients == undefined || !$scope.clients.ContainsId(response.clientId))) {
 
-                $scope.clients = [{id: response.clientId, name: response.clientName}]
+                $scope.clients = [{ id: response.clientId, name: response.clientName }]
             }
 
             if (response.targetUser != null &&
-                ($scope.users == undefined || !$scope.users.ContainsId(response.targetUser))){
+                ($scope.users == undefined || !$scope.users.ContainsId(response.targetUser))) {
 
-                $scope.users = [{id: response.targetUser, userName: response.targetUserName}];
+                $scope.users = [{ id: response.targetUser, userName: response.targetUserName }];
             }
 
             if (response.contragentId != null &&
-                ($scope.contragents == undefined || !$scope.contragents.ContainsId(response.contragentId))){
+                ($scope.contragents == undefined || !$scope.contragents.ContainsId(response.contragentId))) {
 
-                $scope.contragents = [{id: response.contragentId, name: response.contragentName}]
+                $scope.contragents = [{ id: response.contragentId, name: response.contragentName }]
             }
 
             if (response.employeeId != null &&
-                ($scope.employees == undefined || !$scope.employees.ContainsId(response.employeeId))){
+                ($scope.employees == undefined || !$scope.employees.ContainsId(response.employeeId))) {
 
-                $scope.employees = [{id: response.employeeId, firstName: response.employeeName}]
+                $scope.employees = [{ id: response.employeeId, firstName: response.employeeName }]
             }
 
             $scope.currentEvent = response;
@@ -52,7 +54,7 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
         $scope.showEventDialog();
     }
 
-    $scope.onTimeRangeSelected = function(args) {
+    $scope.onTimeRangeSelected = function (args) {
         $scope.currentEvent = {
             start: args.start.value,
             end: args.end,
@@ -64,9 +66,9 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
         $scope.showEventDialog();
     }
 
-    $scope.onEventMove = function(args) {
+    $scope.onEventMove = function (args) {
         var event = $scope.events.getById(args.e.id());
-        if (event == undefined){
+        if (event == undefined) {
             return;
         }
 
@@ -79,13 +81,13 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
         $scope.showEventDialog();
     },
 
-    $scope.dayConfig = {
-        startDate: $scope.startDate,
-        viewType: "Week",
-        onEventClick: $scope.onEventClick,
-        onEventMove: $scope.onEventMove,
-        onTimeRangeSelected:$scope.onTimeRangeSelected,
-    };
+        $scope.dayConfig = {
+            startDate: $scope.startDate,
+            viewType: "Week",
+            onEventClick: $scope.onEventClick,
+            onEventMove: $scope.onEventMove,
+            onTimeRangeSelected: $scope.onTimeRangeSelected,
+        };
 
     $scope.monthConfig = {
         startDate: moment($scope.startDate).format('YYYY-MM-DD'),
@@ -96,35 +98,35 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
 
     $scope.events = new Array();
 
-    $scope.changeViewType = function(type){
+    $scope.changeViewType = function (type) {
         $scope.viewType = type;
 
-        if (type == 'day'){
+        if (type == 'day') {
             $scope.dayViewEnabled = true;
             $scope.weekViewEnabled = $scope.monthViewEnabled = false;
             $scope.dayConfig.viewType = 'Day';
         }
-        if (type == 'week'){
+        if (type == 'week') {
             $scope.weekViewEnabled = true;
             $scope.dayViewEnabled = $scope.monthViewEnabled = false;
             $scope.dayConfig.viewType = 'Week';
         }
-        if (type == 'month'){
+        if (type == 'month') {
             $scope.monthViewEnabled = true;
-            $scope.weekViewEnabled = $scope.dayViewEnabled = false;     
+            $scope.weekViewEnabled = $scope.dayViewEnabled = false;
         }
     }
 
-    $scope.changeStartDate = function(){
-         var result = new Date($scope.$$childHead.startDate);
-         result.setDate(result.getDate() + 1);
+    $scope.changeStartDate = function () {
+        var result = new Date($scope.$$childHead.startDate);
+        result.setDate(result.getDate() + 1);
 
-         $scope.dayConfig.startDate = result;
-         $scope.monthConfig.startDate = moment($scope.$$childHead.startDate).format('YYYY-MM-DD');
+        $scope.dayConfig.startDate = result;
+        $scope.monthConfig.startDate = moment($scope.$$childHead.startDate).format('YYYY-MM-DD');
 
-         $scope.$$childHead.dpDay.update();
-         $scope.$$childHead.dpMonth.update();
-         
+        $scope.$$childHead.dpDay.update();
+        $scope.$$childHead.dpMonth.update();
+
     }
 
     $scope.showEventDialog = function () {
@@ -134,26 +136,25 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
             templateUrl: '/templates/calendar/event_tmpl.html',
             clickOutsideToClose: true,
         })
-        .then(function (answer) {
+            .then(function (answer) {
 
-        }, function () {
+            }, function () {
 
-        });
+            });
     }
 
-    $scope.close = function (){
+    $scope.close = function () {
         $mdDialog.hide();
     }
 
     $scope.saveEventClick = function () {
-        if ($scope.eventForm.$invalid){
+        if ($scope.eventForm.$invalid) {
             return;
         }
 
         $scope.currentEvent.startDate = $scope.currentEvent.startDate.normalize();
         $scope.currentEvent.endDate = $scope.currentEvent.endDate.normalize();
-        if ($scope.currentEvent.remindDate != undefined)
-        {
+        if ($scope.currentEvent.remindDate != undefined) {
             $scope.currentEvent.remindDate = $scope.currentEvent.remindDate.normalize();
         }
 
@@ -161,11 +162,11 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
         calendarService.saveEvent($scope.currentEvent).success(function (response) {
             convertToDayPilotEvent(response);
 
-            if (!$scope.events.ContainsId(response.id)){
+            if (!$scope.events.ContainsId(response.id)) {
                 $scope.events.push(response);
-            }else{
-                for (var i = 0; i < $scope.events.length; i++){
-                    if ($scope.events[i].id == response.id){
+            } else {
+                for (var i = 0; i < $scope.events.length; i++) {
+                    if ($scope.events[i].id == response.id) {
                         $scope.events.splice(i, 1);
                         $scope.events.push(response);
                         break;
@@ -187,8 +188,8 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
         $scope.Saving = true;
         calendarService.deleteEvent($scope.currentEvent.id).success(function (response) {
 
-            for (var i = 0; i < $scope.events.length; i++){
-                if ($scope.events[i].id == $scope.currentEvent.id){
+            for (var i = 0; i < $scope.events.length; i++) {
+                if ($scope.events[i].id == $scope.currentEvent.id) {
                     $scope.events.splice(i, 1);
                     break;
                 }
@@ -220,14 +221,17 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
     }
 
     $scope.loadUsers = function () {
-        if ($scope.users != undefined && $scope.users.length > 2){
+        if ($scope.users != undefined && $scope.users.length > 2) {
             return;
         }
 
         $scope.isLoading = true;
         usersService.load().success(function (response) {
-            var users = response['Accounting'].concat(response['Admin'])
-                .concat(response['Advanced user']).concat(response['Normal user']);
+            users = [];
+            angular.extend(users, response['Admin']);
+            angular.extend(users, response['Accounting']);
+            angular.extend(users, response['Advanced user']);
+            angular.extend(users, response['Normal user']);
 
             $scope.users = users;
             $scope.isLoading = false;
@@ -239,7 +243,7 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
     }
 
     $scope.loadContragents = function () {
-        if ($scope.contragents != undefined && $scope.contragents.length > 2){
+        if ($scope.contragents != undefined && $scope.contragents.length > 2) {
             return;
         }
 
@@ -254,7 +258,7 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
     }
 
     $scope.loadClients = function () {
-        if ($scope.clients != undefined && $scope.clients.length > 2){
+        if ($scope.clients != undefined && $scope.clients.length > 2) {
             return;
         }
 
@@ -269,7 +273,7 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
     }
 
     $scope.loadEmployees = function () {
-        if ($scope.employees != undefined && $scope.employees.length > 2){
+        if ($scope.employees != undefined && $scope.employees.length > 2) {
             return;
         }
 
@@ -282,7 +286,7 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
             $state.go('error');
         })
     }
-    
+
     calendarService.load().success(function (response) {
 
         for (i = 0; i < response.length; i++) {
@@ -296,7 +300,7 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
     }).error(function () {
         $state.go('error');
     })
-    
+
     $scope.changeViewType('day');
 
 });
