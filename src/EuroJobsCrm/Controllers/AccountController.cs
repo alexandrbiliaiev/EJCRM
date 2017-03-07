@@ -90,8 +90,15 @@ namespace EuroJobsCrm.Controllers
                             Response.Cookies.Append("user_name", u.UtcUsrName);
                         }
 
-                        //write preffered language to cookies
-                        Response.Cookies.Append("user_lng", u.UtcLng);
+                        if (u.UtcLng == null)
+                        {
+                            Response.Cookies.Append("user_lng", "pl");
+                        }
+                        else
+                        {
+                            //write preffered language to cookies
+                            Response.Cookies.Append("user_lng", u.UtcLng);
+                        }
                         Response.Cookies.Append("id", u.UtcUsrId);
 
                     }
