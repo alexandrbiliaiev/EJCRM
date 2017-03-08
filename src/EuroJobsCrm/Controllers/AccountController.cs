@@ -64,6 +64,11 @@ namespace EuroJobsCrm.Controllers
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByEmailAsync(model.Email);
+                    if (user.Deleted)
+                    {
+                        return View("Lockout");
+                    }
+
                     var userRoles = await _userManager.GetRolesAsync(user);
 
                     using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())

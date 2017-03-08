@@ -50,7 +50,7 @@ namespace EuroJobsCrm.Controllers
             using (var context = new DB_A12601_bielkaContext())
             {
                 var users = context.AspNetUserRoles.Where(r => r.Role.Name != SUPER_ADMIN_ROLE_NAME && r.Role.Name != ACCOUNTING_ROLE_NAME && r.Role.Name != CONTAGENT_ROLE_NAME).
-                    Join(context.AspNetUsers.Join(context.UsersToContragents.Where(u => u.UtcCtgId == 0 || u.UtcCtgId == null),
+                    Join(context.AspNetUsers.Where(u => !u.Deleted).Join(context.UsersToContragents.Where(u => u.UtcCtgId == 0 || u.UtcCtgId == null),
                         c => c.Id,
                         u => u.UtcUsrId,
                         (c, u) => new { User = c, ContragentUser = u }),
@@ -84,7 +84,7 @@ namespace EuroJobsCrm.Controllers
             using (var context = new DB_A12601_bielkaContext())
             {
                 var users = context.AspNetUserRoles.Where(r => r.Role.Name != SUPER_ADMIN_ROLE_NAME).
-                    Join(context.AspNetUsers.Join(context.UsersToContragents,
+                    Join(context.AspNetUsers.Where(u => !u.Deleted).Join(context.UsersToContragents,
                         c => c.Id,
                         u => u.UtcUsrId,
                         (c, u) => new { User = c, ContragentUser = u }),
@@ -128,7 +128,7 @@ namespace EuroJobsCrm.Controllers
         {
             using (var context = new DB_A12601_bielkaContext())
             {
-                var data = context.UsersToContragents.Where(u => u.UtcUsrId == utc.UsrId).FirstOrDefault();
+                var data = context.UsersToContragents.FirstOrDefault(u => u.UtcUsrId == utc.UsrId);
 
                 data.UtcLng = utc.PrefLng;
 
@@ -202,6 +202,33 @@ namespace EuroJobsCrm.Controllers
             await sender.SendEmailAsync(applicationUser.Email, subject, body);
 
             return new DataTransferObjectBase();
+        }
+
+        [HttpPost]
+        [Route("api/Users/Delete")]
+        public async Task<DataTransferObjectBase> DeleteUser([FromBody] string userId)
+        {
+          
+            using (var context = new DB_A12601_bielkaContext())
+            {
+                var user = context.AspNetUsers.FirstOrDefault(u => u.Id == userId);
+
+                if (user == null)
+                {
+                    return new DataTransferObjectBase
+                    {
+                        Success = false,
+                        ErrorMessage = "User is not found"
+                    };
+                }
+
+                user.Deleted = true;
+                await context.SaveChangesAsync();
+
+                return new DataTransferObjectBase();
+
+            }
+         
         }
 
         [HttpGet]
