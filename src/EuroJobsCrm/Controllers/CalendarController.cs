@@ -107,14 +107,21 @@ namespace EuroJobsCrm.Controllers
             int count = 0;
 
             string id = User.GetUserId();
+            TimeZoneInfo cZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
+
+            var datatimenow = new DateTimeOffset(DateTime.UtcNow);  // will use .Kind to decide the offset
+            var converted = datatimenow.ToOffset(TimeSpan.FromHours(+1));
 
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
+                
                 count = context.Notes.Where(n => 
                 (n.NotAuditCu == id || n.NotTargetUser == id) 
-                && (n.NotRemindDate == DateTime.Now || (n.NotStartDate <= DateTime.Now && n.NotEndDate <= DateTime.Now))
+                && (n.NotRemindDate == datatimenow  || (n.NotStartDate <= datatimenow  && n.NotEndDate >= datatimenow))
                 && n.NotAuditRd == null).Count();
             }
+
+         
 
             return count;
         }
