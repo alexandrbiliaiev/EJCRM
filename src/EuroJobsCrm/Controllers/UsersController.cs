@@ -206,14 +206,14 @@ namespace EuroJobsCrm.Controllers
 
         [HttpPost]
         [Route("api/Users/Delete")]
-        public async Task<DataTransferObjectBase> DeleteUser([FromBody] string userId)
+        public async Task<DataTransferObjectBase> DeleteUser([FromBody] UserDto user)
         {
           
             using (var context = new DB_A12601_bielkaContext())
             {
-                var user = context.AspNetUsers.FirstOrDefault(u => u.Id == userId);
+                var userEntity = context.AspNetUsers.FirstOrDefault(u => u.Id == user.Id);
 
-                if (user == null)
+                if (userEntity == null)
                 {
                     return new DataTransferObjectBase
                     {
@@ -222,11 +222,10 @@ namespace EuroJobsCrm.Controllers
                     };
                 }
 
-                user.Deleted = true;
+                userEntity.Deleted = true;
                 await context.SaveChangesAsync();
 
                 return new DataTransferObjectBase();
-
             }
          
         }

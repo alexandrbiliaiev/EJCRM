@@ -79,6 +79,14 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
+        users.deleteUser = function (userId) {
+            return $http({
+                url: 'api/Users/Delete',
+                method: "POST",
+                data: { id: userId }
+            });
+        }
+
         users.getUser = function (id) {
             for (i in this.users) {
                 if (this.users[i].id == id) {

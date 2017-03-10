@@ -247,5 +247,7 @@
     "ERROR": "Wystąpił błąd",
     "CONTACT_ADMIN": "Proszę o kontakt z administratorem",
     "CREATEDATE":"Data utorzenia:",
-    "POSITION":"Stanowisko:"
+    "POSITION":"Stanowisko:",
+    "DELETE_USER":"Usuń użytkownika",
+    "DELETE_USER_CONFIRM_TEXT":"Czy napewno chcesz usunąć użytkownika?"
 }

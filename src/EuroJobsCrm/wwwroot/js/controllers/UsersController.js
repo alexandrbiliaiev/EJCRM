@@ -35,17 +35,30 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
         $scope.showAddingUserDialog();
     }
 
+    $scope.showDeleteUserDialog= function (userId){
+        var confirm = $mdDialog.confirm()
+            .title($translate.instant('DELETE_USER'))
+            .textContent($translate.instant('DELETE_USER_CONFIRM_TEXT'))
+            .ok($translate.instant('YES'))
+            .cancel($translate.instant('DELETE_CANCEL'));
+
+        $mdDialog.show(confirm).then(function () {
+            usersService.deleteUser(userId).success(function (response) {
+                $scope.reloadUsers();
+            }).error(function () {
+                $state.go('error');
+            });
+        }, function () {
+
+        });
+    }
+
     $scope.showAddingUserDialog = function (){
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
             templateUrl: '/templates/users/user_dialog_tmpl.html',
             clickOutsideToClose: true,
-        })
-        .then(function (answer) {
-
-        }, function () {
-
         });
     }
 
