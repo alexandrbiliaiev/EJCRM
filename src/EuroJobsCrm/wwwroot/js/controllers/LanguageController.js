@@ -6,6 +6,12 @@ angular.module('EuroJobsCrm.controllers').controller('LanguageController',
         $scope.currentLang = $cookies.get('user_lng');
         $scope.$location = $location;
 
+         calendarService.getMyEvents().success(function (response) {
+                $scope.count = response;
+            }).error(function () {
+                $scope.count = 0;
+            });
+            // результат метода підрахунку моїх івентів на сьогодн
 
         setInterval(function () {
             calendarService.getMyEvents().success(function (response) {
