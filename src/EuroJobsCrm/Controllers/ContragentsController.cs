@@ -41,7 +41,7 @@ namespace EuroJobsCrm.Controllers
                     .GroupJoin(context.DocumentFiles.Where(f => f.DcfAuditRu == null && f.DcfCntId != null),
                         c => c.Contragent.CgtId, f => f.DcfCntId,
                         (c, f) => new {c.Contragent, c.Addresses, c.ContactPersons, c.Employees, Files = f})
-                    .LeftJoin(context.AspNetUsers, c => c.Contragent.CgtResponsibleUser, u => u.Id,
+                    .LeftJoin(context.AspNetUsers.Where(u => !u.Deleted), c => c.Contragent.CgtResponsibleUser, u => u.Id,
                         (c, u) =>
                             new {c.Contragent, c.Addresses, c.ContactPersons, c.Employees, c.Files, ResponsibleUser = u})
                     .GroupJoin(context.Notes.Where(n => n.NotAuditRu == null).LeftJoin(context.UsersToContragents,
@@ -61,7 +61,7 @@ namespace EuroJobsCrm.Controllers
                             Notes = n
                         })
                     .GroupJoin(
-                        context.AspNetUsers.Join(context.UsersToContragents, c => c.Id, u => u.UtcUsrId,
+                        context.AspNetUsers.Where(u => !u.Deleted).Join(context.UsersToContragents, c => c.Id, u => u.UtcUsrId,
                             (c, u) => new {User = c, ContragentUser = u})
                         , c => c.Contragent.CgtId, u => u.ContragentUser.UtcCtgId,
                         (c, u) => new

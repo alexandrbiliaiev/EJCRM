@@ -425,6 +425,27 @@
                                     <h3><b>{{user.name}}</b></h3>
                                     <p><i>{{user.email}}</i></p>
                                 </div>
+                                <md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditUserDialog(user)">
+                                    <md-icon md-font-icon="ion-edit">
+                                        <md-tooltip md-direction="left">
+                                            {{ 'EDIT_USER' | translate }}
+                                        </md-tooltip>
+                                    </md-icon>
+                                </md-button>
+                                <md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteUserDialog(user.id)">
+                                    <md-icon md-font-icon="ion-android-delete">
+                                        <md-tooltip md-direction="left">
+                                            {{ 'DELETE_USER' | translate }}
+                                        </md-tooltip>
+                                    </md-icon>
+                                </md-button>
+                                <md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showResetPassConfirmDialog(user.id)">
+                                    <md-icon md-font-icon="ion-ios-refresh">
+                                        <md-tooltip md-direction="left">
+                                            {{ 'RESET_PASSWORD' | translate }}
+                                        </md-tooltip>
+                                    </md-icon>
+                                </md-button>
                                 <md-divider ng-if="!$last"></md-divider>
                             </md-list-item>
                         </md-list>

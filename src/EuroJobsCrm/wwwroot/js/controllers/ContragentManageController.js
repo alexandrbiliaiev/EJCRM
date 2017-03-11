@@ -684,7 +684,105 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
         }
 
+        $scope.showEditUserDialog = function (user) {
+            $scope.userEditMode = true;
+            $scope.user = user;
+            $scope.addingUserMethod = usersService.EditUser;
+            $mdDialog.show({
+                scope: $scope,
+                preserveScope: true,
+                templateUrl: '/templates/users/user_dialog_tmpl.html',
+                clickOutsideToClose: true,
+            });
+        }
 
+        $scope.showResetPassConfirmDialog = function (userId) {
+            var confirm = $mdDialog.confirm()
+                .title($translate.instant('RESET_PASS_CONFIRM_TITLE'))
+                .textContent($translate.instant('RESET_PASS_CONFIRM_TEXT'))
+                .ariaLabel('label')
+                .ok($translate.instant('YES'))
+                .cancel($translate.instant('DELETE_CANCEL'));
+
+            $mdDialog.show(confirm).then(function () {
+                usersService.resetPasswordForUser(userId).success(function (response) {
+                    message = response.success ? $translate.instant('RESET_PASS_SUCCESS') : response.errorMessage;
+                    $mdDialog.show($mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title($translate.instant('RESET_PASS_CONFIRM_TITLE'))
+                        .textContent(message)
+                        .ariaLabel('Message')
+                        .ok('OK'));
+
+                }).error(function (response) {
+                    $state.go('error');
+                });
+            }, function () {
+
+            });
+        };
+
+        $scope.saveUserClick = function () {
+            if ($scope.user.name.length == 0) {
+                return;
+            }
+
+            $scope.Saving = true;
+            usersService.EditUser($scope.user).success(function (response) {
+                if (response.success != true) {
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                        //.parent(angular.element(document.querySelector('#popupContainer')))
+                            .clickOutsideToClose(true)
+                            .title($translate.instant('ADDING_USER_ERROR'))
+                            .textContent(response.errorMessage)
+                            .ariaLabel('Error dialog')
+                            .ok('OK')
+
+                    );
+                    $mdDialog.hide();
+                    return;
+                }
+
+                /*
+                $scope.reloadUsers();
+                $scope.contragent.contragentUsers
+                $scope.user = usersService.getUser();
+                */
+
+                $mdDialog.hide();
+                $scope.Saving = false;
+
+            }).error(function () {
+                $state.go('error');
+                $mdDialog.hide();
+            });
+        }
+
+        $scope.showDeleteUserDialog= function (userId){
+            var confirm = $mdDialog.confirm()
+                .title($translate.instant('DELETE_USER'))
+                .textContent($translate.instant('DELETE_USER_CONFIRM_TEXT'))
+                .ok($translate.instant('YES'))
+                .cancel($translate.instant('DELETE_CANCEL'));
+
+            $mdDialog.show(confirm).then(function () {
+                usersService.deleteUser(userId).success(function (response) {
+                    var users = $scope.contragent.contragentUsers;
+
+                    for (i in users) {
+                        if (users[i].id == userId) {
+                            users.splice(i, 1);
+                            break;
+                        }
+                    }
+                }).error(function () {
+                    $state.go('error');
+                });
+            }, function () {
+
+            });
+        }
         //data loading
 
         $scope.getFormatedDate = function (date) {
@@ -707,13 +805,6 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         }).error(function () {
             $state.go('error');
         });
-
-
-
-
-
-
-
 
         usersService.load().success(function (response) {
 

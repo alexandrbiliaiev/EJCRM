@@ -355,7 +355,8 @@ namespace EuroJobsCrm.Controllers
                     Id = applicationUser.Id,
                     Email = applicationUser.Email,
                     Password = string.Empty,
-                    UserName = applicationUser.UserName
+                    UserName = applicationUser.UserName,
+                    Name = user.Name
                 };
             }
             catch (Exception ex)
