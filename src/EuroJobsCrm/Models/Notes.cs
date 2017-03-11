@@ -14,6 +14,8 @@ namespace EuroJobsCrm.Models
         public int? NotCtgId { get; set; }
         public int? NotCltId { get; set; }
         public int? NotEmp { get; set; }
+        public string NotStatus { get; set; }
+        public bool? NotReminded { get; set; }
         public DateTime? NotAuditMd { get; set; }
         public string NotAuditMu { get; set; }
         public DateTime? NotAuditRd { get; set; }

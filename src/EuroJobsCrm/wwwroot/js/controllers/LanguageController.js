@@ -1,27 +1,37 @@
 angular.module('EuroJobsCrm.controllers').controller('LanguageController',
     function ($scope, $location, $translate, $http, $state, $mdDialog, $routeParams, $cookies,
         clientsService, countriesService, contactpersonsService, addressesService, offersService,
-        employeesService, fileService, usersService, calendarService) {
+        employeesService, fileService, usersService, calendarService, Notification) {
 
         $scope.currentLang = $cookies.get('user_lng');
         $scope.$location = $location;
 
-         calendarService.getMyEvents().success(function (response) {
-                $scope.count = response;
+         calendarService.getLatestEvents().success(function (response) {
+                $scope.count = response.length;
+                 for(i = 0; i < response.length; i++){
+                     Notification({
+                         message: response[i].noteText,
+                         title: response[i].subject});
+                 }
             }).error(function () {
                 $scope.count = 0;
             });
             // результат метода підрахунку моїх івентів на сьогодн
 
         setInterval(function () {
-            calendarService.getMyEvents().success(function (response) {
-                $scope.count = response;
+            calendarService.getLatestEvents().success(function (response) {
+                $scope.count = response.length;
+                for(i = 0; i < response.length; i++){
+                    Notification({
+                        message: response[i].noteText,
+                        title: response[i].subject});
+                }
             }).error(function () {
                 $scope.count = 0;
             });
             // результат метода підрахунку моїх івентів на сьогодні
             $scope.$apply();
-        }, 20000 )
+        }, 2 * 60 * 1000  )
 
 
 

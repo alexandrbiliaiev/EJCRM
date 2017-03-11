@@ -38,9 +38,9 @@ Date.prototype.addHours = function(hours) {
     return this;
 }
 
-var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngFileUpload', 'ngRoute', 'ngCookies', 'pascalprecht.translate', 'angular-jsvat', 'ui.router', 'EuroJobsCrm.services', 'EuroJobsCrm.controllers', 'ng-mfb', 'ngMaterialDatePicker', 'daypilot'])
+var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngFileUpload', 'ngRoute', 'ngCookies', 'pascalprecht.translate', 'angular-jsvat', 'ui.router', 'EuroJobsCrm.services', 'EuroJobsCrm.controllers', 'ng-mfb', 'ngMaterialDatePicker', 'daypilot', 'ui-notification'])
 
-    .config(function ($translateProvider, $routeProvider, $stateProvider, $mdThemingProvider, $httpProvider, $mdDateLocaleProvider) {
+    .config(function ($translateProvider, $routeProvider, $stateProvider, $mdThemingProvider, $httpProvider, $mdDateLocaleProvider, NotificationProvider) {
         $translateProvider.useStaticFilesLoader({
             prefix: '/languages/',
             suffix: '.json'
@@ -91,6 +91,16 @@ var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngFileUplo
                 templateUrl: 'templates/calendar/calendar.html',
             });
 
+
+        NotificationProvider.setOptions({
+            delay: 10000,
+            startTop: 20,
+            startRight: 10,
+            verticalSpacing: 20,
+            horizontalSpacing: 20,
+            positionX: 'right',
+            positionY: 'bottom'
+        });
     });
 
 

@@ -62,6 +62,7 @@ angular.module('EuroJobsCrm.controllers').controller('CalendarController', funct
             text: "",
             startDate: new Date(args.start.value).addHours(-1),
             endDate: new Date(args.end).addHours(-1),
+            remindDate: new Date(args.start.value).addDays(-1).addHours(-1)
         };
         $scope.showEventDialog();
     }

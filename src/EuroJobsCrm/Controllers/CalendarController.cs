@@ -101,29 +101,22 @@ namespace EuroJobsCrm.Controllers
 
 
         [HttpGet]
-        [Route("api/Calendar/Events/GetMyEvents")]
-        public int GetMyEvents()
+        [Route("api/Calendar/Events/GetLatestEvents")]
+        public List<EventDto> GetMyEvents()
         {
-            int count = 0;
-
-            string id = User.GetUserId();
-            TimeZoneInfo cZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
-
-            var datatimenow = new DateTimeOffset(DateTime.UtcNow);  // will use .Kind to decide the offset
-            var converted = datatimenow.ToOffset(TimeSpan.FromHours(+1));
-
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                
-                count = context.Notes.Where(n => 
-                (n.NotAuditCu == id || n.NotTargetUser == id) 
-                && (n.NotRemindDate == datatimenow  || (n.NotStartDate <= datatimenow  && n.NotEndDate >= datatimenow))
-                && n.NotAuditRd == null).Count();
+                string userId = User.GetUserId();
+
+                DateTime from = DateTime.Today;
+                DateTime to = DateTime.Today.AddDays(1);
+
+                var latestEvents = context.Notes.Where(n => (n.NotAuditCu == userId || n.NotTargetUser == userId) &&
+                                                            (n.NotRemindDate >= from && n.NotRemindDate <= to ||
+                                                            n.NotStartDate >= from && n.NotStartDate <= to)).ToList();
+
+                return latestEvents.Select(e => new EventDto(e)).ToList();
             }
-
-         
-
-            return count;
         }
 
 

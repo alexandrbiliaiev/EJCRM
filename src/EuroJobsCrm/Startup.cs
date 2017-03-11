@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,8 +20,11 @@ namespace EuroJobsCrm
 {
     public class Startup
     {
+        private static EventRemindWorker EventRemindWorker;
+
         public Startup(IHostingEnvironment env)
         {
+      
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -62,6 +66,9 @@ namespace EuroJobsCrm
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            EventRemindWorker = new EventRemindWorker();
+            EventRemindWorker.DoWork();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -20,9 +20,9 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
-        events.getMyEvents = function(){
+        events.getLatestEvents = function(){
             return $http({
-                url: 'api/Calendar/Events/GetMyEvents',
+                url: 'api/Calendar/Events/GetLatestEvents',
                 method: "GET",
             });
         }

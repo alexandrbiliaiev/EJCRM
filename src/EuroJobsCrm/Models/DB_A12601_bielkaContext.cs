@@ -9,7 +9,7 @@ namespace EuroJobsCrm.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlServer(@"Server=SQL5016.SmarterASP.NET;Initial Catalog=DB_A12601_bielka;User Id=DB_A12601_bielka_admin;Password=azanezege22;");
+            optionsBuilder.UseSqlServer(@"Server=SQL5016.SmarterASP.NET;Initial Catalog=DB_A12601_bielka;User Id=DB_A12601_bielka_admin;Password=azanezege22;MultipleActiveResultSets=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -729,6 +729,13 @@ namespace EuroJobsCrm.Models
                 entity.Property(e => e.NotText)
                     .HasColumnName("not_text")
                     .HasMaxLength(1000);
+
+                entity.Property(e => e.NotReminded)
+                    .HasColumnName("not_reminded");
+
+                entity.Property(e => e.NotStatus)
+                    .HasColumnName("not_status")
+                    .HasMaxLength(150);
             });
 
             modelBuilder.Entity<Offers>(entity =>
