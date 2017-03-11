@@ -54,6 +54,19 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
     }
 
     $scope.showAddingUserDialog = function (){
+        $scope.userEditMode = false;
+        $mdDialog.show({
+            scope: $scope,
+            preserveScope: true,
+            templateUrl: '/templates/users/user_dialog_tmpl.html',
+            clickOutsideToClose: true,
+        });
+    }
+
+    $scope.showEditUserDialog = function (user) {
+        $scope.userEditMode = true;
+        $scope.user = user;
+        $scope.addingUserMethod = usersService.EditUser;
         $mdDialog.show({
             scope: $scope,
             preserveScope: true,
@@ -63,7 +76,7 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
     }
 
     $scope.saveUserClick = function () {
-        if ($scope.userForm.$invalid) {
+        if ($scope.userForm.$invalid && !$scope.userEditMode) {
             return;
         }
 
@@ -84,25 +97,7 @@ angular.module('EuroJobsCrm.controllers').controller('UsersController', function
                 return;
             }
 
-            if ($scope.addingUserMethod == usersService.AddNormalUser) {
-                //usersService.normalUsers.push(response);
-                 $scope.reloadUsers();
-            }
-
-            if ($scope.addingUserMethod == usersService.AddAdvancedUser) {
-                //usersService.advancedUsers.push(response);
-                $scope.reloadUsers();
-            }
-
-            if ($scope.addingUserMethod == usersService.AddAdminUser) {
-               // usersService.admins.push(response);
-               $scope.reloadUsers();
-            }
-
-            if ($scope.addingUserMethod == usersService.AddAccountingUser) {
-               // usersService.accountingUsers.push(response);
-               $scope.reloadUsers();
-            }
+            $scope.reloadUsers();
 
             $scope.user = usersService.getUser();
             $mdDialog.hide();

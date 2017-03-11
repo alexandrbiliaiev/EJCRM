@@ -41,8 +41,6 @@ namespace EuroJobsCrm.Controllers
             return View();
         }
 
-
-
         [HttpGet]
         [Route("api/Users/GetResponsibleUsersList")]
         public List<UserDto> GetResponsibleUsersList()
@@ -202,6 +200,30 @@ namespace EuroJobsCrm.Controllers
             await sender.SendEmailAsync(applicationUser.Email, subject, body);
 
             return new DataTransferObjectBase();
+        }
+
+        [HttpPost]
+        [Route("api/Users/EditName")]
+        public async Task<UserDto> EditUserName([FromBody] UserDto user)
+        {
+            using (var context = new DB_A12601_bielkaContext())
+            {
+                var userData = context.UsersToContragents.FirstOrDefault(u => u.UtcUsrId == user.Id);
+
+                if (userData == null)
+                {
+                    return new UserDto
+                    {
+                        Success = false,
+                        ErrorMessage = "The user was not found!"
+                    };
+                }
+
+                userData.UtcUsrName = user.Name;
+                await context.SaveChangesAsync();
+
+                return user;
+            }
         }
 
         [HttpPost]

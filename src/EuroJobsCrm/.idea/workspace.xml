@@ -18,25 +18,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="client_details.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wwwroot/templates/clients/client_details.html">
+      <file leaf-file-name="user_dialog_tmpl.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/wwwroot/templates/users/user_dialog_tmpl.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="516" column="13" lean-forward="true" selection-start-line="516" selection-start-column="13" selection-end-line="516" selection-end-column="104" />
-              <folding>
-                <element signature="n#div#4;n#div#1;n#ui-view#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#md-icon#0;n#md-list-item#0;n#md-list#0;n#md-content#0;n#div#0;n#section#0;n#div#0;n#div#4;n#div#1;n#ui-view#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#md-list-item#0;n#md-list#0;n#md-content#0;n#div#0;n#section#0;n#div#0;n#div#4;n#div#1;n#ui-view#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="clients_list.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/wwwroot/templates/clients/clients_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2508">
-              <caret line="114" column="24" lean-forward="false" selection-start-line="114" selection-start-column="24" selection-end-line="114" selection-end-column="24" />
+            <state relative-caret-position="476">
+              <caret line="43" column="45" lean-forward="false" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -45,9 +31,13 @@
       <file leaf-file-name="users_list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wwwroot/templates/users/users_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2249">
-              <caret line="114" column="40" lean-forward="false" selection-start-line="114" selection-start-column="40" selection-end-line="114" selection-end-column="40" />
-              <folding />
+            <state relative-caret-position="264">
+              <caret line="38" column="123" lean-forward="false" selection-start-line="38" selection-start-column="105" selection-end-line="38" selection-end-column="123" />
+              <folding>
+                <element signature="n#md-list-item#1;n#md-list#0;n#md-content#0;n#div#0;n#section#0;n#md-content#0;n#div#1;n#!!top" expanded="false" />
+                <element signature="n#md-list-item#2;n#md-list#0;n#md-content#0;n#div#0;n#section#0;n#md-content#0;n#div#1;n#!!top" expanded="false" />
+                <element signature="n#md-list-item#3;n#md-list#0;n#md-content#0;n#div#0;n#section#0;n#md-content#0;n#div#1;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -55,24 +45,11 @@
       <file leaf-file-name="UsersController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wwwroot/js/controllers/UsersController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="52" column="9" lean-forward="false" selection-start-line="50" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+            <state relative-caret-position="462">
+              <caret line="78" column="39" lean-forward="false" selection-start-line="78" selection-start-column="39" selection-end-line="78" selection-end-column="39" />
               <folding>
-                <element signature="e#1904#2114#0" expanded="false" />
-                <element signature="e#2155#3873#0" expanded="false" />
-                <element signature="e#3933#4942#0" expanded="false" />
-                <marker date="1489175943069" expanded="true" signature="163:6523" ph="{...}" />
+                <element signature="e#3665#4674#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="usersService.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wwwroot/js/services/usersService.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1034">
-              <caret line="47" column="9" lean-forward="false" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -90,8 +67,8 @@
       <file leaf-file-name="pl.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wwwroot/languages/pl.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="736">
-              <caret line="251" column="29" lean-forward="false" selection-start-line="251" selection-start-column="5" selection-end-line="251" selection-end-column="29" />
+            <state relative-caret-position="758">
+              <caret line="252" column="35" lean-forward="false" selection-start-line="252" selection-start-column="35" selection-end-line="252" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -120,6 +97,7 @@
       <find>da</find>
       <find>dele</find>
       <find>DELETE_CONFIRM</find>
+      <find>addingUserMethod</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -144,11 +122,12 @@
         <option value="$PROJECT_DIR$/wwwroot/js/controllers/EmployeeManageController.js" />
         <option value="$PROJECT_DIR$/wwwroot/templates/employees/employee_details.html" />
         <option value="$PROJECT_DIR$/wwwroot/templates/employees/employees_list.html" />
+        <option value="$PROJECT_DIR$/wwwroot/templates/clients/clients_list.html" />
         <option value="$PROJECT_DIR$/wwwroot/languages/pl.json" />
+        <option value="$PROJECT_DIR$/wwwroot/templates/users/users_list.html" />
         <option value="$PROJECT_DIR$/wwwroot/js/services/usersService.js" />
         <option value="$PROJECT_DIR$/wwwroot/js/controllers/UsersController.js" />
-        <option value="$PROJECT_DIR$/wwwroot/templates/users/users_list.html" />
-        <option value="$PROJECT_DIR$/wwwroot/templates/clients/clients_list.html" />
+        <option value="$PROJECT_DIR$/wwwroot/templates/users/user_dialog_tmpl.html" />
       </list>
     </option>
   </component>
@@ -509,12 +488,13 @@
       <workItem from="1487190320352" duration="4606000" />
       <workItem from="1488277879374" duration="17000" />
       <workItem from="1488921722186" duration="1902000" />
-      <workItem from="1489174927551" duration="1543000" />
+      <workItem from="1489174927551" duration="1741000" />
+      <workItem from="1489229723826" duration="2752000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52904000" />
+    <option name="totallyTimeSpent" value="55854000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -558,18 +538,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/wwwroot/templates/clients/client_details.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#div#4;n#div#1;n#ui-view#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#md-icon#0;n#md-list-item#0;n#md-list#0;n#md-content#0;n#div#0;n#section#0;n#div#0;n#div#4;n#div#1;n#ui-view#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#md-list-item#0;n#md-list#0;n#md-content#0;n#div#0;n#section#0;n#div#0;n#div#4;n#div#1;n#ui-view#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wwwroot/css/site.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3234">
@@ -912,44 +880,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="43" column="43" lean-forward="false" selection-start-line="43" selection-start-column="43" selection-end-line="43" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wwwroot/languages/pl.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="251" column="29" lean-forward="false" selection-start-line="251" selection-start-column="5" selection-end-line="251" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wwwroot/js/controllers/UsersController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="52" column="9" lean-forward="false" selection-start-line="50" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
-          <folding>
-            <element signature="e#1904#2114#0" expanded="false" />
-            <element signature="e#2155#3873#0" expanded="false" />
-            <element signature="e#3933#4942#0" expanded="false" />
-            <marker date="1489175943069" expanded="true" signature="163:6523" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wwwroot/templates/users/users_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2249">
-          <caret line="114" column="40" lean-forward="false" selection-start-line="114" selection-start-column="40" selection-end-line="114" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wwwroot/js/services/usersService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1034">
-          <caret line="47" column="9" lean-forward="false" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -961,10 +891,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/wwwroot/languages/pl.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="758">
+          <caret line="252" column="35" lean-forward="false" selection-start-line="252" selection-start-column="35" selection-end-line="252" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/wwwroot/templates/clients/client_details.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
-          <caret line="516" column="13" lean-forward="true" selection-start-line="516" selection-start-column="13" selection-end-line="516" selection-end-column="104" />
+          <caret line="516" column="13" lean-forward="false" selection-start-line="516" selection-start-column="13" selection-end-line="516" selection-end-column="104" />
           <folding>
             <element signature="n#div#4;n#div#1;n#ui-view#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#md-icon#0;n#md-list-item#0;n#md-list#0;n#md-content#0;n#div#0;n#section#0;n#div#0;n#div#4;n#div#1;n#ui-view#0;n#!!top" expanded="true" />
@@ -975,8 +913,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wwwroot/templates/clients/clients_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2508">
+        <state relative-caret-position="604">
           <caret line="114" column="24" lean-forward="false" selection-start-line="114" selection-start-column="24" selection-end-line="114" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wwwroot/js/services/usersService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="62" column="15" lean-forward="true" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wwwroot/js/controllers/UsersController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="78" column="39" lean-forward="false" selection-start-line="78" selection-start-column="39" selection-end-line="78" selection-end-column="39" />
+          <folding>
+            <element signature="e#3665#4674#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wwwroot/templates/users/users_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="38" column="123" lean-forward="false" selection-start-line="38" selection-start-column="105" selection-end-line="38" selection-end-column="123" />
+          <folding>
+            <element signature="n#md-list-item#1;n#md-list#0;n#md-content#0;n#div#0;n#section#0;n#md-content#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#md-list-item#2;n#md-list#0;n#md-content#0;n#div#0;n#section#0;n#md-content#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#md-list-item#3;n#md-list#0;n#md-content#0;n#div#0;n#section#0;n#md-content#0;n#div#1;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wwwroot/templates/users/user_dialog_tmpl.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="43" column="45" lean-forward="false" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
           <folding />
         </state>
       </provider>

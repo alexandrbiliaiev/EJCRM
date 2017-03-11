@@ -29,7 +29,6 @@
 				<md-content flex>
 					<md-list ng-cloak>
 						<md-subheader class="md-no-sticky">{{'ADMINS'|translate}}</md-subheader>
-
 						<md-list-item class="md-2-line" ng-repeat="user in admins">
 							<md-icon style="font-size:32px;" md-font-icon="ion-ios-people"></md-icon>
 							<div class="md-list-item-text">
@@ -37,6 +36,13 @@
 								<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
 							</div>
 
+							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditUserDialog(user)">
+								<md-icon md-font-icon="ion-edit">
+									<md-tooltip md-direction="left">
+										{{ 'EDIT_USER' | translate }}
+									</md-tooltip>
+								</md-icon>
+							</md-button>
 							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteUserDialog(user.id)">
 								<md-icon md-font-icon="ion-android-delete">
 									<md-tooltip md-direction="left">
@@ -60,6 +66,13 @@
 								<h4>{{'USER_NAME'| translate}}: <b>{{user.name}}</b></h4>
 								<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
 							</div>
+							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditUserDialog(user)">
+								<md-icon md-font-icon="ion-edit">
+									<md-tooltip md-direction="left">
+										{{ 'EDIT_USER' | translate }}
+									</md-tooltip>
+								</md-icon>
+							</md-button>
 							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteUserDialog(user.id)">
 								<md-icon md-font-icon="ion-android-delete">
 									<md-tooltip md-direction="left">
@@ -83,6 +96,13 @@
 								<h4>{{'USER_NAME'| translate}}: <b>{{user.name}}</b></h4>
 								<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
 							</div>
+							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditUserDialog(user)">
+								<md-icon md-font-icon="ion-edit">
+									<md-tooltip md-direction="left">
+										{{ 'EDIT_USER' | translate }}
+									</md-tooltip>
+								</md-icon>
+							</md-button>
 							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteUserDialog(user.id)">
 								<md-icon md-font-icon="ion-android-delete">
 									<md-tooltip md-direction="left">
@@ -106,6 +126,13 @@
 								<h4>{{'USER_NAME'| translate}}: <b>{{user.name}}</b></h4>
 								<h5>{{'CP_EMAIL'| translate}}: <b>{{user.email}}</b></h5>
 							</div>
+							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showEditUserDialog(user)">
+								<md-icon md-font-icon="ion-edit">
+									<md-tooltip md-direction="left">
+										{{ 'EDIT_USER' | translate }}
+									</md-tooltip>
+								</md-icon>
+							</md-button>
 							<md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteUserDialog(user.id)">
 								<md-icon md-font-icon="ion-android-delete">
 									<md-tooltip md-direction="left">

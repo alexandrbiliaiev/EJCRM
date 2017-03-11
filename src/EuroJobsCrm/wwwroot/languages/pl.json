@@ -249,5 +249,6 @@
     "CREATEDATE":"Data utorzenia:",
     "POSITION":"Stanowisko:",
     "DELETE_USER":"Usuń użytkownika",
-    "DELETE_USER_CONFIRM_TEXT":"Czy napewno chcesz usunąć użytkownika?"
+    "DELETE_USER_CONFIRM_TEXT":"Czy napewno chcesz usunąć użytkownika?",
+    "EDIT_USER":"Edytuj użytkownika"
 }

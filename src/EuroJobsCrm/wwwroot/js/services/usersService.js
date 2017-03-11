@@ -63,6 +63,14 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
+        users.EditUser = function (user) {
+            return $http({
+                url: 'api/Users/EditName',
+                method: "POST",
+                data: user
+            });
+        }
+
         users.deleteUser = function (userId) {
             return $http({
                 url: 'api/Clients/Delete',
