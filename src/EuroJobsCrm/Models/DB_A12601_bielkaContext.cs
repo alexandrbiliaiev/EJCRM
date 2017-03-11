@@ -744,7 +744,7 @@ namespace EuroJobsCrm.Models
 
                 entity.Property(e => e.OfrAdditionalInfo)
                     .HasColumnName("ofr_additional_info")
-                    .HasColumnType("text");
+                    .HasColumnType("nchar(1000)");
 
                 entity.Property(e => e.OfrAdvanceAmount).HasColumnName("ofr_advance_amount");
 
@@ -782,7 +782,7 @@ namespace EuroJobsCrm.Models
 
                 entity.Property(e => e.OfrComments)
                     .HasColumnName("ofr_comments")
-                    .HasColumnType("text");
+                    .HasColumnType("nchar(1000)");
 
                 entity.Property(e => e.OfrContractType).HasColumnName("ofr_contract_type");
 
@@ -814,7 +814,8 @@ namespace EuroJobsCrm.Models
                     .HasColumnName("ofr_languages")
                     .HasColumnType("nchar(300)");
 
-                entity.Property(e => e.OfrOvertimeRate).HasColumnName("ofr_overtime_rate");
+                entity.Property(e => e.OfrOvertimeRate)
+                .HasColumnName("ofr_overtime_rate");
 
                 entity.Property(e => e.OfrPaymentMethod).HasColumnName("ofr_payment_method");
 

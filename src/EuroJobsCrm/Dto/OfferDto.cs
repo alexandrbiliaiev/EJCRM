@@ -66,7 +66,7 @@ namespace EuroJobsCrm.Dto
         public int? ContractType { get; set; }
         public DateTime? WorkStart { get; set; }
         public DateTime? WorkEnd { get; set; }
-        public double? OvertimeRate { get; set; }
+        public string OvertimeRate { get; set; }
         public int? HoursPerMonth { get; set; }
         public int WorkDays { get; set; }
         public double? RatePerHour { get; set; }

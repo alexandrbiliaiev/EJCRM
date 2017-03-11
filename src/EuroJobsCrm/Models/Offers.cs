@@ -22,7 +22,7 @@ namespace EuroJobsCrm.Models
         public int? OfrContractType { get; set; }
         public DateTime? OfrWorkStart { get; set; }
         public DateTime? OfrWorkEnd { get; set; }
-        public double? OfrOvertimeRate { get; set; }
+        public string OfrOvertimeRate { get; set; }
         public int? OfrHoursPerMonth { get; set; }
         public int OfrWorkDays { get; set; }
         public double? OfrRatePerHour { get; set; }
