@@ -391,6 +391,8 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         $scope.showEditOfferDialog = function (offer) {
             $scope.Saving = false;
             $scope.offer = offer;
+            offer.startingDate = new Date(offer.startingDate);
+            offer.endingDate = new Date(offer.endingDate)
             $mdDialog.show({
                 scope: $scope,
                 preserveScope: true,
