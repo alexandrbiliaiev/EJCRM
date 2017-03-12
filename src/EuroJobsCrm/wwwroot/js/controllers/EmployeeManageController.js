@@ -226,7 +226,7 @@ angular.module('EuroJobsCrm.controllers').controller('EmployeeManageController',
 
         file.upload.then(function (response) {
             $timeout(function () {
-                $scope.document.files.push({ url: response.data, name: file.name });
+                $scope.document.files.push({ url: response.data.url, name: file.name });
                 file.result = response.data;
                 $scope.docFile = undefined;
                 $scope.sendProgress = 0;
