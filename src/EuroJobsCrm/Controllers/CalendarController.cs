@@ -111,7 +111,7 @@ namespace EuroJobsCrm.Controllers
                 DateTime from = DateTime.Today;
                 DateTime to = DateTime.Today.AddDays(1);
 
-                var latestEvents = context.Notes.Where(n => (n.NotAuditCu == userId || n.NotTargetUser == userId) &&
+                var latestEvents = context.Notes.Where(n => n.NotAuditRd == null && (n.NotAuditCu == userId || n.NotTargetUser == userId) &&
                                                             (n.NotRemindDate >= from && n.NotRemindDate <= to ||
                                                             n.NotStartDate >= from && n.NotStartDate <= to)).ToList();
 

@@ -74,37 +74,38 @@ namespace EuroJobsCrm.Controllers
                     using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
                     {
 
-                        UsersToContragents u;
-                        u = context.UsersToContragents.FirstOrDefault(c => c.UtcUsrId == user.Id);
-                        
-                        if (u.UtcCtgId == null)
+                        UsersToContragents u = context.UsersToContragents.FirstOrDefault(c => c.UtcUsrId == user.Id);
+                        if (u != null)
                         {
-                            Response.Cookies.Append("ctg_id", "-1");  
-                        }
-                        else
-                        {
-                            if (u.UtcCtgId != null) Response.Cookies.Append("ctg_id", u.UtcCtgId.ToString());
-                        }
+                            if (u?.UtcCtgId == null)
+                            {
+                                Response.Cookies.Append("ctg_id", "-1");
+                            }
+                            else
+                            {
+                                if (u?.UtcCtgId != null) Response.Cookies.Append("ctg_id", u?.UtcCtgId.ToString());
+                            }
 
-                        if (u.UtcUsrName == null)
-                        {
-                            Response.Cookies.Append("user_name", "NoName");
-                        }
-                        else
-                        {
-                            Response.Cookies.Append("user_name", u.UtcUsrName);
-                        }
+                            if (u?.UtcUsrName == null)
+                            {
+                                Response.Cookies.Append("user_name", "NoName");
+                            }
+                            else
+                            {
+                                Response.Cookies.Append("user_name", u?.UtcUsrName);
+                            }
 
-                        if (u.UtcLng == null)
-                        {
-                            Response.Cookies.Append("user_lng", "pl");
+                            if (u?.UtcLng == null)
+                            {
+                                Response.Cookies.Append("user_lng", "pl");
+                            }
+                            else
+                            {
+                                //write preffered language to cookies
+                                Response.Cookies.Append("user_lng", u?.UtcLng);
+                            }
+                            Response.Cookies.Append("id", u?.UtcUsrId);
                         }
-                        else
-                        {
-                            //write preffered language to cookies
-                            Response.Cookies.Append("user_lng", u.UtcLng);
-                        }
-                        Response.Cookies.Append("id", u.UtcUsrId);
 
                     }
                             //writes role's name to cookies

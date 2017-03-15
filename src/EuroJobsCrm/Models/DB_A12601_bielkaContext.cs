@@ -8,8 +8,7 @@ namespace EuroJobsCrm.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlServer(@"Server=SQL5016.SmarterASP.NET;Initial Catalog=DB_A12601_bielka;User Id=DB_A12601_bielka_admin;Password=azanezege22;MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlServer(@"Server=mssql5.webio.pl,2401;Initial Catalog=bwg2017_crm_db;User Id=bwg2017_main_admin;Password=Bwg24@;MultipleActiveResultSets=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
