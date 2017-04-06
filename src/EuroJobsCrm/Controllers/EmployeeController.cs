@@ -170,8 +170,8 @@ namespace EuroJobsCrm.Controllers
                                                           .Where(d => documentsIds.Contains(d.DcfIdcId) && d.DcfAuditRd == null)
                                                           .ToList();
                 
-                var notes =  context.Notes.Where(n => n.NotAuditRd == null && n.NotEmp == employeeId).LeftJoin(context.UsersToContragents,
-                    n => n.NotAuditCu, u => u.UtcUsrId, (n, u) => new
+                var notes =  context.Notes.Where(n => n.NotAuditRd == null && n.NotEmp == employeeId).LeftJoin(context.AspNetUsers,
+                    n => n.NotAuditCu, u => u.Id, (n, u) => new
                     {
                         Note = n,
                         UserData = u
@@ -184,8 +184,8 @@ namespace EuroJobsCrm.Controllers
                 {
                     emp.Notes = notes.Select(n => new EventDetailsDto(n.Note)
                     {
-                        TargetUser = n.UserData.UtcUsrId,
-                        TargetUserName = n.UserData.UtcUsrName,
+                        TargetUser = n.UserData.Id,
+                        TargetUserName = n.UserData.FullName,
                     }).ToList();
                 }
 

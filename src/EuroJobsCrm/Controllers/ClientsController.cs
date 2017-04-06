@@ -94,8 +94,8 @@ namespace EuroJobsCrm.Controllers
                 var offers = context.Offers.Where(o => o.OfrAuditRd == null && clientId == o.OfrCltId).ToList();
                 var acceptedEmployees = context.Employees.Where(e => e.EmpAuditRd == null && e.EmpCltId != null && clientId == e.EmpCltId).ToList();
                 var files = context.DocumentFiles.Where(f => f.DcfAuditRd == null && clientId == f.DcfCliId).ToList();
-                var notes = context.Notes.Where(n => n.NotAuditRd == null && n.NotCltId == clientId).LeftJoin(context.UsersToContragents,
-                    n => n.NotAuditCu, u => u.UtcUsrId, (n, u) => new
+                var notes = context.Notes.Where(n => n.NotAuditRd == null && n.NotCltId == clientId).LeftJoin(context.AspNetUsers,
+                    n => n.NotAuditCu, u => u.Id, (n, u) => new
                     {
                         Note = n, UserData = u
                     }).ToList();
@@ -108,8 +108,8 @@ namespace EuroJobsCrm.Controllers
                     BusyVacancies = 0,
                     Notes = notes.Select(n=> new EventDetailsDto(n.Note)
                     {
-                        TargetUserName = n.UserData.UtcUsrName,
-                        TargetUser = n.UserData.UtcUsrId
+                        TargetUserName = n.UserData.FullName,
+                        TargetUser = n.UserData.Id
                     }).ToList()
                 };
 

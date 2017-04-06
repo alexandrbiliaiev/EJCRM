@@ -8,7 +8,7 @@ namespace EuroJobsCrm.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=mssql5.webio.pl,2401;Initial Catalog=bwg2017_crm_db;User Id=bwg2017_main_admin;Password=Bwg24@;MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlServer("Server=SQL6001.myASP.NET;Initial Catalog=DB_A1DD1B_bwg;User Id=DB_A1DD1B_bwg_admin;Password=1q2w3e4r5t;MultipleActiveResultSets=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -864,27 +864,6 @@ namespace EuroJobsCrm.Models
                     .HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<UsersToContragents>(entity =>
-            {
-                entity.HasKey(e => e.UtcId)
-                    .HasName("UsersToContragents_utc_id_uindex");
-
-                entity.Property(e => e.UtcId).HasColumnName("utc_id");
-
-                entity.Property(e => e.UtcCtgId).HasColumnName("utc_ctg_id");
-
-                entity.Property(e => e.UtcLng)
-                    .HasColumnName("utc_lng")
-                    .HasColumnType("varchar(2)");
-
-                entity.Property(e => e.UtcUsrId)
-                    .HasColumnName("utc_usr_id")
-                    .HasColumnType("varchar(100)");
-
-                entity.Property(e => e.UtcUsrName)
-                    .HasColumnName("utc_usr_name")
-                    .HasMaxLength(50);
-            });
         }
 
         public virtual DbSet<Addresses> Addresses { get; set; }
@@ -906,6 +885,5 @@ namespace EuroJobsCrm.Models
         public virtual DbSet<IdentityDocuments> IdentityDocuments { get; set; }
         public virtual DbSet<Notes> Notes { get; set; }
         public virtual DbSet<Offers> Offers { get; set; }
-        public virtual DbSet<UsersToContragents> UsersToContragents { get; set; }
     }
 }

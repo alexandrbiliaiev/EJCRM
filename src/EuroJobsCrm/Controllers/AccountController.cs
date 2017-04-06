@@ -71,45 +71,38 @@ namespace EuroJobsCrm.Controllers
 
                     var userRoles = await _userManager.GetRolesAsync(user);
 
-                    using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+              
+                    if (user.ContragentId == null)
                     {
-
-                        UsersToContragents u = context.UsersToContragents.FirstOrDefault(c => c.UtcUsrId == user.Id);
-                        if (u != null)
-                        {
-                            if (u?.UtcCtgId == null)
-                            {
-                                Response.Cookies.Append("ctg_id", "-1");
-                            }
-                            else
-                            {
-                                if (u?.UtcCtgId != null) Response.Cookies.Append("ctg_id", u?.UtcCtgId.ToString());
-                            }
-
-                            if (u?.UtcUsrName == null)
-                            {
-                                Response.Cookies.Append("user_name", "NoName");
-                            }
-                            else
-                            {
-                                Response.Cookies.Append("user_name", u?.UtcUsrName);
-                            }
-
-                            if (u?.UtcLng == null)
-                            {
-                                Response.Cookies.Append("user_lng", "pl");
-                            }
-                            else
-                            {
-                                //write preffered language to cookies
-                                Response.Cookies.Append("user_lng", u?.UtcLng);
-                            }
-                            Response.Cookies.Append("id", u?.UtcUsrId);
-                        }
-
+                        Response.Cookies.Append("ctg_id", "-1");
                     }
-                            //writes role's name to cookies
-                            Response.Cookies.Append("user_role", userRoles.FirstOrDefault());
+                    else
+                    {
+                        Response.Cookies.Append("ctg_id", user.ContragentId.ToString());
+                    }
+
+                    if (string.IsNullOrEmpty(user.FullName))
+                    {
+                        Response.Cookies.Append("user_name", "NoName");
+                    }
+                    else
+                    {
+                        Response.Cookies.Append("user_name", user.FullName);
+                    }
+
+                    if (string.IsNullOrEmpty(user.LanguageCode))
+                    {
+                        Response.Cookies.Append("user_lng", "pl");
+                    }
+                    else
+                    {
+                        //write preffered language to cookies
+                        Response.Cookies.Append("user_lng", user.LanguageCode);
+                    }
+                    Response.Cookies.Append("id", user.Id);
+              
+                    //writes role's name to cookies
+                    Response.Cookies.Append("user_role", userRoles.FirstOrDefault());
                             
 
 

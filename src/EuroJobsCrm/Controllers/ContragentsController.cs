@@ -44,8 +44,8 @@ namespace EuroJobsCrm.Controllers
                     .LeftJoin(context.AspNetUsers.Where(u => !u.Deleted), c => c.Contragent.CgtResponsibleUser, u => u.Id,
                         (c, u) =>
                             new {c.Contragent, c.Addresses, c.ContactPersons, c.Employees, c.Files, ResponsibleUser = u})
-                    .GroupJoin(context.Notes.Where(n => n.NotAuditRu == null).LeftJoin(context.UsersToContragents,
-                            n => n.NotAuditCu, u => u.UtcUsrId, (n, u) => new
+                    .GroupJoin(context.Notes.Where(n => n.NotAuditRu == null).LeftJoin(context.AspNetUsers,
+                            n => n.NotAuditCu, u => u.Id, (n, u) => new
                             {
                                 Note = n,
                                 UserData = u
@@ -61,9 +61,8 @@ namespace EuroJobsCrm.Controllers
                             Notes = n
                         })
                     .GroupJoin(
-                        context.AspNetUsers.Where(u => !u.Deleted).Join(context.UsersToContragents, c => c.Id, u => u.UtcUsrId,
-                            (c, u) => new {User = c, ContragentUser = u})
-                        , c => c.Contragent.CgtId, u => u.ContragentUser.UtcCtgId,
+                        context.AspNetUsers.Where(u => !u.Deleted)
+                        , c => c.Contragent.CgtId, u => u.ContragentId,
                         (c, u) => new
                         {
                             c.Contragent,
@@ -75,11 +74,11 @@ namespace EuroJobsCrm.Controllers
                             c.Notes,
                             ContragentUsers = u.Select(e => new
                             {
-                                Id = e.User.Id,
-                                UserName = e.User.UserName,
-                                Email = e.User.Email,
-                                CtgId = e.ContragentUser.UtcCtgId,
-                                Name = e.ContragentUser.UtcUsrName
+                                Id = e.Id,
+                                UserName = e.UserName,
+                                Email = e.Email,
+                                CtgId = e.ContragentId,
+                                Name = e.FullName
                             })
                         })
                     .ToList()
@@ -98,8 +97,8 @@ namespace EuroJobsCrm.Controllers
                             {
                                 Notes = c.Notes.Select(n => new EventDetailsDto(n.Note)
                                 {
-                                    TargetUserName = n.UserData?.UtcUsrName,
-                                    TargetUser = n.UserData?.UtcUsrId
+                                    TargetUserName = n.UserData?.FullName,
+                                    TargetUser = n.UserData?.Id
                                 }).ToList()
                             })
                     .ToList();

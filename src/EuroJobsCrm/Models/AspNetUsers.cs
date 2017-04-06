@@ -28,7 +28,9 @@ namespace EuroJobsCrm.Models
         public bool TwoFactorEnabled { get; set; }
         public string UserName { get; set; }
         public bool? Blocked { get; set; }
-
+        public int? ContragentId { get; set; }
+        public string FullName { get; set; }
+        public string LanguageCode { get; set; }
         public bool Deleted { get; set; }
 
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }

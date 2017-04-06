@@ -48,25 +48,21 @@ namespace EuroJobsCrm.Controllers
             using (var context = new DB_A12601_bielkaContext())
             {
                 var users = context.AspNetUserRoles.Where(r => r.Role.Name != SUPER_ADMIN_ROLE_NAME && r.Role.Name != ACCOUNTING_ROLE_NAME && r.Role.Name != CONTAGENT_ROLE_NAME).
-                    Join(context.AspNetUsers.Where(u => !u.Deleted).Join(context.UsersToContragents.Where(u => u.UtcCtgId == 0 || u.UtcCtgId == null),
-                        c => c.Id,
-                        u => u.UtcUsrId,
-                        (c, u) => new { User = c, ContragentUser = u }),
+                    Join(context.AspNetUsers.Where(u => !u.Deleted),
                             r => r.UserId,
-                            u => u.User.Id,
+                            u => u.Id,
                              (role, user) => new
                              {
                                  RoleName = role.Role.Name,
-                                 User = user,
-                                 CtgUser = user.ContragentUser
+                                 User = user,                           
                              }).ToList().
                              Select(us => new UserDto
                              {
-                                 Id = us.User.User.Id,
-                                 UserName = us.User.User.UserName,
-                                 Email = us.User.User.Email,
-                                 CtgId = us.User.ContragentUser.UtcCtgId,
-                                 Name = us.User.ContragentUser.UtcUsrName,
+                                 Id = us.User.Id,
+                                 UserName = us.User.UserName,
+                                 Email = us.User.Email,
+                                 CtgId = us.User.ContragentId,
+                                 Name = us.User.FullName,
                                  UserRole = us.RoleName
                              }).ToList();
 
@@ -82,26 +78,20 @@ namespace EuroJobsCrm.Controllers
             using (var context = new DB_A12601_bielkaContext())
             {
                 var users = context.AspNetUserRoles.Where(r => r.Role.Name != SUPER_ADMIN_ROLE_NAME).
-                    Join(context.AspNetUsers.Where(u => !u.Deleted).Join(context.UsersToContragents,
-                        c => c.Id,
-                        u => u.UtcUsrId,
-                        (c, u) => new { User = c, ContragentUser = u }),
-                            r => r.UserId,
-                            u => u.User.Id,
+                    Join(context.AspNetUsers.Where(u => !u.Deleted), r => r.UserId, u => u.Id,
                              (role, user) => new
                              {
                                  RoleName = role.Role.Name,
-                                 User = user,
-                                 CtgUser = user.ContragentUser
+                                 User = user
                              }).ToList().
-                             Select(us => new UserDto
+                             Select(u => new UserDto
                              {
-                                 Id = us.User.User.Id,
-                                 UserName = us.User.User.UserName,
-                                 Email = us.User.User.Email,
-                                 CtgId = us.User.ContragentUser.UtcCtgId,
-                                 Name = us.User.ContragentUser.UtcUsrName,
-                                 UserRole = us.RoleName
+                                 Id = u.User.Id,
+                                 UserName = u.User.UserName,
+                                 Email = u.User.Email,
+                                 CtgId = u.User.ContragentId,
+                                 Name = u.User.FullName,
+                                 UserRole = u.RoleName
                              }).ToList()
                              .GroupBy(group => group.UserRole)
                              .Select(group => new { RoleName = group.Key, Users = group })
@@ -126,9 +116,9 @@ namespace EuroJobsCrm.Controllers
         {
             using (var context = new DB_A12601_bielkaContext())
             {
-                var data = context.UsersToContragents.FirstOrDefault(u => u.UtcUsrId == utc.UsrId);
+                var data = context.AspNetUsers.FirstOrDefault(u => u.Id == utc.UsrId);
 
-                data.UtcLng = utc.PrefLng;
+                data.LanguageCode = utc.PrefLng;
 
                 context.SaveChanges();
 
@@ -208,7 +198,7 @@ namespace EuroJobsCrm.Controllers
         {
             using (var context = new DB_A12601_bielkaContext())
             {
-                var userData = context.UsersToContragents.FirstOrDefault(u => u.UtcUsrId == user.Id);
+                var userData = context.AspNetUsers.FirstOrDefault(u => u.Id == user.Id);
 
                 if (userData == null)
                 {
@@ -219,7 +209,7 @@ namespace EuroJobsCrm.Controllers
                     };
                 }
 
-                userData.UtcUsrName = user.Name;
+                userData.FullName = user.Name;
                 await context.SaveChangesAsync();
 
                 return user;
@@ -322,7 +312,9 @@ namespace EuroJobsCrm.Controllers
                 ApplicationUser applicationUser = new ApplicationUser
                 {
                     Email = user.Email,
-                    UserName = user.Email
+                    UserName = user.Email,
+                    FullName = user.UserName,
+                    ContragentId = user.CtgId
                 };
 
                 IdentityResult result = await _userManager.CreateAsync(applicationUser, user.Password);
@@ -335,20 +327,6 @@ namespace EuroJobsCrm.Controllers
                     };
                 }
                 await _userManager.AddToRoleAsync(applicationUser, roleName);
-
-
-                using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
-                {
-                    UsersToContragents uTc = new UsersToContragents();
-                    uTc.UtcUsrId = applicationUser.Id;
-                    uTc.UtcUsrName = user.UserName;
-                    if (user.CtgId != null) {
-                        uTc.UtcCtgId = user.CtgId;
-                    }
-                    context.Add(uTc);
-                    context.SaveChanges();
-                }
-                
 
                 return new UserDto
                 {

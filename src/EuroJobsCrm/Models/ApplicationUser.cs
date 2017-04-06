@@ -9,6 +9,9 @@ namespace EuroJobsCrm.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        public int? ContragentId { get; set; }
+        public string FullName { get; set; }
+        public string LanguageCode { get; set; }
         public bool Deleted { get; set; }
     }
 }

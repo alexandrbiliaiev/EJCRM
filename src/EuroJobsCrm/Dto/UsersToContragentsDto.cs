@@ -15,14 +15,7 @@ namespace EuroJobsCrm.Dto
         {
 
         }
-        public UsersToContragentsDto(UsersToContragents ustoctg)
-        {
-            Id = ustoctg.UtcId;
-            UsrId = ustoctg.UtcUsrId;
-            UsrName = ustoctg.UtcUsrName;
-            CtgId = ustoctg.UtcCtgId;
-            PrefLng = ustoctg.UtcLng;
-        }
+       
 
     }
 }
