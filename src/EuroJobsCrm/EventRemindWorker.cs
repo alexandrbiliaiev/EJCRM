@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using EuroJobsCrm.Models;
 using EuroJobsCrm.Services;
-using MailKit.Search;
 
 namespace EuroJobsCrm
 {

@@ -41,6 +41,7 @@ namespace EuroJobsCrm
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
             EnvironmentUtil.Environment = env;
         }
 
@@ -59,6 +60,11 @@ namespace EuroJobsCrm
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+            });
+
             services.AddMvc();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
@@ -66,6 +72,7 @@ namespace EuroJobsCrm
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             EventRemindWorker = new EventRemindWorker();
             EventRemindWorker.DoWork();

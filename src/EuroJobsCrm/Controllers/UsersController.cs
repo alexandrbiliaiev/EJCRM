@@ -25,7 +25,7 @@ namespace EuroJobsCrm.Controllers
         private const string SUPER_ADMIN_ROLE_NAME = "Super Admin";
         private const string ADMIN_ROLE_NAME = "Admin";
         private const string GUEST_ROLE_NAME = "Guest";
-        private const string CONTAGENT_ROLE_NAME = "CONTRAGENT";
+        public const string CONTAGENT_ROLE_NAME = "CONTRAGENT";
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;

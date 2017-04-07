@@ -13,7 +13,14 @@ namespace EuroJobsCrm.Services
         public Task SendEmailAsync(string email, string subject, string message)
         {
             // Plug in your email service here to send an email.
+            Execute(email, subject, message).Wait();
             return Task.FromResult(0);
+        }
+
+        public async Task Execute(string subject, string message, string email)
+        {
+            IEmailSender sender = new NotificationEmailSender();
+            await sender.SendEmailAsync(email, subject, message);
         }
 
         public Task SendSmsAsync(string number, string message)

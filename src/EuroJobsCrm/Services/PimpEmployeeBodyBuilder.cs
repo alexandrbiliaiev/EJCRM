@@ -1,5 +1,4 @@
 ﻿using EuroJobsCrm.Dto;
-using EuroJobsCrm.Models;
 using EuroJobsCrm.Utils;
 using System;
 using System.Collections.Generic;
