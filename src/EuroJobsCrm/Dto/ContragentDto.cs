@@ -25,7 +25,7 @@ namespace EuroJobsCrm.Dto
             ContragentUsers = new List<UserDto>();
         }
 
-        public ContragentDto(Contragents contragent)
+        public ContragentDto(Contragent contragent)
         {
             Id = contragent.CgtId;
             Name = contragent.CgtName;
@@ -36,7 +36,7 @@ namespace EuroJobsCrm.Dto
             ContragentUsers = new List<UserDto>();
         }
 
-        public ContragentDto(Contragents contragent, IEnumerable<Addresses> addresses, 
+        public ContragentDto(Contragent contragent, IEnumerable<Addresses> addresses, 
                 IEnumerable<ContactPersons> contactPersons, IEnumerable<Employees> employees,
                 IEnumerable<DocumentFiles> files, AspNetUsers responsibleUser, 
                 IEnumerable<UserDto> contragentUsers) : this(contragent)
@@ -49,7 +49,26 @@ namespace EuroJobsCrm.Dto
             ContragentUsers = contragentUsers;
         }
 
- 
+        public static explicit operator ContragentDto(Contragent contragent)
+        {
+            if (contragent == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            return new ContragentDto
+            {
+                Id = contragent.CgtId,
+                Name = contragent.CgtName,
+                LicenseNumber = contragent.CgtLicenseNumber,
+                Status = contragent.CgtStatus,
+                CreationDate = contragent.CgtAuditCd,
+                Employees = new List<EmployeeDto>(),
+                ContragentUsers = new List<UserDto>()
+            };
+        } 
+
+
     }
 
 

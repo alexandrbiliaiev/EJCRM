@@ -400,7 +400,7 @@ namespace EuroJobsCrm.Controllers
             try
             {
                 var employee = new Employees();
-                var contragent = new Contragents();
+                var contragent = new Contragent();
                 var offer = new Offers();
                 var responsibleUser = new AspNetUsers();
                 string status;

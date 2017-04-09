@@ -366,7 +366,7 @@ namespace EuroJobsCrm.Models
                     .HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Contragents>(entity =>
+            modelBuilder.Entity<Contragent>(entity =>
             {
                 entity.HasKey(e => e.CgtId)
                     .HasName("PK_Contragents");
@@ -877,7 +877,7 @@ namespace EuroJobsCrm.Models
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<ContactPersons> ContactPersons { get; set; }
         public virtual DbSet<Contracts> Contracts { get; set; }
-        public virtual DbSet<Contragents> Contragents { get; set; }
+        public virtual DbSet<Contragent> Contragents { get; set; }
         public virtual DbSet<ContragentsUsersMappings> ContragentsUsersMappings { get; set; }
         public virtual DbSet<DocumentFiles> DocumentFiles { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }

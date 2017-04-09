@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using EuroJobsCrm.Contragents;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,6 @@ using Microsoft.Extensions.Logging;
 using EuroJobsCrm.Models;
 using EuroJobsCrm.Models.AccountViewModels;
 using EuroJobsCrm.Services;
-using Microsoft.AspNetCore.Http;
 
 namespace EuroJobsCrm.Controllers
 {
@@ -188,20 +188,7 @@ namespace EuroJobsCrm.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                Contragents contragent = new Contragents
-                {
-                    CgtAuditCd = DateTime.Now,
-                    CgtAuditCu = User.GetUserId(),
-                    CgtName = model.Name,
-                    CgtStatus = "a",
-                    CgtLicenseNumber = string.Empty
-                };
-
-                using (var context = new DB_A12601_bielkaContext())
-                {
-                    context.Contragents.Add(contragent);
-                    await context.SaveChangesAsync();
-                }
+                Contragent contragent = CreateContragent(model.Name);
 
                 var user = new ApplicationUser
                 {
@@ -210,6 +197,7 @@ namespace EuroJobsCrm.Controllers
                     FullName = model.Name,
                     ContragentId = contragent.CgtId
                 };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -234,6 +222,21 @@ namespace EuroJobsCrm.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private Contragent CreateContragent(string name)
+        {
+            Contragent contragent = new Contragent
+            {
+                CgtAuditCu = User.GetUserId(),
+                CgtName = name,
+                CgtStatus = "a",
+                CgtLicenseNumber = string.Empty
+            };
+
+            IRepository<Contragent> contragentsRepository = new ContragentsRepository();
+            contragentsRepository.Save(contragent);
+            return contragent;
         }
 
         //
