@@ -328,6 +328,18 @@ namespace EuroJobsCrm.Controllers
                 }
                 await _userManager.AddToRoleAsync(applicationUser, roleName);
 
+                // Send an email with this link
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                    new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
+                IAccountConfirmationService accountConfirmationService = new AccountEmailConfirmationService();
+                await accountConfirmationService.Confirm(applicationUser, callbackUrl);
+
+                // Comment out following line to prevent a new user automatically logged on.
+                // await _signInManager.SignInAsync(user, isPersistent: false);
+
+
                 return new UserDto
                 {
                     Id = applicationUser.Id,
