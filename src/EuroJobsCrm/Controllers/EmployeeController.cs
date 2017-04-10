@@ -395,13 +395,13 @@ namespace EuroJobsCrm.Controllers
 
         [HttpPost]
         [Route("/api/Offers/FinishEmployeeContract")]
-        public async Task<bool> FinishEmployeeContract([FromBody] EmploymentRequestDto employmentRequestDto)
+        public bool FinishEmployeeContract([FromBody] EmploymentRequestDto employmentRequestDto)
         {
             try
             {
                 var employee = new Employees();
                 var contragent = new Contragent();
-                var offer = new Offers();
+                var offer = new Offer();
                 var responsibleUser = new AspNetUsers();
                 string status;
 

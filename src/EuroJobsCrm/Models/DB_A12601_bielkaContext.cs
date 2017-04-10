@@ -8,7 +8,7 @@ namespace EuroJobsCrm.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=SQL6001.myASP.NET;Initial Catalog=DB_A1DD1B_bwg;User Id=DB_A1DD1B_bwg_admin;Password=1q2w3e4r5t;MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlServer("Server=mssql5.webio.pl,2401;Initial Catalog=bwg20171_crm_bwg;User Id=bwg20171_admin1;Password=Bwg2017@;MultipleActiveResultSets=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -737,7 +737,7 @@ namespace EuroJobsCrm.Models
                     .HasMaxLength(150);
             });
 
-            modelBuilder.Entity<Offers>(entity =>
+            modelBuilder.Entity<Offer>(entity =>
             {
                 entity.HasKey(e => e.OfrId)
                     .HasName("PK_Offers");
@@ -884,6 +884,6 @@ namespace EuroJobsCrm.Models
         public virtual DbSet<EmploymentRequests> EmploymentRequests { get; set; }
         public virtual DbSet<IdentityDocuments> IdentityDocuments { get; set; }
         public virtual DbSet<Notes> Notes { get; set; }
-        public virtual DbSet<Offers> Offers { get; set; }
+        public virtual DbSet<Offer> Offers { get; set; }
     }
 }

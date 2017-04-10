@@ -3,11 +3,12 @@ using System.Linq;
 using EuroJobsCrm.Contragents;
 using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
+using EuroJobsCrm.Offers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EuroJobsCrm.Controllers
 {
-    public class ContragentsController : Controller
+    public partial class ContragentsController : Controller
     {
         public IActionResult Index()
         {
@@ -84,6 +85,7 @@ namespace EuroJobsCrm.Controllers
         {
             IRepository<Contragent> contragentsRepository = new ContragentsRepository();
             Contragent contragentEntity = contragentsRepository.Get(contragentId);
+          
             if (contragentEntity == null)
             {
                 return false;
@@ -92,6 +94,21 @@ namespace EuroJobsCrm.Controllers
             contragentsRepository.Delete(contragentEntity);
 
             return true;
+        }
+
+        public void NotifyContragents([FromBody] OfferNotificationRequest request)
+        {
+            IRepository<Contragent> repository = new ContragentsRepository();
+            IEnumerable<Contragent> contragents = request.ToAll ? 
+                repository.Get() : 
+                repository.Get(c => request.ContragentsIds.Contains(c.CgtId));
+
+            IRepository<Offer> offersRepository = new OffersRepository();
+            Offer offer = offersRepository.Get(request.OfferId);
+
+
+
+
         }
     }
 }

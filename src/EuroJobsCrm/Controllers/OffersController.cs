@@ -51,7 +51,7 @@ namespace EuroJobsCrm.Controllers
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                Offers ofr = context.Offers.FirstOrDefault(c => c.OfrId == cor.OfferId);
+                Offer ofr = context.Offers.FirstOrDefault(c => c.OfrId == cor.OfferId);
 
                 List<EmployeeDto> candidates = new List<EmployeeDto>();
                 List<EmployeeDto> employees = new List<EmployeeDto>();
@@ -94,7 +94,7 @@ namespace EuroJobsCrm.Controllers
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                Offers ofr = context.Offers.FirstOrDefault(c => c.OfrId == offerId);
+                Offer ofr = context.Offers.FirstOrDefault(c => c.OfrId == offerId);
 
                 List<EmployeeDto> candidates = new List<EmployeeDto>();
                 List<EmployeeDto> employees = new List<EmployeeDto>();
@@ -151,14 +151,14 @@ namespace EuroJobsCrm.Controllers
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                Offers ofr;
+                Offer ofr;
                 if (offer.Id != 0)
                 {
                     ofr = context.Offers.FirstOrDefault(c => c.OfrId == offer.Id);
                 }
                 else
                 {
-                    ofr = new Offers
+                    ofr = new Offer
                     {
                         OfrAuditCd = DateTime.UtcNow,
                         OfrAuditCu = User.GetUserId()
@@ -223,7 +223,7 @@ namespace EuroJobsCrm.Controllers
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                Offers ofr = context.Offers.FirstOrDefault(c => c.OfrId == offerId);
+                Offer ofr = context.Offers.FirstOrDefault(c => c.OfrId == offerId);
               
 
                 if (ofr == null)
@@ -242,7 +242,7 @@ namespace EuroJobsCrm.Controllers
 
         [HttpPost]
         [Route("/api/Offers/MakeRequest")]
-        public async Task<EmploymentRequestDto> MakeEmploymentRequest([FromBody] EmploymentRequestDto employmentRequestDto)
+        public EmploymentRequestDto MakeEmploymentRequest([FromBody] EmploymentRequestDto employmentRequestDto)
         {
             EmploymentRequests employmentRequest = new EmploymentRequests
             {
@@ -254,10 +254,6 @@ namespace EuroJobsCrm.Controllers
                 EtrCltId = employmentRequestDto.ClientId,
                 EtrStatus = employmentRequestDto.Status
             };
-            var employee = new Employees();
-            var contragent = new Contragent();
-            var offer = new Offers();
-            var responsibleUser = new AspNetUsers();
 
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
@@ -288,13 +284,13 @@ namespace EuroJobsCrm.Controllers
 
         [HttpPost]
         [Route("/api/Offers/ChangeRequestStatus")]
-        public async Task<bool> ChangeEmploymentRequestStatus([FromBody] EmploymentRequestDto employmentRequestDto)
+        public bool ChangeEmploymentRequestStatus([FromBody] EmploymentRequestDto employmentRequestDto)
         {
             try
             {
                 var employee = new Employees();
                 var contragent = new Contragent();
-                var offer = new Offers();
+                var offer = new Offer();
                 var responsibleUser = new AspNetUsers();
                 string status;
 

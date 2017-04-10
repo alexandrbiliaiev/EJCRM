@@ -10,7 +10,7 @@ namespace EuroJobsCrm.Dto
             
         }
 
-        public OfferDto(Offers offer)
+        public OfferDto(Offer offer)
         {
             Id = offer.OfrId;
             AccomodationPrice = offer.OfrAccomodationPrice;

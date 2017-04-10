@@ -28,7 +28,7 @@ namespace EuroJobsCrm.Dto
         }
 
         public ClientDto(Clients client, IEnumerable<Addresses> addresses, IEnumerable<ContactPersons> contactPersons,
-                         IEnumerable<Offers> offers, IEnumerable<Employees> acceptedEmployees, IEnumerable<DocumentFiles> files):this(client)
+                         IEnumerable<Offer> offers, IEnumerable<Employees> acceptedEmployees, IEnumerable<DocumentFiles> files):this(client)
         {
             Addresses = addresses?.Select(a => new AddressDto(a)).ToList();
             ContactPersons = contactPersons?.Select(c => new ContactPersonDto(c)).ToList();

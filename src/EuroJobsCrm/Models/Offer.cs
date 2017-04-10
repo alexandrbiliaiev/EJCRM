@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EuroJobsCrm.Models
 {
-    public partial class Offers
+    public partial class Offer
     {
         public int OfrId { get; set; }
         public int OfrCltId { get; set; }
