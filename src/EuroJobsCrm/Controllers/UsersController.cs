@@ -331,7 +331,7 @@ namespace EuroJobsCrm.Controllers
                 // Send an email with this link
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
                 var callbackUrl = Url.Action("ConfirmEmail", "Account",
-                    new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                    new { userId = applicationUser.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
                 IAccountConfirmationService accountConfirmationService = new AccountEmailConfirmationService();
                 await accountConfirmationService.Confirm(applicationUser, callbackUrl);

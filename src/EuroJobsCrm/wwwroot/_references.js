@@ -11,7 +11,6 @@
 /// <reference path="js/controllers/languagecontroller.js" />
 /// <reference path="js/controllers/OfferManageController.js" />
 /// <reference path="js/controllers/offerscontroller.js" />
-/// <reference path="js/controllers/tabsController.js" />
 /// <reference path="js/controllers/userscontroller.js" />
 /// <reference path="js/filters/searchforfilter.js" />
 /// <reference path="js/ng-file-upload.js" />
