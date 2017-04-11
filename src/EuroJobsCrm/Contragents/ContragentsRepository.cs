@@ -6,12 +6,12 @@ using DbContext = EuroJobsCrm.Models.DB_A12601_bielkaContext;
 
 namespace EuroJobsCrm.Contragents
 {
-    public class ContragentsRepository : IRepository<Contragent>
+    public class ContragentsRepository : IRepository<Contragent>, IDisposable
     {
         private readonly DbContext _context;
-        public ContragentsRepository(DbContext context)
+        public ContragentsRepository()
         {
-            _context = context;
+            _context = new DbContext();
         }
 
         /// <summary>
@@ -78,6 +78,11 @@ namespace EuroJobsCrm.Contragents
 
             entity.CgtAuditRd = DateTime.Now;
             _context.SaveChanges();         
+        }
+
+        public void Dispose()
+        {
+            _context?.Dispose();
         }
     }
 }

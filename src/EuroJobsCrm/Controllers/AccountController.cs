@@ -236,7 +236,7 @@ namespace EuroJobsCrm.Controllers
                     CgtLicenseNumber = string.Empty
                 };
 
-                IRepository<Contragent> contragentsRepository = new ContragentsRepository(context);
+                IRepository<Contragent> contragentsRepository = new ContragentsRepository();
                 contragentsRepository.Save(contragent);
                 return contragent;
             }

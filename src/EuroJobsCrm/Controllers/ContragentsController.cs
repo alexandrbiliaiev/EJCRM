@@ -39,78 +39,74 @@ namespace EuroJobsCrm.Controllers
         [Route("/api/Contragents/Lite")]
         public IEnumerable<ContragentDto> GetContragentsLite()
         {
-            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
-            {
-                IRepository<Contragent> contragentsRepository = new ContragentsRepository(context);
-                var contragents = contragentsRepository.Get().Select(c => (ContragentDto)c).ToList();
-                return contragents;
-            }
+
+            IRepository<Contragent> contragentsRepository = new ContragentsRepository();
+            var contragents = contragentsRepository.Get().Select(c => (ContragentDto)c).ToList();
+            return contragents;
+
         }
 
         [HttpPost]
         [Route("/api/Contragents/Save")]
         public ContragentDto SaveContragent([FromBody] ContragentDto contragent)
         {
-            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+
+            IRepository<Contragent> contragentsRepository = new ContragentsRepository();
+            Contragent contragentEntity = contragentsRepository.Get(contragent.Id) ?? new Contragent
             {
-                IRepository<Contragent> contragentsRepository = new ContragentsRepository(context);
-                Contragent contragentEntity = contragentsRepository.Get(contragent.Id) ?? new Contragent
-                {
-                    CgtAuditCu = User.GetUserId()
-                };
+                CgtAuditCu = User.GetUserId()
+            };
 
-                contragentEntity.CgtName = contragent.Name;
-                contragentEntity.CgtLicenseNumber = contragent.LicenseNumber;
-                contragentEntity.CgtStatus = contragent.Status;
-                contragentEntity.CgtAuditMu = User.GetUserId();
+            contragentEntity.CgtName = contragent.Name;
+            contragentEntity.CgtLicenseNumber = contragent.LicenseNumber;
+            contragentEntity.CgtStatus = contragent.Status;
+            contragentEntity.CgtAuditMu = User.GetUserId();
 
-                contragentsRepository.Save(contragentEntity);
+            contragentsRepository.Save(contragentEntity);
 
-                return (ContragentDto)contragentEntity;
-            }
+            return (ContragentDto)contragentEntity;
+
         }
 
         [HttpPost]
         [Route("/api/Contragents/addResponsiblePersonToContragent")]
         public ContragentDto AddResponsiblePersonToContragent([FromBody] ResponsiblePersonToContragentParamDto param)
         {
-            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+
+            IRepository<Contragent> contragentsRepository = new ContragentsRepository();
+            Contragent contragentEntity = contragentsRepository.Get(param.ContragentId);
+            if (contragentEntity == null)
             {
-                IRepository<Contragent> contragentsRepository = new ContragentsRepository(context);
-                Contragent contragentEntity = contragentsRepository.Get(param.ContragentId);
-                if (contragentEntity == null)
+                return new ContragentDto
                 {
-                    return new ContragentDto
-                    {
-                        Success = false,
-                        ErrorMessage = "Customer doesn't exist"
-                    };
-                }
-                contragentEntity.CgtResponsibleUser = param.UserId;
-                contragentsRepository.Save(contragentEntity);
-                return (ContragentDto)contragentEntity;
+                    Success = false,
+                    ErrorMessage = "Customer doesn't exist"
+                };
             }
+            contragentEntity.CgtResponsibleUser = param.UserId;
+            contragentsRepository.Save(contragentEntity);
+            return (ContragentDto)contragentEntity;
+
         }
 
         [HttpPost]
         [Route("/api/Contragents/Delete")]
         public bool DeleteContragent([FromBody] int contragentId)
         {
-            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+
+            IRepository<Contragent> contragentsRepository = new ContragentsRepository();
+            Contragent contragentEntity = contragentsRepository.Get(contragentId);
+
+            if (contragentEntity == null)
             {
-                IRepository<Contragent> contragentsRepository = new ContragentsRepository(context);
-                Contragent contragentEntity = contragentsRepository.Get(contragentId);
-
-                if (contragentEntity == null)
-                {
-                    return false;
-                }
-
-                contragentEntity.CgtAuditRu = User.GetUserId();
-                contragentsRepository.Delete(contragentEntity);
-
-                return true;
+                return false;
             }
+
+            contragentEntity.CgtAuditRu = User.GetUserId();
+            contragentsRepository.Delete(contragentEntity);
+
+            return true;
+
         }
 
         [HttpPost]
@@ -118,8 +114,8 @@ namespace EuroJobsCrm.Controllers
         public async void NotifyContragents([FromBody] OfferNotificationRequest request)
         {
             IRepository<AspNetUsers> repository = new ContragentUsersRepository();
-            IEnumerable<AspNetUsers> contragentUsers = request.ToAll ? 
-                repository.Get() : 
+            IEnumerable<AspNetUsers> contragentUsers = request.ToAll ?
+                repository.Get() :
                 repository.Get(c => request.ContragentsIds.Contains(c.ContragentId ?? 0));
 
             IRepository<Offer> offersRepository = new OffersRepository();
