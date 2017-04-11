@@ -1,7 +1,7 @@
 angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
     function ($scope, $location, $translate, $http, $state, $mdDialog, $routeParams, $cookies,
               clientsService, countriesService, contactpersonsService, addressesService, offersService, employeesService,
-              fileService, calendarService) {
+              fileService, calendarService, contragentsService ) {
 
         $scope.moment = moment;
 
@@ -365,6 +365,13 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
                     $scope.client.offers.push(response);
                 }
                 $mdDialog.hide();
+
+                if ($scope.sendNotifaction){
+                    contragentsService.loadLite().success(function (response) {
+                        showSendNotificationDialog(response);
+                    });
+                }
+
             }).error(function () {
                 $state.go('error');
                 $mdDialog.hide();
@@ -372,14 +379,13 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
 
         }
 
-        $scope.showNewOfferDialog = function (ev) {
+        $scope.showNewOfferDialog = function () {
             $scope.offer = $scope.setDefaultOffer();
             $scope.Saving = false;
             $mdDialog.show({
                 scope: $scope,
                 preserveScope: true,
                 templateUrl: '/templates/offers/offer_dialog_tmpl.html',
-                targetEvent: ev,
                 clickOutsideToClose: false,
             }).then(function (answer) {
 
@@ -634,6 +640,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
             });
         }
 
+        $scope.sendNotifaction = false;
         $scope.saveEventClick = function () {
             if ($scope.eventForm.$invalid) {
                 return;
@@ -666,7 +673,18 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
                 $scope.Saving = false;
                 $mdDialog.hide();
             })
-
         }
 
+        function showSendNotificationDialog(contragents) {
+            for(var i = 0; i < contragents.length; i++){
+                contragents[i].checked = false;
+            }
+            $scope.contragentsList = contragents;
+            $mdDialog.show({
+                scope: $scope,
+                preserveScope: true,
+                templateUrl: '/templates/offers/offer_notification_tmpl.html',
+                clickOutsideToClose: true,
+            });
+        }
     });

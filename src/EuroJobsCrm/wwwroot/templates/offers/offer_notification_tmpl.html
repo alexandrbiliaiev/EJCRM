@@ -1,0 +1,24 @@
+<div ng-include="'/templates/loader.html'"></div>
+
+<div layout="row" layout-wrap ng-show="isActive">
+    <div flex-xs flex layout-xs="column">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                {{ 'CONTRAGENTS_LIST_CAPTION' | translate }}
+            </div>
+        </md-toolbar>
+        <div layout="row" ng-cloak>
+            <md-content layout-padding flex="100">
+                <md-list ng-cloak>
+                    <md-list-item ng-repeat="contragent in contragentsList">
+                        <md-checkbox aria-label="chb2" ng-model="contragent.checked">
+
+                        </md-checkbox>
+                        {{contragent.name}}
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </div>
+
+    </div>
+</div>

@@ -299,6 +299,14 @@
 						<textarea ng-model="offer.additionalInfo" md-maxlength="1000" rows="5" md-select-on-focus></textarea>
 					</md-input-container>
 				</div>
+
+				<div layout="row" layout-align="space-between end">
+					<md-input-container class="md-block" flex="40">
+						<md-checkbox aria-label="chb2" ng-model="sendNotifaction">
+						{{'SEND_NOTIFICATION' | translate}}
+					</md-checkbox>
+					</md-input-container>
+				</div>
 			</form>
 		</div>
 	</md-dialog-content>

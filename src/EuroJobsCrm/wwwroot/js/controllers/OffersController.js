@@ -1,4 +1,4 @@
-angular.module('EuroJobsCrm.controllers').controller('OffersController', function ($scope, $location, $http, $state, $translate, $mdDialog, offersService, $cookies) {
+angular.module('EuroJobsCrm.controllers').controller('OffersController', function ($scope, $location, $http, $state, $translate, $mdDialog, offersService, contragentsService, $cookies) {
     $scope.offers = [];
 
     $scope.moment = moment;
@@ -32,11 +32,12 @@ angular.module('EuroJobsCrm.controllers').controller('OffersController', functio
         });
     }
 
+    $scope.sendNotifaction = false;
     $scope.saveofferClick = function () {
         if ($scope.offerForm.$invalid) {
             return;
         }
-        offer = $scope.offer;
+        var offer = $scope.offer;
         offersService.saveoffer(offer).success(function (response) {
             offersService.offers.push(response);
             $scope.offer = $scope.getDefaultoffer();

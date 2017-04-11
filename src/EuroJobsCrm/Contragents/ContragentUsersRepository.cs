@@ -6,31 +6,31 @@ using DbContext = EuroJobsCrm.Models.DB_A12601_bielkaContext;
 
 namespace EuroJobsCrm.Contragents
 {
-    public class ContragentsRepository : IRepository<Contragent>
+    public class ContragentUsersRepository : IRepository<AspNetUsers>
     {
-        private readonly DbContext _context;
-        public ContragentsRepository(DbContext context)
-        {
-            _context = context;
-        }
-
         /// <summary>
         /// The method returns an entity by id
         /// </summary>
         /// <param name="id">Id of the entity</param>
         /// <returns>The entity</returns>
-        public virtual Contragent Get(int id)
+        public AspNetUsers Get(int id)
         {
-            return _context.Contragents.FirstOrDefault(c => c.CgtId == id);
+            using (DbContext context = new DbContext())
+            {
+                return context.AspNetUsers.FirstOrDefault(c => c.ContragentId == id);
+            }
         }
 
         /// <summary>
         /// The method returns a list of all entities
         /// </summary>
         /// <returns>List of all entities</returns>
-        public virtual List<Contragent> Get()
+        public List<AspNetUsers> Get()
         {
-            return _context.Contragents.Where(c => c.CgtAuditRd == null).ToList();
+            using (DbContext context = new DbContext())
+            {
+                return context.AspNetUsers.Where(u => u.ContragentId != null).ToList();
+            }
         }
 
         /// <summary>
@@ -38,46 +38,56 @@ namespace EuroJobsCrm.Contragents
         /// </summary>
         /// <param name="predicate">Filtering predicate</param>
         /// <returns>List of entities</returns>
-        public virtual IEnumerable<Contragent> Get(Func<Contragent, bool> predicate)
+        public IEnumerable<AspNetUsers> Get(Func<AspNetUsers, bool> predicate)
         {
-            return _context.Contragents.Where(c => c.CgtAuditRd == null && predicate(c)).ToList();
+            using (DbContext context = new DbContext())
+            {
+                return context.AspNetUsers.Where(u => u.ContragentId != null).ToList().Where(predicate).ToList();
+            }
         }
 
         /// <summary>
         /// The method writes an entity to the storage
         /// </summary>
         /// <param name="entity">The entity</param>
-        public virtual void Save(Contragent entity)
+        public async void Save(AspNetUsers entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException();
             }
 
-            if (entity.CgtId == 0)
+            using (DbContext context = new DbContext())
             {
-                entity.CgtAuditCd = DateTime.Now;
-                _context.Contragents.Add(entity);
+                if (string.IsNullOrEmpty(entity.Id))
+                {
+                    context.AspNetUsers.Add(entity);
+                }
+
+                await context.SaveChangesAsync();
             }
-
-            entity.CgtAuditMd = DateTime.Now;
-            _context.SaveChanges();
-
         }
 
         /// <summary>
         /// The method removes an entity from the storage
         /// </summary>
         /// <param name="entity">The entity</param>
-        public virtual void Delete(Contragent entity)
+        public async void Delete(AspNetUsers entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException();
             }
 
-            entity.CgtAuditRd = DateTime.Now;
-            _context.SaveChanges();         
+            using (DbContext context = new DbContext())
+            {
+                if (string.IsNullOrEmpty(entity.Id))
+                {
+                    context.AspNetUsers.Remove(entity);
+                }
+
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

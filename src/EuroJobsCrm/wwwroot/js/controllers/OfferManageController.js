@@ -24,6 +24,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
     $scope.isActive = false;
 
+
     if ($scope.ctgId == '-1' || $scope.ctgId == null) {
         offersService.getOffer($state.params.id).success(function (response) {
             $scope.offer = response;
@@ -115,8 +116,6 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
 
     }
-
-
 
     $scope.deleteCandidateFromOffer = function (emp) {
         candidateRequest = {
@@ -252,7 +251,7 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
 
     /*
         $scope.manageFreeEmployees = function () {
-    
+
             for (i in $scope.offer.candidates) {
                 for (j in $scope.freeEmployees) {
                     if ($scope.offer.candidates[i].id == $scope.freeEmployees[j].id) {
@@ -260,13 +259,13 @@ angular.module('EuroJobsCrm.controllers').controller('OfferManageController', fu
                     }
                 }
             }
-    
+
             for (i in $scope.offer.employees) {
                 for (j in $scope.freeEmployees) {
                     if ($scope.offer.employees[i].id == $scope.freeEmployees[j].id) {
                         $scope.freeEmployees.splice(j, 1);
                     }
-    
+
                 }
             }
         } */

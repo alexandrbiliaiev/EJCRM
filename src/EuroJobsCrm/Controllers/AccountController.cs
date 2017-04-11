@@ -226,17 +226,20 @@ namespace EuroJobsCrm.Controllers
 
         private Contragent CreateContragent(string name)
         {
-            Contragent contragent = new Contragent
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
-                CgtAuditCu = User.GetUserId(),
-                CgtName = name,
-                CgtStatus = "a",
-                CgtLicenseNumber = string.Empty
-            };
+                Contragent contragent = new Contragent
+                {
+                    CgtAuditCu = User.GetUserId(),
+                    CgtName = name,
+                    CgtStatus = "a",
+                    CgtLicenseNumber = string.Empty
+                };
 
-            IRepository<Contragent> contragentsRepository = new ContragentsRepository();
-            contragentsRepository.Save(contragent);
-            return contragent;
+                IRepository<Contragent> contragentsRepository = new ContragentsRepository(context);
+                contragentsRepository.Save(contragent);
+                return contragent;
+            }
         }
 
         //
