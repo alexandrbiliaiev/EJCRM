@@ -39,18 +39,15 @@ namespace EuroJobsCrm.Controllers
         [Route("/api/Contragents/Lite")]
         public IEnumerable<ContragentDto> GetContragentsLite()
         {
-
             IRepository<Contragent> contragentsRepository = new ContragentsRepository();
             var contragents = contragentsRepository.Get().Select(c => (ContragentDto)c).ToList();
             return contragents;
-
         }
 
         [HttpPost]
         [Route("/api/Contragents/Save")]
         public ContragentDto SaveContragent([FromBody] ContragentDto contragent)
         {
-
             IRepository<Contragent> contragentsRepository = new ContragentsRepository();
             Contragent contragentEntity = contragentsRepository.Get(contragent.Id) ?? new Contragent
             {
@@ -65,14 +62,12 @@ namespace EuroJobsCrm.Controllers
             contragentsRepository.Save(contragentEntity);
 
             return (ContragentDto)contragentEntity;
-
         }
 
         [HttpPost]
         [Route("/api/Contragents/addResponsiblePersonToContragent")]
         public ContragentDto AddResponsiblePersonToContragent([FromBody] ResponsiblePersonToContragentParamDto param)
         {
-
             IRepository<Contragent> contragentsRepository = new ContragentsRepository();
             Contragent contragentEntity = contragentsRepository.Get(param.ContragentId);
             if (contragentEntity == null)
@@ -86,14 +81,12 @@ namespace EuroJobsCrm.Controllers
             contragentEntity.CgtResponsibleUser = param.UserId;
             contragentsRepository.Save(contragentEntity);
             return (ContragentDto)contragentEntity;
-
         }
 
         [HttpPost]
         [Route("/api/Contragents/Delete")]
         public bool DeleteContragent([FromBody] int contragentId)
         {
-
             IRepository<Contragent> contragentsRepository = new ContragentsRepository();
             Contragent contragentEntity = contragentsRepository.Get(contragentId);
 
@@ -106,7 +99,6 @@ namespace EuroJobsCrm.Controllers
             contragentsRepository.Delete(contragentEntity);
 
             return true;
-
         }
 
         [HttpPost]
@@ -121,7 +113,7 @@ namespace EuroJobsCrm.Controllers
             IRepository<Offer> offersRepository = new OffersRepository();
             Offer offer = offersRepository.Get(request.OfferId);
 
-            string offerUrl = Request.Scheme + Request.Host + $"off_edit/{request.OfferId}";
+            string offerUrl = $"{Request.Scheme}://{Request.Host}/Offers#/off_edit/{request.OfferId}";
 
             IEmailMessageBuilder messageBuilder = new OfferNotifyMessageBuilder(offer, offerUrl);
             string subject = messageBuilder.BuildSubject();

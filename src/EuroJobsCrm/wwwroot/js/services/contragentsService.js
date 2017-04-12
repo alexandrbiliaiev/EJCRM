@@ -61,6 +61,14 @@ angular.module('EuroJobsCrm.services')
             });
         }
 
+        contragents.notifyAboutOffer = function (params) {
+            return $http({
+                url: 'api/Contragents/Notify',
+                method: "POST",
+                data: params
+            });
+        }
+
 
 
         return contragents;

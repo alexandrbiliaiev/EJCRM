@@ -253,5 +253,7 @@
     "ONLY_NUMBERS": "Tylko cyferki",
     "POST_ADDRESS": "Adres do wysyłki",
     "SEND_NOTIFICATION":"Wyślij powiadomienie o ofercie do kontrahentów",
-    "CONTRAGENTS_LIST_CAPTION":"Wybierz kto ma dowiedzieć o tej ofercie"
+    "CONTRAGENTS_LIST_CAPTION":"Wybierz kto ma dowiedzieć o tej ofercie",
+    "SEND":"Wyślij",
+    "TO_ALL":"Do wszystkich"
 }

@@ -362,10 +362,12 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
             offer.clientId = $scope.client.id;
             offersService.saveOffer(offer).success(function (response) {
                 if (offer.id == 0) {
+                    offer.id = response.id;
                     $scope.client.offers.push(response);
                 }
                 $mdDialog.hide();
 
+                $scope.Saving = false;
                 if ($scope.sendNotifaction){
                     contragentsService.loadLite().success(function (response) {
                         showSendNotificationDialog(response);
@@ -641,6 +643,7 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
         }
 
         $scope.sendNotifaction = false;
+        $scope.toAll = false;
         $scope.saveEventClick = function () {
             if ($scope.eventForm.$invalid) {
                 return;
@@ -673,6 +676,43 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
                 $scope.Saving = false;
                 $mdDialog.hide();
             })
+        }
+
+        $scope.sendNotification = function () {
+            $scope.Saving = true;
+
+            var contrgentsToNotify = new Array();
+            for (var i in $scope.contragentsList){
+                if ($scope.contragentsList[i].checked){
+                    contrgentsToNotify.push($scope.contragentsList[i].id);
+                }
+            }
+
+            var notifyParams = {
+                offerId : $scope.offer.id,
+                contragentsIds : contrgentsToNotify,
+                toAll : $scope.toAll
+            };
+            contragentsService.notifyAboutOffer(notifyParams).success(function (response) {
+                $scope.Saving = false;
+                $mdDialog.hide();
+            }).error(function () {
+                $state.go('error');
+                $scope.Saving = false;
+                $mdDialog.hide();
+            });
+
+
+            $scope.sendNotifaction = false;
+        }
+
+        $scope.checkAllToSend = function () {
+
+            $scope.toAll = !$scope.toAll;
+
+            for(var i = 0; i < $scope.contragentsList.length; i++){
+                $scope.contragentsList[i].checked = $scope.toAll;
+            }
         }
 
         function showSendNotificationDialog(contragents) {

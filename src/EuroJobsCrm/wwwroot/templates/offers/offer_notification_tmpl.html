@@ -1,24 +1,28 @@
-<div ng-include="'/templates/loader.html'"></div>
+<div ng-include="'/templates/saving_loader.html'"></div>
 
-<div layout="row" layout-wrap ng-show="isActive">
+<div layout="row" layout-wrap ng-show="!Saving">
     <div flex-xs flex layout-xs="column">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 {{ 'CONTRAGENTS_LIST_CAPTION' | translate }}
             </div>
         </md-toolbar>
-        <div layout="row" ng-cloak>
-            <md-content layout-padding flex="100">
-                <md-list ng-cloak>
-                    <md-list-item ng-repeat="contragent in contragentsList">
-                        <md-checkbox aria-label="chb2" ng-model="contragent.checked">
+        <md-content layout="column" layout-padding flex="100">
+            <md-list layout="row" layout-wrap="">
+                <md-list-item ng-repeat="contragent in contragentsList">
+                    <md-checkbox aria-label="chb2" ng-model="contragent.checked"></md-checkbox>
+                    <p>{{contragent.name}}</p>
+                </md-list-item>
+            </md-list>
+        </md-content>
+        <md-dialog-actions layout="row" layout-align="space-between center" ng-show="!Saving">
+            <md-button ng-click="checkAllToSend()">
+                {{'TO_ALL'|translate}}
+            </md-button>
 
-                        </md-checkbox>
-                        {{contragent.name}}
-                    </md-list-item>
-                </md-list>
-            </md-content>
-        </div>
-
+            <md-button class="md-raised md-primary" ng-click="sendNotification()">
+                {{'SEND'|translate}}
+            </md-button>
+        </md-dialog-actions>
     </div>
 </div>
