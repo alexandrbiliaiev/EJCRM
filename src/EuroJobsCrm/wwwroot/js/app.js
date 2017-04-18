@@ -59,6 +59,10 @@ var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngFileUplo
             .state('error', {
                 url: '/server_error',
                 templateUrl: 'templates/error_503.html',
+            })
+            .state('denied', {
+                url: '/access_denied',
+                templateUrl: 'templates/error_401.html',
             }).state('contragents', {
                 url: "/ctg_all",
                 templateUrl: 'templates/contragents/contragents_list.html',

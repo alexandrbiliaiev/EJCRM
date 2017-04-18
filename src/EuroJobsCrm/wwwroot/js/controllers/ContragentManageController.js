@@ -24,17 +24,20 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $scope.showEmployeeSearch = false;
 
         $scope.userRole = $cookies.get('user_role');
-        $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin';
-        $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced user';
-        $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user';
+        $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'CONTRAGENT';
+        $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced user' | $scope.userRole == 'CONTRAGENT';
+        $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user' | $scope.userRole == 'CONTRAGENT';
         $scope.detailClaim = $scope.addClaim;
         $scope.moment = moment;
 
-        contragentsService.load().success(function (response) {
-            contragentsService.contragents = response;
-            $scope.contragent = contragentsService.getContragent($state.params.id);
+        contragentsService.getContragent($state.params.id).success(function (response) {
+            if (!response.success){
+                $state.go('denied');
+            }
 
-            for (i in $scope.responsibleUsers) {
+            $scope.contragent = response;
+
+            for (var i in $scope.responsibleUsers) {
                 if ($scope.responsibleUsers[i].id == $scope.contragent.responsibleUser.id) {
                     $scope.responsibleUserName = $scope.responsibleUsers[i].name;
                 }
@@ -788,16 +791,6 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $scope.getFormatedDate = function (date) {
             return moment(date).format('YYYY-MM-DD');
         };
-
-        if (contragentsService.contragents != undefined) {
-            $scope.contragent = contragentsService.getContragent($state.params.id);
-            for (i in $scope.responsibleUsers) {
-                if ($scope.responsibleUsers[i].id == $scope.contragent.responsibleUser.id) {
-                    $scope.responsibleUserName = $scope.responsibleUsers[i].name;
-                }
-            }
-            return;
-        }
 
         usersService.GetResponsibleUsersList().success(function (response) {
             $scope.responsibleUsers = response;

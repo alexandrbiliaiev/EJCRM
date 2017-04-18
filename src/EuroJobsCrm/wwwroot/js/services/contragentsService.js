@@ -39,18 +39,14 @@ angular.module('EuroJobsCrm.services')
         }
 
         contragents.getContragent = function (id) {
-            for (i in this.contragents) {
-                if (this.contragents[i].id == id) {
-                    return this.contragents[i];
-                }
-            }
-
-            return new {
-                id: 0,
-                name: '',
-                licenseNumber: '',
-                status: 'a'
-            }
+            param = {
+                id: id
+            };
+            return $http({
+                url: '/api/Contragents/GetContrgent',
+                method: "POST",
+                data: id
+            });
         }
 
         contragents.AddContragentUser = function (user) {

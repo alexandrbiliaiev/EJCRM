@@ -2,18 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using EuroJobsCrm.Contragents;
 using EuroJobsCrm.Dto;
 using EuroJobsCrm.Models;
 using EuroJobsCrm.Offers;
 using EuroJobsCrm.Services;
 using EuroJobsCrm.Utils;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EuroJobsCrm.Controllers
 {
     public partial class ContragentsController : Controller
     {
+        private UserManager<ApplicationUser> _userManager;
+        public ContragentsController(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
         public IActionResult Index()
         {
             if (!User.Identity.IsAuthenticated)
@@ -23,6 +32,7 @@ namespace EuroJobsCrm.Controllers
                     returnUrl = Request.Path
                 });
             }
+
             return View();
         }
 
@@ -33,6 +43,31 @@ namespace EuroJobsCrm.Controllers
             IRepository<ContragentDto> repository = new EntireContragetsDataRepository();
             var contragents = repository.Get();
             return contragents;
+        }
+
+        [HttpPost]
+        [Route("/api/Contragents/GetContrgent")]
+        public async Task<ContragentDto> GetContragent([FromBody] int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user.ContragentId.HasValue && user.ContragentId != id)
+            {
+                return new ContragentDto
+                {
+                    Success = false
+                };
+            }
+
+            IRepository<ContragentDto> repository = new EntireContragetsDataRepository();
+            var contragent = repository.Get(id);
+            if (contragent == null)
+            {
+                return new ContragentDto
+                {
+                    Success = false
+                };
+            }
+            return contragent;
         }
 
         [HttpGet]
