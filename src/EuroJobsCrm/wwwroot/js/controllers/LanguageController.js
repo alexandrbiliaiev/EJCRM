@@ -11,6 +11,8 @@ angular.module('EuroJobsCrm.controllers').controller('LanguageController',
             $scope.currentLang = $cookies.get('user_lng');
         }
 
+        var allowSubmit = false;
+
         $scope.$location = $location;
 
         calendarService.getLatestEvents().success(function (response) {
@@ -71,6 +73,5 @@ angular.module('EuroJobsCrm.controllers').controller('LanguageController',
         $scope.goToClients = function () {
             $state.go('clients');
         }
-
 
     })

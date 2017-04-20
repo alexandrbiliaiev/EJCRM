@@ -5,7 +5,7 @@
 <div ng-cloak>
     <h2>{{'REGISTER'| translate}}</h2>
     <form asp-controller="Account" asp-action="RegisterContragent" asp-route-returnurl="@ViewData[" ReturnUrl "]" method="post"
-        class="form-horizontal">
+        onsubmit="check_if_capcha_is_filled" class="form-horizontal">
         <h4>{{'ACC'| translate}}</h4>
         <hr />
         <div asp-validation-summary="All" class="text-danger"></div>
@@ -46,19 +46,18 @@
         </div>
         <div class="form-group">
             <div class="col-md-2">
-                <input type="checkbox" style="align: right;" asp-for="PersonalDataUse" class="form-control" required/>
+                <input type="checkbox" asp-for="PersonalDataUse" class="form-control" required/>
             </div>
             <div class="col-md-10">
                 <span>{{'PERSONAL_DATA_USE'|translate}}</span>
             </div>
         </div>
-
-
-        <div class="g-recaptcha" style="float: right;" data-sitekey="6LcvVhwUAAAAADCWYMPuPRzSj-XiTNZ3hACO3A84"></div>
+   
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button type="submit" class="btn btn-default">{{'CREATE_ACC'|translate}}</button>
             </div>
+            <!-- <div class="g-recaptcha" data-callback="capcha_filled" style="float: right;" data-sitekey="6LcvVhwUAAAAADCWYMPuPRzSj-XiTNZ3hACO3A84"></div> -->
         </div>
     </form>
 </div>
