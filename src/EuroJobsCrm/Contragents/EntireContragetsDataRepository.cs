@@ -16,7 +16,7 @@ namespace EuroJobsCrm.Contragents
         {
             using (DbContext context = new DbContext())
             {
-                List<ContragentDto> contagents = context.Contragents
+                 List<ContragentDto> contagents = context.Contragents
                     .Where(c => c.CgtAuditRd == null)
                     .GroupJoin(context.Addresses.Where(a => a.AdrAuditRd == null), c => c.CgtId, a => a.AdrCgtId,
                         (c, a) => new { Contragent = c, Addresses = a })

@@ -93,6 +93,8 @@ namespace EuroJobsCrm.Controllers
             contragentEntity.CgtLicenseNumber = contragent.LicenseNumber;
             contragentEntity.CgtStatus = contragent.Status;
             contragentEntity.CgtAuditMu = User.GetUserId();
+            contragentEntity.CgtInn = contragent.Inn;
+            contragentEntity.CgtSubscription = contragent.Subscription;
 
             contragentsRepository.Save(contragentEntity);
 

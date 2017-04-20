@@ -60,16 +60,16 @@
                     <span class="icon-bar"></span>
                     <a class="navbar-brand" href="/">BWG</a>
                 </div>
-                <div class="navbar-collapse collapse navbar-inverse-collapse">
+                <div class="navbar-collapse collapse navbar-inverse-collapse" ng-cloak>
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <ul class="nav navbar-nav" ng-cloak>
 
                             @if (User.IsInRole("CONTRAGENT"))
                             {
-                                <li><a asp-area="" asp-controller="Contragents" asp-action="Index" asp-fragment="ctg_edit/@Html.Raw(UserManager.GetUserAsync(User).Result.ContragentId)">{{ 'CONTEGENT_PROFILE' | translate }}</a></li>
                                 <li><a asp-area="" asp-controller="Offers" asp-action="Index" asp-fragment="off_all">{{ 'Offers' | translate }}</a></li>
                                 <li><a asp-area="" asp-controller="Employee" asp-action="Index" asp-fragment="emp_all">{{ 'Employees' | translate }}</a></li>
+                                <li><a asp-area="" asp-controller="Contragents" asp-action="Index" asp-fragment="ctg_edit/@Html.Raw(UserManager.GetUserAsync(User).Result.ContragentId)">{{ 'CONTRAGENT_PROFILE' | translate }}</a></li>
                             }
                             else
                             {

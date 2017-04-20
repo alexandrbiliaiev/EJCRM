@@ -8,9 +8,9 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
         $scope.expandDetails = false;
         $scope.expandContactPersons = false;
         $scope.expandAddresses = false;
-        $scope.expandEmployees = true;
+        $scope.expandEmployees = false;
         $scope.expandResponsiblePerson = false;
-        $scope.expandNotes = true;
+        $scope.expandNotes = false;
         $scope.countries = countriesService.countries;
         $scope.birthdate = null;
         $scope.showSearch = false;
@@ -23,15 +23,19 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
 
         $scope.showEmployeeSearch = false;
 
+
+
         $scope.userRole = $cookies.get('user_role');
         $scope.deleteClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'CONTRAGENT';
         $scope.editClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced user' | $scope.userRole == 'CONTRAGENT';
         $scope.addClaim = $scope.userRole == 'Admin' || $scope.userRole == 'Super Admin' || $scope.userRole == 'Advanced user' || $scope.userRole == 'Normal user' | $scope.userRole == 'CONTRAGENT';
         $scope.detailClaim = $scope.addClaim;
+        $scope.isContragent = $scope.userRole == 'CONTRAGENT';
+
         $scope.moment = moment;
 
         contragentsService.getContragent($state.params.id).success(function (response) {
-            if (!response.success){
+            if (!response.success) {
                 $state.go('denied');
             }
 
@@ -73,7 +77,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 name: $scope.user.userName,
                 password: $scope.user.password,
                 email: $scope.user.email,
-                ctgId: $scope.contragent.id
+                ctgId: $scope.contragent.id,
             };
 
             contragentsService.AddContragentUser(contragentUser, $scope.contragent.id).success(function (response) {
@@ -116,7 +120,9 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 id: $scope.contragent.id,
                 name: $scope.contragent.name,
                 licenseNumber: $scope.contragent.licenseNumber,
-                status: $scope.contragent.status
+                status: $scope.contragent.status,
+                inn: $scope.contragent.inn,
+                subscription: $scope.contragent.subscription
             };
 
             contragentsService.saveContragent(contragent).success(function (response) {
@@ -735,7 +741,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
                 if (response.success != true) {
                     $mdDialog.show(
                         $mdDialog.alert()
-                        //.parent(angular.element(document.querySelector('#popupContainer')))
+                            //.parent(angular.element(document.querySelector('#popupContainer')))
                             .clickOutsideToClose(true)
                             .title($translate.instant('ADDING_USER_ERROR'))
                             .textContent(response.errorMessage)
@@ -762,7 +768,7 @@ angular.module('EuroJobsCrm.controllers').controller('ContragentManageController
             });
         }
 
-        $scope.showDeleteUserDialog= function (userId){
+        $scope.showDeleteUserDialog = function (userId) {
             var confirm = $mdDialog.confirm()
                 .title($translate.instant('DELETE_USER'))
                 .textContent($translate.instant('DELETE_USER_CONFIRM_TEXT'))

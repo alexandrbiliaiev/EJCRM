@@ -188,7 +188,7 @@ namespace EuroJobsCrm.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                Contragent contragent = CreateContragent(model.Name);
+                Contragent contragent = CreateContragent(model.CompanyName);
 
                 var user = new ApplicationUser
                 {

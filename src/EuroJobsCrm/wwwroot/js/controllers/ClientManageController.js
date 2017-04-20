@@ -717,7 +717,9 @@ angular.module('EuroJobsCrm.controllers').controller('ClientManageController',
 
         function showSendNotificationDialog(contragents) {
             for(var i = 0; i < contragents.length; i++){
-                contragents[i].checked = false;
+                if (contragents[i].subscription == true)
+                contragents[i].checked = true
+                else contragents[i].checked = false;
             }
             $scope.contragentsList = contragents;
             $mdDialog.show({

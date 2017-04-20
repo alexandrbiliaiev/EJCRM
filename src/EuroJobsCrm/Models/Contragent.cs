@@ -16,5 +16,7 @@ namespace EuroJobsCrm.Models
         public DateTime? CgtAuditRd { get; set; }
         public string CgtAuditRu { get; set; }
         public string CgtResponsibleUser { get; set; }
+        public string CgtInn { get; set; }
+        public bool CgtSubscription { get; set; } 
     }
 }

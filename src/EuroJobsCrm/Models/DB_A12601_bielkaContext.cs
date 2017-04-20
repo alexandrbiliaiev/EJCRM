@@ -415,6 +415,13 @@ namespace EuroJobsCrm.Models
                     .IsRequired()
                     .HasColumnName("cgt_status")
                     .HasMaxLength(1);
+
+                entity.Property(e => e.CgtInn)
+                      .HasColumnName("ctg_inn");
+
+                entity.Property(e => e.CgtSubscription)
+                      .IsRequired()
+                      .HasColumnName("ctg_subscription");
             });
 
             modelBuilder.Entity<ContragentsUsersMappings>(entity =>

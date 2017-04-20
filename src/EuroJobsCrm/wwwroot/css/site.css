@@ -151,6 +151,12 @@ md-input-container.md-placeholder {
     font-size: 9px;
 }
 
+.checkbox {
+    width: 10px;
+    height: 10px;
+    
+}
+
 
 
 

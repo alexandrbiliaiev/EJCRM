@@ -1,9 +1,16 @@
 angular.module('EuroJobsCrm.controllers').controller('LanguageController',
     function ($scope, $location, $translate, $http, $state, $mdDialog, $routeParams, $cookies,
-              clientsService, countriesService, contactpersonsService, addressesService, offersService,
-              employeesService, fileService, usersService, calendarService, Notification) {
+        clientsService, countriesService, contactpersonsService, addressesService, offersService,
+        employeesService, fileService, usersService, calendarService, Notification) {
 
-        $scope.currentLang = $cookies.get('user_lng');
+        if ($cookies.get('user_lng') == null) {
+            $scope.currentLang = 'ru';
+            $translate.use('ru');
+        }
+        else {
+            $scope.currentLang = $cookies.get('user_lng');
+        }
+
         $scope.$location = $location;
 
         calendarService.getLatestEvents().success(function (response) {

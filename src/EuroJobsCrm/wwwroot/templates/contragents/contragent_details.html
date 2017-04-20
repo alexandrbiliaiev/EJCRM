@@ -39,6 +39,17 @@
                             <md-list-item class="md-2-line">
                                 <md-icon style="font-size:32px;" md-font-icon="ion-ios-copy"></md-icon>
                                 <div class="md-list-item-text">
+                                    {{ 'INN' | translate }}
+                                    <p>
+                                        <h3><b>{{contragent.inn}}</b>
+                                            <h3>
+                                    </p>
+                                </div>
+                            </md-list-item>
+                            <md-divider ng-if="!$last"></md-divider>
+                            <md-list-item class="md-2-line">
+                                <md-icon style="font-size:32px;" md-font-icon="ion-ios-copy"></md-icon>
+                                <div class="md-list-item-text">
                                     {{ 'LICENSE_NUMBER' | translate }}
                                     <p>
                                         <h3><b>{{contragent.licenseNumber}}</b>
@@ -47,7 +58,22 @@
                                 </div>
                             </md-list-item>
                             <md-divider ng-if="!$last"></md-divider>
-                            <md-list-item class="md-2-line" ng-show="contragent.status == 'i'">
+                            <md-list-item class="md-2-line">
+                                <md-icon style="font-size:32px;" md-font-icon="ion-ios-copy"></md-icon>
+                                <div class="md-list-item-text">
+                                    {{ 'SUBSCRIPTION_STATUS' | translate }}
+                                    <p>
+                                        <h3 ng-show="contragent.subscription == true"><b> {{ 'SUBSCRIBED' | translate }}</b>
+                                            <h3>
+                                    </p>
+                                    <p>
+                                        <h3 ng-show="contragent.subscription == false"><b> {{ 'NOT_SUBSCRIBED' | translate }}</b>
+                                            <h3>
+                                    </p>
+                                </div>
+                            </md-list-item>
+                            <md-divider ng-if="!$last"></md-divider>
+                            <md-list-item class="md-2-line" ng-show="contragent.status == 'i' && !isContragent">
                                 <md-icon style="font-size:32px;" md-font-icon="ion-android-cancel"></md-icon>
                                 <div class="md-list-item-text">
                                     {{ 'STATUS' | translate }}
@@ -57,7 +83,7 @@
                                     </p>
                                 </div>
                             </md-list-item>
-                            <md-list-item class="md-2-line" ng-show="contragent.status == 'a'">
+                            <md-list-item class="md-2-line" ng-show="contragent.status == 'a' && !isContragent">
                                 <md-icon style="font-size:32px;" md-font-icon="ion-checkmark-circled"></md-icon>
                                 <div class="md-list-item-text">
                                     {{ 'STATUS' | translate }}
@@ -107,12 +133,12 @@
                                 <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showEditContactPersonDialog(contactperson)"
                                     ng-show="editClaim">
                                     <md-icon md-svg-icon="/lib/icons/edit.svg"></md-icon>
-                                    </md-button>
-                                    <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteCtpConfirmDialog(contactperson.id)"
-                                        ng-show="deleteClaim">
-                                        <md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-                                        </md-button>
-                                        <md-divider ng-if="!$last"></md-divider>
+                                </md-button>
+                                <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteCtpConfirmDialog(contactperson.id)"
+                                    ng-show="deleteClaim">
+                                    <md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
+                                </md-button>
+                                <md-divider ng-if="!$last"></md-divider>
                             </md-list-item>
                         </md-list>
                     </md-content>
@@ -160,8 +186,8 @@
                                     <md-button aria-label="button" class="md-icon-button md-secondary" ng-click="showDeleteAddressConfirmDialog(address.id)"
                                         ng-show="deleteClaim">
                                         <md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-                                        </md-button>
-                                        <md-divider ng-if="!$last"></md-divider>
+                                    </md-button>
+                                    <md-divider ng-if="!$last"></md-divider>
                                 </md-list-item>
                             </md-list>
                         </md-content>
@@ -252,8 +278,8 @@
                                 <md-button aria-label="button" class="md-icon-button md-secondary " ng-click="showDeleteEmployeeConfirmDialog(employee.id)"
                                     ng-show="deleteClaim">
                                     <md-icon md-svg-icon="/lib/icons/delete.svg"></md-icon>
-                                    </md-button>
-                                    <md-divider ng-if="!$last"></md-divider>
+                                </md-button>
+                                <md-divider ng-if="!$last"></md-divider>
                             </md-list-item>
                         </md-list>
                     </md-content>
@@ -262,7 +288,7 @@
         </div>
     </div>
     <!--Notes -->
-    <div layout="row" ng-show="isActive" layout-padding>
+    <div layout="row" ng-show="isActive && !isContragent" layout-padding>
         <div flex flex-gt-xs layout-xs="column">
             <section class="demo-container md-whiteframe-z1">
                 <md-toolbar>
@@ -315,7 +341,7 @@
         </div>
     </div>
     <!--Files -->
-    <div layout="row" layout-padding ng-show="isActive">
+    <div layout="row" layout-padding ng-show="isActive && !isContragent">
         <div flex flex-gt-xs layout-xs="column">
             <section class="demo-container md-whiteframe-z1">
                 <md-toolbar>
@@ -357,7 +383,7 @@
         </div>
     </div>
     <!--Responsible Persons-->
-    <div layout="row" layout-padding ng-show="isActive">
+    <div layout="row" layout-padding ng-show="isActive && !isContragent">
         <!--Addresses-->
         <div flex flex-gt-xs layout-xs="column">
             <div flex-xs layout="column">
@@ -371,10 +397,10 @@
                             <md-button ng-show="contragent.responsibleUser.email == null" aria-label="button" class="md-icon-button" ng-click="showAddResponsiblePersonDialog()"
                                 nh-show="addClaim">
                                 <md-icon md-font-icon="ion-plus-round"></md-icon>
-                                </md-button>
-                                <md-button aria-label="button" class="md-icon-button" ng-click="expandResponsiblePerson = !expandResponsiblePerson">
-                                    <md-icon md-font-icon="ion-navicon-round"></md-icon>
-                                </md-button>
+                            </md-button>
+                            <md-button aria-label="button" class="md-icon-button" ng-click="expandResponsiblePerson = !expandResponsiblePerson">
+                                <md-icon md-font-icon="ion-navicon-round"></md-icon>
+                            </md-button>
                         </div>
                     </md-toolbar>
                     <div ng-cloak ng-show="expandResponsiblePerson" class="element-hide">
@@ -398,7 +424,7 @@
         </div>
     </div>
     <!--Users-->
-    <div layout="row" layout-padding ng-show="isActive">
+    <div layout="row" layout-padding ng-show="isActive && !isContragent">
         <div flex flex-gt-xs layout-xs="column">
             <section class="demo-container md-whiteframe-z1">
                 <md-toolbar>
@@ -457,7 +483,7 @@
 
 
     <nav mfb-menu position="br" effect="zoomin" active-icon="ion-edit" resting-icon="ion-plus-round" ng-show="isActive">
-        <a mfb-button icon="ion-ios-information" label="{{'ADD_NOTE' | translate}}" ng-click="showNewNoteDialog()" ng-show="addClaim"
+        <a mfb-button icon="ion-ios-information" label="{{'ADD_NOTE' | translate}}" ng-click="showNewNoteDialog()" ng-show="addClaim && !isContragent"
         />
         <a mfb-button icon="ion-home" label="{{'ADD_ADDRESS' | translate}}" ng-click="showNewAddressDialog()" ng-show="addClaim"
         />
@@ -468,5 +494,5 @@
     </nav>
     <nav mfb-menu position="tl" style="margin-top:100px;" active-icon="ion-android-arrow-back" resting-icon="ion-android-arrow-back"
         ng-click="goBack()">
-        </nav>
+    </nav>
 </ui-view>
