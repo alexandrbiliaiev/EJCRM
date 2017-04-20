@@ -13,7 +13,7 @@ namespace EuroJobsCrm.Services
         public async Task SendEmailAsync(string email, string subject, string message)
         {
             MimeMessage emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress(subject, "crm@eurojobs.info.pl"));
+            emailMessage.From.Add(new MailboxAddress(subject, "crm@bwg.com.pl"));
             emailMessage.To.Add(new MailboxAddress(subject, email));
             emailMessage.Subject = subject;
 
@@ -26,9 +26,9 @@ namespace EuroJobsCrm.Services
 
             using (SmtpClient client = new SmtpClient())
             {
-                client.Connect("mail.ukraine.com.ua", 25, false);
+                client.Connect("smtp.webio.pl", 587, false);
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
-                client.Authenticate("crm@eurojobs.info.pl", "azanezege22");
+                client.Authenticate("crm@bwg.com.pl", "Azanezege22@");
                 await client.SendAsync(emailMessage);
                 client.Dispose();
             }
