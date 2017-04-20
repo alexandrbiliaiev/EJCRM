@@ -6,6 +6,8 @@ using EuroJobsCrm.Models;
 using Microsoft.AspNetCore.Mvc;
 using EuroJobsCrm.Services;
 using System.Threading.Tasks;
+using EuroJobsCrm.Contragents;
+using EuroJobsCrm.Offers;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace EuroJobsCrm.Controllers
@@ -147,10 +149,12 @@ namespace EuroJobsCrm.Controllers
 
         [HttpPost]
         [Route("/api/Offers/Save")]
-        public OfferDto SaveOffer([FromBody] OfferDto offer)
+        public async Task<OfferDto> SaveOffer([FromBody] OfferDto offer)
         {
             using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
             {
+                bool isNewOffer = offer.Id == 0;
+
                 Offer ofr;
                 if (offer.Id != 0)
                 {
@@ -213,7 +217,33 @@ namespace EuroJobsCrm.Controllers
 
                 context.SaveChanges();
                 offer.Id = ofr.OfrId;
+
+                if (isNewOffer)
+                {
+                    List<int> contragentsIds = context.Contragents.Where(c => c.CgtSubscription).Select(c => c.CgtId).ToList();
+                    await SendNotification(contragentsIds, ofr);
+                }
+
                 return offer;
+            }
+        }
+
+        private async Task SendNotification(List<int> contragentsIds, Offer ofr)
+        {
+           
+            IRepository<AspNetUsers> repository = new ContragentUsersRepository();
+            IEnumerable<AspNetUsers> contragentUsers = repository.Get(c => contragentsIds.Contains(c.ContragentId ?? 0));
+
+            string offerUrl = $"{Request.Scheme}://{Request.Host}/Offers#/off_edit/{ofr.OfrId}";
+
+            IEmailMessageBuilder messageBuilder = new OfferNotifyMessageBuilder(ofr, offerUrl);
+            string subject = messageBuilder.BuildSubject();
+            string message = messageBuilder.BuildBody();
+
+            IEmailSender sender = new NotificationEmailSender();
+            foreach (AspNetUsers user in contragentUsers)
+            {
+                await sender.SendEmailAsync(user.Email, subject, message);
             }
         }
 
