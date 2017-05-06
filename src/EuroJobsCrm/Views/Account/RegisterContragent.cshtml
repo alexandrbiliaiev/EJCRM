@@ -10,29 +10,45 @@
     <!-- <h3 class="alertFont"> @Html.ValidationMessage("LoginError") </h3> -->
 
 
-    <form asp-controller="Account" asp-action="RegisterContragent" asp-route-returnurl="@ViewData[" ReturnUrl "]" method="post">
-<div asp-validation-summary="All" class="text-danger"></div>
-        <span asp-validation-for="CompanyName" class="text-danger"></span>
-        <input type="text" asp-for="CompanyName" placeholder="{{'LAW_NAME'|translate}}" />
 
-        <span asp-validation-for="Name" class="text-danger"></span>
-        <input type="text" asp-for="Name"  placeholder="{{'CP_NAME'|translate}}" />
+    <form name="form" asp-controller="Account" asp-action="RegisterContragent" asp-route-returnurl="@ViewData[" ReturnUrl "]" method="post">
+       <!--  -->
 
-        <span asp-validation-for="Email" class="text-danger"></span>
-        <input type="text" asp-for="Email"  placeholder="{{'EMAIL'|translate}}" />
+        <div class="control-group" ng-class="{true: 'error'}[form.email.$error.email || (submitted && form.email.$error.required) || (submitted && form.password.$error.required) 
+            || (submitted && form.companyName.$error.required) || (form.email.$error.pattern) ]">
+            <div class="controls">
+                  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <span asp-validation-for="Password" class="text-danger"></span>
-        <input asp-for="Password" placeholder="{{'PASSWORD'|translate}}" />
+                <span class="help-inline alertFont" ng-show="submitted && form.companyName.$error.required">{{'COMPNAME_REQUIRED'|translate}}</span>
+                <span class="help-inline alertFont" ng-show="form.companyName.$error.pattern">{{'ONLY_LATIN'|translate}}</span>
+                <input type="text" name="companyName" ng-model="companyName" asp-for="CompanyName" placeholder="{{'LAW_NAME'|translate}}" pattern="^[^А-Яа-яёЁ]+$" required />
 
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        <input asp-for="ConfirmPassword" placeholder="{{'CONF_PASSWORD'|translate}}" />
+                <span class="help-inline alertFont" ng-show="submitted && form.name.$error.required">{{'CPNAME_REQUIRED'|translate}}</span>
+                <input type="text" name="name" ng-model="name" asp-for="Name" placeholder="{{'CP_NAME'|translate}}" required />
+
+              
+                <span class="help-inline alertFont" ng-show="submitted && form.email.$error.required">{{'EMAIL_REQUIRED'|translate}}</span>
+                <span class="help-inline alertFont" ng-show="form.email.$error.email">{{'EMAIL_INVALID'|translate}}</span>
+                <input type="email" name="email" ng-model="email" asp-for="Email" placeholder="{{'EMAIL_R'|translate}}" required />
+
+                <span class="help-inline alertFont" ng-show="submitted && form.password.$error.required">{{'PASSWORD_REQUIRED'|translate}}</span> 
+                <span class="help-inline alertFont" ng-show="form.password.$error.pattern">{{'PASSWORD_PATTERN'|translate}}</span>
+                <input type="password" name="password" ng-model="password" asp-for="Password" placeholder="{{'PASSWORD_R'|translate}}" required pattern="(?=^.{6,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"/>
+
+                <span class="help-inline alertFont" ng-show="submitted && form.rep_pass.$error.required">{{'PASSWORD_REQUIRED'|translate}}</span>
+                <span class="help-inline alertFont" ng-show="(rep_pass != password) && rep_pass !=null">{{'PASSWORDS_DONT_MATCH'|translate}}</span>
+                <input type="password" name="rep_pass" ng-model="rep_pass" asp-for="ConfirmPassword"  placeholder="{{'CONF_PASSWORD'|translate}}" required />
+
+                <span class="help-inline alertFont" ng-show="submitted && !terms">{{'REQUIRED'|translate}}</span>
+                <div>
+                <input type="checkbox" name="pdu" ng-model = "terms" asp-for="PersonalDataUse" required/>{{'PERSONAL_DATA_USE'|translate}}
+                </div>
 
 
-        <input type="checkbox" asp-for="PersonalDataUse" required/>{{'PERSONAL_DATA_USE'|translate}}
+                <input type="submit" name="login" class="login loginmodal-submit" ng-click="submitted=true" value="{{'CREATE_ACC'|translate}}">
+            </div>
 
-
-        <input type="submit" name="login" class="login loginmodal-submit" value="{{'CREATE_ACC'|translate}}">
-
+        </div>
 
 
 
@@ -40,6 +56,6 @@
 </div>
 
 
-<
 
-@section Scripts { @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); } }
+
+<!--@section Scripts { @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); } } -->

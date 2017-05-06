@@ -172,7 +172,11 @@ namespace EuroJobsCrm.Controllers
                     _logger.LogInformation(3, "User created a new account with password.");
                     return RedirectToLocal(returnUrl);
                 }
-                AddErrors(result);
+                else
+                {
+                    ModelState.AddModelError("RegError", "{{'EMAIL_USED'|translate}}");
+                }
+                //AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form

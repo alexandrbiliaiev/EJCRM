@@ -219,11 +219,17 @@
     "TO": "до",
     "LoginToBWG": "Вход в систему BWG",
     "LOG IN": "Войти",
-    "FORGOT_PASSWORD":"Забыли пароль?",
-    "INV_LOG_ATT":"Неверный логин или пароль!",
+    "FORGOT_PASSWORD": "Забыли пароль?",
+    "INV_LOG_ATT": "Неверный логин или пароль!",
     "Log in": "Вход",
-    "EMAIL_REQUIRED":"Email обязателен!",
-    "PASSWORD_REQUIRED":"Пароль обязателен!",
-    "EMAIL_INVALID":"Неверный Email!"
-
+    "EMAIL_REQUIRED": "Email обязателен!",
+    "PASSWORD_REQUIRED": "Пароль обязателен!",
+    "EMAIL_INVALID": "Неверный Email!",
+    "COMPNAME_REQUIRED": "Название обязательноe!",
+    "ONLY_LATIN": "Только латинские буквы!",
+    "CPNAME_REQUIRED": "Контактное лицо обязательное!",
+    "EMAIL_R": "E-mail*",
+    "PASSWORD_R": "Пароль*",
+    "PASSWORD_PATTERN": "Пароль должен состоять из минимум 6 латинских символов включая заглавные буквы, цифры и специальные символы!",
+    "PASSWORDS_DONT_MATCH": "Пароли не совпадают!"
 }
