@@ -12,7 +12,6 @@
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/lib/angular/angular-material.min.css" />
         <link rel="stylesheet" href="~/lib/language-switcher/angular-language-picker.min.css" />
         <link rel="stylesheet" href="~/lib/angular-notification/angular-ui-notification.min.css" />
@@ -23,6 +22,7 @@
         <link href="~/css/mfb.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link rel="stylesheet" href="~/css/bootstrap-material-design.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/lib/mdPickers/mdPickers.css" />
         <link rel="stylesheet" href="~/css/angular-bootstrap-calendar.min.css" />
         <link rel="stylesheet" href="~/css/ionicons.min.css" />
@@ -31,7 +31,6 @@
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/lib/angular/angular-material.min.css" />
         <link rel="stylesheet" href="~/lib/angular-notification/angular-ui-notification.min.css" />
 
@@ -41,6 +40,7 @@
         <link href="~/css/mfb.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link rel="stylesheet" href="~/css/bootstrap-material-design.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/lib/mdPickers/mdPickers.css" />
         <link rel="stylesheet" href="~/css/angular-bootstrap-calendar.min.css" />
         <link rel="stylesheet" href="~/css/ionicons.min.css" />
@@ -58,7 +58,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <a class="navbar-brand" href="/">BWG</a>
+                    <a class="navbar-brand" href="/"><b>BWG</b></a>
                 </div>
                 <div class="navbar-collapse collapse navbar-inverse-collapse" ng-cloak>
                     @if (SignInManager.IsSignedIn(User))
@@ -115,15 +115,14 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <div class="row">
-                <div class="col-sm-6">
-                    <p>&copy; 2017 - BWG CRM</p>
-                </div>
-            </div>
-
-        </footer>
     </div>
+    <div class="navbar-fixed-bottom row-fluid">
+      <div class="navbar-inner">
+          <div class="container">
+               <p>&copy; 2017 - BWG CRM</p>
+          </div>
+     </div>
+   </div>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

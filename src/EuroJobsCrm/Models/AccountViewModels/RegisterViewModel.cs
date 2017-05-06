@@ -8,20 +8,20 @@ namespace EuroJobsCrm.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Поле обязательное!")]
+        [EmailAddress(ErrorMessage = "Не корректный адрес Email!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Поле обязательное!")]
+        [StringLength(100, ErrorMessage = "Пароль должен быть минимум 6 знаков", MinimumLength = 6)]
+        [DataType(DataType.Password, ErrorMessage = "Минимум 6 знаков включая прописные буквы, цифры и специальные символы!" ) ]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают!")]
         public string ConfirmPassword { get; set; }
     }
 }

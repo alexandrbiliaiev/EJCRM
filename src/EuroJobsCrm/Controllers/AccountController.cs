@@ -120,8 +120,7 @@ namespace EuroJobsCrm.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
+                    ModelState.AddModelError("LoginError", "{{'INV_LOG_ATT'|translate}}");
                 }
             }
 

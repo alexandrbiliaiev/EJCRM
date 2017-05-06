@@ -4,16 +4,16 @@ namespace EuroJobsCrm.Models.AccountViewModels
 {
     public class RegisterContragentViewModel : RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Поле обязательное!")]
         [Display(Name = "Name")]
 
         public string Name { get; set; }
 
-        [Required, RegularExpression(@"^[A-Za-z0-9 ]+$")]
+        [Required (ErrorMessage = "Поле обязательное!"), 
+            RegularExpression("^[^А-Яа-яёЁ]+$", ErrorMessage = "Только латинские буквы!")]
         public string CompanyName { get; set; }
 
-        [Required]
-
+        [Required(ErrorMessage = "Поле обязательное!")]
         public bool PersonalDataUse { get; set; }
     }
 }
