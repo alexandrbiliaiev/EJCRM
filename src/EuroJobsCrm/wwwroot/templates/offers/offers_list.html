@@ -1,7 +1,7 @@
 <div ng-include="'/templates/loader.html'"></div>
 
-<div layout="row" layout-wrap layout-padding ng-show="isActive">
-	<div flex-xs flex layout-xs="column">
+<div id="popupContainer" class="container body-content" ng-show="isActive">
+	<md-content>
 		<section class="demo-container md-whiteframe-z1">
 			<md-toolbar>
 				<div class="md-toolbar-tools">
@@ -27,7 +27,7 @@
 				</div>
 			</md-toolbar>
 			<div layout="row" ng-cloak>
-				<md-content flex="100">
+				<md-content flex>
 					<md-list ng-cloak>
 						<md-list-item class="md-2-line" ng-repeat="offer in offers | offersSearchFor : searchOffersString">
 							<md-icon style="font-size:32px;" md-font-icon="ion-document-text" ng-click="editOffer(offer.id)"></md-icon>
@@ -87,5 +87,5 @@
 				</md-content>
 			</div>
 		</section>
-	</div>
+	</md-content>
 </div>

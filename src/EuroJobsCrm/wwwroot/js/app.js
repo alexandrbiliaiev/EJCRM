@@ -1,6 +1,6 @@
 ﻿Array.prototype.ContainsId = function (id) {
-    for (var i in this){
-        if (this[i].id == id){
+    for (var i in this) {
+        if (this[i].id == id) {
             return true;
         }
     }
@@ -8,32 +8,32 @@
 }
 
 Array.prototype.getById = function (id) {
-    for (var i in this){
-        if (this[i].id == id){
+    for (var i in this) {
+        if (this[i].id == id) {
             return this[i];
         }
     }
     return undefined;
 }
 
-Date.prototype.addDays = function(days) {
+Date.prototype.addDays = function (days) {
     var date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
     return date;
 }
 
-Date.prototype.addTime = function(h, m) {
-    this.setTime(this.getTime() + (h*60*60*1000) + (m*60*1000));
+Date.prototype.addTime = function (h, m) {
+    this.setTime(this.getTime() + (h * 60 * 60 * 1000) + (m * 60 * 1000));
     return this;
 }
 
-Date.prototype.normalize = function() {
-    offset = this.getTimezoneOffset()*60*1000;
+Date.prototype.normalize = function () {
+    offset = this.getTimezoneOffset() * 60 * 1000;
     this.setTime(this.getTime() - offset);
     return this;
 }
 
-Date.prototype.addHours = function(hours) {
+Date.prototype.addHours = function (hours) {
     this.setTime(this.getTime() + hours * 60 * 60 * 1000);
     return this;
 }
@@ -50,10 +50,22 @@ var app = angular.module('EuroJobsCrm', ['ngMaterial', 'ngMessages', 'ngFileUplo
             return moment(date).format('YYYY-MM-DD');
         };
 
+
         $translateProvider.useSanitizeValueStrategy('escapeParameters');
         //$translateProvider.preferredLanguage('pl');
         $translateProvider.forceAsyncReload(true);
-        $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
+
+        var neonRedMap = $mdThemingProvider.extendPalette('blue', {
+            '500': '#007FFF'
+        });
+
+        // Register the new color palette map with the name <code>neonRed</code>
+        $mdThemingProvider.definePalette('neonRed', neonRedMap);
+
+        // Use that theme for the primary intentions
+        $mdThemingProvider.theme('default')
+            .primaryPalette('neonRed');
+
 
         $stateProvider
             .state('error', {
