@@ -260,6 +260,10 @@ md-input-container.md-placeholder {
 .capt {
     text-transform: capitalize;
 }
-
+.navbar-fixed-bottom
+{
+    background: #007FFF;
+    color: white;
+}
 
 

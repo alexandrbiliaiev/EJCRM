@@ -2,10 +2,14 @@
     ViewData["Title"] = "Confirm Email";
 }
 
-<h2>@ViewData["Title"].</h2>
+<div ng-controller="LanguageController" ng-cloak>
+<h2>{{'CONFIRM_EMAIL'|translate}}</h2>
 <div>
     <p>
-        Thank you for your registration. <br/>
-        Confirm your account please, you will receive an email confirmaton in few minutes.
+        {{'GRAT'|translate}} <br/>
+        {{'ACC_CREATED'|translate}} <br/>
+        {{'FINISH_REG'|translate}}
     </p>
 </div>
+
+    </div>

@@ -14,7 +14,7 @@ using EuroJobsCrm.Data;
 using EuroJobsCrm.Models;
 using EuroJobsCrm.Services;
 using EuroJobsCrm.Utils;
-
+using Microsoft.AspNetCore.Http;
 
 namespace EuroJobsCrm
 {
@@ -115,8 +115,16 @@ namespace EuroJobsCrm
 
             app.UseIdentity();
 
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                ExpireTimeSpan = TimeSpan.FromSeconds(20),
+                LoginPath = new PathString("/Account/Login")
+            });
+
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
             app.UseSession();
+
+
 
             app.UseMvc(routes =>
             {

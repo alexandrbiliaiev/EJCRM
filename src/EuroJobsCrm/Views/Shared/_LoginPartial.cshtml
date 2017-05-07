@@ -4,9 +4,6 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-
-
-
 @if (SignInManager.IsSignedIn(User))
 {
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right" >
@@ -49,7 +46,6 @@
                     {{ 'LOGOUT' | translate }}
                 </button>
             </li>
-
     </ul>
     </form>
 }
