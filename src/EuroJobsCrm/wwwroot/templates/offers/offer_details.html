@@ -263,7 +263,7 @@
                                                     {{'ADVANCE'| translate}}:
                                                 </div>
                                                 <div layout="column" flex>
-                                                    <b ng-show="offer.advanceAmount != null">{{offer.advanceAmount}}</b>
+                                                    <b ng-show="offer.advanceAmount != null">{{offer.advanceAmount}} PLN</b>
                                                     <b ng-show="offer.advanceAmount == null">{{'ADVANCE_NOT_POSSIBLE' | translate}}</b>
                                                 </div>
                                             </div>
@@ -285,7 +285,7 @@
                                                         <span>{{'ACCOMODATION_PRICE'| translate}}:</span>
                                                     </div>
                                                     <div layout="column" flex>
-                                                        <span><b ng-show="offer.accomodationPrice != null && offer.accomodationPrice != 0">{{offer.accomodationPrice}}</b></span>
+                                                        <span><b ng-show="offer.accomodationPrice != null && offer.accomodationPrice != 0">{{offer.accomodationPrice}} PLN</b></span>
                                                         <span><b ng-show="offer.accomodationPrice == null || offer.accomodationPrice == 0">{{'FREE_ACCOMODATION' | translate}}</b></span>
                                                     </div>
                                                 </div>

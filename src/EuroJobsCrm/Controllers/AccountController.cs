@@ -103,8 +103,11 @@ namespace EuroJobsCrm.Controllers
               
                     //writes role's name to cookies
                     Response.Cookies.Append("user_role", userRoles.FirstOrDefault());
-                            
 
+                    if (user.ContragentId.HasValue)
+                    {
+                        return Redirect(Url.Action("Index", "Contragents") + "#/ctg_edit/" + user.ContragentId );
+                    }
 
                     _logger.LogInformation(1, "User logged in.");
                     return RedirectToLocal(returnUrl);
@@ -188,17 +191,29 @@ namespace EuroJobsCrm.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterContragent(RegisterContragentViewModel model, string returnUrl = null)
         {
+
+            using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+            {
+                var userToCompare = context.AspNetUsers.Where(u => u.UserName == model.Email && u.Deleted).FirstOrDefault();
+                if (userToCompare != null)
+                {
+                    userToCompare.UserName = userToCompare.Id + "_" + userToCompare.UserName;
+                    userToCompare.NormalizedUserName = userToCompare.Id + "_" + userToCompare.NormalizedUserName;
+                    userToCompare.Email = userToCompare.Id + "_" + userToCompare.Email;
+                    userToCompare.NormalizedEmail = userToCompare.Id + "_" + userToCompare.NormalizedEmail;
+                    context.SaveChanges();
+                }
+            }
+
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                Contragent contragent = CreateContragent(model.CompanyName);
 
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    FullName = model.Name,
-                    ContragentId = contragent.CgtId
+                    FullName = model.Name
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -218,6 +233,17 @@ namespace EuroJobsCrm.Controllers
                     // await _signInManager.SignInAsync(user, isPersistent: false);
     
                     _logger.LogInformation(3, "User created a new account with password.");
+
+                    Contragent contragent = CreateContragent(model.CompanyName);
+
+                    using (DB_A12601_bielkaContext context = new DB_A12601_bielkaContext())
+                    {
+                        var userToModify = context.AspNetUsers.Where(u => u.Id == user.Id).FirstOrDefault();
+
+                        userToModify.ContragentId = contragent.CgtId;
+
+                        context.SaveChanges();
+                    }
                     return View("SucceedRegister");
                 }
                 AddErrors(result);
