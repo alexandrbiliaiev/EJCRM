@@ -257,5 +257,9 @@ md-input-container.md-placeholder {
     color: #ff7100;
 }
 
+.capt {
+    text-transform: capitalize;
+}
+
 
 

@@ -9,32 +9,43 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
+    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right" >
         <ul class="nav navbar-nav navbar-right">
-            <li style="margin-top: 8px;">
+            <li style="margin-top: 8px;">            
                 <md-menu >
                     <md-button ng-click="$mdOpenMenu()" class="md-icon-button" aria-label="Open sample menu">
-                    {{currentLang}}
+                        <md-icon ng-show="currentLang=='pl'" md-svg-src="lib/flags/pl.svg"></md-icon>
+                        <md-icon ng-show="currentLang=='ru'" md-svg-src="lib/flags/ru.svg"></md-icon>
+                      <!--  <md-icon ng-show="currentLang='ua'" md-svg-src="lib/flags/ua.svg"></md-icon>
+                        <md-icon ng-show="currentLang='en'" md-svg-src="lib/flags/us.svg"></md-icon> -->
                     </md-button>
                     <md-menu-content>
                         <md-menu-item>
-                            <md-button ng-click="changeLanguage('pl')">PL</md-button>
+                            <md-button ng-click="changeLanguage('pl')">
+                                <md-icon md-svg-src="lib/flags/pl.svg"></md-icon> Polski
+                            </md-button>
                         </md-menu-item>
                        <!-- <md-menu-item>
-                            <md-button ng-click="changeLanguage('en')">EN</md-button>
-                        </md-menu-item> -->
-                        <!--<md-menu-item>
-                            <md-button ng-click="changeLanguage('ua')">UA</md-button>
+                            <md-button ng-click="changeLanguage('en')">
+                                <md-icon md-svg-src="lib/flags/us.svg"></md-icon> English
+                            </md-button>
+                        </md-menu-item> 
+                        <md-menu-item>
+                            <md-button ng-click="changeLanguage('ua')">
+                                <md-icon md-svg-src="lib/flags/ua.svg"></md-icon> Українська
+                            </md-button>
                         </md-menu-item> -->
                         <md-menu-item>
-                            <md-button ng-click="changeLanguage('ru')">RU</md-button>
+                            <md-button ng-click="changeLanguage('ru')">
+                                <md-icon md-svg-src="lib/flags/ru.svg"></md-icon> Русский
+                            </md-button>
                         </md-menu-item>
                     </md-menu-content>
                 </md-menu>
             </li>
             <li>
                 
-                <button ng-cloak type="submit" class="btn navbar-btn navbar-link">
+                <button ng-cloak type="submit" class="btn navbar-btn navbar-link capt">
                     {{ 'LOGOUT' | translate }}
                 </button>
             </li>
