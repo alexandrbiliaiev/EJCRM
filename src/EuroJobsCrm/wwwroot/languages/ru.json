@@ -255,5 +255,19 @@
     "SEND": "Выслать",
     "ADDED_BY": "Добавлено",
     "FILE": "Файл",
-    "FILE_NANE": "Имя файла"
+    "FILE_NANE": "Имя файла",
+    "EVENT_TITLE":"Название события",
+    "START_DATE":"Дата начала",
+    "TIME":"Время",
+    "END_DATE":"Дата окончания",
+    "EVENT_REMIND":"Напомнить",
+    "EVENT_NOTE":"Текст напоминания",
+    "TARGET_USER":"Пользователь",
+    "TARGET_CONTRAGENT":"Работодатель",
+    "TARGET_CLIENT":"Клиент",
+    "TARGET_EMPLOYEE":"Работник",
+    "MESSANGER_TYPE":"Мессенджер",
+    "WORK_ADDRESS":"Адресс филии ",
+    "POST_ADRESS":"Адресс для направления корреспонденции",
+    "SELECT_FILE": "Выбрать файл"
 }

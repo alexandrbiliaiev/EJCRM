@@ -32,7 +32,7 @@
                 <div layout="row" flex="100" layout-wrap>
                     <md-button class="md-raised md-primary">
                         <label for="document-file-input" style="cursor:pointer; color:white;">
-							<md-icon md-font-icon="ion-document"></md-icon> Select file {{ docFile.name}} 
+							<md-icon md-font-icon="ion-document"></md-icon> {{'SELECT_FILE'| translate}} {{ docFile.name}} 
 						</label>
                     </md-button>
                     <input id="document-file-input" type="file" ngf-select ng-model="newFile" ngf-max-size="10MB" ngf-model-invalid="errorFile"
